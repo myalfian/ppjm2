@@ -269,9 +269,9 @@
                     <span id="statusPing" class="hidden"></span>
                 </div>
 
-                <!-- Desktop Navigation Menu (Icon Stacked on Top, Modern & Harmonious Design) -->
+                <!-- Desktop Navigation Menu (Icon Stacked on Top with Modern Mega Menus) -->
                 <nav class="hidden lg:flex items-center gap-2 xl:gap-4 text-xs font-semibold">
-                    <!-- 1. JM Center (Active highlighted pill) -->
+                    <!-- 1. JM Center (Active highlighted pill with Mega Menu) -->
                     <div class="relative group">
                         <a href="#home" class="flex flex-col items-center justify-center px-4 py-2 rounded-2xl bg-[#ecfdf5] hover:bg-[#dcfce7] border border-emerald-150/80 text-primary transition-all duration-200 shadow-2xs group cursor-pointer">
                             <i class="fa-solid fa-mosque text-primary text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
@@ -280,22 +280,38 @@
                                 <i class="fa-solid fa-chevron-down text-[8px] text-primary/80 group-hover:rotate-180 transition-transform duration-200"></i>
                             </div>
                         </a>
-                        <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-56 hidden group-hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-200">
-                            <div class="bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-gray-100 py-2 px-1 text-xs divide-y divide-gray-50">
-                                <div class="py-1">
-                                    <a href="#home" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-house text-accent text-xs w-4 text-center"></i> Beranda Utama</a>
-                                    <a href="#sambutan" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-user-tie text-accent text-xs w-4 text-center"></i> Sambutan Pengasuh</a>
-                                    <a href="#about" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-landmark text-accent text-xs w-4 text-center"></i> Profil &amp; Visi Misi</a>
+                        <!-- Desktop Mega Menu: JM Center (2-Column Grid + Bottom Highlights) -->
+                        <div class="mega-menu-dropdown absolute left-0 top-full pt-2 w-[540px] z-50">
+                            <div class="bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-100 p-4 text-xs divide-y divide-gray-100">
+                                <div class="grid grid-cols-2 gap-4 pb-3">
+                                    <div>
+                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Profil &amp; Kelembagaan</div>
+                                        <div class="space-y-1">
+                                            <a href="#home" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-house text-accent w-4 text-center"></i> Beranda Utama</a>
+                                            <a href="#sambutan" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-user-tie text-accent w-4 text-center"></i> Sambutan Pengasuh</a>
+                                            <a href="#about" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-landmark text-accent w-4 text-center"></i> Profil &amp; Visi Misi</a>
+                                            <a href="#guru" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-chalkboard-user text-accent w-4 text-center"></i> Pengajar &amp; Asatidz</a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Fasilitas Pesantren</div>
+                                        <div class="space-y-1">
+                                            <a href="#programs" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-hotel text-accent w-4 text-center"></i> Asrama Representatif</a>
+                                            <a href="#stem-area" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-flask text-accent w-4 text-center"></i> Lab STEM &amp; Riset</a>
+                                            <a href="#organisasi" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-sitemap text-accent w-4 text-center"></i> Struktur Organisasi</a>
+                                            <a href="#lokasi" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-map-location-dot text-accent w-4 text-center"></i> Peta Kompleks &amp; Arah</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="py-1">
-                                    <a href="#guru" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-chalkboard-user text-accent text-xs w-4 text-center"></i> Pengajar &amp; Ustadz</a>
-                                    <a href="#organisasi" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-sitemap text-accent text-xs w-4 text-center"></i> Struktur Organisasi</a>
+                                <div class="pt-3 flex items-center justify-between text-[11px] text-gray-500 bg-gray-50/60 -mx-4 -mb-4 px-4 py-2.5 rounded-b-2xl">
+                                    <span class="flex items-center gap-1.5 font-semibold text-emerald-800"><i class="fa-solid fa-circle-check text-emerald-600"></i> Akreditasi "A" BAN-PDM</span>
+                                    <button onclick="triggerHaptic(); BottomSheet.open(0.5);" class="font-bold text-primary hover:text-primary-dark flex items-center gap-1 touch-press">Buka Bottom Sheet Layanan <i class="fa-solid fa-arrow-right text-[9px]"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- 2. Program Unggulan -->
+                    <!-- 2. Program Unggulan (Comprehensive Desktop Mega Menu w-[760px]) -->
                     <div class="relative group">
                         <a href="#programs" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer">
                             <i class="fa-solid fa-graduation-cap text-primary text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
@@ -304,12 +320,90 @@
                                 <i class="fa-solid fa-chevron-down text-[8px] text-gray-400 group-hover:text-primary group-hover:rotate-180 transition-transform duration-200"></i>
                             </div>
                         </a>
-                        <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-60 hidden group-hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-200">
-                            <div class="bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-gray-100 py-2 px-1 text-xs">
-                                <a href="#programs" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-school text-accent text-xs w-4 text-center"></i> SMP Plus Akademik</a>
-                                <a href="#programs" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-quran text-accent text-xs w-4 text-center"></i> Tahfidzul Qur'an 30 Juz</a>
-                                <a href="#programs" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-book-open text-accent text-xs w-4 text-center"></i> Kajian Kitab Kuning Salaf</a>
-                                <a href="#programs" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-laptop-code text-accent text-xs w-4 text-center"></i> Literasi Digital &amp; Bahasa</a>
+                        <!-- Desktop Mega Menu: Program Unggulan (3 Columns + Highlight Card + Bottom CTA) -->
+                        <div class="mega-menu-dropdown absolute -left-32 top-full pt-2 w-[760px] z-50">
+                            <div class="bg-white/98 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-100 p-5 text-xs divide-y divide-gray-100">
+                                <div class="grid grid-cols-12 gap-5 pb-4">
+                                    <!-- Col 1: Highlight Card (4 Cols) -->
+                                    <div class="col-span-4 bg-gradient-to-br from-emerald-800 to-primary-dark text-white rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-md">
+                                        <div class="space-y-2 relative z-10">
+                                            <span class="inline-block px-2.5 py-0.5 rounded-full bg-accent/20 text-accent font-extrabold text-[10px] uppercase tracking-wider">Takhassus</span>
+                                            <h4 class="font-black text-sm text-white leading-snug">Tahfidzul Qur'an 30 Juz Bersanad</h4>
+                                            <p class="text-[11px] text-gray-200 leading-relaxed">Bimbingan huffadz bersanad muttasil dengan metode setoran mutqin dan karantina tahfidz.</p>
+                                        </div>
+                                        <div class="pt-3 relative z-10">
+                                            <a href="#programs" class="inline-flex items-center gap-1.5 bg-accent hover:bg-accent-hover text-primary-dark font-extrabold px-3 py-1.5 rounded-xl text-[11px] shadow-sm transition touch-press">
+                                                <span>Lihat Detail Program</span>
+                                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                                            </a>
+                                        </div>
+                                        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-accent/15 rounded-full blur-xl pointer-events-none"></div>
+                                    </div>
+
+                                    <!-- Col 2: Kurikulum & Kitab Kuning (4 Cols) -->
+                                    <div class="col-span-4 space-y-1">
+                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Kurikulum &amp; Diniyah</div>
+                                        <a href="#programs" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                            <i class="fa-solid fa-school text-accent w-4 text-center mt-0.5"></i>
+                                            <div>
+                                                <div class="font-bold text-gray-900 leading-tight">SMP Plus Akademik</div>
+                                                <div class="text-[10px] text-gray-500">Kurikulum Merdeka Akreditasi "A"</div>
+                                            </div>
+                                        </a>
+                                        <a href="#programs" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                            <i class="fa-solid fa-book-open text-accent w-4 text-center mt-0.5"></i>
+                                            <div>
+                                                <div class="font-bold text-gray-900 leading-tight">Kajian Kitab Kuning Salaf</div>
+                                                <div class="text-[10px] text-gray-500">Metode Maknani Gandul Syafi'iyah</div>
+                                            </div>
+                                        </a>
+                                        <a href="#programs" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                            <i class="fa-solid fa-language text-accent w-4 text-center mt-0.5"></i>
+                                            <div>
+                                                <div class="font-bold text-gray-900 leading-tight">Bilingual Arab &amp; Inggris</div>
+                                                <div class="text-[10px] text-gray-500">Muhadharah khitobah mingguan</div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <!-- Col 3: Karakter & Inovasi (4 Cols) -->
+                                    <div class="col-span-4 space-y-1">
+                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Inovasi &amp; Karakter</div>
+                                        <a href="#stem-area" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                            <i class="fa-solid fa-flask text-teal-600 w-4 text-center mt-0.5"></i>
+                                            <div>
+                                                <div class="font-bold text-gray-900 leading-tight">STEM Area &amp; Riset</div>
+                                                <div class="text-[10px] text-gray-500">Sains terapan &amp; literasi numerasi</div>
+                                            </div>
+                                        </a>
+                                        <a href="#programs" onclick="triggerHaptic(); openModal('adminModal'); switchCmsTab('utbk');" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-violet-50 text-gray-700 hover:text-violet-800 transition font-medium">
+                                            <i class="fa-solid fa-laptop-code text-violet-600 w-4 text-center mt-0.5"></i>
+                                            <div>
+                                                <div class="font-bold text-gray-900 leading-tight">Simulasi UTBK CBT</div>
+                                                <div class="text-[10px] text-gray-500">Ujian digital anti kecurangan</div>
+                                            </div>
+                                        </a>
+                                        <a href="#ekskul" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                            <i class="fa-solid fa-hands-praying text-amber-500 w-4 text-center mt-0.5"></i>
+                                            <div>
+                                                <div class="font-bold text-gray-900 leading-tight">Hadrah Al-Banjari</div>
+                                                <div class="text-[10px] text-gray-500">Seni sholawat &amp; spiritualitas</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom Banner: PPDB Alert -->
+                                <div class="pt-3 flex items-center justify-between text-xs bg-emerald-50/80 -mx-5 -mb-5 px-5 py-3 rounded-b-3xl">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                                        <span class="font-bold text-primary-dark">Penerimaan Santri Baru (PPDB) 2026 Gelombang I Telah Dibuka</span>
+                                    </div>
+                                    <button onclick="triggerHaptic(); openModal('ppdbModal');" class="bg-primary hover:bg-primary-dark text-white font-extrabold px-3.5 py-1.5 rounded-xl shadow-xs transition touch-press flex items-center gap-1.5">
+                                        <i class="fa-solid fa-file-pen text-accent"></i>
+                                        <span>Daftar Online</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -341,16 +435,16 @@
                                 <i class="fa-solid fa-chevron-down text-[8px] text-gray-400 group-hover:text-primary group-hover:rotate-180 transition-transform duration-200"></i>
                             </div>
                         </a>
-                        <div class="absolute right-0 top-full pt-2 w-48 hidden group-hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-200">
+                        <div class="mega-menu-dropdown absolute right-0 top-full pt-2 w-52 z-50">
                             <div class="bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-gray-100 py-2 px-1 text-xs">
-                                <a href="#galeri" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-image text-accent text-xs w-4 text-center"></i> Galeri Foto</a>
-                                <a href="#galeri-video" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-video text-accent text-xs w-4 text-center"></i> Galeri Video</a>
+                                <a href="#galeri" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-image text-accent text-xs w-4 text-center"></i> Galeri Foto Dokumentasi</a>
+                                <a href="#galeri-video" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-video text-accent text-xs w-4 text-center"></i> Video Kegiatan Santri</a>
                             </div>
                         </div>
                     </div>
                 </nav>
 
-                <!-- Navigation Actions (Harmony & Balanced Hub for Desktop & Touch-Optimized Mobile) -->
+                <!-- Navigation Actions (Adaptive Mobile App Bar & Desktop Action Hub) -->
                 <div class="flex items-center gap-2">
                     <!-- Desktop Action Hub (Right-Side Visual Balance) -->
                     <div class="hidden lg:flex items-center gap-2">
@@ -360,6 +454,12 @@
                             <span>Cari</span>
                         </a>
 
+                        <!-- Integrated Desktop Bottom Sheet Launcher Button -->
+                        <button id="btnDesktopBottomSheet" onclick="triggerHaptic(); BottomSheet.open(0.5);" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-primary border border-primary/20 text-xs font-bold transition-all shadow-2xs cursor-pointer touch-press" title="Buka Menu Layanan Santri (Bottom Sheet)" aria-label="Buka Layanan Bottom Sheet">
+                            <i class="fa-solid fa-shapes text-accent"></i>
+                            <span>Layanan</span>
+                        </button>
+
                         <!-- Primary CTA Button: PPDB Online -->
                         <a href="#ppdb-section" onclick="triggerHaptic()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white text-xs font-bold shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all" aria-label="Daftar PPDB Online 2026">
                             <i class="fa-solid fa-graduation-cap text-xs"></i>
@@ -368,13 +468,19 @@
                         </a>
                     </div>
 
-                    <!-- Mobile Search / Quick Filter button -->
-                    <a href="#ppdb-section" onclick="triggerHaptic()" aria-label="Cek Status Pendaftaran" class="lg:hidden w-10 h-10 rounded-xl bg-emerald-50 text-primary flex items-center justify-center border border-primary/20 text-xs touch-press" title="Cek Status Pendaftaran">
+                    <!-- Adaptive Mobile App Bar Actions (48px Ergonomic Touch Targets) -->
+                    <!-- 1. Mobile Search / Quick Filter button -->
+                    <a href="#ppdb-section" onclick="triggerHaptic()" aria-label="Cek Status Pendaftaran" class="lg:hidden touch-target-48 w-11 h-11 rounded-xl bg-emerald-50 text-primary flex items-center justify-center border border-primary/20 text-xs touch-press" title="Cek Status Pendaftaran">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
 
-                    <!-- Mobile Hamburger Menu Button (48px min touch target iOS/Android) -->
-                    <button id="btnMobileDrawerOpen" onclick="toggleMobileDrawer(true)" class="lg:hidden touch-target-48 w-12 h-12 rounded-xl bg-emerald-50 text-primary hover:bg-emerald-100 border border-primary/20 text-base flex items-center justify-center touch-press cursor-pointer" title="Buka Menu" aria-label="Buka Menu Navigasi">
+                    <!-- 2. Integrated Mobile Bottom Sheet Trigger Button (48px Touch Target) -->
+                    <button id="btnMobileBottomSheetOpen" onclick="triggerHaptic(); BottomSheet.open(0.5);" class="lg:hidden touch-target-48 w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-primary text-white flex items-center justify-center text-sm touch-press shadow-sm cursor-pointer" title="Aplikasi &amp; Layanan Santri (Bottom Sheet)" aria-label="Buka Menu Layanan Santri">
+                        <i class="fa-solid fa-shapes text-accent text-sm"></i>
+                    </button>
+
+                    <!-- 3. Mobile Slide-Over Drawer Hamburger Button (48px min touch target iOS/Android) -->
+                    <button id="btnMobileDrawerOpen" onclick="toggleMobileDrawer(true)" class="lg:hidden touch-target-48 w-11 h-11 rounded-xl bg-emerald-50 text-primary hover:bg-emerald-100 border border-primary/20 text-base flex items-center justify-center touch-press cursor-pointer" title="Buka Menu" aria-label="Buka Menu Navigasi">
                         <i class="fa-solid fa-bars-staggered"></i>
                     </button>
                 </div>
@@ -478,6 +584,35 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
             
+            <!-- Hero Top Synergy Bar (Academic Year Indicator & Direct Bottom Sheet Trigger) -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
+                <div class="flex items-center gap-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-white">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="font-bold">TP 2026/2027</span>
+                        <span class="text-white/40">|</span>
+                        <span class="text-accent font-semibold">Pondok Pesantren &amp; SMP Plus</span>
+                    </div>
+                    <span class="hidden md:inline-flex text-[11px] text-gray-300">
+                        <i class="fa-solid fa-location-dot text-emerald-400 mr-1.5"></i> Lasem, Sidayu, Gresik
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <!-- Integrated Bottom Sheet Trigger Button in Hero Banner -->
+                    <button onclick="triggerHaptic(); BottomSheet.open(0.5);" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-accent hover:bg-accent-hover text-primary-dark font-extrabold text-xs shadow-md transition touch-press cursor-pointer" title="Buka Menu Layanan Santri (Bottom Sheet)">
+                        <i class="fa-solid fa-shapes text-sm"></i>
+                        <span>Menu Layanan Santri</span>
+                        <i class="fa-solid fa-arrow-up text-[10px] opacity-70"></i>
+                    </button>
+                    <!-- PPDB Quick Button -->
+                    <button onclick="triggerHaptic(); openModal('ppdbModal');" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition touch-press cursor-pointer">
+                        <i class="fa-solid fa-paper-plane text-xs text-accent"></i>
+                        <span>Daftar PPDB</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Sliding Cards Wrapper -->
             <div class="relative group">
                 <!-- Outer Overflow Container -->

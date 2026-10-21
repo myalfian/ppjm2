@@ -4607,23 +4607,72 @@ function moveHeroCardSlide(direction) {
   setHeroCardSlide(currentHeroSlideIndex + direction);
 }
 
+function startHeroAutoPlay() {
+  if (heroSlideAutoTimer) clearInterval(heroSlideAutoTimer);
+  heroSlideAutoTimer = setInterval(function() {
+    if (!document.hidden) moveHeroCardSlide(1);
+  }, 5500);
+}
+
 if (typeof window !== 'undefined') {
   window.setHeroCardSlide = setHeroCardSlide;
   window.moveHeroCardSlide = moveHeroCardSlide;
+  window.startHeroAutoPlay = startHeroAutoPlay;
 
   window.addEventListener('resize', function() {
     setHeroCardSlide(currentHeroSlideIndex);
   });
 
+  // Adaptive App Bar Dynamic Elevation & Scroll Styling
+  const mainHeader = document.getElementById('mainHeader');
+  if (mainHeader) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 20) {
+        mainHeader.classList.add('header-scrolled');
+      } else {
+        mainHeader.classList.remove('header-scrolled');
+      }
+    }, { passive: true });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
       setHeroCardSlide(0);
-    }, 100);
-  });
+      startHeroAutoPlay();
 
-  setInterval(function() {
-    moveHeroCardSlide(1);
-  }, 5000);
+      // Touch Swipe Gesture Support for Hero Card Carousel
+      const heroContainer = document.getElementById('heroCardTrackContainer');
+      if (heroContainer) {
+        let heroTouchStartX = 0;
+        let heroTouchStartY = 0;
+        heroContainer.addEventListener('touchstart', function(e) {
+          heroTouchStartX = e.touches[0].clientX;
+          heroTouchStartY = e.touches[0].clientY;
+          if (heroSlideAutoTimer) clearInterval(heroSlideAutoTimer);
+        }, { passive: true });
+
+        heroContainer.addEventListener('touchend', function(e) {
+          const dx = e.changedTouches[0].clientX - heroTouchStartX;
+          const dy = e.changedTouches[0].clientY - heroTouchStartY;
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 36) {
+            if (dx < 0) {
+              moveHeroCardSlide(1);
+            } else {
+              moveHeroCardSlide(-1);
+            }
+          }
+          startHeroAutoPlay();
+        }, { passive: true });
+
+        heroContainer.addEventListener('mouseenter', function() {
+          if (heroSlideAutoTimer) clearInterval(heroSlideAutoTimer);
+        });
+        heroContainer.addEventListener('mouseleave', function() {
+          startHeroAutoPlay();
+        });
+      }
+    }, 120);
+  });
 }
 
 /* ==========================================================================

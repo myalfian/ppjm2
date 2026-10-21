@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ppjm-v11';
+const CACHE_NAME = 'ppjm-v12';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
