@@ -373,8 +373,8 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
 
-                    <!-- Mobile Hamburger Menu Button (44px min touch target) -->
-                    <button id="btnMobileDrawerOpen" onclick="toggleMobileDrawer(true)" class="lg:hidden w-10 h-10 rounded-xl bg-emerald-50 text-primary hover:bg-emerald-100 border border-primary/20 text-sm flex items-center justify-center touch-press" title="Buka Menu" aria-label="Buka Menu">
+                    <!-- Mobile Hamburger Menu Button (48px min touch target iOS/Android) -->
+                    <button id="btnMobileDrawerOpen" onclick="toggleMobileDrawer(true)" class="lg:hidden touch-target-48 w-12 h-12 rounded-xl bg-emerald-50 text-primary hover:bg-emerald-100 border border-primary/20 text-base flex items-center justify-center touch-press cursor-pointer" title="Buka Menu" aria-label="Buka Menu Navigasi">
                         <i class="fa-solid fa-bars-staggered"></i>
                     </button>
                 </div>
@@ -383,17 +383,20 @@
     </header>
 
     <!-- MOBILE NAVIGATION DRAWER (Slide-over App Menu with iOS/Android Touch Ergonomics) -->
-    <div id="mobileDrawer" class="fixed inset-0 z-50 hidden transition-all duration-300" aria-hidden="true">
-        <!-- Backdrop -->
+    <div id="mobileDrawer" class="fixed inset-0 z-50 hidden select-none" aria-hidden="true">
+        <!-- Backdrop with Dynamic Opacity -->
         <div id="mobileDrawerBackdrop" onclick="toggleMobileDrawer(false)" class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
         
-        <!-- Drawer Panel -->
-        <div id="mobileDrawerPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-xs bg-white shadow-2xl flex flex-col z-10 overflow-y-auto custom-scrollbar transform translate-x-full transition-transform duration-300 ease-out">
-            <!-- Header -->
-            <div class="p-4 bg-gradient-to-r from-primary-dark to-primary text-white flex items-center justify-between shrink-0">
+        <!-- Drawer Panel with Safe-Area Inset Handling, Scroll Containment & Native GPU Transitions -->
+        <div id="mobileDrawerPanel" class="drawer-panel-gpu absolute right-0 top-0 bottom-0 w-full max-w-xs bg-white shadow-2xl flex flex-col z-10 overscroll-contain overflow-y-auto custom-scrollbar pt-safe pb-safe">
+            <!-- Visual Drag Indicator / Swipe Handle for Dismiss Gesture -->
+            <div class="drawer-swipe-handle" aria-hidden="true" title="Geser ke kanan untuk menutup"></div>
+
+            <!-- Header with Safe Area Inset Handling and 48px Close Target -->
+            <div class="px-4 py-3 bg-gradient-to-r from-primary-dark to-primary text-white flex items-center justify-between shrink-0 shadow-sm">
                 <div class="flex items-center gap-2.5">
                     <div id="drawerLogoStatusLamp" class="logo-lamp-wrapper status-online shrink-0" title="Status Sistem: Online">
-                        <div class="w-9 h-9 rounded-full overflow-hidden bg-white flex items-center justify-center border-2 border-white shrink-0 shadow-sm relative z-10">
+                        <div class="w-10 h-10 rounded-full overflow-hidden bg-white flex items-center justify-center border-2 border-white shrink-0 shadow-sm relative z-10">
                             <img src="/logo.jpg" alt="Logo Pondok Pesantren Jauharul Maknuun" class="w-full h-full object-cover" width="48" height="48" decoding="async">
                         </div>
                     </div>
@@ -404,61 +407,62 @@
                         </svg>
                     </div>
                 </div>
-                <button onclick="toggleMobileDrawer(false)" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm touch-press" aria-label="Tutup Menu">
+                <!-- 48px Ergonomic Touch Target Close Button -->
+                <button onclick="toggleMobileDrawer(false)" class="touch-target-48 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-base touch-press" aria-label="Tutup Menu">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Language & Quick Bar -->
-            <div class="p-3 bg-gray-50 border-b flex items-center justify-between text-xs shrink-0">
-                <span class="text-gray-500 font-semibold text-[11px]"><i class="fa-solid fa-globe text-primary mr-1"></i> Bahasa:</span>
-                <div class="flex gap-1">
-                    <button onclick="changeLanguage('id'); triggerHaptic();" class="px-2.5 py-1 rounded text-[11px] font-bold bg-primary text-white touch-press">ID</button>
-                    <button onclick="changeLanguage('en'); triggerHaptic();" class="px-2.5 py-1 rounded text-[11px] font-semibold bg-white border text-gray-700 touch-press">EN</button>
-                    <button onclick="changeLanguage('ar'); triggerHaptic();" class="px-2.5 py-1 rounded text-[11px] font-semibold bg-white border text-gray-700 touch-press">AR</button>
+            <!-- Language & Quick Bar (44px target buttons) -->
+            <div class="px-4 py-2.5 bg-gray-50 border-b border-gray-100 flex items-center justify-between text-xs shrink-0">
+                <span class="text-gray-500 font-semibold text-xs flex items-center gap-1.5"><i class="fa-solid fa-globe text-primary"></i> Bahasa:</span>
+                <div class="flex gap-1.5">
+                    <button onclick="changeLanguage('id'); triggerHaptic();" class="touch-target-48 min-w-[44px] min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white touch-press">ID</button>
+                    <button onclick="changeLanguage('en'); triggerHaptic();" class="touch-target-48 min-w-[44px] min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-gray-200 text-gray-700 touch-press">EN</button>
+                    <button onclick="changeLanguage('ar'); triggerHaptic();" class="touch-target-48 min-w-[44px] min-h-[44px] px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-gray-200 text-gray-700 touch-press">AR</button>
                 </div>
             </div>
 
-            <!-- Navigation Links (6 Revised App Menu Items) -->
-            <nav class="p-4 space-y-1 text-xs font-semibold text-gray-700 flex-1">
+            <!-- Navigation Links (Minimum 48px Target Height for All Items) -->
+            <nav class="p-3 space-y-1.5 text-xs font-semibold text-gray-700 flex-1 overscroll-contain">
                 <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 pt-1 pb-1">Navigasi Utama</div>
-                <a href="#home" onclick="handleDrawerNavClick(event, '#home')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-mosque text-primary w-5 text-center"></i> JM Center
+                <a href="#home" onclick="handleDrawerNavClick(event, '#home')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
+                    <i class="fa-solid fa-mosque text-primary w-5 text-center text-sm"></i> JM Center
                 </a>
-                <a href="#programs" onclick="handleDrawerNavClick(event, '#programs')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-graduation-cap text-primary w-5 text-center"></i> Program Unggulan
+                <a href="#programs" onclick="handleDrawerNavClick(event, '#programs')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
+                    <i class="fa-solid fa-graduation-cap text-primary w-5 text-center text-sm"></i> Program Unggulan
                 </a>
-                <a href="#ekskul" onclick="handleDrawerNavClick(event, '#ekskul')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-futbol text-primary w-5 text-center"></i> Ekstrakurikuler
+                <a href="#ekskul" onclick="handleDrawerNavClick(event, '#ekskul')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
+                    <i class="fa-solid fa-futbol text-primary w-5 text-center text-sm"></i> Ekstrakurikuler
                 </a>
-                <a href="#prestasi" onclick="handleDrawerNavClick(event, '#prestasi')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-trophy text-amber-500 w-5 text-center"></i> Prestasi
+                <a href="#prestasi" onclick="handleDrawerNavClick(event, '#prestasi')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
+                    <i class="fa-solid fa-trophy text-amber-500 w-5 text-center text-sm"></i> Prestasi Santri
                 </a>
-                <a href="#stem-area" onclick="handleDrawerNavClick(event, '#stem-area')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-flask text-teal-600 w-5 text-center"></i> STEM Area
+                <a href="#stem-area" onclick="handleDrawerNavClick(event, '#stem-area')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
+                    <i class="fa-solid fa-flask text-teal-600 w-5 text-center text-sm"></i> STEM Area &amp; Riset
                 </a>
-                <a href="#galeri" onclick="handleDrawerNavClick(event, '#galeri')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-images text-primary w-5 text-center"></i> Galeri Sekolah
+                <a href="#galeri" onclick="handleDrawerNavClick(event, '#galeri')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
+                    <i class="fa-solid fa-images text-primary w-5 text-center text-sm"></i> Galeri Sekolah
                 </a>
 
                 <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 pt-3 pb-1">Layanan &amp; Portal</div>
-                <button onclick="triggerHaptic(); toggleMobileDrawer(false); openModal('adminModal'); switchCmsTab('utbk');" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-violet-50 text-violet-800 font-bold transition touch-press border border-violet-200/60 text-left">
-                    <i class="fa-solid fa-laptop-code text-violet-600 w-5 text-center"></i> Ujian UTBK CBT
+                <button onclick="triggerHaptic(); toggleMobileDrawer(false); openModal('adminModal'); switchCmsTab('utbk');" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl bg-violet-50 text-violet-800 font-bold transition touch-press border border-violet-200/60 text-left">
+                    <i class="fa-solid fa-laptop-code text-violet-600 w-5 text-center text-sm"></i> Ujian UTBK CBT
                 </button>
-                <a href="#ppdb-section" onclick="handleDrawerNavClick(event, '#ppdb-section')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-emerald-50 text-primary font-bold transition touch-press">
-                    <i class="fa-solid fa-file-signature text-accent w-5 text-center"></i> Info PPDB &amp; Cek Status
+                <a href="#ppdb-section" onclick="handleDrawerNavClick(event, '#ppdb-section')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl bg-emerald-50 text-primary font-bold transition touch-press">
+                    <i class="fa-solid fa-file-signature text-accent w-5 text-center text-sm"></i> Info PPDB &amp; Cek Status
                 </a>
-                <a href="#informasi" onclick="handleDrawerNavClick(event, '#informasi')" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press">
-                    <i class="fa-solid fa-newspaper text-accent w-5 text-center"></i> Berita &amp; Agenda
+                <a href="#informasi" onclick="handleDrawerNavClick(event, '#informasi')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press">
+                    <i class="fa-solid fa-newspaper text-accent w-5 text-center text-sm"></i> Berita &amp; Agenda
                 </a>
             </nav>
 
-            <!-- Actions Footer (Thumb-reach CTA) -->
-            <div class="p-4 border-t bg-gray-50 space-y-2 shrink-0">
-                <button onclick="toggleMobileDrawer(false); triggerHaptic(); openModal('ppdbModal');" class="w-full bg-accent hover:bg-accent-hover text-primary-dark font-extrabold py-3 rounded-xl text-xs uppercase shadow-md touch-press flex items-center justify-center gap-2">
+            <!-- Actions Footer (Thumb-reach CTA with 48px Target Height & Safe Area) -->
+            <div class="p-4 border-t border-gray-100 bg-gray-50 space-y-2.5 shrink-0">
+                <button onclick="toggleMobileDrawer(false); triggerHaptic(); openModal('ppdbModal');" class="touch-target-48 w-full min-h-[48px] bg-accent hover:bg-accent-hover text-primary-dark font-extrabold rounded-xl text-xs uppercase shadow-md touch-press flex items-center justify-center gap-2">
                     <i class="fa-solid fa-paper-plane"></i> Daftar PPDB 2026
                 </button>
-                <button onclick="toggleMobileDrawer(false); triggerHaptic(); openModal('adminModal');" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl text-xs shadow-xs touch-press flex items-center justify-center gap-2">
+                <button onclick="toggleMobileDrawer(false); triggerHaptic(); openModal('adminModal');" class="touch-target-48 w-full min-h-[48px] bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs shadow-xs touch-press flex items-center justify-center gap-2">
                     <i class="fa-solid fa-user-gear"></i> Portal Santri &amp; Admin
                 </button>
             </div>
@@ -2292,6 +2296,133 @@
             <span class="tab-indicator opacity-0 w-6 h-0.5 bg-primary rounded-full mt-0.5 transition-opacity"></span>
         </button>
     </nav>
+
+    <!-- MOBILE NAVIGATION BOTTOM SHEET (Multi Snap Points: 0.5 & 0.9 Screen Height with iOS/Android Ergonomics) -->
+    <div id="mobileBottomSheet" class="fixed inset-0 z-50 hidden select-none" aria-hidden="true">
+        <!-- Backdrop with Dynamic Opacity Tracking -->
+        <div id="bottomSheetBackdrop" onclick="BottomSheet.close()" class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+        
+        <!-- Bottom Sheet Panel with GPU Native Translation & Multi Snap Physics -->
+        <div id="bottomSheetPanel" class="bottom-sheet-gpu fixed bottom-0 left-0 right-0 max-w-xl mx-auto bg-white rounded-t-3xl shadow-2xl flex flex-col z-10 overscroll-contain">
+            <!-- Top Drag Handle & Gesture Header Area -->
+            <div id="bottomSheetHeader" class="pt-2.5 pb-2 px-5 bg-gradient-to-b from-gray-50 to-white rounded-t-3xl border-b border-gray-100 shrink-0 touch-none">
+                <!-- Horizontal Drag Handle Bar for Intuitive Pulling -->
+                <div class="drag-handle-bar" aria-label="Tarik geser menu"></div>
+                
+                <div class="flex items-center justify-between mt-1">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <span class="text-xs font-bold text-gray-800 uppercase tracking-wider">Aplikasi &amp; Layanan Santri</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <!-- Multi-Snap Toggle Button (0.5 <-> 0.9 snap) -->
+                        <button id="btnSheetToggleSnap" onclick="BottomSheet.toggleSnap()" class="touch-target-48 w-11 h-11 rounded-full text-gray-400 hover:text-primary flex items-center justify-center text-xs touch-press" title="Ubah Ukuran Panel" aria-label="Ubah Ukuran Panel">
+                            <i id="sheetSnapIcon" class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                        </button>
+                        <!-- 48px Ergonomic Close Button -->
+                        <button onclick="BottomSheet.close()" class="touch-target-48 w-11 h-11 rounded-full text-gray-400 hover:text-gray-700 flex items-center justify-center text-base touch-press" title="Tutup" aria-label="Tutup Bottom Sheet">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scrollable Content with Safe-Area Inset Handling & Scroll Containment -->
+            <div id="bottomSheetScrollContent" class="overflow-y-auto overscroll-contain flex-1 p-4 pb-safe space-y-4 custom-scrollbar">
+                <!-- 6-Grid Quick Access Modules -->
+                <div>
+                    <div class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2.5 px-1 flex items-center justify-between">
+                        <span>Akses Kilat Fitur</span>
+                        <span class="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">Terpopuler</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <a href="#home" onclick="BottomSheet.close(); handleBottomTabClick(event, 'home');" class="touch-press flex flex-col items-center justify-center p-3 rounded-2xl bg-emerald-50/70 hover:bg-emerald-100 text-primary border border-emerald-100 text-center transition">
+                            <div class="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-lg shadow-sm mb-1.5">
+                                <i class="fa-solid fa-mosque"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800">JM Center</span>
+                            <span class="text-[10px] text-gray-500">Beranda</span>
+                        </a>
+
+                        <button onclick="BottomSheet.close(); triggerHaptic(); openModal('ppdbModal');" class="touch-press flex flex-col items-center justify-center p-3 rounded-2xl bg-amber-50/70 hover:bg-amber-100 text-amber-900 border border-amber-200/80 text-center transition">
+                            <div class="w-11 h-11 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-lg shadow-sm mb-1.5">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800">PPDB 2026</span>
+                            <span class="text-[10px] text-amber-700 font-semibold">Daftar Santri</span>
+                        </button>
+
+                        <button onclick="BottomSheet.close(); triggerHaptic(); openModal('adminModal'); switchCmsTab('utbk');" class="touch-press flex flex-col items-center justify-center p-3 rounded-2xl bg-violet-50/70 hover:bg-violet-100 text-violet-900 border border-violet-200/80 text-center transition">
+                            <div class="w-11 h-11 rounded-2xl bg-violet-600 text-white flex items-center justify-center text-lg shadow-sm mb-1.5">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800">UTBK CBT</span>
+                            <span class="text-[10px] text-violet-700 font-semibold">Simulasi Ujian</span>
+                        </button>
+
+                        <a href="#informasi" onclick="BottomSheet.close(); handleBottomTabClick(event, 'news');" class="touch-press flex flex-col items-center justify-center p-3 rounded-2xl bg-blue-50/70 hover:bg-blue-100 text-blue-900 border border-blue-200/80 text-center transition">
+                            <div class="w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-lg shadow-sm mb-1.5">
+                                <i class="fa-solid fa-newspaper"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800">JM News</span>
+                            <span class="text-[10px] text-blue-700 font-semibold">Warta Santri</span>
+                        </a>
+
+                        <button onclick="BottomSheet.close(); triggerHaptic(); openEcosystemModal('elearning');" class="touch-press flex flex-col items-center justify-center p-3 rounded-2xl bg-rose-50/70 hover:bg-rose-100 text-rose-900 border border-rose-200/80 text-center transition">
+                            <div class="w-11 h-11 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-lg shadow-sm mb-1.5">
+                                <i class="fa-solid fa-book-quran"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800">E-Learning</span>
+                            <span class="text-[10px] text-rose-700 font-semibold">Kitab &amp; Materi</span>
+                        </button>
+
+                        <button onclick="BottomSheet.close(); triggerHaptic(); openModal('adminModal');" class="touch-press flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200 text-center transition">
+                            <div class="w-11 h-11 rounded-2xl bg-slate-700 text-white flex items-center justify-center text-lg shadow-sm mb-1.5">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800">Portal Admin</span>
+                            <span class="text-[10px] text-gray-500">Wali &amp; Guru</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Extended Navigation List (Minimum 48px Touch Targets) -->
+                <div class="bg-gray-50/80 rounded-2xl p-2 border border-gray-100 space-y-1">
+                    <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 py-1.5">Eksplorasi Lengkap Pesantren</div>
+                    <a href="#programs" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-graduation-cap text-primary w-5 text-center"></i> Program Unggulan &amp; Tahfidz</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
+                    </a>
+                    <a href="#ekskul" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-futbol text-primary w-5 text-center"></i> Ekstrakurikuler &amp; Olahraga</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
+                    </a>
+                    <a href="#prestasi" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-trophy text-amber-500 w-5 text-center"></i> Prestasi Santri Terkini</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
+                    </a>
+                    <a href="#stem-area" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-flask text-teal-600 w-5 text-center"></i> STEM Area &amp; Riset Sains</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
+                    </a>
+                    <a href="#galeri" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-images text-primary w-5 text-center"></i> Galeri Dokumentasi</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
+                    </a>
+                </div>
+
+                <!-- Call to Action Footer (Safe Area Handled) -->
+                <div class="pt-2 pb-4 space-y-2.5">
+                    <button onclick="BottomSheet.close(); triggerHaptic(); openModal('ppdbModal');" class="touch-target-48 w-full min-h-[48px] bg-accent hover:bg-accent-hover text-primary-dark font-extrabold rounded-xl text-xs uppercase shadow-md touch-press flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Daftar PPDB 2026 Sekarang
+                    </button>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20PPJM" target="_blank" rel="noopener noreferrer" class="touch-target-48 w-full min-h-[48px] bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-xs touch-press flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Bantuan WhatsApp Call Center
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL PPDB ONLINE (App-like Bottom Sheet on Mobile) -->
     <div id="ppdbModal" class="modal fixed inset-0 bg-black/60 z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4 backdrop-blur-sm">

@@ -89,49 +89,6 @@ const cmsState = {
       content: 'Kegiatan muhadharah mingguan menjadi sarana santri PPJM melatih kecakapan berpidato dalam bahasa Arab, Inggris, dan Indonesia. Dilengkapi dengan lantunan Jam\'iyyah Sholawat Al-Banjari malam Jum\'at, para santri dididik menjadi generasi yang berakhlak karimah, percaya diri, dan siap berdakwah di tengah masyarakat modern.'
     }
   ],
-      summary: 'Pondok Pesantren dan SMP Plus Jauharul Maknuun Lasem resmi membuka Pendaftaran Peserta Didik Baru Gelombang I.',
-      content: 'Alhamdulillah, PP & SMP Plus Jauharul Maknuun Lasem membuka Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027. Tersedia Program SMP Plus Akademik Terakreditasi, Takhassus Tahfidzul Qur\'an 30 Juz, dan Diniyah Kitab Kuning Salaf. Kuota terbatas 120 santri/siswa dengan sistem seleksi berkas, baca Al-Qur\'an, dan tes potensi akademik.'
-    },
-    {
-      id: 'post-2',
-      title: 'Santri Jauharul Maknuun Raih Juara 1 Musabaqah Hifdzil Qur\'an (MHQ) se-Jawa Tengah',
-      slug: 'juara-1-mhq-jawa-tengah',
-      category: 'Prestasi',
-      author: 'Humas PPJM',
-      date: '2026-02-14',
-      image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
-      status: 'published',
-      tags: ['Prestasi', 'Tahfidz', 'Juara'],
-      summary: 'Prestasi gemilang diraih ananda Muhammad Faiz Al-Fatih kategori Tahfidz 10 Juz putra.',
-      content: 'Selamat dan apresiasi setinggi-tingginya kepada santri kami, Muhammad Faiz Al-Fatih yang berhasil meraih Juara 1 cabang MHQ 10 Juz dalam ajang Festival Santri Jawa Tengah di Semarang. Keberhasilan ini membuktikan komitmen PPJM dalam mencetak penghafal Al-Qur\'an mutqin bersanad.'
-    },
-    {
-      id: 'post-3',
-      title: 'Implementasi Digital Assessment CBT Semester Genap SMP Plus Jauharul Maknuun',
-      slug: 'implementasi-digital-assessment-cbt',
-      category: 'Berita',
-      author: 'Waka Kurikulum',
-      date: '2026-02-08',
-      image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=800&q=80',
-      status: 'published',
-      tags: ['Akademik', 'Teknologi', 'CBT'],
-      summary: 'SMP Plus Jauharul Maknuun menggunakan sistem Computer Based Test dengan enkripsi anti kecurangan.',
-      content: 'Sebagai wujud modernisasi pendidikan tanpa meninggalkan nilai pesantren, SMP Plus Jauharul Maknuun menggelar asesmen digital berbasis Computer Based Test (CBT) di laboratorium multimedia. Sistem ini menguji kejujuran dan kompetensi literasi numerasi para santri.'
-    },
-    {
-      id: 'post-4',
-      title: 'Pengajian Akbar Ahad Pahing & Temu Silaturahmi Wali Santri',
-      slug: 'pengajian-akbar-ahad-pahing',
-      category: 'Agenda',
-      author: 'Sekretariat PP',
-      date: '2026-02-01',
-      image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80',
-      status: 'published',
-      tags: ['Agenda', 'Wali Santri', 'Salaf'],
-      summary: 'Agenda rutin silaturahmi, doa bersama, dan pembagian rapor mid-semester santri.',
-      content: 'Mengundang seluruh orang tua/wali santri PP & SMP Plus Jauharul Maknuun Lasem untuk hadir dalam majelis ta\'lim Pengajian Ahad Pahing bertempat di Masjid Jami\' Pesantren. Agenda mencakup tausiyah pengasuh, musyawarah komite, dan ramah tamah wali asrama.'
-    }
-  ],
   trash: [],
   ppdbList: [
     {
@@ -1029,6 +986,8 @@ const UI = {
 // Expose all global functions to window immediately (hoisted) to ensure inline onclick handlers always work
 const exportedGlobalHandlers = {
   toggleMobileDrawer,
+  DrawerGesture,
+  BottomSheet,
   changeLanguage,
   openModal,
   closeModal,
@@ -4506,11 +4465,12 @@ function openHelpGuideModal(tabKey = 'tahfidz') {
  * Handle navigation clicks with smooth scroll
  */
 function handleDrawerNavClick(event, anchor) {
-  event.preventDefault();
+  if (event) event.preventDefault();
+  toggleMobileDrawer(false);
   const target = document.querySelector(anchor);
   if (target) {
     target.scrollIntoView({ behavior: 'smooth' });
-    triggerHaptic();
+    triggerHaptic(10);
   }
 }
 
@@ -4543,7 +4503,11 @@ function handleBottomTabClick(event, tab) {
   } else if (tab === 'login') {
     openModal('adminModal');
   } else if (tab === 'menu') {
-    toggleMobileDrawer(true);
+    if (typeof BottomSheet !== 'undefined' && BottomSheet.open) {
+      BottomSheet.open(0.5);
+    } else {
+      toggleMobileDrawer(true);
+    }
   }
 
   triggerHaptic();
@@ -4573,10 +4537,12 @@ function handleBottomTabClick(event, tab) {
   }
 }
 
-function triggerHaptic() {
-  if (window.navigator && window.navigator.vibrate) {
-    window.navigator.vibrate(10);
-  }
+function triggerHaptic(duration = 10) {
+  try {
+    if (window.navigator && typeof window.navigator.vibrate === 'function') {
+      window.navigator.vibrate(duration);
+    }
+  } catch (err) {}
 }
 
 // Hero Card Sliding Banner Carousel (smkn1pugaan.sch.id style)
@@ -4660,6 +4626,117 @@ if (typeof window !== 'undefined') {
   }, 5000);
 }
 
+/* ==========================================================================
+   MOBILE NAVIGATION DRAWER & NATIVE TOUCH GESTURE ENGINE (iOS / Android MD3)
+   ========================================================================== */
+const DrawerGesture = {
+  drawer: null,
+  panel: null,
+  backdrop: null,
+  isOpen: false,
+  isDragging: false,
+  startX: 0,
+  startY: 0,
+  startTime: 0,
+  currentX: 0,
+  isLockDetermined: false,
+  isHorizontalSwipe: false,
+  panelWidth: 320,
+
+  init() {
+    this.drawer = document.getElementById('mobileDrawer');
+    this.panel = document.getElementById('mobileDrawerPanel');
+    this.backdrop = document.getElementById('mobileDrawerBackdrop');
+    if (!this.drawer || !this.panel || !this.backdrop) return;
+
+    this.panel.addEventListener('touchstart', (e) => this.onTouchStart(e), { passive: true });
+    this.panel.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
+    this.panel.addEventListener('touchend', (e) => this.onTouchEnd(e), { passive: true });
+    this.panel.addEventListener('touchcancel', (e) => this.onTouchEnd(e), { passive: true });
+  },
+
+  onTouchStart(e) {
+    if (!this.isOpen) return;
+    const touch = e.touches[0];
+    this.startX = touch.clientX;
+    this.startY = touch.clientY;
+    this.startTime = Date.now();
+    this.isLockDetermined = false;
+    this.isHorizontalSwipe = false;
+    this.isDragging = false;
+    this.panelWidth = this.panel.offsetWidth || 320;
+  },
+
+  onTouchMove(e) {
+    if (!this.isOpen) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - this.startX;
+    const dy = touch.clientY - this.startY;
+
+    // Gesture Direction Lock: Distinguish vertical menu scroll from horizontal dismiss swipe
+    if (!this.isLockDetermined) {
+      if (Math.hypot(dx, dy) > 8) {
+        this.isLockDetermined = true;
+        // Only lock to horizontal swipe if dragging to the right (closing direction)
+        if (Math.abs(dx) > Math.abs(dy) && dx > 0) {
+          this.isHorizontalSwipe = true;
+        } else {
+          this.isHorizontalSwipe = false;
+        }
+      }
+    }
+
+    if (this.isHorizontalSwipe && dx > 0) {
+      if (e.cancelable) e.preventDefault();
+
+      if (!this.isDragging) {
+        this.isDragging = true;
+        this.panel.classList.add('is-dragging');
+      }
+
+      this.currentX = dx;
+      // Real-time GPU tracking
+      this.panel.style.transform = `translate3d(${dx}px, 0, 0)`;
+
+      // Dynamic backdrop opacity fading proportionally
+      const progress = Math.max(0, Math.min(1, 1 - (dx / this.panelWidth)));
+      this.backdrop.style.opacity = progress.toFixed(2);
+    }
+  },
+
+  onTouchEnd(e) {
+    if (!this.isOpen || !this.isDragging) {
+      this.isDragging = false;
+      this.isLockDetermined = false;
+      this.isHorizontalSwipe = false;
+      return;
+    }
+
+    this.isDragging = false;
+    this.panel.classList.remove('is-dragging');
+
+    const dt = Math.max(1, Date.now() - this.startTime);
+    const velocity = this.currentX / dt; // px/ms
+    const threshold = this.panelWidth * 0.3; // 30% width release threshold
+
+    // Threshold & Velocity Release Decision
+    if (this.currentX > threshold || (velocity > 0.45 && this.currentX > 20)) {
+      // Dismiss drawer
+      triggerHaptic(12);
+      toggleMobileDrawer(false);
+    } else {
+      // Spring back to open position
+      triggerHaptic(8);
+      this.panel.style.transform = '';
+      this.backdrop.style.opacity = '1';
+    }
+
+    this.currentX = 0;
+    this.isLockDetermined = false;
+    this.isHorizontalSwipe = false;
+  }
+};
+
 function toggleMobileDrawer(show) {
   const drawer = document.getElementById('mobileDrawer');
   const backdrop = document.getElementById('mobileDrawerBackdrop');
@@ -4668,23 +4745,263 @@ function toggleMobileDrawer(show) {
   if (!drawer || !backdrop || !panel) return;
   
   if (show) {
+    DrawerGesture.isOpen = true;
     drawer.classList.remove('hidden');
-    setTimeout(() => {
+    document.body.style.overflow = 'hidden';
+    
+    // Clear any leftover manual drag styles
+    panel.style.transform = '';
+    backdrop.style.opacity = '';
+
+    requestAnimationFrame(() => {
       backdrop.classList.remove('opacity-0');
       backdrop.classList.add('opacity-100');
-      panel.classList.remove('translate-x-full');
-      panel.classList.add('translate-x-0');
-    }, 10);
+      panel.classList.add('is-open');
+    });
+    triggerHaptic(10);
   } else {
+    DrawerGesture.isOpen = false;
     backdrop.classList.remove('opacity-100');
     backdrop.classList.add('opacity-0');
-    panel.classList.remove('translate-x-0');
-    panel.classList.add('translate-x-full');
+    panel.classList.remove('is-open');
+    panel.style.transform = '';
+    
     setTimeout(() => {
       drawer.classList.add('hidden');
-    }, 300);
+      document.body.style.overflow = '';
+      backdrop.style.opacity = '';
+    }, 320);
+    triggerHaptic(8);
   }
 }
+
+/* ==========================================================================
+   MOBILE NAVIGATION BOTTOM SHEET (Multi Snap Points: 0.5 & 0.9)
+   ========================================================================== */
+const BottomSheet = {
+  sheet: null,
+  panel: null,
+  backdrop: null,
+  header: null,
+  content: null,
+  snapIcon: null,
+
+  currentSnap: 0, // 0 = closed, 0.5 = half screen, 0.9 = full screen
+  isOpen: false,
+  isDragging: false,
+  startY: 0,
+  startX: 0,
+  startTime: 0,
+  currentY: 0,
+  startTranslateY: 0,
+  isDirectionLocked: false,
+  isVerticalDrag: false,
+
+  init() {
+    this.sheet = document.getElementById('mobileBottomSheet');
+    this.panel = document.getElementById('bottomSheetPanel');
+    this.backdrop = document.getElementById('bottomSheetBackdrop');
+    this.header = document.getElementById('bottomSheetHeader');
+    this.content = document.getElementById('bottomSheetScrollContent');
+    this.snapIcon = document.getElementById('sheetSnapIcon');
+    if (!this.sheet || !this.panel || !this.backdrop) return;
+
+    // Attach listeners to drag handle & header
+    if (this.header) {
+      this.header.addEventListener('touchstart', (e) => this.onTouchStart(e, true), { passive: true });
+      this.header.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
+      this.header.addEventListener('touchend', (e) => this.onTouchEnd(e), { passive: true });
+      this.header.addEventListener('touchcancel', (e) => this.onTouchEnd(e), { passive: true });
+    }
+
+    // Attach listener to scroll content when user pulls down at top
+    if (this.content) {
+      this.content.addEventListener('touchstart', (e) => this.onTouchStart(e, false), { passive: true });
+      this.content.addEventListener('touchmove', (e) => this.onTouchMove(e), { passive: false });
+      this.content.addEventListener('touchend', (e) => this.onTouchEnd(e), { passive: true });
+      this.content.addEventListener('touchcancel', (e) => this.onTouchEnd(e), { passive: true });
+    }
+  },
+
+  getSnapPixels(snap) {
+    const vh = window.innerHeight;
+    if (snap <= 0) return vh;
+    // translateY is offset from top: (1 - snap) * vh
+    return (1 - snap) * vh;
+  },
+
+  open(snap = 0.5) {
+    if (!this.sheet || !this.panel) return;
+    this.isOpen = true;
+    this.currentSnap = snap;
+    this.sheet.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    // Set panel height based on maximum snap
+    this.panel.style.height = `${window.innerHeight * 0.92}px`;
+    
+    const targetY = this.getSnapPixels(snap);
+
+    requestAnimationFrame(() => {
+      this.backdrop.classList.remove('opacity-0');
+      this.backdrop.classList.add('opacity-100');
+      this.panel.style.transform = `translate3d(0, ${targetY}px, 0)`;
+      this.updateSnapIcon();
+    });
+
+    triggerHaptic(10);
+  },
+
+  snapTo(snap) {
+    if (!this.isOpen) return;
+    this.currentSnap = snap;
+    const targetY = this.getSnapPixels(snap);
+    this.panel.classList.remove('is-dragging');
+    this.panel.style.transform = `translate3d(0, ${targetY}px, 0)`;
+    this.updateSnapIcon();
+    triggerHaptic(10);
+  },
+
+  toggleSnap() {
+    if (this.currentSnap <= 0.6) {
+      this.snapTo(0.9);
+    } else {
+      this.snapTo(0.5);
+    }
+  },
+
+  updateSnapIcon() {
+    if (!this.snapIcon) return;
+    if (this.currentSnap >= 0.7) {
+      this.snapIcon.className = 'fa-solid fa-down-left-and-up-right-to-center';
+    } else {
+      this.snapIcon.className = 'fa-solid fa-up-right-and-down-left-from-center';
+    }
+  },
+
+  close() {
+    if (!this.isOpen) return;
+    this.isOpen = false;
+    this.currentSnap = 0;
+    this.backdrop.classList.remove('opacity-100');
+    this.backdrop.classList.add('opacity-0');
+    this.panel.classList.remove('is-dragging');
+    this.panel.style.transform = `translate3d(0, ${window.innerHeight}px, 0)`;
+
+    setTimeout(() => {
+      this.sheet.classList.add('hidden');
+      document.body.style.overflow = '';
+      this.panel.style.transform = '';
+      this.backdrop.style.opacity = '';
+    }, 340);
+
+    triggerHaptic(8);
+  },
+
+  onTouchStart(e, isHandle) {
+    if (!this.isOpen) return;
+    const touch = e.touches[0];
+    this.startX = touch.clientX;
+    this.startY = touch.clientY;
+    this.startTime = Date.now();
+    this.isDirectionLocked = false;
+    this.isVerticalDrag = isHandle;
+    this.isDragging = false;
+    this.startTranslateY = this.getSnapPixels(this.currentSnap);
+  },
+
+  onTouchMove(e) {
+    if (!this.isOpen) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - this.startX;
+    const dy = touch.clientY - this.startY;
+
+    if (!this.isDirectionLocked) {
+      if (Math.hypot(dx, dy) > 6) {
+        this.isDirectionLocked = true;
+        const isAtTop = !this.content || this.content.scrollTop <= 0;
+        if (Math.abs(dy) > Math.abs(dx)) {
+          if (dy > 0 && isAtTop) {
+            this.isVerticalDrag = true;
+          } else if (dy < 0 && this.currentSnap < 0.9) {
+            this.isVerticalDrag = true;
+          } else {
+            this.isVerticalDrag = false;
+          }
+        } else {
+          this.isVerticalDrag = false;
+        }
+      }
+    }
+
+    if (this.isVerticalDrag) {
+      if (e.cancelable) e.preventDefault();
+
+      if (!this.isDragging) {
+        this.isDragging = true;
+        this.panel.classList.add('is-dragging');
+      }
+
+      const rawY = this.startTranslateY + dy;
+      // Minimum limit clamped to 8% viewport height from top
+      const minY = window.innerHeight * 0.08;
+      const targetY = Math.max(minY, rawY);
+      this.currentY = targetY;
+
+      // Real-time GPU tracking
+      this.panel.style.transform = `translate3d(0, ${targetY}px, 0)`;
+
+      // Dynamic backdrop opacity proportional to pull
+      const maxDrag = window.innerHeight;
+      const progress = Math.max(0, Math.min(1, 1 - (targetY / maxDrag)));
+      this.backdrop.style.opacity = progress.toFixed(2);
+    }
+  },
+
+  onTouchEnd(e) {
+    if (!this.isOpen || !this.isDragging) {
+      this.isDragging = false;
+      this.isVerticalDrag = false;
+      this.isDirectionLocked = false;
+      return;
+    }
+
+    this.isDragging = false;
+    this.panel.classList.remove('is-dragging');
+
+    const dt = Math.max(1, Date.now() - this.startTime);
+    const dy = this.currentY - this.startTranslateY;
+    const velocity = dy / dt; // positive = dragged down, negative = dragged up
+
+    const vh = window.innerHeight;
+    const visibleHeightRatio = 1 - (this.currentY / vh);
+
+    // Momentum velocity release & dynamic snap logic:
+    if (velocity > 0.5) {
+      // Thrown downwards fast
+      if (this.currentSnap >= 0.8) {
+        this.snapTo(0.5);
+      } else {
+        this.close();
+      }
+    } else if (velocity < -0.5) {
+      // Thrown upwards fast
+      this.snapTo(0.9);
+    } else {
+      // Snap based on position thresholds
+      if (visibleHeightRatio < 0.25) {
+        this.close();
+      } else if (visibleHeightRatio < 0.70) {
+        this.snapTo(0.5);
+      } else {
+        this.snapTo(0.9);
+      }
+    }
+
+    this.isVerticalDrag = false;
+    this.isDirectionLocked = false;
+  }
+};
 
 function initNavObserver() {
   const sections = document.querySelectorAll('section[id]');
@@ -5410,6 +5727,8 @@ async function initApp() {
     renderFrontendGallery();
     initNavObserver();
     initScrollProgress();
+    DrawerGesture.init();
+    BottomSheet.init();
   } catch (e) {
     console.warn('[PPSPJM] UI component init warning:', e);
   }

@@ -587,3 +587,104 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* ==========================================================================
+   MOBILE NAVIGATION DRAWER & MULTI-SNAP BOTTOM SHEET ERGONOMICS (iOS / MD3)
+   ========================================================================== */
+/* Remove default gray tap highlight across all mobile devices */
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Safe Area Inset Utility Classes */
+.pt-safe {
+  padding-top: max(1rem, env(safe-area-inset-top, 16px));
+}
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 16px));
+}
+.pl-safe {
+  padding-left: max(1rem, env(safe-area-inset-left, 16px));
+}
+.pr-safe {
+  padding-right: max(1rem, env(safe-area-inset-right, 16px));
+}
+
+/* Ergonomic Minimum Touch Target (44-48px) */
+.touch-target-48 {
+  min-width: 48px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Micro-Haptic Tactile Scale on Press */
+.touch-press {
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s ease, opacity 0.15s ease;
+  touch-action: manipulation;
+}
+.touch-press:active {
+  transform: scale(0.98) !important;
+}
+
+/* Scroll Containment & Anti-Bounce to eliminate background rubber-banding */
+.overscroll-contain {
+  overscroll-behavior-y: contain !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile Slide-Over Drawer GPU Native Panel */
+.drawer-panel-gpu {
+  will-change: transform;
+  transform: translate3d(100%, 0, 0);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -8px 0 28px -4px rgba(0, 0, 0, 0.28);
+}
+.drawer-panel-gpu.is-open {
+  transform: translate3d(0, 0, 0);
+}
+.drawer-panel-gpu.is-dragging {
+  transition: none !important;
+}
+
+/* Visual Grab Handle / Indicator for Swipe-to-Dismiss */
+.drawer-swipe-handle {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 48px;
+  border-radius: 9999px;
+  background-color: rgba(156, 163, 175, 0.5);
+  pointer-events: none;
+}
+
+/* Multi-Snap Mobile Bottom Sheet (0.5 and 0.9 screen height) */
+.bottom-sheet-gpu {
+  will-change: transform;
+  transform: translate3d(0, 100%, 0);
+  transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -10px 30px -4px rgba(0, 0, 0, 0.25);
+  touch-action: pan-y;
+}
+.bottom-sheet-gpu.is-dragging {
+  transition: none !important;
+}
+
+/* Horizontal Drag Handle for Bottom Sheet */
+.drag-handle-bar {
+  width: 44px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: #cbd5e1;
+  margin: 10px auto 6px auto;
+  touch-action: none;
+  cursor: grab;
+}
+.drag-handle-bar:active {
+  cursor: grabbing;
+  background-color: #94a3b8;
+}
+
