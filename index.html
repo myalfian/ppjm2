@@ -215,7 +215,7 @@
     }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased font-sans selection:bg-primary selection:text-white pb-24 md:pb-24 bg-islamic-pattern">
+<body class="bg-gray-50 text-gray-800 antialiased font-sans selection:bg-primary selection:text-white pb-24 md:pb-0 bg-islamic-pattern">
 
     <!-- WCAG 2.1 Accessibility: Skip to Main Content Link (Fokus 2: UX & Accessibility) -->
     <a href="#home" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-primary focus:text-white focus:font-bold focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-accent">
@@ -2377,7 +2377,8 @@
         </div>
     </section>
 
-    
+    <!-- Mobile Bottom Clearance Spacer for 6"+ smartphones -->
+    <div id="mobileBottomClearanceSpacer" class="block md:hidden h-4 w-full pointer-events-none" aria-hidden="true"></div>
 
     <!-- FLOATING ACTION BUTTONS: WHATSAPP & BACK TO TOP -->
     <div class="fixed bottom-24 md:bottom-6 right-5 z-40 flex flex-col gap-2.5 items-center">
@@ -2392,7 +2393,7 @@
     </div>
 
     <!-- MOBILE & APP FOOTER NAVBAR (5 App-Style Bottom Items: Home - JM News - Medsos - E-Learning - Menu) -->
-    <nav id="mobileBottomNav" class="fixed bottom-0 inset-x-0 z-50 block md:hidden bg-white/98 backdrop-blur-md border-t border-slate-200/80 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.06)] flex justify-around items-center px-1 sm:px-2" style="padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.75rem); -webkit-tap-highlight-color: transparent;">
+    <nav id="mobileBottomNav" class="fixed bottom-0 inset-x-0 z-50 block md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/80 rounded-t-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.06)] flex justify-around items-center px-1 sm:px-2" style="padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.75rem); -webkit-tap-highlight-color: transparent;">
         <!-- 1. Home -->
         <a id="bottomTabHome" href="#home" onclick="handleBottomTabClick(event, 'home')" class="min-h-[44px] min-w-[44px] flex-1 flex flex-col items-center justify-center pt-2 pb-0.5 text-slate-500 hover:text-emerald-700 transition-colors active:scale-95 transition-transform duration-100 select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="Home">
             <i class="fa-solid fa-house text-lg mb-0.5 transition-transform group-hover:scale-105"></i>
