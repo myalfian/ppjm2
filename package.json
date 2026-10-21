@@ -16,5 +16,8 @@
     "@supabase/supabase-js": "^2.49.1",
     "express": "^4.21.2",
     "tinymce": "^8.9.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.3"
   }
 }
