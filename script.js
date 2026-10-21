@@ -4531,33 +4531,45 @@ function handleBottomTabClick(event, tab) {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
-    triggerHaptic();
-    document.querySelectorAll('[id^="bottomTab"]').forEach(el => el.classList.remove('nav-tab-active', 'text-primary'));
-    document.querySelectorAll('[id^="bottomTab"]').forEach(el => el.classList.add('text-gray-500'));
-    const activeId = `bottomTab${tab.charAt(0).toUpperCase() + tab.slice(1)}`;
-    const active = document.getElementById(activeId);
-    if (active) {
-      active.classList.add('nav-tab-active', 'text-primary');
-      active.classList.remove('text-gray-500');
-    }
   } else if (tab === 'medsos') {
-    triggerHaptic();
-    const footer = document.querySelector('footer');
+    const footer = document.querySelector('footer') || document.querySelector('#kontak');
     if (footer) {
       footer.scrollIntoView({ behavior: 'smooth' });
     }
   } else if (tab === 'elearning') {
-    triggerHaptic();
     openEcosystemModal('elearning');
   } else if (tab === 'ppdb') {
     openModal('ppdbModal');
-    triggerHaptic();
   } else if (tab === 'login') {
     openModal('adminModal');
-    triggerHaptic();
   } else if (tab === 'menu') {
-    triggerHaptic();
     toggleMobileDrawer(true);
+  }
+
+  triggerHaptic();
+
+  // Reset tab visuals
+  document.querySelectorAll('[id^="bottomTab"]').forEach(el => {
+    el.classList.remove('nav-tab-active', 'text-primary', 'font-bold');
+    el.classList.add('text-slate-500');
+    const ind = el.querySelector('.tab-indicator');
+    if (ind) {
+      ind.classList.remove('opacity-100');
+      ind.classList.add('opacity-0');
+    }
+  });
+
+  // Activate chosen tab
+  const activeId = 'bottomTab' + tab.charAt(0).toUpperCase() + tab.slice(1);
+  const active = document.getElementById(activeId);
+  if (active) {
+    active.classList.add('nav-tab-active', 'text-primary', 'font-bold');
+    active.classList.remove('text-slate-500');
+    const ind = active.querySelector('.tab-indicator');
+    if (ind) {
+      ind.classList.remove('opacity-0');
+      ind.classList.add('opacity-100');
+    }
   }
 }
 

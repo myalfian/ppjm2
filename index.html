@@ -215,7 +215,7 @@
     }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased font-sans selection:bg-primary selection:text-white pb-20 md:pb-0 bg-islamic-pattern">
+<body class="bg-gray-50 text-gray-800 antialiased font-sans selection:bg-primary selection:text-white pb-24 md:pb-24 bg-islamic-pattern">
 
     <!-- WCAG 2.1 Accessibility: Skip to Main Content Link (Fokus 2: UX & Accessibility) -->
     <a href="#home" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-primary focus:text-white focus:font-bold focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-accent">
@@ -2252,39 +2252,44 @@
         </a>
     </div>
 
-    <!-- MOBILE BOTTOM NAVIGATION (5 Revised Bottom Items: Home, JM News, Medsos FAB, E-Learning, Menu) -->
-    <nav id="mobileBottomNav" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200/90 z-40 md:hidden flex justify-around items-center h-16 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] px-2 pb-[env(safe-area-inset-bottom,0px)]">
+    <!-- MOBILE & APP FOOTER NAVBAR (5 App-Style Bottom Items: Home - JM News - Medsos - E-Learning - Menu) -->
+    <nav id="mobileBottomNav" class="fixed bottom-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-md border-t border-gray-200 shadow-[0_-2px_15px_rgba(0,0,0,0.06)] flex justify-between items-center h-16 px-1 sm:px-3 pb-[env(safe-area-inset-bottom,0px)] max-w-xl mx-auto md:max-w-2xl sm:bottom-2 sm:rounded-2xl sm:border sm:border-gray-200/90 sm:shadow-xl">
         <!-- 1. Home -->
-        <a id="bottomTabHome" href="#home" onclick="handleBottomTabClick(event, 'home')" class="flex flex-col items-center justify-center text-primary text-[10px] font-bold touch-press w-14 h-full nav-tab-active" aria-label="Home">
-            <i class="fa-solid fa-house text-lg mb-0.5"></i>
-            <span>Home</span>
+        <a id="bottomTabHome" href="#home" onclick="handleBottomTabClick(event, 'home')" class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors touch-press flex-1 h-full py-1 group cursor-pointer" aria-label="Home">
+            <i class="fa-solid fa-house text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <span class="text-[11px] font-semibold leading-tight">Home</span>
+            <span class="tab-indicator opacity-0 w-6 h-0.5 bg-primary rounded-full mt-0.5 transition-opacity"></span>
         </a>
 
-        <!-- 2. JM News -->
-        <a id="bottomTabNews" href="#informasi" onclick="handleBottomTabClick(event, 'news')" class="flex flex-col items-center justify-center text-gray-500 hover:text-primary text-[10px] font-bold touch-press w-14 h-full" aria-label="JM News">
-            <i class="fa-solid fa-newspaper text-lg mb-0.5"></i>
-            <span>JM News</span>
+        <!-- 2. JM News (Active indicator matching screenshot) -->
+        <a id="bottomTabNews" href="#informasi" onclick="handleBottomTabClick(event, 'news')" class="flex flex-col items-center justify-center text-primary font-bold transition-colors touch-press flex-1 h-full py-1 group cursor-pointer nav-tab-active" aria-label="JM News">
+            <i class="fa-solid fa-newspaper text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <span class="text-[11px] font-bold leading-tight">JM News</span>
+            <span class="tab-indicator opacity-100 w-6 h-0.5 bg-primary rounded-full mt-0.5 transition-opacity"></span>
         </a>
 
-        <!-- 3. Medsos (Center Floating Action Button) -->
-        <button id="bottomTabMedsos" onclick="handleBottomTabClick(event, 'medsos')" class="flex flex-col items-center justify-center -mt-6 touch-press group min-w-[56px] min-h-[56px]" aria-label="Medsos">
-            <div class="w-14 h-14 rounded-full bg-emerald-800 text-white flex items-center justify-center shadow-lg border-4 border-white group-hover:scale-105 active:scale-95 transition transform relative">
-                <i class="fa-solid fa-share-nodes text-xl text-white"></i>
-                <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-amber-400 rounded-full border-2 border-white animate-pulse"></span>
+        <!-- 3. Medsos (Stylized Green Emblem with Amber Dot) -->
+        <button id="bottomTabMedsos" onclick="handleBottomTabClick(event, 'medsos')" class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors touch-press flex-1 h-full py-1 group cursor-pointer" aria-label="Medsos">
+            <div class="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center relative mb-0.5 shadow-2xs group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-share-nodes text-[10px] text-white"></i>
+                <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-amber-400 rounded-full border border-white"></span>
             </div>
-            <span class="text-[10px] font-extrabold text-primary-dark mt-0.5">Medsos</span>
+            <span class="text-[11px] font-semibold leading-tight">Medsos</span>
+            <span class="tab-indicator opacity-0 w-6 h-0.5 bg-primary rounded-full mt-0.5 transition-opacity"></span>
         </button>
 
         <!-- 4. E-Learning -->
-        <button id="bottomTabElearning" onclick="handleBottomTabClick(event, 'elearning')" class="flex flex-col items-center justify-center text-gray-500 hover:text-primary text-[10px] font-bold touch-press w-14 h-full" aria-label="E-Learning">
-            <i class="fa-solid fa-laptop-code text-lg mb-0.5"></i>
-            <span>E-Learning</span>
+        <button id="bottomTabElearning" onclick="handleBottomTabClick(event, 'elearning')" class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors touch-press flex-1 h-full py-1 group cursor-pointer" aria-label="E-Learning">
+            <i class="fa-solid fa-laptop-code text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <span class="text-[11px] font-semibold leading-tight">E-Learning</span>
+            <span class="tab-indicator opacity-0 w-6 h-0.5 bg-primary rounded-full mt-0.5 transition-opacity"></span>
         </button>
 
         <!-- 5. Menu -->
-        <button id="bottomTabMenu" onclick="handleBottomTabClick(event, 'menu')" class="flex flex-col items-center justify-center text-gray-500 hover:text-primary text-[10px] font-bold touch-press w-14 h-full" aria-label="Menu">
-            <i class="fa-solid fa-bars-staggered text-lg mb-0.5"></i>
-            <span>Menu</span>
+        <button id="bottomTabMenu" onclick="handleBottomTabClick(event, 'menu')" class="flex flex-col items-center justify-center text-slate-500 hover:text-primary transition-colors touch-press flex-1 h-full py-1 group cursor-pointer" aria-label="Menu">
+            <i class="fa-solid fa-bars text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <span class="text-[11px] font-semibold leading-tight">Menu</span>
+            <span class="tab-indicator opacity-0 w-6 h-0.5 bg-primary rounded-full mt-0.5 transition-opacity"></span>
         </button>
     </nav>
 
