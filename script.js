@@ -4514,7 +4514,7 @@ function handleBottomTabClick(event, tab) {
 
   // Reset tab visuals
   document.querySelectorAll('[id^="bottomTab"]').forEach(el => {
-    el.classList.remove('nav-tab-active', 'text-primary', 'font-bold');
+    el.classList.remove('nav-tab-active', 'text-emerald-700', 'text-primary', 'font-bold');
     el.classList.add('text-slate-500');
     const ind = el.querySelector('.tab-indicator');
     if (ind) {
@@ -4527,7 +4527,7 @@ function handleBottomTabClick(event, tab) {
   const activeId = 'bottomTab' + tab.charAt(0).toUpperCase() + tab.slice(1);
   const active = document.getElementById(activeId);
   if (active) {
-    active.classList.add('nav-tab-active', 'text-primary', 'font-bold');
+    active.classList.add('nav-tab-active', 'text-emerald-700', 'font-bold');
     active.classList.remove('text-slate-500');
     const ind = active.querySelector('.tab-indicator');
     if (ind) {

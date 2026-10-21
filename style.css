@@ -317,18 +317,7 @@ html {
 
 /* Mobile Bottom Bar Active Glow & Indicator */
 .nav-tab-active {
-    color: #1a6b3c !important;
-    position: relative;
-}
-.nav-tab-active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    width: 18px;
-    height: 3px;
-    background: #1a6b3c;
-    border-radius: 9999px;
-    transition: all 0.25s ease;
+    color: #047857 !important;
 }
 
 .active-nav-link {
