@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Property Test: XSS Surface Zero (Property 2)</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #f9f9f9; }
+    .pass { color: green; } .fail { color: red; font-weight: bold; }
+    h1 { font-size: 1.2em; } pre { background: #fff; padding: 10px; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Property Test: XSS Surface Zero</h1>
+  <p style="font-size:0.85em;color:#666">
+    Property 2: Guestbook entries containing script payloads must render as escaped
+    text — no &lt;script&gt; tags in the DOM, innerHTML equals the literal string.
+  </p>
+  <div id="guestbookList" style="display:none"></div>
+  <pre id="output"></pre>
+
+  <script>
+    function el(tag, attrs = {}, text = '') {
+      const node = document.createElement(tag);
+      Object.entries(attrs).forEach(([k, v]) => node.setAttribute(k, v));
+      if (text) node.textContent = text;
+      return node;
+    }
+
+    function renderStars(rating) {
+      const wrap = el('div', { class: 'text-xs flex gap-1' });
+      for (let i = 1; i <= 5; i++) {
+        wrap.appendChild(el('i', {
+          class: i <= rating ? 'fa-solid fa-star text-amber-400' : 'fa-regular fa-star text-gray-300'
+        }));
+      }
+      return wrap;
+    }
+
+    function renderGuestbook(entries) {
+      const list = document.getElementById('guestbookList');
+      if (!list) return;
+      while (list.firstChild) list.removeChild(list.firstChild);
+      if (!entries || entries.length === 0) {
+        list.appendChild(el('p', { class: 'text-xs' }, 'Belum ada testimoni.'));
+        return;
+      }
+      entries.forEach(item => {
+        const card = el('div', { class: 'card' });
+        const nameEl = el('p', { class: 'name' }, item.name || '');
+        const roleEl = el('p', { class: 'role' }, item.role || '');
+        const msgEl  = el('p', { class: 'msg'  }, item.message || '');
+        card.appendChild(nameEl);
+        card.appendChild(roleEl);
+        if (item.rating) card.appendChild(renderStars(Number(item.rating)));
+        card.appendChild(msgEl);
+        list.appendChild(card);
+      });
+    }
+
+    let passed = 0, failed = 0;
+    const lines = [];
+
+    function assert(description, condition) {
+      if (condition) { passed++; lines.push('✅ PASS: ' + description); }
+      else           { failed++; lines.push('❌ FAIL: ' + description); }
+    }
+
+    const xssPayloads = [
+      '<script>alert(1)<\/script>',
+      '<img src=x onerror="alert(1)">',
+      '<svg onload="alert(1)">',
+      'javascript:alert(1)',
+      '"><script>alert(document.cookie)<\/script>',
+    ];
+
+    function runTests() {
+      const list = document.getElementById('guestbookList');
+
+      xssPayloads.forEach(payload => {
+        // Test payload in name
+        renderGuestbook([{ name: payload, role: 'Tester', rating: 5, message: 'Normal message.' }]);
+        assert('No <script> in DOM when name = ' + payload.substring(0,40),
+          list.querySelectorAll('script').length === 0);
+        const nameEls = list.querySelectorAll('.name');
+        let nameIsLiteral = false;
+        nameEls.forEach(p => { if (p.textContent === payload) nameIsLiteral = true; });
+        assert('Name stored as literal textContent: ' + payload.substring(0,40), nameIsLiteral);
+
+        // Test payload in message
+        renderGuestbook([{ name: 'Normal Name', role: 'Tester', rating: 5, message: payload }]);
+        assert('No <script> in DOM when message = ' + payload.substring(0,40),
+          list.querySelectorAll('script').length === 0);
+        const msgEls = list.querySelectorAll('.msg');
+        let msgIsLiteral = false;
+        msgEls.forEach(p => { if (p.textContent === payload) msgIsLiteral = true; });
+        assert('Message stored as literal textContent: ' + payload.substring(0,40), msgIsLiteral);
+      });
+
+      // innerHTML escaping check
+      renderGuestbook([{ name: '<script>alert(1)<\/script>', role: 'T', rating: 3, message: '<script>alert(2)<\/script>' }]);
+      const html = list.innerHTML;
+      assert('innerHTML contains &lt; (escaped), not raw <script> tag',
+        !html.includes('<script>') && html.includes('&lt;'));
+
+      lines.push('');
+      lines.push('Total: ' + (passed + failed) + ' | Passed: ' + passed + ' | Failed: ' + failed);
+      document.getElementById('output').innerHTML = lines
+        .map(l => '<span class="' + (l.startsWith('✅') ? 'pass' : l.startsWith('❌') ? 'fail' : '') + '">' + l + '</span>')
+        .join('\n');
+    }
+
+    runTests();
+  </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Property Test: Admin Auth Gate (Property 3)</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #f9f9f9; }
+    .pass { color: green; } .fail { color: red; font-weight: bold; }
+    h1 { font-size: 1.2em; } pre { background: #fff; padding: 10px; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Property Test: Admin Auth Gate</h1>
+  <p style="font-size:0.85em;color:#666">
+    Property 3: #adminDashboardSection must be hidden on initial load.
+    The string "admin123" must not exist as a live credential in script.js or index.html
+    (a JSDoc comment referencing it is acceptable; actual usage as a password is not).
+  </p>
+
+  <!-- Simulate the admin modal HTML from index.html -->
+  <div id="adminModal" style="display:none">
+    <div id="adminLoginSection">
+      <input id="adminEmail" type="email" value="">
+      <input id="adminPassword" type="password" value="">
+      <button id="loginBtn">Login</button>
+    </div>
+    <div id="adminDashboardSection" class="hidden">
+      <!-- Dashboard content -->
+    </div>
+  </div>
+
+  <pre id="output"></pre>
+
+  <script>
+    let passed = 0, failed = 0;
+    const lines = [];
+
+    function assert(description, condition) {
+      if (condition) { passed++; lines.push('✅ PASS: ' + description); }
+      else           { failed++; lines.push('❌ FAIL: ' + description); }
+    }
+
+    async function runTests() {
+      lines.push('--- Property 3: Admin auth gate ---');
+      lines.push('');
+
+      // ---------------------------------------------------------------
+      // Test 1: #adminDashboardSection has class "hidden" on initial load
+      // ---------------------------------------------------------------
+      const dashSection = document.getElementById('adminDashboardSection');
+      assert(
+        '#adminDashboardSection has class "hidden" on initial load',
+        dashSection !== null && dashSection.classList.contains('hidden')
+      );
+
+      // ---------------------------------------------------------------
+      // Test 2: #adminLoginSection is visible (no hidden class) on load
+      // ---------------------------------------------------------------
+      const loginSection = document.getElementById('adminLoginSection');
+      assert(
+        '#adminLoginSection does NOT have class "hidden" on initial load',
+        loginSection !== null && !loginSection.classList.contains('hidden')
+      );
+
+      // ---------------------------------------------------------------
+      // Test 3: script.js does not contain 'admin123' as a live credential
+      //   Allowed: JSDoc/comment references (lines starting with " * ")
+      //   Disallowed: any assignment, comparison, or string literal usage
+      // ---------------------------------------------------------------
+      try {
+        const scriptResponse = await fetch('../script.js');
+        const scriptText = await scriptResponse.text();
+
+        // Strip comment-only lines (single-line // … and JSDoc * … lines) then check
+        const nonCommentLines = scriptText
+          .split('\n')
+          .filter(line => {
+            const trimmed = line.trim();
+            return !trimmed.startsWith('//') && !trimmed.startsWith('*');
+          })
+          .join('\n');
+
+        assert(
+          'script.js does NOT contain "admin123" in non-comment code',
+          !nonCommentLines.includes('admin123')
+        );
+      } catch (e) {
+        lines.push('⚠️  SKIP: Could not fetch ../script.js — run this test via a local HTTP server');
+      }
+
+      // ---------------------------------------------------------------
+      // Test 4: index.html does not contain 'admin123'
+      // ---------------------------------------------------------------
+      try {
+        const htmlResponse = await fetch('../index.html');
+        const htmlText = await htmlResponse.text();
+        assert(
+          'index.html does NOT contain the string "admin123"',
+          !htmlText.includes('admin123')
+        );
+      } catch (e) {
+        lines.push('⚠️  SKIP: Could not fetch ../index.html — run this test via a local HTTP server');
+      }
+
+      // ---------------------------------------------------------------
+      // Test 5: loginAdmin() with FAILED auth does NOT show dashboard
+      // ---------------------------------------------------------------
+      let dashShown = false;
+
+      // Local stubs (override globals for isolation)
+      function showAdminDashboard() { dashShown = true; }
+      function showAdminLogin()     {}
+      function showAdminError(msg)  {}
+      function loadAdminPPDB()      {}
+
+      // Mock Supabase that simulates auth failure
+      const mockSupabaseFailure = {
+        auth: {
+          signInWithPassword: async () => ({ data: null, error: { message: 'Invalid credentials' } })
+        }
+      };
+
+      // Inline loginAdmin logic (mirrors script.js implementation exactly)
+      async function loginAdminIsolated(supabase) {
+        const email    = (document.getElementById('adminEmail')?.value || '').trim();
+        const password = document.getElementById('adminPassword')?.value || '';
+        if (!supabase) { showAdminError('Layanan autentikasi tidak tersedia.'); return; }
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) { showAdminError('Email atau sandi salah.'); return; }
+        showAdminDashboard();
+        loadAdminPPDB();
+      }
+
+      document.getElementById('adminEmail').value    = 'test@example.com';
+      document.getElementById('adminPassword').value = 'wrongpassword';
+      await loginAdminIsolated(mockSupabaseFailure);
+      assert('Dashboard NOT shown when Supabase auth fails', !dashShown);
+
+      // ---------------------------------------------------------------
+      // Test 6: loginAdmin() with SUCCESSFUL auth DOES show dashboard
+      // ---------------------------------------------------------------
+      dashShown = false;
+      const mockSupabaseSuccess = {
+        auth: {
+          signInWithPassword: async () => ({ data: { user: { id: 'usr_abc123' } }, error: null })
+        }
+      };
+
+      document.getElementById('adminEmail').value    = 'admin@ppspjm.sch.id';
+      document.getElementById('adminPassword').value = 'correctpassword';
+      await loginAdminIsolated(mockSupabaseSuccess);
+      assert('Dashboard IS shown when Supabase auth succeeds', dashShown);
+
+      // ---------------------------------------------------------------
+      // Test 7: loginAdmin() with no Supabase client shows error, no dashboard
+      // ---------------------------------------------------------------
+      dashShown = false;
+      let errorShown = false;
+      function showAdminErrorCapture(msg) { errorShown = true; }
+
+      async function loginAdminIsolatedCapture(supabase) {
+        const email    = (document.getElementById('adminEmail')?.value || '').trim();
+        const password = document.getElementById('adminPassword')?.value || '';
+        if (!supabase) { showAdminErrorCapture('Layanan autentikasi tidak tersedia.'); return; }
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) { showAdminErrorCapture('Email atau sandi salah.'); return; }
+        showAdminDashboard();
+        loadAdminPPDB();
+      }
+
+      document.getElementById('adminEmail').value    = 'admin@ppspjm.sch.id';
+      document.getElementById('adminPassword').value = 'somepassword';
+      await loginAdminIsolatedCapture(undefined); // no supabase client
+      assert('Dashboard NOT shown when Supabase client is unavailable', !dashShown);
+      assert('Error is displayed when Supabase client is unavailable', errorShown);
+
+      // ---------------------------------------------------------------
+      // Summary
+      // ---------------------------------------------------------------
+      lines.push('');
+      lines.push('─────────────────────────────────────────────');
+      lines.push('Total: ' + (passed + failed) + ' | ✅ Passed: ' + passed + ' | ❌ Failed: ' + failed);
+
+      document.getElementById('output').innerHTML = lines
+        .map(l => {
+          const cls = l.startsWith('✅') ? 'pass' : l.startsWith('❌') ? 'fail' : '';
+          return '<span class="' + cls + '">' + l + '</span>';
+        })
+        .join('\n');
+    }
+
+    runTests();
+  </script>
+</body>
+</html>

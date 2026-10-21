@@ -1,0 +1,8 @@
+{
+  "name": "PP & SMP Plus Jauharul Maknuun Lasem",
+  "description": "Portal Resmi Pondok Pesantren & SMP Plus Jauharul Maknuun Lasem, Rembang dengan layanan PPDB Online dan informasi terpadu.",
+  "requestFramePermissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
