@@ -6,4 +6,3 @@ dist/
 .vercel/
 .DS_Store
 .vercel
-bun.lock
