@@ -215,7 +215,7 @@
     }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased font-sans selection:bg-primary selection:text-white pb-24 md:pb-0 bg-islamic-pattern">
+<body class="bg-gray-50 text-gray-800 antialiased font-sans selection:bg-primary selection:text-white min-h-screen min-h-[100dvh] pb-28 sm:pb-32 md:pb-0 overflow-x-hidden bg-islamic-pattern">
 
     <!-- WCAG 2.1 Accessibility: Skip to Main Content Link (Fokus 2: UX & Accessibility) -->
     <a href="#home" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-primary focus:text-white focus:font-bold focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-accent">
@@ -616,11 +616,11 @@
             <!-- Sliding Cards Wrapper -->
             <div class="relative group">
                 <!-- Outer Overflow Container -->
-                <div id="heroCardTrackContainer" class="overflow-hidden rounded-3xl">
-                    <div id="heroCardTrack" class="flex transition-transform duration-500 ease-out gap-4 sm:gap-6">
+                <div id="heroCardTrackContainer" class="hero-stage-viewport overflow-hidden rounded-3xl select-none py-2 cursor-grab active:cursor-grabbing" style="perspective: 1200px; -webkit-perspective: 1200px; perspective-origin: center center;">
+                    <div id="heroCardTrack" class="hero-carousel-track flex gap-4 md:gap-6 py-2 will-change-transform" style="transform-style: preserve-3d; -webkit-transform-style: preserve-3d;">
                         
                         <!-- Slide Card 1: Tahfidz 30 Juz -->
-                        <div class="w-full lg:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-emerald-800 via-primary-dark to-emerald-900 rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-accent/40 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
+                        <div class="hero-card hero-card-active group/card w-[88%] sm:w-[85%] md:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-emerald-800 via-primary-dark to-emerald-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 dark:border-white/15 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
                             <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-accent/15 rounded-full blur-2xl pointer-events-none"></div>
                             <div class="absolute top-4 right-20 text-white/5 text-8xl font-black pointer-events-none select-none"><i class="fa-solid fa-quran"></i></div>
 
@@ -637,8 +637,8 @@
                                     </p>
                                 </div>
                                 <div class="col-span-5 sm:col-span-4 relative flex justify-center">
-                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-accent/50 shadow-xl transform rotate-2 hover:rotate-0 transition duration-500">
-                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=400&q=80" alt="Tahfidz 30 Juz" class="w-full h-full object-cover" width="400" height="300">
+                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-accent/50 shadow-xl transform rotate-2 group-hover/card:rotate-0 transition duration-500">
+                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=400&q=80" alt="Tahfidz 30 Juz" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500 ease-out" width="400" height="300">
                                     </div>
                                 </div>
                             </div>
@@ -654,7 +654,7 @@
                         </div>
 
                         <!-- Slide Card 2: SMP Plus & STEM Area -->
-                        <div class="w-full lg:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-blue-900 via-emerald-950 to-primary-dark rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-accent/40 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
+                        <div class="hero-card hero-card-active group/card w-[88%] sm:w-[85%] md:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-blue-900 via-emerald-950 to-primary-dark rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 dark:border-white/15 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
                             <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none"></div>
                             <div class="absolute top-4 right-20 text-white/5 text-8xl font-black pointer-events-none select-none"><i class="fa-solid fa-laptop-code"></i></div>
 
@@ -671,8 +671,8 @@
                                     </p>
                                 </div>
                                 <div class="col-span-5 sm:col-span-4 relative flex justify-center">
-                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-cyan-400/50 shadow-xl transform -rotate-2 hover:rotate-0 transition duration-500">
-                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80" alt="SMP Plus &amp; STEM Area" class="w-full h-full object-cover" width="400" height="300">
+                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-cyan-400/50 shadow-xl transform -rotate-2 group-hover/card:rotate-0 transition duration-500">
+                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80" alt="SMP Plus &amp; STEM Area" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500 ease-out" width="400" height="300">
                                     </div>
                                 </div>
                             </div>
@@ -688,7 +688,7 @@
                         </div>
 
                         <!-- Slide Card 3: PPDB Online 2026 -->
-                        <div class="w-full lg:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-amber-900 via-primary-dark to-emerald-900 rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-accent/40 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
+                        <div class="hero-card hero-card-inactive group/card w-[88%] sm:w-[85%] md:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-amber-900 via-primary-dark to-emerald-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 dark:border-white/15 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
                             <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-amber-500/15 rounded-full blur-2xl pointer-events-none"></div>
 
                             <div class="relative z-10 grid grid-cols-12 gap-4 items-center h-full">
@@ -704,8 +704,8 @@
                                     </p>
                                 </div>
                                 <div class="col-span-5 sm:col-span-4 relative flex justify-center">
-                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-accent/50 shadow-xl transform rotate-3 hover:rotate-0 transition duration-500">
-                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80" alt="PPDB Online" class="w-full h-full object-cover" width="400" height="300">
+                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-accent/50 shadow-xl transform rotate-3 group-hover/card:rotate-0 transition duration-500">
+                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80" alt="PPDB Online" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500 ease-out" width="400" height="300">
                                     </div>
                                 </div>
                             </div>
@@ -719,7 +719,7 @@
                         </div>
 
                         <!-- Slide Card 4: Kitab Kuning Salaf -->
-                        <div class="w-full lg:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-emerald-950 via-primary-dark to-emerald-900 rounded-3xl p-6 sm:p-8 shadow-2xl border-2 border-accent/40 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
+                        <div class="hero-card hero-card-inactive group/card w-[88%] sm:w-[85%] md:w-[calc(50%-12px)] shrink-0 bg-gradient-to-r from-emerald-950 via-primary-dark to-emerald-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 dark:border-white/15 relative overflow-hidden flex flex-col justify-between min-h-[290px] sm:min-h-[320px]">
                             <div class="relative z-10 grid grid-cols-12 gap-4 items-center h-full">
                                 <div class="col-span-7 sm:col-span-8 space-y-3">
                                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-400/20 border border-emerald-400/40 text-emerald-300 font-bold text-[10px] sm:text-xs">
@@ -733,8 +733,8 @@
                                     </p>
                                 </div>
                                 <div class="col-span-5 sm:col-span-4 relative flex justify-center">
-                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-emerald-400/50 shadow-xl transform -rotate-3 hover:rotate-0 transition duration-500">
-                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Kitab Kuning Salaf" class="w-full h-full object-cover" width="400" height="300">
+                                    <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-emerald-400/50 shadow-xl transform -rotate-3 group-hover/card:rotate-0 transition duration-500">
+                                        <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Kitab Kuning Salaf" class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500 ease-out" width="400" height="300">
                                     </div>
                                 </div>
                             </div>
@@ -753,19 +753,19 @@
                 </div>
 
                 <!-- Carousel Navigation Arrows -->
-                <button id="heroSlidePrev" onclick="moveHeroCardSlide(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur transition opacity-0 group-hover:opacity-100 z-20" aria-label="Slide Sebelumnya">
+                <button id="heroSlidePrev" onclick="moveHeroCardSlide(-1)" class="absolute -left-2 sm:left-2 top-1/2 -translate-y-1/2 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white hover:bg-black/50 shadow-lg shadow-black/20 flex items-center justify-center transition-all duration-200 active:scale-90 z-20 cursor-pointer" aria-label="Slide Sebelumnya">
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
-                <button id="heroSlideNext" onclick="moveHeroCardSlide(1)" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur transition opacity-0 group-hover:opacity-100 z-20" aria-label="Slide Selanjutnya">
+                <button id="heroSlideNext" onclick="moveHeroCardSlide(1)" class="absolute -right-2 sm:right-2 top-1/2 -translate-y-1/2 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-white hover:bg-black/50 shadow-lg shadow-black/20 flex items-center justify-center transition-all duration-200 active:scale-90 z-20 cursor-pointer" aria-label="Slide Selanjutnya">
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
 
             <!-- Carousel Pagination Dots (Matching smkn1pugaan.sch.id Dots Style) -->
             <div id="heroCardDots" class="flex items-center justify-center gap-2 pt-2">
-                <button onclick="setHeroCardSlide(0)" class="w-3.5 h-3.5 rounded-full bg-accent transition-all duration-300 scale-110" aria-label="Ke slide 1"></button>
-                <button onclick="setHeroCardSlide(1)" class="w-3.5 h-3.5 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300" aria-label="Ke slide 2"></button>
-                <button onclick="setHeroCardSlide(2)" class="w-3.5 h-3.5 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300" aria-label="Ke slide 3"></button>
+                <button onclick="setHeroCardSlide(0)" class="w-7 h-2.5 rounded-full bg-amber-400 shadow-md shadow-amber-400/30 transition-all duration-300 ease-out cursor-pointer" aria-label="Ke slide 1"></button>
+                <button onclick="setHeroCardSlide(1)" class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300 cursor-pointer" aria-label="Ke slide 2"></button>
+                <button onclick="setHeroCardSlide(2)" class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300 cursor-pointer" aria-label="Ke slide 3"></button>
             </div>
 
             
@@ -1895,8 +1895,8 @@
     </section>
 
     <!-- STRUKTUR ORGANISASI & MANAJEMEN PESANTREN/SEKOLAH -->
-    <section id="organisasi" class="section-deferred py-16 bg-gray-50 border-t border-gray-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="organisasi" class="section-deferred py-10 sm:py-14 md:py-16 lg:py-20 bg-gray-50 border-t border-slate-200/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
             <div class="text-center max-w-2xl mx-auto space-y-2">
                 <span class="text-xs font-bold text-primary uppercase tracking-widest bg-emerald-100/80 px-3 py-1 rounded-full">Tata Kelola &amp; Pimpinan</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-primary-dark">Struktur Organisasi Lembaga</h2>
@@ -1905,10 +1905,10 @@
             </div>
 
             <!-- Organigram Cards Hierarchy -->
-            <div class="space-y-8 max-w-4xl mx-auto text-center">
+            <div class="space-y-4 sm:space-y-6 max-w-4xl mx-auto text-center">
                 <!-- Top: Pengasuh Pondok & Ketua Yayasan -->
                 <div class="flex justify-center">
-                    <div class="bg-white rounded-2xl p-5 border-2 border-accent shadow-md max-w-sm w-full space-y-2">
+                    <div class="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 border border-accent/70 shadow-sm hover:shadow-md transition-shadow max-w-sm w-full space-y-2">
                         <div class="w-16 h-16 rounded-full overflow-hidden mx-auto border-2 border-accent">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="KH. Ahmad Zaini, M.Pd.I - Pengasuh PPJM" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="400">
                         </div>
@@ -1919,8 +1919,8 @@
                 </div>
 
                 <!-- Mid: Kepala SMP Plus & Koordinator Tahfidz -->
-                <div class="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                    <div class="bg-white rounded-2xl p-4 border border-primary/30 shadow-sm space-y-2">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                    <div class="bg-white rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow space-y-1.5">
                         <div class="w-14 h-14 rounded-full overflow-hidden mx-auto border-2 border-primary">
                             <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="H. M. Sholihin, S.Pd., M.M. - Kepala Sekolah SMP Plus" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="400">
                         </div>
@@ -1929,7 +1929,7 @@
                         <p class="text-[10px] text-gray-500">Penanggung Jawab Kurikulum Nasional &amp; Akreditasi</p>
                     </div>
 
-                    <div class="bg-white rounded-2xl p-4 border border-primary/30 shadow-sm space-y-2">
+                    <div class="bg-white rounded-2xl p-3 sm:p-4 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow space-y-1.5">
                         <div class="w-14 h-14 rounded-full overflow-hidden mx-auto border-2 border-primary">
                             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Ust. H. Ridwan, M.Ag - Koordinator Tahfidz" class="w-full h-full object-cover" loading="lazy" decoding="async" width="400" height="400">
                         </div>
@@ -1940,20 +1940,20 @@
                 </div>
 
                 <!-- Bottom: Para Waka & Kepala Asrama -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 text-center space-y-1">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+                    <div class="bg-white p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow text-center space-y-1">
                         <h5 class="font-bold text-xs text-primary-dark">Ust. Abdul Muid, S.Pd</h5>
                         <p class="text-[10px] text-accent font-semibold">Waka Kesiswaan &amp; Kedisiplinan</p>
                     </div>
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 text-center space-y-1">
+                    <div class="bg-white p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow text-center space-y-1">
                         <h5 class="font-bold text-xs text-primary-dark">Ustadzah Nur Hidayah, S.Si</h5>
                         <p class="text-[10px] text-accent font-semibold">Waka Kurikulum &amp; Pengajaran</p>
                     </div>
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 text-center space-y-1">
+                    <div class="bg-white p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow text-center space-y-1">
                         <h5 class="font-bold text-xs text-primary-dark">Ust. Fahrur Rozi, S.Kom</h5>
                         <p class="text-[10px] text-accent font-semibold">Kepala Sarpras &amp; Lab Komputer</p>
                     </div>
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 text-center space-y-1">
+                    <div class="bg-white p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow text-center space-y-1">
                         <h5 class="font-bold text-xs text-primary-dark">Ustadzah Siti Munawwaroh</h5>
                         <p class="text-[10px] text-accent font-semibold">Kepala Asrama Putri &amp; Kesehatan</p>
                     </div>
@@ -1963,8 +1963,8 @@
     </section>
 
     <!-- EKOSISTEM DIGITAL SEKOLAH (MODULAR INTEGRATIONS) -->
-    <section id="ekosistem" data-aos="fade-up" class="section-deferred py-16 bg-white border-t border-gray-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="ekosistem" data-aos="fade-up" class="section-deferred py-10 sm:py-14 md:py-16 lg:py-20 bg-white border-t border-slate-200/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
             <div class="text-center max-w-2xl mx-auto space-y-2">
                 <span class="text-xs font-bold text-primary uppercase tracking-widest bg-emerald-100/80 px-3 py-1 rounded-full">Kesiapan Integrasi Sistem</span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-primary-dark">Ekosistem Digital Sekolah Modern</h2>
@@ -2151,9 +2151,9 @@
     </section>
 
     <!-- GALERI FOTO & VIDEO (Matching smkn1pugaan.sch.id Galeri Video & Photo Grid) -->
-    <section id="galeri" class="section-deferred py-16 bg-white border-t border-gray-200/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-            <div class="flex flex-wrap items-center justify-between gap-4">
+    <section id="galeri" class="section-deferred py-10 sm:py-14 md:py-16 lg:py-20 bg-white border-t border-slate-200/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                 <div>
                     <span class="text-xs font-bold text-primary uppercase tracking-widest">Dokumentasi</span>
                     <h2 class="text-2xl font-bold text-primary-dark">Galeri Kegiatan &amp; Fasilitas Santri</h2>
@@ -2178,8 +2178,8 @@
                 <h3 class="text-lg font-bold text-primary-dark mb-4 flex items-center gap-2">
                     <i class="fa-solid fa-circle-play text-red-600"></i> Galeri Video Profil
                 </h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-video relative group cursor-pointer border border-gray-200" onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                    <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-video relative group cursor-pointer border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow" onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')">
                         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Video Profil Singkat PP &amp; SMP Plus Jauharul Maknuun" class="w-full h-full object-cover" loading="lazy" decoding="async" width="800" height="450">
                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition">
                             <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition">
@@ -2189,7 +2189,7 @@
                         <span class="absolute bottom-3 left-3 text-white text-xs font-bold bg-black/60 px-3 py-1 rounded-md">Profil Singkat PP & SMP Plus Jauharul Maknuun</span>
                     </div>
 
-                    <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-video relative group cursor-pointer border border-gray-200" onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+                    <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-video relative group cursor-pointer border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow" onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')">
                         <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" alt="Video Dokumentasi Khataman Al-Qur'an Santri PPJM" class="w-full h-full object-cover" loading="lazy" decoding="async" width="800" height="450">
                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition">
                             <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition">
@@ -2393,23 +2393,26 @@
     </div>
 
     <!-- MOBILE & APP FOOTER NAVBAR (5 App-Style Bottom Items: Home - JM News - Medsos - E-Learning - Menu) -->
-    <nav id="mobileBottomNav" class="fixed bottom-0 inset-x-0 z-50 block md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/80 rounded-t-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.06)] flex justify-around items-center px-1 sm:px-2" style="padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.75rem); -webkit-tap-highlight-color: transparent;">
+    <nav id="mobileBottomNav" class="fixed left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-[420px] flex md:hidden bg-white/85 dark:bg-slate-900/85 backdrop-blur-2xl border border-slate-200/80 dark:border-white/15 rounded-full shadow-[0_12px_40px_-8px_rgba(0,0,0,0.18)] dark:shadow-[0_12px_40px_-8px_rgba(0,0,0,0.6)] justify-around items-center p-1.5 select-none transform-gpu will-change-transform relative" style="bottom: max(env(safe-area-inset-bottom, 0px), 1rem); --active-index: 1; -webkit-tap-highlight-color: transparent; transform: translate3d(-50%, 0, 0); -webkit-transform: translate3d(-50%, 0, 0);" role="navigation" aria-label="Navigasi Seluler Floating Dock">
+        <!-- Animated Sliding Pill Indicator (Glides behind the active item) -->
+        <div id="slidingPillIndicator" class="sliding-pill-indicator" aria-hidden="true"></div>
+
         <!-- 1. Home -->
-        <a id="bottomTabHome" href="#home" onclick="handleBottomTabClick(event, 'home')" class="min-h-[44px] min-w-[44px] flex-1 flex flex-col items-center justify-center pt-2 pb-0.5 text-slate-500 hover:text-emerald-700 transition-colors active:scale-95 transition-transform duration-100 select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="Home">
+        <a id="bottomTabHome" href="#home" onclick="handleBottomTabClick(event, 'home')" class="min-h-[48px] min-w-[48px] flex-1 flex flex-col items-center justify-center pt-1.5 pb-0.5 relative z-10 text-slate-500 hover:text-emerald-700 transition-colors duration-200 active:scale-95 transition-transform duration-100 ease-out select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="Home">
             <i class="fa-solid fa-house text-lg mb-0.5 transition-transform group-hover:scale-105"></i>
             <span class="text-[11px] font-semibold leading-tight">Home</span>
             <span class="tab-indicator block w-6 h-0.5 bg-emerald-700 mx-auto mt-1 rounded-full opacity-0 transition-opacity"></span>
         </a>
 
         <!-- 2. JM News (Active State) -->
-        <a id="bottomTabNews" href="#informasi" onclick="handleBottomTabClick(event, 'news')" class="min-h-[44px] min-w-[44px] flex-1 flex flex-col items-center justify-center pt-2 pb-0.5 text-emerald-700 font-bold transition-colors active:scale-95 transition-transform duration-100 select-none cursor-pointer group nav-tab-active" style="-webkit-tap-highlight-color: transparent;" aria-label="JM News">
+        <a id="bottomTabNews" href="#informasi" onclick="handleBottomTabClick(event, 'news')" class="min-h-[48px] min-w-[48px] flex-1 flex flex-col items-center justify-center pt-1.5 pb-0.5 relative z-10 text-emerald-700 font-bold transition-colors duration-200 active:scale-95 transition-transform duration-100 ease-out select-none cursor-pointer group nav-tab-active" style="-webkit-tap-highlight-color: transparent;" aria-label="JM News">
             <i class="fa-solid fa-newspaper text-lg mb-0.5 transition-transform group-hover:scale-105"></i>
             <span class="text-[11px] font-bold leading-tight">JM News</span>
             <span class="tab-indicator block w-6 h-0.5 bg-emerald-700 mx-auto mt-1 rounded-full opacity-100 transition-opacity"></span>
         </a>
 
         <!-- 3. Medsos (Stylized Green Emblem with Amber Dot) -->
-        <button id="bottomTabMedsos" onclick="handleBottomTabClick(event, 'medsos')" class="min-h-[44px] min-w-[44px] flex-1 flex flex-col items-center justify-center pt-2 pb-0.5 text-slate-500 hover:text-emerald-700 transition-colors active:scale-95 transition-transform duration-100 select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="Medsos">
+        <button id="bottomTabMedsos" onclick="handleBottomTabClick(event, 'medsos')" class="min-h-[48px] min-w-[48px] flex-1 flex flex-col items-center justify-center pt-1.5 pb-0.5 relative z-10 text-slate-500 hover:text-emerald-700 transition-colors duration-200 active:scale-95 transition-transform duration-100 ease-out select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="Medsos">
             <div class="w-6 h-6 rounded-full bg-emerald-800 text-white flex items-center justify-center relative mb-0.5 shadow-2xs group-hover:scale-105 transition-transform">
                 <i class="fa-solid fa-share-nodes text-[10px] text-white"></i>
                 <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-amber-400 rounded-full border border-white"></span>
@@ -2419,14 +2422,14 @@
         </button>
 
         <!-- 4. E-Learning -->
-        <button id="bottomTabElearning" onclick="handleBottomTabClick(event, 'elearning')" class="min-h-[44px] min-w-[44px] flex-1 flex flex-col items-center justify-center pt-2 pb-0.5 text-slate-500 hover:text-emerald-700 transition-colors active:scale-95 transition-transform duration-100 select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="E-Learning">
+        <button id="bottomTabElearning" onclick="handleBottomTabClick(event, 'elearning')" class="min-h-[48px] min-w-[48px] flex-1 flex flex-col items-center justify-center pt-1.5 pb-0.5 relative z-10 text-slate-500 hover:text-emerald-700 transition-colors duration-200 active:scale-95 transition-transform duration-100 ease-out select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="E-Learning">
             <i class="fa-solid fa-laptop-code text-lg mb-0.5 transition-transform group-hover:scale-105"></i>
             <span class="text-[11px] font-semibold leading-tight">E-Learning</span>
             <span class="tab-indicator block w-6 h-0.5 bg-emerald-700 mx-auto mt-1 rounded-full opacity-0 transition-opacity"></span>
         </button>
 
         <!-- 5. Menu -->
-        <button id="bottomTabMenu" onclick="handleBottomTabClick(event, 'menu')" class="min-h-[44px] min-w-[44px] flex-1 flex flex-col items-center justify-center pt-2 pb-0.5 text-slate-500 hover:text-emerald-700 transition-colors active:scale-95 transition-transform duration-100 select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="Menu">
+        <button id="bottomTabMenu" onclick="handleBottomTabClick(event, 'menu')" class="min-h-[48px] min-w-[48px] flex-1 flex flex-col items-center justify-center pt-1.5 pb-0.5 relative z-10 text-slate-500 hover:text-emerald-700 transition-colors duration-200 active:scale-95 transition-transform duration-100 ease-out select-none cursor-pointer group" style="-webkit-tap-highlight-color: transparent;" aria-label="Menu">
             <i class="fa-solid fa-bars text-lg mb-0.5 transition-transform group-hover:scale-105"></i>
             <span class="text-[11px] font-semibold leading-tight">Menu</span>
             <span class="tab-indicator block w-6 h-0.5 bg-emerald-700 mx-auto mt-1 rounded-full opacity-0 transition-opacity"></span>

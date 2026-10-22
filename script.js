@@ -846,7 +846,7 @@ function renderFrontendGallery() {
   });
 
   filtered.forEach((item, index) => {
-    const card = el('div', { class: 'relative group overflow-hidden rounded-2xl cursor-pointer shadow-sm border border-gray-100 bg-gray-100 break-inside-avoid' });
+    const card = el('div', { class: 'relative group overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-md border border-slate-200/80 bg-gray-100 break-inside-avoid transition-all duration-300' });
     card.setAttribute('data-aos', 'fade-up');
     card.setAttribute('data-aos-delay', (index % 4) * 100);
     
@@ -4535,6 +4535,13 @@ function handleBottomTabClick(event, tab) {
       ind.classList.add('opacity-100');
     }
   }
+
+  // Update sliding pill indicator position
+  const tabIndices = { home: 0, news: 1, medsos: 2, elearning: 3, menu: 4 };
+  const navContainer = document.getElementById('mobileBottomNav');
+  if (navContainer && typeof tabIndices[tab] !== 'undefined') {
+    navContainer.style.setProperty('--active-index', tabIndices[tab]);
+  }
 }
 
 function triggerHaptic(duration = 10) {
@@ -4557,8 +4564,9 @@ function setHeroCardSlide(index) {
   if (!slides || slides.length === 0) return;
 
   const totalSlides = slides.length;
-  const isDesktop = window.innerWidth >= 1024;
-  const maxIndex = isDesktop ? Math.max(0, totalSlides - 2) : totalSlides - 1;
+  // Multi-card layout on tablet & desktop (>= 768px: 2 cards visible per view)
+  const isMultiCard = window.innerWidth >= 768;
+  const maxIndex = isMultiCard ? Math.max(0, totalSlides - 2) : totalSlides - 1;
 
   if (typeof index !== 'number' || isNaN(index)) index = 0;
   if (index < 0) currentHeroSlideIndex = maxIndex;
@@ -4567,19 +4575,42 @@ function setHeroCardSlide(index) {
 
   const container = track.parentElement;
   const containerWidth = container ? container.clientWidth : 0;
-  const gap = isDesktop ? 24 : 16;
+  const gap = isMultiCard ? 24 : 16;
   
   // Calculate precise slide shift step
   let moveDistance = 0;
-  if (containerWidth > 0) {
-    const slideWidth = isDesktop ? (containerWidth - gap) / 2 : containerWidth;
-    moveDistance = slideWidth + gap;
-  } else if (slides[0] && slides[0].offsetWidth > 0) {
+  if (slides[0] && slides[0].offsetWidth > 0) {
     moveDistance = slides[0].offsetWidth + gap;
+  } else if (containerWidth > 0) {
+    const slideWidth = isMultiCard ? (containerWidth - gap) / 2 : containerWidth * 0.88;
+    moveDistance = slideWidth + gap;
   }
 
-  track.style.transform = `translateX(-${currentHeroSlideIndex * moveDistance}px)`;
+  // Organic Apple-style spring easing and GPU-accelerated translate3d
+  track.style.transition = 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1)';
+  track.style.transform = `translate3d(-${currentHeroSlideIndex * moveDistance}px, 0, 0)`;
 
+  // 3D Coverflow Dynamics: Active Center vs Left/Right Inactive Perspective Tilts
+  slides.forEach((slide, idx) => {
+    const isActive = isMultiCard 
+      ? (idx === currentHeroSlideIndex || idx === currentHeroSlideIndex + 1)
+      : (idx === currentHeroSlideIndex);
+
+    // Reset 3D positioning classes
+    slide.classList.remove('hero-card-active', 'hero-card-left', 'hero-card-right', 'hero-card-inactive');
+
+    if (isActive) {
+      slide.classList.add('hero-card-active');
+    } else if (idx < currentHeroSlideIndex) {
+      // Left inactive card: rotateY(12deg) into stage
+      slide.classList.add('hero-card-left', 'hero-card-inactive');
+    } else {
+      // Right inactive card: rotateY(-12deg) into stage
+      slide.classList.add('hero-card-right', 'hero-card-inactive');
+    }
+  });
+
+  // Animated Pagination Dots Synchronization with elongated pill transition
   if (dotsContainer) {
     const requiredDots = maxIndex + 1;
     if (dotsContainer.children.length !== requiredDots) {
@@ -4594,9 +4625,11 @@ function setHeroCardSlide(index) {
     const dots = dotsContainer.children;
     for (let i = 0; i < dots.length; i++) {
       if (i === currentHeroSlideIndex) {
-        dots[i].className = 'w-3.5 h-3.5 rounded-full bg-accent transition-all duration-300 scale-110 shadow-md cursor-pointer';
+        // Active dot: elongated pill in amber-400
+        dots[i].className = 'w-7 h-2.5 rounded-full bg-amber-400 shadow-md shadow-amber-400/30 transition-all duration-300 ease-out cursor-pointer';
       } else {
-        dots[i].className = 'w-3.5 h-3.5 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300 cursor-pointer';
+        // Inactive dot: compact circle with translucent white
+        dots[i].className = 'w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300 cursor-pointer';
       }
     }
   }
@@ -4640,26 +4673,84 @@ if (typeof window !== 'undefined') {
       setHeroCardSlide(0);
       startHeroAutoPlay();
 
-      // Touch Swipe Gesture Support for Hero Card Carousel
+      // Touch Swipe Gesture & Spring Momentum Support for Hero Carousel
       const heroContainer = document.getElementById('heroCardTrackContainer');
       if (heroContainer) {
         let heroTouchStartX = 0;
         let heroTouchStartY = 0;
+        let heroTouchStartTime = 0;
+        let isDragging = false;
+
         heroContainer.addEventListener('touchstart', function(e) {
+          if (!e.touches || e.touches.length === 0) return;
           heroTouchStartX = e.touches[0].clientX;
           heroTouchStartY = e.touches[0].clientY;
+          heroTouchStartTime = performance.now();
+          isDragging = true;
           if (heroSlideAutoTimer) clearInterval(heroSlideAutoTimer);
         }, { passive: true });
 
-        heroContainer.addEventListener('touchend', function(e) {
-          const dx = e.changedTouches[0].clientX - heroTouchStartX;
-          const dy = e.changedTouches[0].clientY - heroTouchStartY;
-          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 36) {
-            if (dx < 0) {
-              moveHeroCardSlide(1);
-            } else {
-              moveHeroCardSlide(-1);
+        heroContainer.addEventListener('touchmove', function(e) {
+          if (!isDragging || !e.touches || e.touches.length === 0) return;
+          const currentX = e.touches[0].clientX;
+          const currentY = e.touches[0].clientY;
+          const dx = currentX - heroTouchStartX;
+          const dy = currentY - heroTouchStartY;
+
+          // If horizontal swipe dominates, provide direct tactile drag
+          if (Math.abs(dx) > Math.abs(dy)) {
+            const track = document.getElementById('heroCardTrack');
+            if (track) {
+              const isMultiCard = window.innerWidth >= 768;
+              const gap = isMultiCard ? 24 : 16;
+              const firstCard = track.children[0];
+              const moveDistance = firstCard && firstCard.offsetWidth > 0 ? (firstCard.offsetWidth + gap) : 320;
+              const baseOffset = -currentHeroSlideIndex * moveDistance;
+              
+              // Elastic boundary drag resistance
+              let boundedDx = dx;
+              const maxIndex = isMultiCard ? Math.max(0, track.children.length - 2) : track.children.length - 1;
+              if ((currentHeroSlideIndex === 0 && dx > 0) || (currentHeroSlideIndex === maxIndex && dx < 0)) {
+                boundedDx = dx * 0.35;
+              }
+              track.style.transition = 'none';
+              track.style.transform = `translate3d(${baseOffset + boundedDx}px, 0, 0)`;
             }
+          }
+        }, { passive: true });
+
+        heroContainer.addEventListener('touchend', function(e) {
+          if (!isDragging) return;
+          isDragging = false;
+          const track = document.getElementById('heroCardTrack');
+          if (track) {
+            track.style.transition = 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1)';
+          }
+
+          if (e.changedTouches && e.changedTouches.length > 0) {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const dx = endX - heroTouchStartX;
+            const dy = endY - heroTouchStartY;
+            const dt = Math.max(1, performance.now() - heroTouchStartTime);
+            const velocity = Math.abs(dx) / dt; // px per millisecond
+
+            if (Math.abs(dx) > Math.abs(dy)) {
+              // Quick flick gesture (velocity > 0.3) or drag past 40px threshold
+              if (velocity > 0.3 || Math.abs(dx) > 40) {
+                if (dx < 0) {
+                  moveHeroCardSlide(1);
+                } else {
+                  moveHeroCardSlide(-1);
+                }
+              } else {
+                setHeroCardSlide(currentHeroSlideIndex);
+              }
+            } else {
+              setHeroCardSlide(currentHeroSlideIndex);
+            }
+          } else {
+            setHeroCardSlide(currentHeroSlideIndex);
           }
           startHeroAutoPlay();
         }, { passive: true });
