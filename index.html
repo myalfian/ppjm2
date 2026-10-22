@@ -470,18 +470,18 @@
 
                     <!-- Adaptive Mobile App Bar Actions (48px Ergonomic Touch Targets) -->
                     <!-- 1. Mobile Search / Quick Filter button -->
-                    <a href="#ppdb-section" onclick="triggerHaptic()" aria-label="Cek Status Pendaftaran" class="lg:hidden touch-target-48 w-11 h-11 rounded-xl bg-emerald-50 text-primary flex items-center justify-center border border-primary/20 text-xs touch-press" title="Cek Status Pendaftaran">
+                    <a href="#ppdb-section" onclick="triggerHaptic()" aria-label="Cari Informasi" class="lg:hidden touch-target-48 w-11 h-11 rounded-2xl bg-white border border-slate-200/90 text-slate-700 flex items-center justify-center text-sm shadow-xs touch-press" title="Cari Informasi">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
 
                     <!-- 2. Integrated Mobile Bottom Sheet Trigger Button (48px Touch Target) -->
-                    <button id="btnMobileBottomSheetOpen" onclick="triggerHaptic(); BottomSheet.open(0.5);" class="lg:hidden touch-target-48 w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-primary text-white flex items-center justify-center text-sm touch-press shadow-sm cursor-pointer" title="Aplikasi &amp; Layanan Santri (Bottom Sheet)" aria-label="Buka Menu Layanan Santri">
+                    <button id="btnMobileBottomSheetOpen" onclick="triggerHaptic(); BottomSheet.open(0.5);" class="lg:hidden touch-target-48 w-11 h-11 rounded-2xl bg-[#064e3b] hover:bg-emerald-900 text-amber-300 flex items-center justify-center text-base touch-press shadow-xs cursor-pointer" title="Menu Layanan Santri" aria-label="Buka Menu Layanan Santri">
                         <i class="fa-solid fa-shapes text-accent text-sm"></i>
                     </button>
 
                     <!-- 3. Mobile Slide-Over Drawer Hamburger Button (48px min touch target iOS/Android) -->
-                    <button id="btnMobileDrawerOpen" onclick="toggleMobileDrawer(true)" class="lg:hidden touch-target-48 w-11 h-11 rounded-xl bg-emerald-50 text-primary hover:bg-emerald-100 border border-primary/20 text-base flex items-center justify-center touch-press cursor-pointer" title="Buka Menu" aria-label="Buka Menu Navigasi">
-                        <i class="fa-solid fa-bars-staggered"></i>
+                    <button id="btnMobileDrawerOpen" onclick="toggleMobileDrawer(true)" class="lg:hidden touch-target-48 w-11 h-11 rounded-2xl bg-white border border-slate-200/90 text-slate-700 hover:bg-slate-50 text-base flex items-center justify-center touch-press shadow-xs cursor-pointer" title="Buka Menu" aria-label="Buka Menu Navigasi">
+                        <i class="fa-solid fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -576,7 +576,7 @@
     </div>
 
     <!-- HERO CARD CAROUSEL BANNER SECTION (Matching smkn1pugaan.sch.id Card Sliding Carousel) -->
-    <section id="home" class="relative overflow-hidden bg-gradient-to-br from-primary-dark via-[#093d20] to-emerald-950 text-white py-10 lg:py-14">
+    <section id="home" class="relative overflow-hidden bg-gradient-to-br from-primary-dark via-[#093d20] to-emerald-950 text-white pt-4 pb-8 sm:py-10 lg:py-14">
         <!-- Background Ambient Glow & Patterns -->
         <div class="absolute inset-0 opacity-15 pointer-events-none bg-islamic-pattern"></div>
         <div class="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -585,7 +585,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
             
             <!-- Hero Top Synergy Bar (Academic Year Indicator & Direct Bottom Sheet Trigger) -->
-            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
+            <div class="hidden md:flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
                 <div class="flex items-center gap-2">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-white">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -762,10 +762,11 @@
             </div>
 
             <!-- Carousel Pagination Dots (Matching smkn1pugaan.sch.id Dots Style) -->
-            <div id="heroCardDots" class="flex items-center justify-center gap-2 pt-2">
-                <button onclick="setHeroCardSlide(0)" class="w-7 h-2.5 rounded-full bg-amber-400 shadow-md shadow-amber-400/30 transition-all duration-300 ease-out cursor-pointer" aria-label="Ke slide 1"></button>
-                <button onclick="setHeroCardSlide(1)" class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300 cursor-pointer" aria-label="Ke slide 2"></button>
-                <button onclick="setHeroCardSlide(2)" class="w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300 cursor-pointer" aria-label="Ke slide 3"></button>
+            <div id="heroCardDots" class="flex items-center justify-center gap-2.5 pt-3">
+                <button onclick="setHeroCardSlide(0)" class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300 cursor-pointer" aria-label="Ke slide 1"></button>
+                <button onclick="setHeroCardSlide(1)" class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300 cursor-pointer" aria-label="Ke slide 2"></button>
+                <button onclick="setHeroCardSlide(2)" class="w-3.5 h-3.5 rounded-full bg-amber-400 shadow-md shadow-amber-400/40 transition-all duration-300 scale-110 cursor-pointer" aria-label="Ke slide 3"></button>
+                <button onclick="setHeroCardSlide(3)" class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300 cursor-pointer" aria-label="Ke slide 4"></button>
             </div>
 
             
@@ -773,64 +774,72 @@
         </div>
     </section>
 
-    <!-- QUICK ACCESS FEATURE GRID (Exact match of smkn1pugaan.sch.id quick feature icons) -->
-    <section class="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-12">
-        <div class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 text-center">
+    <!-- QUICK ACCESS FEATURE GRID (Exact match of mobile screenshot & modern clean cards) -->
+    <section class="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:-mt-8 mb-10 sm:mb-12">
+        <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2.5 sm:gap-4 text-center">
             
-            <button onclick="openEcosystemModal('elearning')" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-primary flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-primary group-hover:text-accent transition shadow-sm">
-                    <i class="fa-solid fa-laptop-code"></i>
-                </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">E-Learning</span>
-            </button>
-
-            <a href="#sambutan" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-amber-600 group-hover:text-white transition shadow-sm">
-                    <i class="fa-solid fa-user-tie"></i>
-                </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">Sambutan</span>
-            </a>
-
-            <a href="#about" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition shadow-sm">
+            <!-- 1. Visi & Misi -->
+            <a href="#about" class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-blue-200 transition-all duration-300 group flex flex-col items-center justify-center">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-blue-100/70 text-blue-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-bullseye"></i>
                 </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">Visi & Misi</span>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Visi & Misi</span>
             </a>
 
-            <a href="#informasi" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-700 flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition shadow-sm">
+            <!-- 2. Pengumuman -->
+            <a href="#informasi" class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-rose-200 transition-all duration-300 group flex flex-col items-center justify-center">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-rose-100/70 text-rose-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-scroll"></i>
                 </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">Pengumuman</span>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-rose-600 transition-colors">Pengumuman</span>
             </a>
 
-            <button onclick="openModal('ppdbModal')" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition shadow-sm">
-                    <i class="fa-solid fa-file-signature"></i>
-                </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">PPDB Online</span>
-            </button>
-
-            <a href="#agenda" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition shadow-sm">
-                    <i class="fa-solid fa-calendar-days"></i>
-                </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">Agenda</span>
-            </a>
-
-            <a href="#ekskul" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white transition shadow-sm">
+            <!-- 3. Ekstrakurikuler -->
+            <a href="#ekskul" class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-orange-200 transition-all duration-300 group flex flex-col items-center justify-center">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-orange-100/70 text-orange-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-shapes"></i>
                 </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">Ekstrakurikuler</span>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-orange-600 transition-colors">Ekstrakurikuler</span>
             </a>
 
-            <a href="#prestasi" class="p-3 rounded-xl hover:bg-emerald-50 transition group flex flex-col items-center">
-                <div class="w-12 h-12 rounded-2xl bg-yellow-100 text-yellow-700 flex items-center justify-center text-xl mb-2 group-hover:scale-110 group-hover:bg-yellow-500 group-hover:text-white transition shadow-sm">
+            <!-- 4. PPDB Online -->
+            <button onclick="openModal('ppdbModal')" class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-emerald-200 transition-all duration-300 group flex flex-col items-center justify-center cursor-pointer">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-emerald-100/70 text-emerald-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-file-signature"></i>
+                </div>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">PPDB Online</span>
+            </button>
+
+            <!-- 5. Agenda -->
+            <a href="#agenda" class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-purple-200 transition-all duration-300 group flex flex-col items-center justify-center">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-purple-100/70 text-purple-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-purple-600 transition-colors">Agenda</span>
+            </a>
+
+            <!-- 6. Prestasi -->
+            <a href="#prestasi" class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-amber-200 transition-all duration-300 group flex flex-col items-center justify-center">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-amber-100/70 text-amber-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-award"></i>
                 </div>
-                <span class="text-xs font-bold text-gray-700 group-hover:text-primary">Prestasi</span>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-amber-600 transition-colors">Prestasi</span>
+            </a>
+
+            <!-- 7. E-Learning (desktop only or large screen) -->
+            <button onclick="openEcosystemModal('elearning')" class="hidden md:flex bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-emerald-200 transition-all duration-300 group flex-col items-center justify-center cursor-pointer">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-teal-100/70 text-teal-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-teal-600 transition-colors">E-Learning</span>
+            </button>
+
+            <!-- 8. Sambutan (desktop only or large screen) -->
+            <a href="#sambutan" class="hidden md:flex bg-white rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md border border-slate-100/90 hover:border-amber-200 transition-all duration-300 group flex-col items-center justify-center">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-indigo-100/70 text-indigo-600 flex items-center justify-center text-lg sm:text-xl mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <span class="text-[11px] sm:text-xs font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">Sambutan</span>
             </a>
 
         </div>

@@ -4625,11 +4625,11 @@ function setHeroCardSlide(index) {
     const dots = dotsContainer.children;
     for (let i = 0; i < dots.length; i++) {
       if (i === currentHeroSlideIndex) {
-        // Active dot: elongated pill in amber-400
-        dots[i].className = 'w-7 h-2.5 rounded-full bg-amber-400 shadow-md shadow-amber-400/30 transition-all duration-300 ease-out cursor-pointer';
+        // Active dot: circular amber with soft glow and subtle scale as in mobile screenshot
+        dots[i].className = 'w-3.5 h-3.5 rounded-full bg-amber-400 shadow-md shadow-amber-400/40 transition-all duration-300 scale-110 cursor-pointer';
       } else {
-        // Inactive dot: compact circle with translucent white
-        dots[i].className = 'w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300 cursor-pointer';
+        // Inactive dot: translucent white circular dot
+        dots[i].className = 'w-3 h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300 cursor-pointer';
       }
     }
   }
@@ -4670,7 +4670,9 @@ if (typeof window !== 'undefined') {
 
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
-      setHeroCardSlide(0);
+      // In mobile view (<768px), default to slide 2 ("PPDB ONLINE 2026/2027") as shown in reference screenshot
+      const initialSlide = (typeof window !== 'undefined' && window.innerWidth < 768) ? 2 : 0;
+      setHeroCardSlide(initialSlide);
       startHeroAutoPlay();
 
       // Touch Swipe Gesture & Spring Momentum Support for Hero Carousel
