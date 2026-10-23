@@ -9,7 +9,9 @@ import {
   Perizinan, 
   Tagihan, 
   NilaiAkademik,
-  AdminRole 
+  AdminRole,
+  InstitutionSettings,
+  HeroSlide 
 } from '../types';
 import { 
   initialPosts, 
@@ -21,7 +23,9 @@ import {
   initialTahfidz, 
   initialPerizinan, 
   initialTagihan, 
-  initialNilai 
+  initialNilai,
+  initialSettings,
+  initialHeroSlides 
 } from '../data/initialData';
 
 // Local storage helper with fallbacks
@@ -54,6 +58,8 @@ class AppStore {
   private perizinanList: Perizinan[] = getStored('perizinan', initialPerizinan);
   private tagihanList: Tagihan[] = getStored('tagihan', initialTagihan);
   private nilaiList: NilaiAkademik[] = getStored('nilai', initialNilai);
+  private settings: InstitutionSettings = getStored('settings', initialSettings);
+  private slides: HeroSlide[] = getStored('slides', initialHeroSlides);
   
   private currentRole: AdminRole = 'super_admin';
   private isAuthenticated: boolean = false;
@@ -81,6 +87,8 @@ class AppStore {
   getPerizinanList() { return this.perizinanList; }
   getTagihanList() { return this.tagihanList; }
   getNilaiList() { return this.nilaiList; }
+  getSettings() { return this.settings; }
+  getSlides() { return this.slides; }
   getCurrentRole() { return this.currentRole; }
   getIsAuthenticated() { return this.isAuthenticated; }
   getCurrentUserEmail() { return this.currentUserEmail; }
@@ -296,6 +304,106 @@ class AppStore {
     setStored('nilai', this.nilaiList);
     this.logActivity(`Input nilai ${item.subject} (${item.score}) untuk ${item.santriName}`, 'create');
     this.notify();
+  }
+
+  // Settings
+  updateSettings(updates: Partial<InstitutionSettings>) {
+    this.settings = { ...this.settings, ...updates };
+    setStored('settings', this.settings);
+    this.logActivity('Memperbarui informasi & kontak lembaga', 'update');
+    this.notify();
+  }
+
+  // Slides
+  updateSlide(id: string, updates: Partial<HeroSlide>) {
+    this.slides = this.slides.map(s => (s.id === id ? { ...s, ...updates } : s));
+    setStored('slides', this.slides);
+    this.logActivity('Memperbarui slide banner promosi', 'update');
+    this.notify();
+  }
+
+  addSlide(slide: Omit<HeroSlide, 'id'>): HeroSlide {
+    const newSlide: HeroSlide = {
+      id: `slide-${Date.now()}`,
+      ...slide
+    };
+    this.slides = [...this.slides, newSlide];
+    setStored('slides', this.slides);
+    this.logActivity(`Menambah slide banner baru: "${slide.title}"`, 'create');
+    this.notify();
+    return newSlide;
+  }
+
+  deleteSlide(id: string) {
+    this.slides = this.slides.filter(s => s.id !== id);
+    setStored('slides', this.slides);
+    this.logActivity(`Menghapus slide banner ID ${id}`, 'delete');
+    this.notify();
+  }
+
+  // Record CBT result for PPDB
+  recordCBTScore(codeOrId: string, score: number, total: number) {
+    this.ppdbList = this.ppdbList.map(item => {
+      if (item.code.toLowerCase() === codeOrId.toLowerCase() || item.id === codeOrId) {
+        return {
+          ...item,
+          cbt_score: score,
+          cbt_total: total,
+          cbt_status: 'Sudah Mengikuti'
+        };
+      }
+      return item;
+    });
+    setStored('ppdb', this.ppdbList);
+    this.logActivity(`Hasil CBT dicatat untuk [${codeOrId}]: Skor ${score}/${total}`, 'create');
+    this.notify();
+  }
+
+  // Cleanup TEST-AUDIT data
+  cleanupTestAuditData(): number {
+    let removedCount = 0;
+    const isTest = (str: string) => /TEST-AUDIT/i.test(str);
+
+    // Filter posts
+    const prevPostsCount = this.posts.length;
+    this.posts = this.posts.filter(p => !isTest(p.title) && !isTest(p.content) && !isTest(p.id));
+    removedCount += prevPostsCount - this.posts.length;
+
+    // Filter trash
+    const prevTrashCount = this.trash.length;
+    this.trash = this.trash.filter(p => !isTest(p.title) && !isTest(p.content) && !isTest(p.id));
+    removedCount += prevTrashCount - this.trash.length;
+
+    // Filter PPDB
+    const prevPpdbCount = this.ppdbList.length;
+    this.ppdbList = this.ppdbList.filter(p => !isTest(p.name) && !isTest(p.code) && !isTest(p.id));
+    removedCount += prevPpdbCount - this.ppdbList.length;
+
+    // Filter Media
+    const prevMediaCount = this.mediaList.length;
+    this.mediaList = this.mediaList.filter(m => !isTest(m.title) && !isTest(m.id));
+    removedCount += prevMediaCount - this.mediaList.length;
+
+    // Filter Guestbook
+    const prevGbCount = this.guestbook.length;
+    this.guestbook = this.guestbook.filter(g => !isTest(g.name) && !isTest(g.message) && !isTest(g.id));
+    removedCount += prevGbCount - this.guestbook.length;
+
+    // Filter Activity logs
+    const prevLogsCount = this.activityLogs.length;
+    this.activityLogs = this.activityLogs.filter(l => !isTest(l.action));
+    removedCount += prevLogsCount - this.activityLogs.length;
+
+    setStored('posts', this.posts);
+    setStored('trash', this.trash);
+    setStored('ppdb', this.ppdbList);
+    setStored('media', this.mediaList);
+    setStored('guestbook', this.guestbook);
+    setStored('activity_logs', this.activityLogs);
+
+    this.logActivity(`Pembersihan data audit: ${removedCount} entri TEST-AUDIT dibersihkan`, 'delete');
+    this.notify();
+    return removedCount;
   }
 }
 

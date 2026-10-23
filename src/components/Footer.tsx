@@ -16,8 +16,15 @@ import {
   Clock,
   ArrowRight
 } from 'lucide-react';
+import { InstitutionSettings } from '../types';
+import { initialSettings } from '../data/initialData';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  settings?: InstitutionSettings;
+}
+
+export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
+  const settings = propSettings || initialSettings;
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showCalendarModal, setShowCalendarModal] = useState(false);
 
@@ -163,15 +170,15 @@ export const Footer: React.FC = () => {
               <div className="space-y-2.5 text-xs text-gray-300">
                 <div className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
-                  <span>Jl. Raya Dukun-Lasem RT 1 RW 1, Lasem Sidayu Gresik, Gresik 61153</span>
+                  <span>{settings.address}, {settings.city}</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Phone className="w-4 h-4 text-[#d4af37] shrink-0" />
-                  <span>+62 812-3456-7890 (Panitia PPDB)</span>
+                  <span>{settings.phone} (Panitia PPDB)</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <Mail className="w-4 h-4 text-[#d4af37] shrink-0" />
-                  <span>admin@jauharulmaknuun.sch.id</span>
+                  <span>{settings.email}</span>
                 </div>
                 <div className="pt-1">
                   <a

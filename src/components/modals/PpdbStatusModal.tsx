@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Search, CheckCircle, Printer, AlertTriangle, Calendar, Phone, Mail, Utensils } from 'lucide-react';
+import { X, Search, CheckCircle, Printer, AlertTriangle, Calendar, Phone, Mail, Utensils, BookOpen } from 'lucide-react';
 import { PPDBSubmission } from '../../types';
 
 interface PpdbStatusModalProps {
@@ -7,15 +7,18 @@ interface PpdbStatusModalProps {
   onClose: () => void;
   submissions: PPDBSubmission[];
   onOpenPrintCard: (submission: PPDBSubmission) => void;
+  onStartCbt?: (submission: PPDBSubmission) => void;
 }
 
 export const PpdbStatusModal: React.FC<PpdbStatusModalProps> = ({
   isOpen,
   onClose,
   submissions,
-  onOpenPrintCard
+  onOpenPrintCard,
+  onStartCbt
 }) => {
-  const [query, setQuery] = useState('');
+  const [regCode, setRegCode] = useState('');
+  const [phoneLast4, setPhoneLast4] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
   const [result, setResult] = useState<PPDBSubmission | null>(null);
 
@@ -25,17 +28,20 @@ export const PpdbStatusModal: React.FC<PpdbStatusModalProps> = ({
     e.preventDefault();
     setHasSearched(true);
 
-    const clean = query.trim().toLowerCase();
-    if (!clean) {
+    const cleanCode = regCode.trim().toLowerCase();
+    const cleanPhone = phoneLast4.trim().replace(/[^0-9]/g, '');
+
+    if (!cleanCode || cleanPhone.length < 4) {
       setResult(null);
       return;
     }
 
-    const found = submissions.find(s => 
-      s.code.toLowerCase().includes(clean) ||
-      s.name.toLowerCase().includes(clean) ||
-      s.phone.replace(/[^0-9]/g, '').includes(clean.replace(/[^0-9]/g, ''))
-    );
+    const found = submissions.find(s => {
+      const matchCode = s.code.toLowerCase() === cleanCode || s.code.toLowerCase().includes(cleanCode);
+      const digitsOnly = s.phone.replace(/[^0-9]/g, '');
+      const matchPhone = digitsOnly.endsWith(cleanPhone) || digitsOnly.includes(cleanPhone);
+      return matchCode && matchPhone;
+    });
 
     setResult(found || null);
   };
@@ -55,6 +61,13 @@ export const PpdbStatusModal: React.FC<PpdbStatusModalProps> = ({
       default:
         return 'bg-gray-500 text-white';
     }
+  };
+
+  // Mask phone number for privacy protection (0812****7890)
+  const maskPhone = (phone: string) => {
+    const clean = phone.replace(/[^0-9]/g, '');
+    if (clean.length < 8) return phone;
+    return `${clean.slice(0, 4)}****${clean.slice(-4)}`;
   };
 
   return (
@@ -85,29 +98,52 @@ export const PpdbStatusModal: React.FC<PpdbStatusModalProps> = ({
           </button>
         </div>
 
-        {/* Search input form */}
+        {/* Search input form with 2-point verification */}
         <div className="p-6 space-y-6">
-          <form onSubmit={handleSearch} className="space-y-3">
-            <label className="block text-xs font-bold text-gray-700">
-              Masukkan Nomor Registrasi, Nama Calon Santri, atau No. WhatsApp:
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Contoh: PPDB-2026-001 atau 08123456789"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="flex-1 px-4 py-2.5 bg-gray-50 rounded-xl border border-gray-200 text-xs focus:bg-white focus:ring-2 focus:ring-[#1a6b3c] focus:outline-none"
-                required
-              />
-              <button
-                type="submit"
-                className="px-5 py-2.5 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold text-xs rounded-xl shadow-md btn-spring flex items-center gap-1.5 shrink-0"
-              >
-                <Search className="w-3.5 h-3.5" />
-                <span>Cari</span>
-              </button>
+          <form onSubmit={handleSearch} className="space-y-3.5 bg-gray-50/70 p-4 rounded-2xl border border-gray-200">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-gray-800">
+              <Search className="w-3.5 h-3.5 text-[#1a6b3c]" />
+              <span>Verifikasi Kepemilikan Pendaftaran:</span>
             </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div>
+                <label className="block text-gray-600 font-semibold mb-1">
+                  Nomor Registrasi PPDB *
+                </label>
+                <input
+                  type="text"
+                  placeholder="Contoh: PPDB-2026-001"
+                  value={regCode}
+                  onChange={(e) => setRegCode(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-gray-200 font-mono text-xs focus:ring-2 focus:ring-[#1a6b3c] focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-600 font-semibold mb-1">
+                  4 Digit Terakhir No. WhatsApp *
+                </label>
+                <input
+                  type="text"
+                  maxLength={4}
+                  placeholder="Contoh: 7890"
+                  value={phoneLast4}
+                  onChange={(e) => setPhoneLast4(e.target.value)}
+                  className="w-full px-3.5 py-2.5 bg-white rounded-xl border border-gray-200 font-mono text-xs focus:ring-2 focus:ring-[#1a6b3c] focus:outline-none"
+                  required
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-2.5 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold text-xs rounded-xl shadow-md btn-spring flex items-center justify-center gap-1.5"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span>Cek Status Verifikasi</span>
+            </button>
           </form>
 
           {/* Result Card */}
@@ -141,32 +177,8 @@ export const PpdbStatusModal: React.FC<PpdbStatusModalProps> = ({
                     </div>
 
                     <div>
-                      <span className="text-gray-500 block text-[10px]">No. WhatsApp</span>
-                      <span className="font-mono text-gray-800">{result.phone}</span>
-                    </div>
-
-                    {result.email && (
-                      <div className="sm:col-span-2">
-                        <span className="text-gray-500 block text-[10px]">Email Wali</span>
-                        <span className="text-gray-800">{result.email}</span>
-                      </div>
-                    )}
-
-                    <div className="sm:col-span-2 bg-emerald-100/50 p-2.5 rounded-xl border border-emerald-200">
-                      <span className="text-[#0d4a28] font-bold text-[11px] flex items-center gap-1">
-                        <Utensils className="w-3.5 h-3.5 text-[#1a6b3c]" />
-                        Paket Nutrisi: {result.diet_package || 'Reguler 4 Sehat'}
-                      </span>
-                      {result.allergy_notes && (
-                        <p className="text-[10px] text-amber-800 mt-0.5">
-                          <strong>Catatan Alergi:</strong> {result.allergy_notes}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="sm:col-span-2">
-                      <span className="text-gray-500 block text-[10px]">Alamat Asal</span>
-                      <p className="text-gray-700 leading-relaxed">{result.address}</p>
+                      <span className="text-gray-500 block text-[10px]">No. WhatsApp Terdaftar</span>
+                      <span className="font-mono text-gray-800">{maskPhone(result.phone)}</span>
                     </div>
 
                     <div className="sm:col-span-2">
@@ -179,9 +191,37 @@ export const PpdbStatusModal: React.FC<PpdbStatusModalProps> = ({
                         })}
                       </span>
                     </div>
+
+                    <div className="sm:col-span-2 bg-white/70 p-2.5 rounded-xl border border-emerald-200/80 flex items-center justify-between">
+                      <div>
+                        <span className="text-gray-500 block text-[10px]">Asesmen Seleksi Masuk (CBT Online)</span>
+                        <div className="text-xs font-bold mt-0.5">
+                          {result.cbt_status === 'Sudah Mengikuti' ? (
+                            <span className="text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
+                              ✓ Selesai Mengikuti (Skor: {result.cbt_score}/{result.cbt_total || 5})
+                            </span>
+                          ) : (
+                            <span className="text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
+                              ⏳ Belum Mengikuti Asesmen
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {onStartCbt && (
+                        <button
+                          type="button"
+                          onClick={() => onStartCbt(result)}
+                          className="px-3 py-1.5 bg-[#0d4a28] hover:bg-[#1a6b3c] text-white font-bold text-[11px] rounded-lg shadow-sm flex items-center gap-1.5 btn-spring border border-[#d4af37]/30"
+                        >
+                          <BookOpen className="w-3.5 h-3.5 text-[#d4af37]" />
+                          <span>{result.cbt_status === 'Sudah Mengikuti' ? 'Buka Lembar CBT' : 'Mulai Ujian CBT'}</span>
+                        </button>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="pt-2 flex gap-3 border-t border-emerald-200">
+                  <div className="pt-2 flex flex-wrap gap-2.5 border-t border-emerald-200">
                     <button
                       onClick={() => onOpenPrintCard(result)}
                       className="px-4 py-2 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-2 btn-spring"

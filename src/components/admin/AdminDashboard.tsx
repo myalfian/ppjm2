@@ -25,7 +25,13 @@ import {
   Eye,
   RefreshCw,
   ShieldCheck,
-  Award
+  Award,
+  Settings,
+  Sliders,
+  Sparkles,
+  ShieldAlert,
+  Save,
+  CheckCircle2
 } from 'lucide-react';
 import { 
   AdminRole, 
@@ -37,9 +43,11 @@ import {
   TahfidzRecord, 
   Perizinan, 
   Tagihan, 
-  NilaiAkademik 
+  NilaiAkademik,
+  InstitutionSettings,
+  HeroSlide 
 } from '../../types';
-import { utbkQuestions } from '../../data/initialData';
+import { utbkQuestions, initialSettings, initialHeroSlides } from '../../data/initialData';
 
 interface AdminDashboardProps {
   currentRole: AdminRole;
@@ -56,6 +64,13 @@ interface AdminDashboardProps {
   perizinanList: Perizinan[];
   tagihanList: Tagihan[];
   nilaiList: NilaiAkademik[];
+  settings?: InstitutionSettings;
+  slides?: HeroSlide[];
+  onUpdateSettings?: (settings: Partial<InstitutionSettings>) => void;
+  onUpdateSlide?: (id: string, slide: Partial<HeroSlide>) => void;
+  onAddSlide?: (slide: Omit<HeroSlide, 'id'>) => void;
+  onDeleteSlide?: (id: string) => void;
+  onCleanupTestAudit?: () => number;
   onUpdatePPDBStatus: (id: string, status: PPDBSubmission['status']) => void;
   onOpenPrintCard: (submission: PPDBSubmission) => void;
   onAddPost: (post: Omit<Post, 'id'>) => void;
@@ -89,6 +104,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   perizinanList,
   tagihanList,
   nilaiList,
+  settings: propSettings,
+  slides: propSlides,
+  onUpdateSettings,
+  onUpdateSlide,
+  onAddSlide,
+  onDeleteSlide,
+  onCleanupTestAudit,
   onUpdatePPDBStatus,
   onOpenPrintCard,
   onAddPost,
@@ -106,12 +128,48 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   onAddNilai,
   onToast
 }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'ppdb' | 'santri' | 'tahfidz' | 'perizinan' | 'tagihan' | 'nilai' | 'posts' | 'trash' | 'media' | 'activity' | 'cbt'>('overview');
+  const settings = propSettings || initialSettings;
+  const slides = propSlides || initialHeroSlides;
+
+  const [activeTab, setActiveTab] = useState<'overview' | 'ppdb' | 'santri' | 'tahfidz' | 'perizinan' | 'tagihan' | 'nilai' | 'posts' | 'trash' | 'media' | 'activity' | 'cbt' | 'settings' | 'slides'>('overview');
 
   // Search & Filter state
   const [ppdbQuery, setPpdbQuery] = useState('');
   const [ppdbProgramFilter, setPpdbProgramFilter] = useState('Semua');
   const [ppdbStatusFilter, setPpdbStatusFilter] = useState('Semua');
+
+  // Settings Edit State
+  const [instName, setInstName] = useState(settings.name);
+  const [instTagline, setInstTagline] = useState(settings.tagline);
+  const [instAddress, setInstAddress] = useState(settings.address);
+  const [instCity, setInstCity] = useState(settings.city);
+  const [instPhone, setInstPhone] = useState(settings.phone);
+  const [instWhatsapp, setInstWhatsapp] = useState(settings.whatsapp);
+  const [instEmail, setInstEmail] = useState(settings.email);
+  const [instAccreditation, setInstAccreditation] = useState(settings.accreditation);
+
+  // New Slide Form State
+  const [showSlideModal, setShowSlideModal] = useState(false);
+  const [slideTitle, setSlideTitle] = useState('');
+  const [slideBadge, setSlideBadge] = useState('Pendidikan Terpadu');
+  const [slideDesc, setSlideDesc] = useState('');
+  const [slideImage, setSlideImage] = useState('');
+  const [slideTag, setSlideTag] = useState('Akreditasi A');
+
+  // RBAC Permission Check
+  const isTabAllowed = (tab: string) => {
+    if (currentRole === 'super_admin') return true;
+    if (currentRole === 'panitia_ppdb') {
+      return ['overview', 'ppdb', 'cbt', 'activity'].includes(tab);
+    }
+    if (currentRole === 'guru') {
+      return ['overview', 'santri', 'tahfidz', 'nilai', 'posts', 'cbt'].includes(tab);
+    }
+    if (currentRole === 'santri_wali') {
+      return ['overview', 'santri', 'tahfidz', 'tagihan', 'nilai'].includes(tab);
+    }
+    return true;
+  };
 
   // New Post Form State
   const [showPostModal, setShowPostModal] = useState(false);
@@ -275,6 +333,58 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     onToast('Media berhasil ditambahkan ke galeri.');
   };
 
+  const handleSaveSettings = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onUpdateSettings) {
+      onUpdateSettings({
+        name: instName.trim(),
+        tagline: instTagline.trim(),
+        address: instAddress.trim(),
+        city: instCity.trim(),
+        phone: instPhone.trim(),
+        whatsapp: instWhatsapp.trim(),
+        email: instEmail.trim(),
+        accreditation: instAccreditation.trim()
+      });
+      onToast('Pengaturan profil dan kontak lembaga berhasil disimpan!');
+    }
+  };
+
+  const handleCreateSlide = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!slideTitle.trim() || !slideImage.trim()) {
+      onToast('Judul dan URL gambar slide wajib diisi.');
+      return;
+    }
+    if (onAddSlide) {
+      onAddSlide({
+        title: slideTitle.trim(),
+        badge: slideBadge.trim() || 'Pendidikan Terpadu',
+        desc: slideDesc.trim() || 'Pondok Pesantren & SMP Plus Jauharul Maknuun',
+        image: slideImage.trim(),
+        tag: slideTag.trim() || 'Akreditasi A',
+        cardTheme: 'bg-gradient-to-br from-[#064e3b]/90 via-[#064e3b]/80 to-black/85 border-emerald-400/40 shadow-[0_12px_40px_rgba(6,78,59,0.5)]',
+        badgeTheme: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-200',
+        tagColor: 'text-[#d4af37]',
+        btnTheme: 'from-[#d4af37] via-[#eab308] to-[#ca8a04]'
+      });
+      setSlideTitle('');
+      setSlideDesc('');
+      setSlideImage('');
+      setShowSlideModal(false);
+      onToast('Banner slide baru berhasil ditambahkan!');
+    }
+  };
+
+  const handleCleanupAudit = () => {
+    if (window.confirm('Apakah Anda yakin ingin membersihkan semua entri data uji (TEST-AUDIT) dari artikel, pendaftar, dan log?')) {
+      if (onCleanupTestAudit) {
+        const count = onCleanupTestAudit();
+        onToast(`Pembersihan sukses! ${count} data uji TEST-AUDIT berhasil dibersihkan.`);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Top Header */}
@@ -345,143 +455,197 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             Modul Administrasi
           </div>
 
-          <button
-            onClick={() => setActiveTab('overview')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'overview' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <LayoutDashboard className="w-4 h-4" />
-            <span>Ringkasan (Overview)</span>
-          </button>
+          {isTabAllowed('overview') && (
+            <button
+              onClick={() => setActiveTab('overview')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'overview' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <LayoutDashboard className="w-4 h-4" />
+              <span>Ringkasan (Overview)</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('ppdb')}
-            className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'ppdb' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <div className="flex items-center gap-2.5">
-              <UserCheck className="w-4 h-4" />
-              <span>Verifikasi PPDB</span>
-            </div>
-            <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
-              activeTab === 'ppdb' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-[#1a6b3c]'
-            }`}>
-              {ppdbList.length}
-            </span>
-          </button>
+          {isTabAllowed('ppdb') && (
+            <button
+              onClick={() => setActiveTab('ppdb')}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'ppdb' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <UserCheck className="w-4 h-4" />
+                <span>Verifikasi PPDB</span>
+              </div>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                activeTab === 'ppdb' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-[#1a6b3c]'
+              }`}>
+                {ppdbList.length}
+              </span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('santri')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'santri' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            <span>Direktori Santri</span>
-          </button>
+          {isTabAllowed('santri') && (
+            <button
+              onClick={() => setActiveTab('santri')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'santri' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <Users className="w-4 h-4" />
+              <span>Direktori Santri</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('tahfidz')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'tahfidz' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            <span>Setoran Tahfidz</span>
-          </button>
+          {isTabAllowed('tahfidz') && (
+            <button
+              onClick={() => setActiveTab('tahfidz')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'tahfidz' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Setoran Tahfidz</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('perizinan')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'perizinan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <Calendar className="w-4 h-4" />
-            <span>Perizinan Asrama</span>
-          </button>
+          {isTabAllowed('perizinan') && (
+            <button
+              onClick={() => setActiveTab('perizinan')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'perizinan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Perizinan Asrama</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('tagihan')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'tagihan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <CreditCard className="w-4 h-4" />
-            <span>Keuangan / SPP</span>
-          </button>
+          {isTabAllowed('tagihan') && (
+            <button
+              onClick={() => setActiveTab('tagihan')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'tagihan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>Keuangan / SPP</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('nilai')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'nilai' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <GraduationCap className="w-4 h-4" />
-            <span>Rapor & Nilai</span>
-          </button>
+          {isTabAllowed('nilai') && (
+            <button
+              onClick={() => setActiveTab('nilai')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'nilai' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <GraduationCap className="w-4 h-4" />
+              <span>Rapor & Nilai</span>
+            </button>
+          )}
 
           <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 pt-3 mb-2">
             CMS & Publikasi
           </div>
 
-          <button
-            onClick={() => setActiveTab('posts')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'posts' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <Newspaper className="w-4 h-4" />
-            <span>Berita & Artikel</span>
-          </button>
+          {isTabAllowed('posts') && (
+            <button
+              onClick={() => setActiveTab('posts')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'posts' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <Newspaper className="w-4 h-4" />
+              <span>Berita & Artikel</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('trash')}
-            className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'trash' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <div className="flex items-center gap-2.5">
-              <Trash2 className="w-4 h-4" />
-              <span>Tempat Sampah</span>
-            </div>
-            {trash.length > 0 && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-100 text-red-600 font-bold">
-                {trash.length}
-              </span>
-            )}
-          </button>
+          {isTabAllowed('trash') && (
+            <button
+              onClick={() => setActiveTab('trash')}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'trash' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Trash2 className="w-4 h-4" />
+                <span>Tempat Sampah</span>
+              </div>
+              {trash.length > 0 && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-100 text-red-600 font-bold">
+                  {trash.length}
+                </span>
+              )}
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('media')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'media' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <ImageIcon className="w-4 h-4" />
-            <span>Manajer Galeri</span>
-          </button>
+          {isTabAllowed('slides') && (
+            <button
+              onClick={() => setActiveTab('slides')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'slides' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <Sliders className="w-4 h-4" />
+              <span>Hero Banner Slider</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('cbt')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'cbt' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <FileQuestion className="w-4 h-4" />
-            <span>CBT / Ujian Asesmen</span>
-          </button>
+          {isTabAllowed('media') && (
+            <button
+              onClick={() => setActiveTab('media')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'media' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <ImageIcon className="w-4 h-4" />
+              <span>Manajer Galeri</span>
+            </button>
+          )}
 
-          <button
-            onClick={() => setActiveTab('activity')}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-              activeTab === 'activity' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-            }`}
-          >
-            <Activity className="w-4 h-4" />
-            <span>Audit Trail Log</span>
-          </button>
+          {isTabAllowed('cbt') && (
+            <button
+              onClick={() => setActiveTab('cbt')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'cbt' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <FileQuestion className="w-4 h-4" />
+              <span>CBT / Ujian Asesmen</span>
+            </button>
+          )}
+
+          {isTabAllowed('activity') && (
+            <button
+              onClick={() => setActiveTab('activity')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'activity' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <Activity className="w-4 h-4" />
+              <span>Audit Trail Log</span>
+            </button>
+          )}
+
+          {currentRole === 'super_admin' && (
+            <>
+              <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 pt-3 mb-2">
+                Pengaturan Sistem
+              </div>
+
+              <button
+                onClick={() => setActiveTab('settings')}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
+                  activeTab === 'settings' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <Settings className="w-4 h-4" />
+                <span>Profil & Kontak Lembaga</span>
+              </button>
+            </>
+          )}
         </aside>
 
         {/* Tab Content Panel */}
@@ -1216,6 +1380,206 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
           )}
 
+          {/* HERO BANNER SLIDES TAB */}
+          {activeTab === 'slides' && (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-bold text-[#0d4a28]">Manajer Hero Banner & Slider</h2>
+                  <p className="text-xs text-gray-500">Kelola gambar promosi, judul headline, dan pesan sambutan di beranda utama.</p>
+                </div>
+                <button
+                  onClick={() => setShowSlideModal(true)}
+                  className="px-4 py-2 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold text-xs rounded-xl shadow flex items-center gap-2 btn-spring self-start sm:self-auto"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Tambah Banner Baru</span>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {slides.map((s, idx) => (
+                  <div key={s.id || idx} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div>
+                      <div className="h-44 bg-gray-900 relative overflow-hidden">
+                        <img src={s.image} alt={s.title} className="w-full h-full object-cover opacity-85" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                        <span className="absolute top-3 left-3 bg-[#1a6b3c]/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-400/30">
+                          {s.badge}
+                        </span>
+                        <span className="absolute bottom-2 right-3 text-[#d4af37] font-bold text-[10px]">
+                          {s.tag}
+                        </span>
+                      </div>
+                      <div className="p-4 space-y-2">
+                        <h4 className="font-extrabold text-sm text-gray-800 line-clamp-2">{s.title}</h4>
+                        <p className="text-xs text-gray-500 line-clamp-3 leading-relaxed">{s.desc}</p>
+                      </div>
+                    </div>
+
+                    <div className="p-4 pt-0 border-t border-gray-100 flex items-center justify-between mt-2">
+                      <span className="text-[10px] text-gray-400 font-mono">Slide #{idx + 1}</span>
+                      {onDeleteSlide && slides.length > 1 && (
+                        <button
+                          onClick={() => {
+                            if (confirm(`Hapus slide "${s.title}"?`)) {
+                              onDeleteSlide(s.id);
+                              onToast('Slide banner berhasil dihapus.');
+                            }
+                          }}
+                          className="text-red-500 hover:text-red-700 text-xs font-semibold flex items-center gap-1 p-1 hover:bg-red-50 rounded-lg transition"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span>Hapus</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* SETTINGS TAB */}
+          {activeTab === 'settings' && (
+            <div className="space-y-6 max-w-4xl">
+              <div>
+                <h2 className="text-xl font-bold text-[#0d4a28]">Pengaturan Lembaga & Kontak</h2>
+                <p className="text-xs text-gray-500">Konfigurasi terpusat identitas pesantren, kontak layanan, dan nomor darurat.</p>
+              </div>
+
+              {/* Institution Profile Form */}
+              <form onSubmit={handleSaveSettings} className="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-5 text-xs">
+                <div className="flex items-center gap-2 pb-3 border-b border-gray-100">
+                  <Settings className="w-4 h-4 text-[#1a6b3c]" />
+                  <h3 className="font-extrabold text-sm text-gray-800">Identitas & Akreditasi Lembaga</h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="md:col-span-2">
+                    <label className="block text-gray-700 font-bold mb-1">Nama Resmi Lembaga *</label>
+                    <input
+                      type="text"
+                      value={instName}
+                      onChange={(e) => setInstName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                      required
+                    />
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <label className="block text-gray-700 font-bold mb-1">Tagline & Moto Pendidikan</label>
+                    <input
+                      type="text"
+                      value={instTagline}
+                      onChange={(e) => setInstTagline(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-1">Alamat Kampus</label>
+                    <input
+                      type="text"
+                      value={instAddress}
+                      onChange={(e) => setInstAddress(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-1">Kota / Kabupaten & Kode Pos</label>
+                    <input
+                      type="text"
+                      value={instCity}
+                      onChange={(e) => setInstCity(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-1">No. Telepon / Hotline Layanan</label>
+                    <input
+                      type="text"
+                      value={instPhone}
+                      onChange={(e) => setInstPhone(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-1">WhatsApp Panitia PPDB (Angka saja, misal: 6281234567890)</label>
+                    <input
+                      type="text"
+                      value={instWhatsapp}
+                      onChange={(e) => setInstWhatsapp(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-1">Email Resmi Sekretariat</label>
+                    <input
+                      type="email"
+                      value={instEmail}
+                      onChange={(e) => setInstEmail(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-1">Status Akreditasi</label>
+                    <input
+                      type="text"
+                      value={instAccreditation}
+                      onChange={(e) => setInstAccreditation(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-3 flex justify-end">
+                  <button
+                    type="submit"
+                    className="px-6 py-2.5 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold rounded-xl shadow flex items-center gap-2 btn-spring"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>Simpan Pengaturan Lembaga</span>
+                  </button>
+                </div>
+              </form>
+
+              {/* Maintenance & Data Cleanup Card */}
+              <div className="bg-amber-50/70 p-6 rounded-3xl border border-amber-200 shadow-sm space-y-4 text-xs">
+                <div className="flex items-center gap-2 pb-2 border-b border-amber-200">
+                  <ShieldAlert className="w-4 h-4 text-amber-700" />
+                  <h3 className="font-extrabold text-sm text-amber-900">Pemeliharaan & Pembersihan Data Pre-Launch</h3>
+                </div>
+
+                <p className="text-amber-800 leading-relaxed text-xs">
+                  Gunakan tombol di bawah ini sebelum mempublikasikan website secara umum. Tindakan ini akan secara aman menyaring dan menghapus entri pengujian bertanda <strong>TEST-AUDIT</strong> dari basis data artikel, pendaftar PPDB, buku tamu, media, dan log aktivitas agar website bersih dan siap digunakan pendaftar nyata.
+                </p>
+
+                <div className="pt-1 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleCleanupAudit}
+                    className="px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl shadow flex items-center gap-2 btn-spring"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    <span>Bersihkan Seluruh Data Uji (TEST-AUDIT)</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
         </main>
       </div>
 
@@ -1301,6 +1665,97 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowPostModal(false)}
+                  className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl"
+                >
+                  Batal
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* CREATE SLIDE MODAL */}
+      {showSlideModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl border border-gray-200 space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+              <h3 className="font-bold text-sm text-[#0d4a28]">Tambah Slide Hero Banner Baru</h3>
+              <button onClick={() => setShowSlideModal(false)} className="text-gray-400 hover:text-gray-600">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleCreateSlide} className="space-y-3 text-xs">
+              <div>
+                <label className="block text-gray-700 font-bold mb-1">Judul Headline Banner *</label>
+                <input
+                  type="text"
+                  value={slideTitle}
+                  onChange={(e) => setSlideTitle(e.target.value)}
+                  placeholder="Contoh: PPDB TP 2026/2027 Gelombang I Resmi Dibuka"
+                  className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-gray-700 font-bold mb-1">Badge Kategori</label>
+                  <input
+                    type="text"
+                    value={slideBadge}
+                    onChange={(e) => setSlideBadge(e.target.value)}
+                    placeholder="Pendidikan Terpadu"
+                    className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-bold mb-1">Tag Sorotan</label>
+                  <input
+                    type="text"
+                    value={slideTag}
+                    onChange={(e) => setSlideTag(e.target.value)}
+                    placeholder="Akreditasi A"
+                    className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-bold mb-1">Deskripsi / Penjelasan Singkat</label>
+                <textarea
+                  rows={3}
+                  value={slideDesc}
+                  onChange={(e) => setSlideDesc(e.target.value)}
+                  placeholder="Deskripsi singkat yang tampil di atas foto banner..."
+                  className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-bold mb-1">URL Gambar Latar (Unsplash / Direct Link) *</label>
+                <input
+                  type="url"
+                  value={slideImage}
+                  onChange={(e) => setSlideImage(e.target.value)}
+                  placeholder="https://images.unsplash.com/..."
+                  className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
+                  required
+                />
+              </div>
+
+              <div className="pt-2 flex gap-2">
+                <button
+                  type="submit"
+                  className="flex-1 py-2.5 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold rounded-xl shadow btn-spring"
+                >
+                  Simpan Banner
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowSlideModal(false)}
                   className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl"
                 >
                   Batal

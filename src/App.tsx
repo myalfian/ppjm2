@@ -28,6 +28,7 @@ import { MediaModal } from './components/modals/MediaModal';
 import { EcosystemModal } from './components/modals/EcosystemModal';
 import { SyllabusModal } from './components/modals/SyllabusModal';
 import { SearchModal } from './components/modals/SearchModal';
+import { CbtExamModal } from './components/modals/CbtExamModal';
 
 // Admin Views
 import { AdminLogin } from './components/admin/AdminLogin';
@@ -58,6 +59,8 @@ export const App: React.FC = () => {
   const perizinanList = store.getPerizinanList();
   const tagihanList = store.getTagihanList();
   const nilaiList = store.getNilaiList();
+  const settings = store.getSettings();
+  const slides = store.getSlides();
   const currentRole = store.getCurrentRole();
   const isAuthenticated = store.getIsAuthenticated();
 
@@ -72,6 +75,7 @@ export const App: React.FC = () => {
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showPpdbModal, setShowPpdbModal] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
+  const [cbtExamSubmission, setCbtExamSubmission] = useState<PPDBSubmission | null>(null);
   const [printCardSubmission, setPrintCardSubmission] = useState<PPDBSubmission | null>(null);
   const [selectedNewsPost, setSelectedNewsPost] = useState<Post | null>(null);
   const [selectedMediaItem, setSelectedMediaItem] = useState<MediaGalleryItem | null>(null);
@@ -107,17 +111,35 @@ export const App: React.FC = () => {
     showToast(`Bahasa diubah ke: ${langNames[lang] || lang}`);
   };
 
-  // Scroll Progress Percentage for Top Progress Bar
+  // Scroll Progress Percentage with requestAnimationFrame (LOW-04)
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  // 404 Route path check (MED-06)
+  const [invalidRoute, setInvalidRoute] = useState<string | null>(null);
+
   useEffect(() => {
+    const path = window.location.pathname;
+    if (path && path !== '/' && path !== '/index.html') {
+      setInvalidRoute(path);
+      window.history.replaceState({}, '', '/');
+    }
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const currentProgress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
-      } else {
-        setScrollProgress(0);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+          if (totalHeight > 0) {
+            const currentProgress = (window.scrollY / totalHeight) * 100;
+            setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
+          } else {
+            setScrollProgress(0);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
@@ -139,6 +161,25 @@ export const App: React.FC = () => {
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
+
+      {/* Invalid route 404 notification banner (MED-06) */}
+      {invalidRoute && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-md w-full px-4">
+          <div className="bg-amber-800 text-white p-3 rounded-2xl shadow-xl flex items-center justify-between text-xs border border-amber-600">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-amber-300 shrink-0" />
+              <span>Halaman <strong>{invalidRoute}</strong> tidak ditemukan. Dialihkan ke beranda.</span>
+            </div>
+            <button 
+              onClick={() => setInvalidRoute(null)}
+              className="p-1 rounded-full hover:bg-amber-700 transition"
+              aria-label="Tutup pemberitahuan"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Toast Notification */}
       {toastMessage && (
@@ -174,6 +215,13 @@ export const App: React.FC = () => {
             perizinanList={perizinanList}
             tagihanList={tagihanList}
             nilaiList={nilaiList}
+            settings={settings}
+            slides={slides}
+            onUpdateSettings={(s) => store.updateSettings(s)}
+            onUpdateSlide={(id, s) => store.updateSlide(id, s)}
+            onAddSlide={(s) => store.addSlide(s)}
+            onDeleteSlide={(id) => store.deleteSlide(id)}
+            onCleanupTestAudit={() => store.cleanupTestAuditData()}
             onUpdatePPDBStatus={(id, s) => store.updatePPDBStatus(id, s)}
             onOpenPrintCard={(s) => setPrintCardSubmission(s)}
             onAddPost={(p) => store.addPost(p)}
@@ -209,6 +257,7 @@ export const App: React.FC = () => {
           {/* Main Landing Sections */}
           <main className="flex-1">
             <HeroSlider
+              slides={slides}
               onOpenPpdb={() => setShowPpdbModal(true)}
               onOpenStatus={() => setShowStatusModal(true)}
             />
@@ -308,6 +357,7 @@ export const App: React.FC = () => {
             />
 
             <LocationSection
+              settings={settings}
               onToast={showToast}
             />
 
@@ -339,7 +389,7 @@ export const App: React.FC = () => {
           </main>
 
           {/* Footer */}
-          <Footer />
+          <Footer settings={settings} />
 
           {/* Android-style Mobile Bottom Navigation Bar (Home, JM News, Medsos, E-Learning, Menu) */}
           <BottomNav
@@ -370,7 +420,23 @@ export const App: React.FC = () => {
           setShowStatusModal(false);
           setPrintCardSubmission(sub);
         }}
+        onStartCbt={(sub) => {
+          setShowStatusModal(false);
+          setCbtExamSubmission(sub);
+        }}
       />
+
+      {cbtExamSubmission && (
+        <CbtExamModal
+          isOpen={!!cbtExamSubmission}
+          submission={cbtExamSubmission}
+          onClose={() => setCbtExamSubmission(null)}
+          onComplete={(score, total) => {
+            store.recordCBTScore(cbtExamSubmission.code, score, total);
+            showToast(`CBT Asesmen selesai! Skor: ${score}/${total} telah disimpan pada berkas pendaftaran.`);
+          }}
+        />
+      )}
 
       <PrintCardModal
         submission={printCardSubmission}

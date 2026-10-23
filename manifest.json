@@ -30,14 +30,14 @@
       "name": "PPDB Online 2026",
       "short_name": "PPDB",
       "description": "Pendaftaran Santri & Siswa Baru",
-      "url": "/#ppdb-section",
+      "url": "/#home",
       "icons": [{ "src": "https://img.icons8.com/color/96/registration.png", "sizes": "96x96" }]
     },
     {
       "name": "Berita & Pengumuman",
       "short_name": "Berita",
       "description": "Kabar terkini dan agenda santri",
-      "url": "/#informasi",
+      "url": "/#news",
       "icons": [{ "src": "https://img.icons8.com/color/96/news.png", "sizes": "96x96" }]
     },
     {

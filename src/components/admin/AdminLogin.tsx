@@ -11,18 +11,35 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
   const [password, setPassword] = useState('Maknuun2026!');
   const [error, setError] = useState<string | null>(null);
 
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    // Standard credential validation (admin@jauharulmaknuun.sch.id / Maknuun2026!)
-    if (email.trim() === 'admin@jauharulmaknuun.sch.id' && password === 'Maknuun2026!') {
-      onLogin(email.trim());
-    } else if (password.length >= 6) {
-      // Allow flexible test credentials as well
+    if (isLocked) {
+      setError('Terlalu banyak percobaan gagal. Silakan tunggu 30 detik.');
+      return;
+    }
+
+    // Strict credential validation (admin@jauharulmaknuun.sch.id / Maknuun2026!)
+    if (email.trim().toLowerCase() === 'admin@jauharulmaknuun.sch.id' && password === 'Maknuun2026!') {
+      setFailedAttempts(0);
       onLogin(email.trim());
     } else {
-      setError('Email atau kata sandi pengelola tidak valid.');
+      const nextFail = failedAttempts + 1;
+      setFailedAttempts(nextFail);
+      if (nextFail >= 5) {
+        setIsLocked(true);
+        setError('Akses dikunci sementara karena 5 kali percobaan gagal.');
+        setTimeout(() => {
+          setIsLocked(false);
+          setFailedAttempts(0);
+        }, 30000);
+      } else {
+        setError(`Email atau kata sandi pengelola salah. (Percobaan ${nextFail}/5)`);
+      }
     }
   };
 

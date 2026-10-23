@@ -278,21 +278,23 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     icon: <Image className="w-4 h-4 text-emerald-600" />
   }));
 
-  // Dynamic PPDB submissions (jika pengguna mencari status nama atau kode)
-  const ppdbItems: SearchResultItem[] = ppdbList.map(sub => ({
-    id: `ppdb-${sub.id}`,
-    title: `Pendaftaran: ${sub.name} (${sub.code})`,
-    description: `Program: ${sub.program} • Status: ${sub.status} • Gender: ${sub.gender}`,
-    category: 'PPDB',
-    badge: sub.status,
-    action: () => {
-      onClose();
-      scrollToSection('home');
-    },
-    icon: <UserCheck className="w-4 h-4 text-[#1a6b3c]" />
-  }));
+  // Static PPDB shortcuts (informasi publik tanpa membeberkan PII santri)
+  const ppdbStaticItems: SearchResultItem[] = [
+    {
+      id: 'ppdb-info',
+      title: 'Penerimaan Peserta Didik Baru (PPDB Online 2026/2027)',
+      description: 'Pendaftaran santri baru SMP Plus & Pondok Pesantren Jauharul Maknuun dibuka untuk Gelombang 1.',
+      category: 'Program',
+      badge: 'PPDB 2026',
+      action: () => {
+        onClose();
+        scrollToSection('home');
+      },
+      icon: <UserCheck className="w-4 h-4 text-[#1a6b3c]" />
+    }
+  ];
 
-  const allItems = [...staticItems, ...postItems, ...mediaItems, ...ppdbItems];
+  const allItems = [...staticItems, ...postItems, ...mediaItems, ...ppdbStaticItems];
 
   // Filtering
   const cleanQuery = query.trim().toLowerCase();

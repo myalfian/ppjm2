@@ -27,6 +27,8 @@ export const PpdbModal: React.FC<PpdbModalProps> = ({
   const [address, setAddress] = useState('');
   const [honeypot, setHoneypot] = useState('');
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [successEntry, setSuccessEntry] = useState<PPDBSubmission | null>(null);
 
@@ -38,6 +40,13 @@ export const PpdbModal: React.FC<PpdbModalProps> = ({
 
     // Anti-bot Honeypot check
     if (honeypot.trim()) {
+      return;
+    }
+
+    // Cooldown check (prevent multiple fast submits within 10 seconds)
+    const now = Date.now();
+    if (now - lastSubmitTime < 10000) {
+      setError('Mohon tunggu beberapa detik sebelum mengirimkan kembali formulir.');
       return;
     }
 
@@ -63,18 +72,27 @@ export const PpdbModal: React.FC<PpdbModalProps> = ({
       return;
     }
 
-    const newSub = onSubmit({
-      name: name.trim(),
-      gender,
-      program,
-      phone: cleanPhone,
-      email: email.trim() || null,
-      diet_package: dietPackage,
-      allergy_notes: allergyNotes.trim() || null,
-      address: address.trim()
-    });
+    setIsSubmitting(true);
+    setLastSubmitTime(now);
 
-    setSuccessEntry(newSub);
+    try {
+      const newSub = onSubmit({
+        name: name.trim(),
+        gender,
+        program,
+        phone: cleanPhone,
+        email: email.trim() || null,
+        diet_package: dietPackage,
+        allergy_notes: allergyNotes.trim() || null,
+        address: address.trim()
+      });
+
+      setSuccessEntry(newSub);
+    } catch (err) {
+      setError('Terjadi kendala saat menyimpan pendaftaran. Silakan coba kembali.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetForm = () => {
@@ -314,10 +332,11 @@ export const PpdbModal: React.FC<PpdbModalProps> = ({
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-extrabold rounded-2xl shadow-lg shadow-[#1a6b3c]/30 flex items-center justify-center gap-2 btn-spring"
+                  disabled={isSubmitting}
+                  className={`w-full py-3 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-extrabold rounded-2xl shadow-lg shadow-[#1a6b3c]/30 flex items-center justify-center gap-2 btn-spring ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
                   <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-                  <span>Kirim Formulir Pendaftaran PPDB</span>
+                  <span>{isSubmitting ? 'Memproses Pendaftaran...' : 'Kirim Formulir Pendaftaran PPDB'}</span>
                 </button>
               </div>
             </form>

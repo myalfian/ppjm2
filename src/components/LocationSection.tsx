@@ -1,11 +1,15 @@
 import React from 'react';
 import { MapPin, Phone, MessageSquare, Copy, Navigation, Shield, HeartPulse, Building, Clock } from 'lucide-react';
+import { InstitutionSettings } from '../types';
+import { initialSettings } from '../data/initialData';
 
 interface LocationSectionProps {
   onToast: (msg: string) => void;
+  settings?: InstitutionSettings;
 }
 
-export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => {
+export const LocationSection: React.FC<LocationSectionProps> = ({ onToast, settings: propSettings }) => {
+  const settings = propSettings || initialSettings;
   const handleCopy = (phone: string, title: string) => {
     navigator.clipboard?.writeText(phone);
     onToast(`Nomor telepon ${title} (${phone}) berhasil disalin.`);
@@ -41,24 +45,30 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
                 </span>
               </div>
               <h4 className="font-bold text-sm text-[#0d4a28]">Panitia PPDB 2026</h4>
-              <div className="font-mono text-xs font-bold text-gray-700 mt-0.5">0812-3456-7890</div>
+              <div className="font-mono text-xs font-bold text-gray-700 mt-0.5">{settings.phone}</div>
               <p className="text-[11px] text-gray-500 leading-relaxed mt-1">Konsultasi pendaftaran, tes seleksi, & verifikasi berkas santri baru.</p>
             </div>
             <div className="pt-3 border-t border-gray-100 flex items-center gap-1.5">
-              <a href="tel:081234567890" className="flex-1 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring">
+              <a 
+                href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`} 
+                aria-label="Telepon Panitia PPDB 2026"
+                className="flex-1 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring"
+              >
                 <Phone className="w-3.5 h-3.5" /> Telepon
               </a>
               <button 
-                onClick={() => handleCopy('081234567890', 'Panitia PPDB')}
+                onClick={() => handleCopy(settings.phone, 'Panitia PPDB')}
+                aria-label="Salin nomor telepon Panitia PPDB 2026"
                 className="p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-xs transition" 
                 title="Salin Nomor"
               >
                 <Copy className="w-4 h-4" />
               </button>
               <a 
-                href="https://wa.me/6281234567890?text=Assalamu'alaikum%20Panitia%20PPDB" 
+                href={`https://wa.me/${settings.whatsapp}?text=Assalamu'alaikum%20Panitia%20PPDB`} 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                aria-label="Chat WhatsApp Panitia PPDB 2026"
                 className="p-2 bg-emerald-50 hover:bg-emerald-100 text-[#1a6b3c] rounded-xl text-xs transition" 
                 title="Chat WhatsApp"
               >
@@ -83,11 +93,16 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
               <p className="text-[11px] text-gray-500 leading-relaxed mt-1">Layanan administrasi, perizinan pulang santri, dan surat pengantar.</p>
             </div>
             <div className="pt-3 border-t border-gray-100 flex items-center gap-1.5">
-              <a href="tel:081234567891" className="flex-1 bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring">
+              <a 
+                href="tel:081234567891" 
+                aria-label="Telepon Sekretariat dan Asrama"
+                className="flex-1 bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring"
+              >
                 <Phone className="w-3.5 h-3.5" /> Kantor
               </a>
               <button 
                 onClick={() => handleCopy('081234567891', 'Sekretariat')}
+                aria-label="Salin nomor telepon Sekretariat dan Asrama"
                 className="p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-xs transition" 
                 title="Salin Nomor"
               >
@@ -97,6 +112,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
                 href="https://wa.me/6281234567891?text=Halo%20Sekretariat%20PPJM" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                aria-label="Chat WhatsApp Sekretariat dan Asrama"
                 className="p-2 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-xl text-xs transition" 
                 title="Chat WhatsApp"
               >
@@ -121,11 +137,16 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
               <p className="text-[11px] text-gray-500 leading-relaxed mt-1">Layanan darurat medis santri, konsultasi gizi, dan dokter klinik.</p>
             </div>
             <div className="pt-3 border-t border-gray-100 flex items-center gap-1.5">
-              <a href="tel:081234567892" className="flex-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring">
+              <a 
+                href="tel:081234567892" 
+                aria-label="Telepon Pos Medis UKS 24 Jam"
+                className="flex-1 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring"
+              >
                 <Phone className="w-3.5 h-3.5" /> Pos Medis
               </a>
               <button 
                 onClick={() => handleCopy('081234567892', 'Pos Medis')}
+                aria-label="Salin nomor telepon Pos Medis"
                 className="p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-xs transition" 
                 title="Salin Nomor"
               >
@@ -135,6 +156,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
                 href="https://wa.me/6281234567892?text=Emergency%20Medis%20PPJM" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                aria-label="Chat WhatsApp Pos Medis"
                 className="p-2 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl text-xs transition" 
                 title="Chat WhatsApp"
               >
@@ -159,11 +181,16 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
               <p className="text-[11px] text-gray-500 leading-relaxed mt-1">Konfirmasi izin sambang wali santri, keamanan gerbang, & parkir.</p>
             </div>
             <div className="pt-3 border-t border-gray-100 flex items-center gap-1.5">
-              <a href="tel:081234567893" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring">
+              <a 
+                href="tel:081234567893" 
+                aria-label="Telepon Pos Keamanan dan Gerbang"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 rounded-xl text-center flex items-center justify-center gap-1 btn-spring"
+              >
                 <Phone className="w-3.5 h-3.5" /> Pos Jaga
               </a>
               <button 
                 onClick={() => handleCopy('081234567893', 'Pos Keamanan')}
+                aria-label="Salin nomor telepon Pos Keamanan"
                 className="p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-xs transition" 
                 title="Salin Nomor"
               >
@@ -173,6 +200,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
                 href="https://wa.me/6281234567893?text=Halo%20Pos%20Keamanan%20PPJM" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                aria-label="Chat WhatsApp Pos Keamanan"
                 className="p-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-xs transition" 
                 title="Chat WhatsApp"
               >
@@ -197,6 +225,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
               href="https://maps.google.com/?q=Lasem+Sidayu+Gresik"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Buka petunjuk arah Google Maps ke Lasem Sidayu Gresik"
               className="bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold px-4 py-2 rounded-xl border border-gray-300 flex items-center gap-2 self-start sm:self-auto transition"
             >
               <Navigation className="w-4 h-4 text-[#1a6b3c]" />
@@ -206,18 +235,18 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast }) => 
 
           <div className="relative w-full h-80 rounded-2xl overflow-hidden border border-gray-200 shadow-inner">
             <iframe
-              title="Peta Lokasi Pondok Pesantren Jauharul Maknuun"
+              title="Peta Lokasi Pondok Pesantren Jauharul Maknuun Lasem Sidayu Gresik"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15849.524672621008!2d111.44!3d-6.7085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e772f4405a8b7c5%3A0x4027a76e3531b40!2sLasem%2C%20Rembang%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1700000000000"
+              src="https://maps.google.com/maps?q=Desa%20Lasem%2C%20Kecamatan%20Sidayu%2C%20Kabupaten%20Gresik%2C%20Jawa%20Timur&t=&z=15&ie=UTF8&iwloc=&output=embed"
             />
             <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur px-3 py-1.5 rounded-xl border border-gray-200 text-xs font-bold text-[#1a6b3c] shadow-md flex items-center gap-2">
               <MapPin className="w-4 h-4 text-rose-600" />
-              <span>Pondok Pesantren Jauharul Maknuun</span>
+              <span>Pondok Pesantren Jauharul Maknuun (Lasem Sidayu Gresik)</span>
             </div>
           </div>
         </div>

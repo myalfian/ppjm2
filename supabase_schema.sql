@@ -22,14 +22,14 @@ CREATE INDEX IF NOT EXISTS idx_ppdb_phone ON ppdb_submissions(phone);
 CREATE INDEX IF NOT EXISTS idx_ppdb_status ON ppdb_submissions(status);
 CREATE INDEX IF NOT EXISTS idx_ppdb_submitted ON ppdb_submissions(submitted_at DESC);
 
--- RLS untuk PPDB
+-- RLS untuk PPDB: Anonim hanya boleh INSERT data baru; SELECT hanya untuk pengguna terautentikasi (pengelola/admin)
 ALTER TABLE ppdb_submissions ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "anon_insert_ppdb" ON ppdb_submissions;
 DROP POLICY IF EXISTS "anon_select_ppdb" ON ppdb_submissions;
 DROP POLICY IF EXISTS "auth_all_ppdb" ON ppdb_submissions;
 
 CREATE POLICY "anon_insert_ppdb" ON ppdb_submissions FOR INSERT TO anon WITH CHECK (true);
-CREATE POLICY "anon_select_ppdb" ON ppdb_submissions FOR SELECT TO anon USING (true);
+-- Anonim dilarang dump data (SELECT diserahkan ke RPC terverifikasi atau admin terautentikasi)
 CREATE POLICY "auth_all_ppdb" ON ppdb_submissions FOR ALL TO authenticated USING (true);
 
 -- 2. Tabel Buku Tamu / Testimoni

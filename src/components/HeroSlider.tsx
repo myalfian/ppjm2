@@ -1,48 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
+import { HeroSlide } from '../types';
+import { initialHeroSlides } from '../data/initialData';
 
 interface HeroSliderProps {
   onOpenPpdb: () => void;
   onOpenStatus: () => void;
+  slides?: HeroSlide[];
 }
 
-const slides = [
-  {
-    badge: 'Pendidikan Islam Terpadu & Berkarakter',
-    title: 'Mencetak Generasi Rabbani, Berakhlak & Unggul Teknologi',
-    desc: 'Sistem pendidikan terpadu memadukan kemurnian Kurikulum Kitab Kuning Pesantren Salaf dengan standar nasional Kurikulum Merdeka berakreditasi "A" BAN-PDM di Kota Santri Lasem.',
-    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1600&q=80',
-    tag: 'Akreditasi "A" BAN-PDM',
-    cardTheme: 'bg-gradient-to-br from-[#064e3b]/90 via-[#064e3b]/80 to-black/85 border-emerald-400/40 shadow-[0_12px_40px_rgba(6,78,59,0.5)]',
-    badgeTheme: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-200',
-    tagColor: 'text-[#d4af37]',
-    btnTheme: 'from-[#d4af37] via-[#eab308] to-[#ca8a04]'
-  },
-  {
-    badge: 'Takhassus Al-Qur\'an Bersanad',
-    title: 'Halaqah Tahfidz 30 Juz Mutqin & Berijazah Sanad Keilmuan',
-    desc: 'Bimbingan intensif hafalan ba\'da Subuh dan Maghrib bersama dewan huffadz bersanad 30 juz, dilengkapi kajian tajwid qira\'ah dan mutaba\'ah berkala.',
-    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1600&q=80',
-    tag: 'Target Mutqin 30 Juz',
-    cardTheme: 'bg-gradient-to-br from-[#1e1b4b]/90 via-[#1e1b4b]/80 to-black/85 border-indigo-400/40 shadow-[0_12px_40px_rgba(30,27,75,0.5)]',
-    badgeTheme: 'bg-indigo-500/20 border-indigo-400/40 text-indigo-200',
-    tagColor: 'text-amber-300',
-    btnTheme: 'from-[#d4af37] via-[#facc15] to-[#eab308]'
-  },
-  {
-    badge: 'Islamic Boarding School Modern',
-    title: 'SMP Plus Jauharul Maknuun: Riset STEM & Pengkajian Kitab Turats',
-    desc: 'Fasilitas asrama representatif, laboratorium komputer modern, program dwibahasa (Arab-Inggris), serta kajian kitab turats maknani Jawa dan pembinaan adab santri 24 jam.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
-    tag: 'Bilingual & STEM',
-    cardTheme: 'bg-gradient-to-br from-[#1c1917]/90 via-[#292524]/80 to-black/85 border-amber-500/40 shadow-[0_12px_40px_rgba(28,25,23,0.5)]',
-    badgeTheme: 'bg-amber-500/20 border-amber-400/40 text-amber-200',
-    tagColor: 'text-cyan-300',
-    btnTheme: 'from-[#d4af37] via-[#eab308] to-[#ca8a04]'
-  }
-];
-
-export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus }) => {
+export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus, slides: propSlides }) => {
+  const slides = propSlides && propSlides.length > 0 ? propSlides : initialHeroSlides;
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {

@@ -1,4 +1,17 @@
-import { Post, PPDBSubmission, MediaGalleryItem, GuestbookEntry, ActivityLog, Santri, TahfidzRecord, Perizinan, Tagihan, NilaiAkademik } from '../types';
+import { 
+  Post, 
+  PPDBSubmission, 
+  MediaGalleryItem, 
+  GuestbookEntry, 
+  ActivityLog, 
+  Santri, 
+  TahfidzRecord, 
+  Perizinan, 
+  Tagihan, 
+  NilaiAkademik,
+  InstitutionSettings,
+  HeroSlide 
+} from '../types';
 
 export const initialPosts: Post[] = [
   {
@@ -55,64 +68,7 @@ export const initialPosts: Post[] = [
   }
 ];
 
-export const initialPPDB: PPDBSubmission[] = [
-  {
-    id: 'ppdb-1',
-    code: 'PPDB-2026-001',
-    name: 'Muhammad Faiz Al-Fatih',
-    gender: 'Laki-laki',
-    program: 'Takhassus Tahfidz',
-    phone: '081234567890',
-    email: 'wali.faiz@gmail.com',
-    diet_package: 'Nutrisi Khusus Huffadz (Omega-3 & Madu)',
-    allergy_notes: 'Tidak ada alergi',
-    address: 'Jl. Diponegoro No. 45, Lasem, Rembang',
-    status: 'Diterima',
-    submitted_at: '2026-02-14T09:30:00Z'
-  },
-  {
-    id: 'ppdb-2',
-    code: 'PPDB-2026-002',
-    name: 'Siti Fatimah Az-Zahra',
-    gender: 'Perempuan',
-    program: 'SMP Plus & Pesantren',
-    phone: '085712345678',
-    email: 'fatimah.parent@yahoo.com',
-    diet_package: 'Reguler 4 Sehat (3x Sehari)',
-    allergy_notes: 'Alergi udang dan kepiting',
-    address: 'Desa Jolotundo RT 03/02, Lasem, Rembang',
-    status: 'Terverifikasi',
-    submitted_at: '2026-02-16T11:15:00Z'
-  },
-  {
-    id: 'ppdb-3',
-    code: 'PPDB-2026-003',
-    name: 'Ahmad Rizki Maulana',
-    gender: 'Laki-laki',
-    program: 'SMP Plus & Pesantren',
-    phone: '082198765432',
-    email: 'ahmad.rizki@gmail.com',
-    diet_package: 'Reguler 4 Sehat (3x Sehari)',
-    allergy_notes: '',
-    address: 'Kec. Sluke, Kab. Rembang, Jawa Tengah',
-    status: 'Menunggu Verifikasi',
-    submitted_at: '2026-02-18T14:20:00Z'
-  },
-  {
-    id: 'ppdb-4',
-    code: 'PPDB-2026-004',
-    name: 'Nurul Hidayah Putri',
-    gender: 'Perempuan',
-    program: 'Kajian Kitab Kuning',
-    phone: '087811223344',
-    email: 'nurul.hidayah@gmail.com',
-    diet_package: 'Menu Ramah Alergen & Lambung',
-    allergy_notes: 'Pernah maag kronis, hindari makanan terlalu pedas',
-    address: 'Kec. Sedan, Kab. Rembang',
-    status: 'Cadangan',
-    submitted_at: '2026-02-19T08:45:00Z'
-  }
-];
+export const initialPPDB: PPDBSubmission[] = [];
 
 export const initialMedia: MediaGalleryItem[] = [
   { 
@@ -311,5 +267,75 @@ export const utbkQuestions = [
     options: ['90 m²', '120 m²', '150 m²', '180 m²'],
     correct: 1,
     explanation: 'Kamar = 2/5 * 450 = 180 m². Aula = 1/3 * 450 = 150 m². Total = 330 m². Sisa taman = 450 - 330 = 120 m².'
+  },
+  {
+    id: 5,
+    subject: 'Wawasan Kebangsaan & Akhlak Santri',
+    question: 'Di antara prinsip utama Panca Jiwa Pondok Pesantren Jauharul Maknuun dalam membina santri adalah...',
+    options: [
+      'Keikhlasan, Kesederhanaan, Berdikari, Ukhuwah Islamiyah, dan Kebebasan Terpimpin',
+      'Materialisme, Kemewahan, dan Kebebasan Mutlak',
+      'Hanya mengutamakan gelar akademik tanpa integritas akhlak',
+      'Menolak perkembangan teknologi dan sains modern'
+    ],
+    correct: 0,
+    explanation: 'Panca Jiwa Pondok Pesantren mencakup Keikhlasan, Kesederhanaan, Berdikari, Ukhuwah Islamiyah, dan Kebebasan Terpimpin yang mendasari kepribadian santri.'
+  }
+];
+
+export const initialSettings: InstitutionSettings = {
+  name: 'Pondok Pesantren & SMP Plus Jauharul Maknuun',
+  tagline: "Membina Generasi Qur'ani, Berakhlak Salaf & Berwawasan Global STEAM",
+  address: 'Jl. Raya Lasem - Sidayu Km. 3, Desa Lasem, Sidayu',
+  city: 'Kabupaten Gresik, Jawa Timur 61153',
+  phone: '0812-3456-7890',
+  whatsapp: '6281234567890',
+  email: 'sekretariat@ppjauharulmaknuun.yufan.id',
+  accreditation: 'Akreditasi "A" BAN-PDM',
+  npsn: '69981234',
+  nsm: '212352500099',
+  foundation: 'Yayasan Pendidikan Islam Jauharul Maknuun',
+  mapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15837.284279581898!2d112.5466488!3d-6.9899814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77e034a2d9894e%3A0x6b9d62d2948c2a86!2sSidayu%2C%20Gresik%20Regency%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid',
+  facebookUrl: 'https://facebook.com/ppjauharulmaknuun',
+  instagramUrl: 'https://instagram.com/ppjauharulmaknuun',
+  youtubeUrl: 'https://youtube.com/@ppjauharulmaknuun'
+};
+
+export const initialHeroSlides: HeroSlide[] = [
+  {
+    id: 'slide-1',
+    badge: 'Pendidikan Islam Terpadu & Berkarakter',
+    title: 'Mencetak Generasi Rabbani, Berakhlak & Unggul Teknologi',
+    desc: 'Sistem pendidikan terpadu memadukan kemurnian Kurikulum Kitab Kuning Pesantren Salaf dengan standar nasional Kurikulum Merdeka berakreditasi "A" BAN-PDM di Kota Santri Lasem.',
+    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1600&q=80',
+    tag: 'Akreditasi "A" BAN-PDM',
+    cardTheme: 'bg-gradient-to-br from-[#064e3b]/90 via-[#064e3b]/80 to-black/85 border-emerald-400/40 shadow-[0_12px_40px_rgba(6,78,59,0.5)]',
+    badgeTheme: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-200',
+    tagColor: 'text-[#d4af37]',
+    btnTheme: 'from-[#d4af37] via-[#eab308] to-[#ca8a04]'
+  },
+  {
+    id: 'slide-2',
+    badge: "Takhassus Al-Qur'an Bersanad",
+    title: 'Halaqah Tahfidz 30 Juz Mutqin & Berijazah Sanad Keilmuan',
+    desc: "Bimbingan intensif hafalan ba'da Subuh dan Maghrib bersama dewan huffadz bersanad 30 juz, dilengkapi kajian tajwid qira'ah dan mutaba'ah berkala.",
+    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1600&q=80',
+    tag: 'Target Mutqin 30 Juz',
+    cardTheme: 'bg-gradient-to-br from-[#1e1b4b]/90 via-[#1e1b4b]/80 to-black/85 border-indigo-400/40 shadow-[0_12px_40px_rgba(30,27,75,0.5)]',
+    badgeTheme: 'bg-indigo-500/20 border-indigo-400/40 text-indigo-200',
+    tagColor: 'text-amber-300',
+    btnTheme: 'from-[#d4af37] via-[#facc15] to-[#eab308]'
+  },
+  {
+    id: 'slide-3',
+    badge: 'Islamic Boarding School Modern',
+    title: 'SMP Plus Jauharul Maknuun: Riset STEM & Pengkajian Kitab Turats',
+    desc: 'Fasilitas asrama representatif, laboratorium komputer modern, program dwibahasa (Arab-Inggris), serta kajian kitab turats maknani Jawa dan pembinaan adab santri 24 jam.',
+    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
+    tag: 'Bilingual & STEM',
+    cardTheme: 'bg-gradient-to-br from-[#1c1917]/90 via-[#292524]/80 to-black/85 border-amber-500/40 shadow-[0_12px_40px_rgba(28,25,23,0.5)]',
+    badgeTheme: 'bg-amber-500/20 border-amber-400/40 text-amber-200',
+    tagColor: 'text-cyan-300',
+    btnTheme: 'from-[#d4af37] via-[#eab308] to-[#ca8a04]'
   }
 ];

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /private/
 
-Sitemap: https://ppjm.vercel.app/sitemap.xml
+Sitemap: https://ppjauharulmaknuun.yufan.id/sitemap.xml

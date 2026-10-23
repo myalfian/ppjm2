@@ -13,6 +13,9 @@ export interface PPDBSubmission {
   address: string;
   status: PPDBStatus;
   submitted_at: string;
+  cbt_score?: number;
+  cbt_total?: number;
+  cbt_status?: 'Belum Mengikuti' | 'Sudah Mengikuti';
 }
 
 export interface Post {
@@ -157,4 +160,35 @@ export interface EcosystemModule {
   icon: string;
   desc: string;
   features: string[];
+}
+
+export interface InstitutionSettings {
+  name: string;
+  tagline: string;
+  address: string;
+  city: string;
+  phone: string;
+  whatsapp: string;
+  email: string;
+  accreditation: string;
+  npsn: string;
+  nsm: string;
+  foundation: string;
+  mapsEmbedUrl: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
+}
+
+export interface HeroSlide {
+  id: string;
+  badge: string;
+  title: string;
+  desc: string;
+  image: string;
+  tag: string;
+  cardTheme: string;
+  badgeTheme: string;
+  tagColor: string;
+  btnTheme: string;
 }
