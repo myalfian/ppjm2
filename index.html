@@ -270,134 +270,152 @@
                 </div>
 
                 <!-- Desktop Navigation Menu (Icon Stacked on Top with Modern Mega Menus) -->
-                <nav class="hidden lg:flex items-center gap-2 xl:gap-4 text-xs font-semibold">
-                    <!-- 1. JM Center (Active highlighted pill with Mega Menu) -->
+                <nav class="hidden lg:flex items-center gap-2 xl:gap-3 text-xs font-semibold">
+                    <!-- 1. JM Center (Profil JM, Sambutan Direktur, Visi Misi) -->
                     <div class="relative group">
-                        <a href="#home" class="flex flex-col items-center justify-center px-4 py-2 rounded-2xl bg-[#ecfdf5] hover:bg-[#dcfce7] border border-emerald-150/80 text-primary transition-all duration-200 shadow-2xs group cursor-pointer">
+                        <a href="#home" class="flex flex-col items-center justify-center px-3.5 py-2 rounded-2xl bg-[#ecfdf5] hover:bg-[#dcfce7] border border-emerald-150/80 text-primary transition-all duration-200 shadow-2xs group cursor-pointer">
                             <i class="fa-solid fa-mosque text-primary text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
                             <div class="flex items-center gap-1 font-bold text-xs text-primary leading-tight">
                                 <span class="text-center font-bold tracking-tight">JM<br>Center</span>
                                 <i class="fa-solid fa-chevron-down text-[8px] text-primary/80 group-hover:rotate-180 transition-transform duration-200"></i>
                             </div>
                         </a>
-                        <!-- Desktop Mega Menu: JM Center (2-Column Grid + Bottom Highlights) -->
-                        <div class="mega-menu-dropdown absolute left-0 top-full pt-2 w-[540px] z-50">
+                        <!-- Desktop Mega Menu: JM Center -->
+                        <div class="mega-menu-dropdown absolute left-0 top-full pt-2 w-[520px] z-50">
                             <div class="bg-white/98 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-100 p-4 text-xs divide-y divide-gray-100">
                                 <div class="grid grid-cols-2 gap-4 pb-3">
                                     <div>
-                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Profil &amp; Kelembagaan</div>
+                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Profil &amp; Yayasan</div>
                                         <div class="space-y-1">
-                                            <a href="#home" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-house text-accent w-4 text-center"></i> Beranda Utama</a>
-                                            <a href="#sambutan" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-user-tie text-accent w-4 text-center"></i> Sambutan Pengasuh</a>
-                                            <a href="#about" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-landmark text-accent w-4 text-center"></i> Profil &amp; Visi Misi</a>
-                                            <a href="#guru" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-chalkboard-user text-accent w-4 text-center"></i> Pengajar &amp; Asatidz</a>
+                                            <a href="#profil-jm" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                                <i class="fa-solid fa-landmark text-accent w-4 text-center"></i>
+                                                <div>
+                                                    <div class="font-bold text-gray-900 leading-tight">Profil JM</div>
+                                                    <div class="text-[10px] text-gray-500">Sejarah &amp; Identitas Pesantren</div>
+                                                </div>
+                                            </a>
+                                            <a href="#sambutan" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                                <i class="fa-solid fa-user-tie text-accent w-4 text-center"></i>
+                                                <div>
+                                                    <div class="font-bold text-gray-900 leading-tight">Sambutan Direktur</div>
+                                                    <div class="text-[10px] text-gray-500">Arahan Pengasuh &amp; Direktur PP</div>
+                                                </div>
+                                            </a>
+                                            <a href="#visi-misi" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                                <i class="fa-solid fa-bullseye text-accent w-4 text-center"></i>
+                                                <div>
+                                                    <div class="font-bold text-gray-900 leading-tight">Visi Misi</div>
+                                                    <div class="text-[10px] text-gray-500">Landasan Filosofis &amp; Strategi</div>
+                                                </div>
+                                            </a>
+                                            <a href="#guru" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                                <i class="fa-solid fa-chalkboard-user text-accent w-4 text-center"></i>
+                                                <div>
+                                                    <div class="font-bold text-gray-900 leading-tight">Asatidz &amp; Pengajar</div>
+                                                    <div class="text-[10px] text-gray-500">Dewan Asatidz &amp; Guru Ahli</div>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Fasilitas Pesantren</div>
+                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Fasilitas &amp; Lingkungan</div>
                                         <div class="space-y-1">
-                                            <a href="#programs" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-hotel text-accent w-4 text-center"></i> Asrama Representatif</a>
-                                            <a href="#stem-area" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-flask text-accent w-4 text-center"></i> Lab STEM &amp; Riset</a>
-                                            <a href="#organisasi" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-sitemap text-accent w-4 text-center"></i> Struktur Organisasi</a>
-                                            <a href="#lokasi" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium"><i class="fa-solid fa-map-location-dot text-accent w-4 text-center"></i> Peta Kompleks &amp; Arah</a>
+                                            <a href="#programs" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                                <i class="fa-solid fa-hotel text-accent w-4 text-center"></i>
+                                                <div>
+                                                    <div class="font-bold text-gray-900 leading-tight">Asrama Representatif</div>
+                                                    <div class="text-[10px] text-gray-500">Kamar santri berpendingin &amp; asri</div>
+                                                </div>
+                                            </a>
+                                            <a href="#steam-area" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                                <i class="fa-solid fa-flask text-accent w-4 text-center"></i>
+                                                <div>
+                                                    <div class="font-bold text-gray-900 leading-tight">Lab STEAM &amp; Riset</div>
+                                                    <div class="text-[10px] text-gray-500">Pusat inovasi sains &amp; teknologi</div>
+                                                </div>
+                                            </a>
+                                            <a href="#lokasi" class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
+                                                <i class="fa-solid fa-map-location-dot text-accent w-4 text-center"></i>
+                                                <div>
+                                                    <div class="font-bold text-gray-900 leading-tight">Peta Kompleks</div>
+                                                    <div class="text-[10px] text-gray-500">Lasem Sidayu Gresik</div>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="pt-3 flex items-center justify-between text-[11px] text-gray-500 bg-gray-50/60 -mx-4 -mb-4 px-4 py-2.5 rounded-b-2xl">
                                     <span class="flex items-center gap-1.5 font-semibold text-emerald-800"><i class="fa-solid fa-circle-check text-emerald-600"></i> Akreditasi "A" BAN-PDM</span>
-                                    <button onclick="triggerHaptic(); BottomSheet.open(0.5);" class="font-bold text-primary hover:text-primary-dark flex items-center gap-1 touch-press">Buka Bottom Sheet Layanan <i class="fa-solid fa-arrow-right text-[9px]"></i></button>
+                                    <a href="#visi-misi" class="font-bold text-primary hover:text-primary-dark flex items-center gap-1">Lihat Visi Misi Lengkap <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- 2. Program Unggulan (Comprehensive Desktop Mega Menu w-[760px]) -->
+                    <!-- 2. Program Unggulan (Pondok, Sekolah, Masim) -->
                     <div class="relative group">
                         <a href="#programs" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer">
                             <i class="fa-solid fa-graduation-cap text-primary text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
-                            <div class="flex items-center gap-1.5 font-bold text-xs text-gray-800 group-hover:text-primary leading-tight">
+                            <div class="flex items-center gap-1 font-bold text-xs text-gray-800 group-hover:text-primary leading-tight">
                                 <span class="text-center font-bold tracking-tight">Program<br>Unggulan</span>
                                 <i class="fa-solid fa-chevron-down text-[8px] text-gray-400 group-hover:text-primary group-hover:rotate-180 transition-transform duration-200"></i>
                             </div>
                         </a>
-                        <!-- Desktop Mega Menu: Program Unggulan (3 Columns + Highlight Card + Bottom CTA) -->
-                        <div class="mega-menu-dropdown absolute -left-32 top-full pt-2 w-[760px] z-50">
+                        <!-- Desktop Mega Menu: Program Unggulan -->
+                        <div class="mega-menu-dropdown absolute -left-20 top-full pt-2 w-[720px] z-50">
                             <div class="bg-white/98 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-100 p-5 text-xs divide-y divide-gray-100">
-                                <div class="grid grid-cols-12 gap-5 pb-4">
-                                    <!-- Col 1: Highlight Card (4 Cols) -->
-                                    <div class="col-span-4 bg-gradient-to-br from-emerald-800 to-primary-dark text-white rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-md">
-                                        <div class="space-y-2 relative z-10">
-                                            <span class="inline-block px-2.5 py-0.5 rounded-full bg-accent/20 text-accent font-extrabold text-[10px] uppercase tracking-wider">Takhassus</span>
-                                            <h4 class="font-black text-sm text-white leading-snug">Tahfidzul Qur'an 30 Juz Bersanad</h4>
-                                            <p class="text-[11px] text-gray-200 leading-relaxed">Bimbingan huffadz bersanad muttasil dengan metode setoran mutqin dan karantina tahfidz.</p>
+                                <div class="grid grid-cols-3 gap-4 pb-4">
+                                    <!-- 1. Pondok -->
+                                    <a href="#program-pondok" class="bg-emerald-50/70 hover:bg-emerald-100/70 rounded-2xl p-4 border border-emerald-100 transition flex flex-col justify-between group/card">
+                                        <div class="space-y-2">
+                                            <div class="w-10 h-10 rounded-xl bg-primary text-accent flex items-center justify-center text-lg shadow-sm">
+                                                <i class="fa-solid fa-kaaba"></i>
+                                            </div>
+                                            <span class="inline-block px-2 py-0.5 rounded-full bg-emerald-200/60 text-emerald-800 font-extrabold text-[9px] uppercase tracking-wider">Takhassus Salaf</span>
+                                            <h4 class="font-extrabold text-sm text-gray-900 group-hover/card:text-primary transition">Pondok Pesantren</h4>
+                                            <p class="text-[11px] text-gray-600 leading-relaxed">Tahfidzul Qur'an 30 Juz bersanad muttasil, halaqah kitab kuning maknani gandul, dan pembiasaan adab 24 jam.</p>
                                         </div>
-                                        <div class="pt-3 relative z-10">
-                                            <a href="#programs" class="inline-flex items-center gap-1.5 bg-accent hover:bg-accent-hover text-primary-dark font-extrabold px-3 py-1.5 rounded-xl text-[11px] shadow-sm transition touch-press">
-                                                <span>Lihat Detail Program</span>
-                                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                                            </a>
+                                        <div class="pt-3 font-bold text-primary text-[11px] flex items-center gap-1">
+                                            <span>Lihat Program Pondok</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
                                         </div>
-                                        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-accent/15 rounded-full blur-xl pointer-events-none"></div>
-                                    </div>
+                                    </a>
 
-                                    <!-- Col 2: Kurikulum & Kitab Kuning (4 Cols) -->
-                                    <div class="col-span-4 space-y-1">
-                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Kurikulum &amp; Diniyah</div>
-                                        <a href="#programs" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
-                                            <i class="fa-solid fa-school text-accent w-4 text-center mt-0.5"></i>
-                                            <div>
-                                                <div class="font-bold text-gray-900 leading-tight">SMP Plus Akademik</div>
-                                                <div class="text-[10px] text-gray-500">Kurikulum Merdeka Akreditasi "A"</div>
+                                    <!-- 2. Sekolah -->
+                                    <a href="#program-sekolah" class="bg-blue-50/70 hover:bg-blue-100/70 rounded-2xl p-4 border border-blue-100 transition flex flex-col justify-between group/card">
+                                        <div class="space-y-2">
+                                            <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg shadow-sm">
+                                                <i class="fa-solid fa-school"></i>
                                             </div>
-                                        </a>
-                                        <a href="#programs" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
-                                            <i class="fa-solid fa-book-open text-accent w-4 text-center mt-0.5"></i>
-                                            <div>
-                                                <div class="font-bold text-gray-900 leading-tight">Kajian Kitab Kuning Salaf</div>
-                                                <div class="text-[10px] text-gray-500">Metode Maknani Gandul Syafi'iyah</div>
-                                            </div>
-                                        </a>
-                                        <a href="#programs" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
-                                            <i class="fa-solid fa-language text-accent w-4 text-center mt-0.5"></i>
-                                            <div>
-                                                <div class="font-bold text-gray-900 leading-tight">Bilingual Arab &amp; Inggris</div>
-                                                <div class="text-[10px] text-gray-500">Muhadharah khitobah mingguan</div>
-                                            </div>
-                                        </a>
-                                    </div>
+                                            <span class="inline-block px-2 py-0.5 rounded-full bg-blue-200/60 text-blue-800 font-extrabold text-[9px] uppercase tracking-wider">Formal SMP Plus</span>
+                                            <h4 class="font-extrabold text-sm text-gray-900 group-hover/card:text-blue-700 transition">Sekolah (SMP Plus)</h4>
+                                            <p class="text-[11px] text-gray-600 leading-relaxed">Pendidikan formal nasional terakreditasi "A", Kurikulum Merdeka, laboratorium MIPA komputer CBT, &amp; dwibahasa.</p>
+                                        </div>
+                                        <div class="pt-3 font-bold text-blue-700 text-[11px] flex items-center gap-1">
+                                            <span>Lihat Program Sekolah</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                                        </div>
+                                    </a>
 
-                                    <!-- Col 3: Karakter & Inovasi (4 Cols) -->
-                                    <div class="col-span-4 space-y-1">
-                                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Inovasi &amp; Karakter</div>
-                                        <a href="#stem-area" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
-                                            <i class="fa-solid fa-flask text-teal-600 w-4 text-center mt-0.5"></i>
-                                            <div>
-                                                <div class="font-bold text-gray-900 leading-tight">STEM Area &amp; Riset</div>
-                                                <div class="text-[10px] text-gray-500">Sains terapan &amp; literasi numerasi</div>
+                                    <!-- 3. Masim -->
+                                    <a href="#program-masim" class="bg-amber-50/70 hover:bg-amber-100/70 rounded-2xl p-4 border border-amber-100 transition flex flex-col justify-between group/card">
+                                        <div class="space-y-2">
+                                            <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center text-lg shadow-sm">
+                                                <i class="fa-solid fa-certificate"></i>
                                             </div>
-                                        </a>
-                                        <a href="#programs" onclick="triggerHaptic(); openModal('adminModal'); switchCmsTab('utbk');" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-violet-50 text-gray-700 hover:text-violet-800 transition font-medium">
-                                            <i class="fa-solid fa-laptop-code text-violet-600 w-4 text-center mt-0.5"></i>
-                                            <div>
-                                                <div class="font-bold text-gray-900 leading-tight">Simulasi UTBK CBT</div>
-                                                <div class="text-[10px] text-gray-500">Ujian digital anti kecurangan</div>
-                                            </div>
-                                        </a>
-                                        <a href="#ekskul" class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-emerald-50 text-gray-700 hover:text-primary transition font-medium">
-                                            <i class="fa-solid fa-hands-praying text-amber-500 w-4 text-center mt-0.5"></i>
-                                            <div>
-                                                <div class="font-bold text-gray-900 leading-tight">Hadrah Al-Banjari</div>
-                                                <div class="text-[10px] text-gray-500">Seni sholawat &amp; spiritualitas</div>
-                                            </div>
-                                        </a>
-                                    </div>
+                                            <span class="inline-block px-2 py-0.5 rounded-full bg-amber-200/60 text-amber-800 font-extrabold text-[9px] uppercase tracking-wider">Akselerasi &amp; Riset</span>
+                                            <h4 class="font-extrabold text-sm text-gray-900 group-hover/card:text-amber-700 transition">Program MASIM</h4>
+                                            <p class="text-[11px] text-gray-600 leading-relaxed">Madrasah Aliyah Salafiyah &amp; Inovasi Mandiri: akselerasi baca kitab turats, kemandirian santri, &amp; kaderisasi da'i.</p>
+                                        </div>
+                                        <div class="pt-3 font-bold text-amber-700 text-[11px] flex items-center gap-1">
+                                            <span>Lihat Program Masim</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                                        </div>
+                                    </a>
                                 </div>
 
-                                <!-- Bottom Banner: PPDB Alert -->
+                                <!-- Bottom Banner -->
                                 <div class="pt-3 flex items-center justify-between text-xs bg-emerald-50/80 -mx-5 -mb-5 px-5 py-3 rounded-b-3xl">
                                     <div class="flex items-center gap-2">
                                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                                        <span class="font-bold text-primary-dark">Penerimaan Santri Baru (PPDB) 2026 Gelombang I Telah Dibuka</span>
+                                        <span class="font-bold text-primary-dark">Penerimaan Santri Baru (PPDB) 2026/2027 Gelombang I Telah Dibuka</span>
                                     </div>
                                     <button onclick="triggerHaptic(); openModal('ppdbModal');" class="bg-primary hover:bg-primary-dark text-white font-extrabold px-3.5 py-1.5 rounded-xl shadow-xs transition touch-press flex items-center gap-1.5">
                                         <i class="fa-solid fa-file-pen text-accent"></i>
@@ -409,41 +427,52 @@
                     </div>
 
                     <!-- 3. Ekstrakurikuler -->
-                    <a href="#ekskul" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer">
+                    <a href="#ekskul" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer" title="Lihat Foto &amp; Kegiatan Ekstrakurikuler">
                         <i class="fa-solid fa-futbol text-primary text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
                         <span class="font-bold text-xs text-gray-800 group-hover:text-primary leading-tight text-center tracking-tight">Ekstrakurikuler</span>
                     </a>
 
                     <!-- 4. Prestasi -->
-                    <a href="#prestasi" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer">
+                    <a href="#prestasi" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer" title="Lihat Prestasi &amp; Penghargaan Santri">
                         <i class="fa-solid fa-trophy text-amber-500 text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
                         <span class="font-bold text-xs text-gray-800 group-hover:text-primary leading-tight text-center tracking-tight">Prestasi</span>
                     </a>
 
-                    <!-- 5. STEM Area -->
-                    <a href="#stem-area" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer">
+                    <!-- 5. STEAM Area -->
+                    <a href="#steam-area" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 transition-all duration-200 group cursor-pointer" title="Sains, Teknologi, Engineering, Seni &amp; Matematika">
                         <i class="fa-solid fa-flask text-teal-600 text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
-                        <span class="font-bold text-xs text-gray-800 group-hover:text-primary leading-tight text-center tracking-tight">STEM<br>Area</span>
+                        <span class="font-bold text-xs text-gray-800 group-hover:text-primary leading-tight text-center tracking-tight">STEAM<br>Area</span>
                     </a>
 
                     <!-- 6. Galeri Sekolah -->
                     <div class="relative group">
-                        <a href="#galeri" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 group-hover:text-primary group-hover:bg-emerald-50/70 transition-all duration-200 cursor-pointer">
+                        <a href="#galeri" class="flex flex-col items-center justify-center px-3 py-2 rounded-xl text-gray-800 hover:text-primary hover:bg-emerald-50/70 group-hover:text-primary group-hover:bg-emerald-50/70 transition-all duration-200 cursor-pointer" title="Galeri Foto &amp; Video Kegiatan">
                             <i class="fa-solid fa-images text-primary text-base mb-1 transition-transform duration-200 group-hover:scale-110"></i>
-                            <div class="flex items-center gap-1.5 font-bold text-xs text-gray-800 group-hover:text-primary leading-tight">
+                            <div class="flex items-center gap-1 font-bold text-xs text-gray-800 group-hover:text-primary leading-tight">
                                 <span class="text-center font-bold tracking-tight">Galeri<br>Sekolah</span>
                                 <i class="fa-solid fa-chevron-down text-[8px] text-gray-400 group-hover:text-primary group-hover:rotate-180 transition-transform duration-200"></i>
                             </div>
                         </a>
-                        <div class="mega-menu-dropdown absolute right-0 top-full pt-2 w-52 z-50">
+                        <div class="mega-menu-dropdown absolute right-0 top-full pt-2 w-56 z-50">
                             <div class="bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-gray-100 py-2 px-1 text-xs">
-                                <a href="#galeri" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-image text-accent text-xs w-4 text-center"></i> Galeri Foto Dokumentasi</a>
-                                <a href="#galeri-video" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium"><i class="fa-solid fa-video text-accent text-xs w-4 text-center"></i> Video Kegiatan Santri</a>
+                                <a href="#galeri" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium">
+                                    <i class="fa-solid fa-image text-accent text-xs w-4 text-center"></i>
+                                    <div>
+                                        <div class="font-bold">Foto Kegiatan Santri</div>
+                                        <div class="text-[10px] text-gray-400">Dokumentasi rutinitas santri</div>
+                                    </div>
+                                </a>
+                                <a href="#galeri-video" class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-emerald-50 hover:text-primary transition font-medium">
+                                    <i class="fa-solid fa-video text-accent text-xs w-4 text-center"></i>
+                                    <div>
+                                        <div class="font-bold">Video Profil &amp; Kegiatan</div>
+                                        <div class="text-[10px] text-gray-400">Liputan kegiatan santri</div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </nav>
-
                 <!-- Navigation Actions (Adaptive Mobile App Bar & Desktop Action Hub) -->
                 <div class="flex items-center gap-2">
                     <!-- Desktop Action Hub (Right-Side Visual Balance) -->
@@ -532,23 +561,63 @@
             <!-- Navigation Links (Minimum 48px Target Height for All Items) -->
             <nav class="p-3 space-y-1.5 text-xs font-semibold text-gray-700 flex-1 overscroll-contain">
                 <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 pt-1 pb-1">Navigasi Utama</div>
-                <a href="#home" onclick="handleDrawerNavClick(event, '#home')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-mosque text-primary w-5 text-center text-sm"></i> JM Center
-                </a>
-                <a href="#programs" onclick="handleDrawerNavClick(event, '#programs')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-graduation-cap text-primary w-5 text-center text-sm"></i> Program Unggulan
-                </a>
+                
+                <!-- 1. JM Center + Sub-Links -->
+                <div class="rounded-xl border border-emerald-100 bg-emerald-50/40 p-1.5 space-y-1">
+                    <a href="#home" onclick="handleDrawerNavClick(event, '#home')" class="touch-target-48 w-full min-h-[44px] flex items-center justify-between px-3 py-2 rounded-lg bg-emerald-100/60 text-primary font-bold">
+                        <span class="flex items-center gap-2.5"><i class="fa-solid fa-mosque text-primary w-5 text-center text-sm"></i> JM Center</span>
+                        <i class="fa-solid fa-angle-right text-[11px] text-primary"></i>
+                    </a>
+                    <div class="pl-3 pr-1 py-1 space-y-1">
+                        <a href="#profil-jm" onclick="handleDrawerNavClick(event, '#profil-jm')" class="flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-gray-700 hover:text-primary hover:bg-white text-xs font-semibold">
+                            <i class="fa-solid fa-landmark text-accent text-xs w-4 text-center"></i> Profil JM
+                        </a>
+                        <a href="#sambutan" onclick="handleDrawerNavClick(event, '#sambutan')" class="flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-gray-700 hover:text-primary hover:bg-white text-xs font-semibold">
+                            <i class="fa-solid fa-user-tie text-accent text-xs w-4 text-center"></i> Sambutan Direktur
+                        </a>
+                        <a href="#visi-misi" onclick="handleDrawerNavClick(event, '#visi-misi')" class="flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-gray-700 hover:text-primary hover:bg-white text-xs font-semibold">
+                            <i class="fa-solid fa-bullseye text-accent text-xs w-4 text-center"></i> Visi Misi
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Program Unggulan + Sub-Links -->
+                <div class="rounded-xl border border-gray-200/80 bg-gray-50/60 p-1.5 space-y-1">
+                    <a href="#programs" onclick="handleDrawerNavClick(event, '#programs')" class="touch-target-48 w-full min-h-[44px] flex items-center justify-between px-3 py-2 rounded-lg bg-white border border-gray-200 text-gray-800 font-bold">
+                        <span class="flex items-center gap-2.5"><i class="fa-solid fa-graduation-cap text-primary w-5 text-center text-sm"></i> Program Unggulan</span>
+                        <i class="fa-solid fa-angle-right text-[11px] text-gray-400"></i>
+                    </a>
+                    <div class="pl-3 pr-1 py-1 space-y-1">
+                        <a href="#program-pondok" onclick="handleDrawerNavClick(event, '#program-pondok')" class="flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-gray-700 hover:text-primary hover:bg-white text-xs font-semibold">
+                            <i class="fa-solid fa-kaaba text-primary text-xs w-4 text-center"></i> Pondok (Tahfidz &amp; Kitab)
+                        </a>
+                        <a href="#program-sekolah" onclick="handleDrawerNavClick(event, '#program-sekolah')" class="flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-gray-700 hover:text-blue-700 hover:bg-white text-xs font-semibold">
+                            <i class="fa-solid fa-school text-blue-600 text-xs w-4 text-center"></i> Sekolah (SMP Plus)
+                        </a>
+                        <a href="#program-masim" onclick="handleDrawerNavClick(event, '#program-masim')" class="flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-gray-700 hover:text-amber-700 hover:bg-white text-xs font-semibold">
+                            <i class="fa-solid fa-certificate text-amber-600 text-xs w-4 text-center"></i> Program MASIM
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Ekstrakurikuler -->
                 <a href="#ekskul" onclick="handleDrawerNavClick(event, '#ekskul')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-futbol text-primary w-5 text-center text-sm"></i> Ekstrakurikuler
+                    <i class="fa-solid fa-futbol text-primary w-5 text-center text-sm"></i> Ekstrakurikuler (Foto &amp; Info)
                 </a>
-                <a href="#prestasi" onclick="handleDrawerNavClick(event, '#prestasi')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-trophy text-amber-500 w-5 text-center text-sm"></i> Prestasi Santri
+
+                <!-- 4. Prestasi -->
+                <a href="#prestasi" onclick="handleDrawerNavClick(event, '#prestasi')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-amber-50 hover:text-amber-800 transition touch-press font-bold">
+                    <i class="fa-solid fa-trophy text-amber-500 w-5 text-center text-sm"></i> Prestasi Santri &amp; Sekolah
                 </a>
-                <a href="#stem-area" onclick="handleDrawerNavClick(event, '#stem-area')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-flask text-teal-600 w-5 text-center text-sm"></i> STEM Area &amp; Riset
+
+                <!-- 5. STEAM Area -->
+                <a href="#steam-area" onclick="handleDrawerNavClick(event, '#steam-area')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-teal-50 hover:text-teal-800 transition touch-press font-bold">
+                    <i class="fa-solid fa-flask text-teal-600 w-5 text-center text-sm"></i> STEAM Area &amp; Riset
                 </a>
+
+                <!-- 6. Galeri Sekolah -->
                 <a href="#galeri" onclick="handleDrawerNavClick(event, '#galeri')" class="touch-target-48 w-full min-h-[48px] flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-emerald-50 hover:text-primary transition touch-press font-bold">
-                    <i class="fa-solid fa-images text-primary w-5 text-center text-sm"></i> Galeri Sekolah
+                    <i class="fa-solid fa-images text-primary w-5 text-center text-sm"></i> Galeri Foto &amp; Video Kegiatan
                 </a>
 
                 <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 pt-3 pb-1">Layanan &amp; Portal</div>
@@ -562,7 +631,6 @@
                     <i class="fa-solid fa-newspaper text-accent w-5 text-center text-sm"></i> Berita &amp; Agenda
                 </a>
             </nav>
-
             <!-- Actions Footer (Thumb-reach CTA with 48px Target Height & Safe Area) -->
             <div class="p-4 border-t border-gray-100 bg-gray-50 space-y-2.5 shrink-0">
                 <button onclick="toggleMobileDrawer(false); triggerHaptic(); openModal('ppdbModal');" class="touch-target-48 w-full min-h-[48px] bg-accent hover:bg-accent-hover text-primary-dark font-extrabold rounded-xl text-xs uppercase shadow-md touch-press flex items-center justify-center gap-2">
@@ -858,12 +926,12 @@
                             KH. Ahmad Zaini, M.Pd.I
                         </div>
                     </div>
-                    <p class="text-xs font-semibold text-gray-500 mt-5">Pengasuh PP & Pengawas SMP Plus</p>
+                    <p class="text-xs font-semibold text-gray-500 mt-5">Pengasuh &amp; Direktur Pesantren</p>
                 </div>
 
                 <div class="md:col-span-8 space-y-4">
                     <div class="inline-flex items-center gap-2 text-xs font-bold text-primary bg-emerald-100 px-3 py-1 rounded-full uppercase tracking-wider">
-                        <i class="fa-solid fa-quote-left text-accent"></i> Sambutan Resmi
+                        <i class="fa-solid fa-quote-left text-accent"></i> Sambutan Direktur &amp; Pengasuh Pesantren
                     </div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-primary-dark">Selamat Datang di Portal Resmi Pondok Pesantren Jauharul Maknuun Lasem</h2>
                     <p class="text-gray-600 text-sm leading-relaxed italic">
@@ -884,6 +952,7 @@
 
     <!-- TENTANG KAMI & PROFIL LEMBAGA (#about: Scannable High-Impact Storytelling) -->
     <section id="about" data-aos="fade-up" class="section-deferred py-16 bg-gradient-to-b from-gray-50 via-white to-gray-50 border-b border-gray-200/80">
+        <div id="profil-jm" class="scroll-mt-24"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <!-- Header Section -->
             <div class="text-center max-w-3xl mx-auto space-y-3">
@@ -942,6 +1011,74 @@
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-600 text-[11px]"></i> Laboratorium multimedia &amp; CBT modern</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-600 text-[11px]"></i> Juara OSN Sains &amp; Robotic Club</li>
                     </ul>
+                </div>
+            </div>
+
+                        <!-- VISI & MISI PESANTREN (#visi-misi) -->
+            <div id="visi-misi" class="scroll-mt-28 bg-gradient-to-br from-emerald-900 via-primary-dark to-[#093d20] text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-emerald-700/60 relative overflow-hidden">
+                <div class="absolute -right-16 -top-16 w-64 h-64 bg-accent/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 space-y-8">
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-accent/20 border border-accent/40 text-accent font-extrabold text-xs uppercase tracking-widest">
+                            <i class="fa-solid fa-compass"></i> Landasan Filosofis
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Visi &amp; Misi Jauharul Maknuun</h3>
+                        <p class="text-xs sm:text-sm text-gray-200">Arah strategis pembinaan santri dan penyelenggaraan pendidikan berkualitas unggul</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-12 gap-6 items-stretch">
+                        <!-- Visi Card -->
+                        <div class="md:col-span-5 bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-white/20 flex flex-col justify-between space-y-4">
+                            <div>
+                                <div class="w-12 h-12 rounded-xl bg-accent text-primary-dark flex items-center justify-center text-xl mb-4 shadow-md font-black">
+                                    <i class="fa-solid fa-eye"></i>
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-accent block mb-1">Visi Utama</span>
+                                <h4 class="text-base sm:text-lg font-extrabold text-white leading-relaxed">
+                                    "Terwujudnya Generasi Qur'ani yang Unggul dalam Imtaq dan Iptek, Berakhlak Mulia, Berwawasan Global, serta Berpaham Ahlussunnah wal Jama'ah an-Nahdliyyah."
+                                </h4>
+                            </div>
+                            <div class="pt-4 border-t border-white/15 flex items-center gap-2 text-xs text-emerald-200 font-medium">
+                                <i class="fa-solid fa-certificate text-accent"></i>
+                                <span>Terpadu Pesantren Salafiyah &amp; SMP Plus Formal Modern</span>
+                            </div>
+                        </div>
+
+                        <!-- Misi Card -->
+                        <div class="md:col-span-7 bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-7 border border-white/20 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/30 text-accent flex items-center justify-center text-xl shadow-md border border-accent/30 font-black">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-accent block">Misi Strategis</span>
+                                    <h4 class="text-base font-extrabold text-white">5 Pilar Aksi Mewujudkan Visi</h4>
+                                </div>
+                            </div>
+                            <div class="space-y-2.5 text-xs text-gray-100">
+                                <div class="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                                    <span class="w-6 h-6 rounded-full bg-accent text-primary-dark font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">1</span>
+                                    <span>Menyelenggarakan program Tahfidzul Qur'an 30 Juz bersanad muttasil dengan metode setoran mutqin dan tartil.</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                                    <span class="w-6 h-6 rounded-full bg-accent text-primary-dark font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">2</span>
+                                    <span>Mengembangkan pendidikan formal SMP Plus berbasis Kurikulum Merdeka dengan penguatan sains, teknologi, dan literasi numerasi (STEAM).</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                                    <span class="w-6 h-6 rounded-full bg-accent text-primary-dark font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">3</span>
+                                    <span>Mendalami khazanah kitab kuning salafiyah secara komprehensif menggunakan metode gramatika maknani gandul khas Nusantara.</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                                    <span class="w-6 h-6 rounded-full bg-accent text-primary-dark font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">4</span>
+                                    <span>Membiasakan akhlaqul karimah santri 24 jam, kemandirian hidup, serta kemampuan komunikasi aktif bahasa Arab dan Inggris.</span>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                                    <span class="w-6 h-6 rounded-full bg-accent text-primary-dark font-extrabold flex items-center justify-center text-xs shrink-0 mt-0.5">5</span>
+                                    <span>Membangun jiwa kepemimpinan, kepedulian sosial, serta wawasan kebangsaan berlandaskan kecintaan pada NKRI.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1312,39 +1449,96 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Program 1 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/70 hover:shadow-lg transition group">
-                    <div class="h-44 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80" alt="Tahfidz" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" width="800" height="600">
-                        <span class="absolute top-3 left-3 bg-primary text-accent font-bold text-xs px-3 py-1 rounded-full border border-accent">Pesantren</span>
+                <!-- Program 1: Pondok -->
+                <div id="program-pondok" class="scroll-mt-28 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80" alt="Program Pondok Pesantren Tahfidz" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" width="800" height="600">
+                            <span class="absolute top-3 left-3 bg-primary text-accent font-extrabold text-xs px-3.5 py-1 rounded-full border border-accent/40 shadow-sm">
+                                <i class="fa-solid fa-kaaba mr-1"></i> Pondok Pesantren
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
+                                Tahfidz &amp; Kitab Salaf
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="font-extrabold text-xl text-primary-dark group-hover:text-primary transition">Pondok Pesantren (Tahfidz &amp; Salaf)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Program pesantren mukim intensif berfokus pada hafalan Al-Qur'an 30 Juz bersanad muttasil, halaqah kitab kuning maknani gandul Syafi'iyah, pembiasaan qiyamul lail, serta bimbingan adab 24 jam.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-xs text-gray-500">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Setoran mutqin &amp; tasmi' akbar per juz</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Fathul Qorib, Jurumiyah, Imrithi &amp; Riyadhus Shalihin</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-[11px]"></i> Pendampingan ustadz pembina kamar 24 jam</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-6 space-y-3">
-                        <h3 class="font-bold text-lg text-primary-dark">Program Takhassus Tahfidz</h3>
-                        <p class="text-xs text-gray-600 leading-relaxed">Fokus hafalan Al-Qur'an 30 Juz dengan metode muraja'ah terstruktur, tasmi' berkala, dan sanad qira'at muttasil.</p>
+                    <div class="p-6 pt-0">
+                        <button onclick="triggerHaptic(); openModal('ppdbModal');" class="w-full py-2.5 rounded-xl bg-emerald-50 hover:bg-primary text-primary hover:text-white font-bold text-xs border border-primary/20 transition flex items-center justify-center gap-2">
+                            <span>Daftar Program Pondok</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Program 2 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/70 hover:shadow-lg transition group">
-                    <div class="h-44 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" alt="SMP Plus" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" width="800" height="600">
-                        <span class="absolute top-3 left-3 bg-primary text-accent font-bold text-xs px-3 py-1 rounded-full border border-accent">Akademik</span>
+                <!-- Program 2: Sekolah (SMP Plus) -->
+                <div id="program-sekolah" class="scroll-mt-28 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-blue-500 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" alt="Program Sekolah SMP Plus Formal" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" width="800" height="600">
+                            <span class="absolute top-3 left-3 bg-blue-600 text-white font-extrabold text-xs px-3.5 py-1 rounded-full shadow-sm">
+                                <i class="fa-solid fa-school mr-1"></i> Sekolah Formal
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
+                                Akreditasi "A" Unggul
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="font-extrabold text-xl text-primary-dark group-hover:text-blue-700 transition">Sekolah (SMP Plus Jauharul Maknuun)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Satuan pendidikan formal jenjang SMP berstandar nasional (Kurikulum Merdeka) terintegrasi sains, informatika digital, simulasi UTBK CBT, serta penguasaan aktif Bahasa Inggris &amp; Bahasa Arab.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-xs text-gray-500">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-600 text-[11px]"></i> Kurikulum Merdeka Kemendikbudristek RI</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-600 text-[11px]"></i> Laboratorium CBT &amp; Multimedia Komputer</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-600 text-[11px]"></i> Pembelajaran MIPA Sains STEAM interaktif</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-6 space-y-3">
-                        <h3 class="font-bold text-lg text-primary-dark">SMP Plus Formal (Nasional)</h3>
-                        <p class="text-xs text-gray-600 leading-relaxed">Pendidikan formal SMP terakreditasi dengan penguatan MIPA, Bahasa Inggris, Matematika, dan Informatika Digital.</p>
+                    <div class="p-6 pt-0">
+                        <button onclick="triggerHaptic(); openModal('ppdbModal');" class="w-full py-2.5 rounded-xl bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white font-bold text-xs border border-blue-200 transition flex items-center justify-center gap-2">
+                            <span>Daftar SMP Plus</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Program 3 -->
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/70 hover:shadow-lg transition group">
-                    <div class="h-44 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=800&q=80" alt="Kitab Kuning" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" width="800" height="600">
-                        <span class="absolute top-3 left-3 bg-primary text-accent font-bold text-xs px-3 py-1 rounded-full border border-accent">Diniyah</span>
+                <!-- Program 3: Masim -->
+                <div id="program-masim" class="scroll-mt-28 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=800&q=80" alt="Program MASIM Madrasah Aliyah Salafiyah" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async" width="800" height="600">
+                            <span class="absolute top-3 left-3 bg-amber-600 text-white font-extrabold text-xs px-3.5 py-1 rounded-full shadow-sm">
+                                <i class="fa-solid fa-certificate mr-1"></i> Program MASIM
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
+                                Akselerasi &amp; Inovasi
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h3 class="font-extrabold text-xl text-primary-dark group-hover:text-amber-700 transition">Program MASIM (Madrasah Salafiyah Mandiri)</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Program lanjutan dan akselerasi keilmuan Islam: pendalaman Ushul Fiqih, Balaghah, metode cepat baca kitab gundul, pembekalan karya ilmiah santri, serta pelatihan dakwah kemasyarakatan mandiri.
+                            </p>
+                            <div class="pt-2 border-t border-gray-100 space-y-1.5 text-xs text-gray-500">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600 text-[11px]"></i> Kelas Akselerasi Baca Kitab Kuning (Metode Cepat)</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600 text-[11px]"></i> Muhadharah Khitobah 3 Bahasa &amp; Bahtsul Masail</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600 text-[11px]"></i> Sertifikasi Sanad Keilmuan &amp; Pembinaan Riset</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-6 space-y-3">
-                        <h3 class="font-bold text-lg text-primary-dark">Madrasah Diniyah & Kitab Kuning</h3>
-                        <p class="text-xs text-gray-600 leading-relaxed">Pengkajian Fiqih, Nahwu Shorof, Aqidah, Hadits, dan Akhlak menggunakan literatur turats klasik bertradisi Nusantara.</p>
+                    <div class="p-6 pt-0">
+                        <button onclick="triggerHaptic(); openModal('ppdbModal');" class="w-full py-2.5 rounded-xl bg-amber-50 hover:bg-amber-600 text-amber-800 hover:text-white font-bold text-xs border border-amber-200 transition flex items-center justify-center gap-2">
+                            <span>Pelajari Program Masim</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1593,43 +1787,304 @@
                 </div>
             </div>
 
-            <!-- EKSTRAKURIKULER & GALERI PRESTASI (smkn1pugaan.sch.id Ekstrakurikuler style) -->
-            <div id="ekskul" class="pt-8 space-y-6">
-                <div id="prestasi" class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-xl font-bold text-primary-dark">Ekstrakurikuler Santri</h3>
-                        <p class="text-xs text-gray-500">Wadah pengembangan bakat & minat siswa</p>
-                    </div>
+            <!-- EKSTRAKURIKULER SANTRI (Foto-Foto Lengkap & Keterangan Rinci) -->
+            <div id="ekskul" class="scroll-mt-28 pt-10 space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-100 text-primary font-bold text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-futbol"></i> Minat &amp; Bakat Santri
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary-dark">Ekstrakurikuler Unggulan Santri</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        Galeri kegiatan non-akademik untuk mengasah kreativitas, kepemimpinan, kebugaran jasmani, dan kecintaan pada seni budaya Islam.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div class="bg-white p-4 rounded-xl border border-gray-200 text-center space-y-2 hover:border-primary transition">
-                        <div class="w-10 h-10 rounded-full bg-emerald-100 text-primary mx-auto flex items-center justify-center text-lg"><i class="fa-solid fa-drum"></i></div>
-                        <h4 class="font-bold text-xs text-gray-800">Seni Hadroh & Sholawat</h4>
+                <!-- 8 High-Impact Ekskul Cards with Real Photos & Full Explanations -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Ekskul 1: Hadrah -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Seni Hadrah Al-Banjari" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-emerald-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Seni Musik Islami</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-primary transition">Seni Hadrah Al-Banjari</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Pelatihan tabuhan terbang banjari, variasi bass-tam, serta teknik vokal qasidah sholawat. Santri rutin tampil di acara maulid dan festival se-Jatim.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-emerald-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Setiap Malam Jumat</span>
+                            <span>Asrama PPJM</span>
+                        </div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl border border-gray-200 text-center space-y-2 hover:border-primary transition">
-                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 mx-auto flex items-center justify-center text-lg"><i class="fa-solid fa-campground"></i></div>
-                        <h4 class="font-bold text-xs text-gray-800">Pramuka & IPNU IPPNU</h4>
+
+                    <!-- Ekskul 2: Pramuka -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Pramuka & IPNU IPPNU" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-amber-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Kepanduan</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-amber-700 transition">Pramuka &amp; IPNU IPPNU</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Pembentukan kedisiplinan, teknik pioneering, survival luar ruang, kepemimpinan organisasi santri, serta peneguhan patriotisme cinta NKRI.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-amber-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Setiap Sabtu Siang</span>
+                            <span>Lapangan Utama</span>
+                        </div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl border border-gray-200 text-center space-y-2 hover:border-primary transition">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 mx-auto flex items-center justify-center text-lg"><i class="fa-solid fa-code"></i></div>
-                        <h4 class="font-bold text-xs text-gray-800">Robotics & IT Club</h4>
+
+                    <!-- Ekskul 3: Robotik & IT -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-blue-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80" alt="Robotics & Coding IT Club" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-blue-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Sains &amp; Digital</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-blue-700 transition">Robotics &amp; Coding IT Club</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Merakit mikro-robot transporter, pengenalan sensor Arduino, algoritma Scratch/Python, dan persiapan tim olimpiade teknologi digital.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-blue-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Setiap Ahad Pagi</span>
+                            <span>Lab Komputer CBT</span>
+                        </div>
                     </div>
-                    <div class="bg-white p-4 rounded-xl border border-gray-200 text-center space-y-2 hover:border-primary transition">
-                        <div class="w-10 h-10 rounded-full bg-red-100 text-red-700 mx-auto flex items-center justify-center text-lg"><i class="fa-solid fa-person-running"></i></div>
-                        <h4 class="font-bold text-xs text-gray-800">Pencak Silat Pagar Nusa</h4>
+
+                    <!-- Ekskul 4: Pencak Silat -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-red-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80" alt="Pencak Silat Pagar Nusa" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-red-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Bela Diri Tradisi</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-red-700 transition">Pencak Silat Pagar Nusa</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Olahraga bela diri kebanggaan Nahdlatul Ulama. Melatih ketahanan fisik, jurus pertahanan diri, wirid ketangkasan, dan sportivitas kejuaraan.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-red-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Selasa &amp; Jumat Sore</span>
+                            <span>Gedung Olahraga</span>
+                        </div>
+                    </div>
+
+                    <!-- Ekskul 5: Kaligrafi Islam -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Seni Kaligrafi Islam" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-emerald-700 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Seni Rupa Islami</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-primary transition">Seni Kaligrafi Islam (Khat)</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Mempelajari keindahan khath Naskhi, Tsuluts, Riq'ah, dan Diwani dengan pena bambu handam serta teknik kanvas dekorasi mushaf Al-Qur'an.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-emerald-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Rabu Sore</span>
+                            <span>Sanggar Seni PPJM</span>
+                        </div>
+                    </div>
+
+                    <!-- Ekskul 6: Muhadharah 3 Bahasa -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-purple-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80" alt="Muhadharah 3 Bahasa" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-purple-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Bahasa Asing</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-purple-700 transition">Muhadharah 3 Bahasa</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Latihan pidato (public speaking), debat ilmiah, dan khitobah panggung bergantian dalam Bahasa Arab, Inggris, dan Indonesia di depan seluruh santri.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-purple-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Setiap Malam Ahad</span>
+                            <span>Aula Pertemuan</span>
+                        </div>
+                    </div>
+
+                    <!-- Ekskul 7: Futsal Santri -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-teal-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="Futsal & Olahraga Santri" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-teal-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Olahraga &amp; Atletik</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-teal-700 transition">Futsal &amp; Olahraga Santri</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Pembinaan kebugaran jasmani, taktik futsal, kerjasama tim, dan persiapan kompetisi Liga Santri &amp; turnamen antar-sekolah karesidenan.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-teal-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Ahad Sore</span>
+                            <span>Lapangan Futsal</span>
+                        </div>
+                    </div>
+
+                    <!-- Ekskul 8: Qira'ah & Tilawah -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200/80 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=800&q=80" alt="Qira'ah & Tilawah Al-Qur'an" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+                                <span class="absolute top-3 left-3 bg-amber-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow">Seni Qur'ani</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-extrabold text-base text-gray-900 group-hover:text-amber-700 transition">Qira'ah &amp; Seni Tilawah</h4>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">
+                                    Pelatihan tartil dan nagham Al-Qur'an (Bayyati, Shoba, Hijaz, Nahawand, Rost, Jiharkah, Sikah) dibimbing langsung oleh qari' berprestasi nasional.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0 text-[10px] text-amber-700 font-semibold flex items-center justify-between border-t border-gray-100 mt-2">
+                            <span><i class="fa-regular fa-clock mr-1"></i> Senin Malam</span>
+                            <span>Masjid Pesantren</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- DEDICATED PRESTASI SANTRI & SEKOLAH SECTION (#prestasi) -->
+            <div id="prestasi" class="scroll-mt-28 pt-12 space-y-8 border-t border-gray-200/80">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-100 text-amber-800 font-bold text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-trophy text-amber-600"></i> Rekam Jejak Kejuaraan
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary-dark">Prestasi Santri &amp; Sekolah</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        Bukti dedikasi santri dalam meraih pencapaian gemilang di bidang tahfidzul Qur'an, olimpiade sains, bahasa asing, dan seni bela diri.
+                    </p>
+                </div>
+
+                <!-- 6 Prestasi Cards with Real Achievements -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Prestasi 1 -->
+                    <div class="bg-gradient-to-br from-white to-amber-50/40 rounded-3xl p-6 border border-amber-200 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition shadow-sm">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-amber-200/70 text-amber-900 font-extrabold text-[10px] uppercase tracking-wider mb-2">Tingkat Nasional &bull; 2025</span>
+                        <h4 class="font-extrabold text-lg text-primary-dark mb-2 group-hover:text-amber-800 transition">Juara 1 MHQ 30 Juz Tingkat Nasional</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            Santriwan Muhammad Fatih Al-Habsyi berhasil meraih juara pertama cabang Musabaqah Hifdzil Qur'an (MHQ) 30 Juz bersanad dalam festival santri nusantara.
+                        </p>
+                        <div class="pt-3 border-t border-amber-100 flex items-center justify-between text-xs text-gray-500">
+                            <span class="font-bold text-primary"><i class="fa-solid fa-user-graduate mr-1"></i> M. Fatih Al-Habsyi</span>
+                            <span class="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-md text-[10px]">Piala Emas</span>
+                        </div>
+                    </div>
+
+                    <!-- Prestasi 2 -->
+                    <div class="bg-gradient-to-br from-white to-blue-50/40 rounded-3xl p-6 border border-blue-200 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition shadow-sm">
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-blue-200/70 text-blue-900 font-extrabold text-[10px] uppercase tracking-wider mb-2">Tingkat Provinsi &bull; 2025</span>
+                        <h4 class="font-extrabold text-lg text-primary-dark mb-2 group-hover:text-blue-800 transition">Medali Emas Olimpiade Sains (OSN SMP)</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            Santriwati Nailah Az-Zahra memenangkan Medali Emas cabang IPA Terpadu dan Numerasi pada Olimpiade Sains Nasional (OSN) tingkat Provinsi Jawa Timur.
+                        </p>
+                        <div class="pt-3 border-t border-blue-100 flex items-center justify-between text-xs text-gray-500">
+                            <span class="font-bold text-primary"><i class="fa-solid fa-user-graduate mr-1"></i> Nailah Az-Zahra</span>
+                            <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-md text-[10px]">Medali Emas</span>
+                        </div>
+                    </div>
+
+                    <!-- Prestasi 3 -->
+                    <div class="bg-gradient-to-br from-white to-emerald-50/40 rounded-3xl p-6 border border-emerald-200 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-primary flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition shadow-sm">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-200/70 text-emerald-900 font-extrabold text-[10px] uppercase tracking-wider mb-2">Tingkat Regional &bull; 2024</span>
+                        <h4 class="font-extrabold text-lg text-primary-dark mb-2 group-hover:text-primary transition">Juara 1 Festival Hadrah Banjari se-Jatim</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            Grup Hadrah "Nurul Maknuun" menyabet gelar Juara 1 dan Best Vocal dalam Festival Seni Sholawat Banjari Terbuka yang diikuti lebih dari 80 grup pesantren.
+                        </p>
+                        <div class="pt-3 border-t border-emerald-100 flex items-center justify-between text-xs text-gray-500">
+                            <span class="font-bold text-primary"><i class="fa-solid fa-users mr-1"></i> Tim Hadrah PPJM</span>
+                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md text-[10px]">Trofi Bergilir</span>
+                        </div>
+                    </div>
+
+                    <!-- Prestasi 4 -->
+                    <div class="bg-gradient-to-br from-white to-purple-50/40 rounded-3xl p-6 border border-purple-200 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition shadow-sm">
+                            <i class="fa-solid fa-language"></i>
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-purple-200/70 text-purple-900 font-extrabold text-[10px] uppercase tracking-wider mb-2">Tingkat Karesidenan &bull; 2025</span>
+                        <h4 class="font-extrabold text-lg text-primary-dark mb-2 group-hover:text-purple-800 transition">Juara 1 Pidato Bahasa Arab (Khitobah)</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            Ahmad Syauqi meraih podium pertama lomba orasi pidato Bahasa Arab fushah dengan kefasihan makharijul huruf dan argumentasi tematik kontemporer.
+                        </p>
+                        <div class="pt-3 border-t border-purple-100 flex items-center justify-between text-xs text-gray-500">
+                            <span class="font-bold text-primary"><i class="fa-solid fa-user-graduate mr-1"></i> Ahmad Syauqi</span>
+                            <span class="bg-purple-100 text-purple-800 font-bold px-2 py-0.5 rounded-md text-[10px]">Juara Utama</span>
+                        </div>
+                    </div>
+
+                    <!-- Prestasi 5 -->
+                    <div class="bg-gradient-to-br from-white to-red-50/40 rounded-3xl p-6 border border-red-200 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition shadow-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-red-200/70 text-red-900 font-extrabold text-[10px] uppercase tracking-wider mb-2">Tingkat Daerah &bull; 2024</span>
+                        <h4 class="font-extrabold text-lg text-primary-dark mb-2 group-hover:text-red-800 transition">Juara Umum Kejurda Pencak Silat</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            Kontingen Pencak Silat Pagar Nusa Jauharul Maknuun merebut Juara Umum Kejuaraan Daerah dengan koleksi 4 Medali Emas, 2 Perak, dan 1 Perunggu.
+                        </p>
+                        <div class="pt-3 border-t border-red-100 flex items-center justify-between text-xs text-gray-500">
+                            <span class="font-bold text-primary"><i class="fa-solid fa-people-group mr-1"></i> Kontingen Pagar Nusa</span>
+                            <span class="bg-red-100 text-red-800 font-bold px-2 py-0.5 rounded-md text-[10px]">Juara Umum</span>
+                        </div>
+                    </div>
+
+                    <!-- Prestasi 6 -->
+                    <div class="bg-gradient-to-br from-white to-emerald-50/40 rounded-3xl p-6 border border-emerald-200 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-primary flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition shadow-sm">
+                            <i class="fa-solid fa-certificate"></i>
+                        </div>
+                        <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-200/70 text-emerald-900 font-extrabold text-[10px] uppercase tracking-wider mb-2">Kemendikbudristek &bull; 2023-2028</span>
+                        <h4 class="font-extrabold text-lg text-primary-dark mb-2 group-hover:text-primary transition">Akreditasi "A" Unggul Nilai 96</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                            SMP Plus Jauharul Maknuun meraih predikat Akreditasi A (Unggul) dari Badan Akreditasi Nasional Pendidikan Dasar &amp; Menengah (BAN-PDM).
+                        </p>
+                        <div class="pt-3 border-t border-emerald-100 flex items-center justify-between text-xs text-gray-500">
+                            <span class="font-bold text-primary"><i class="fa-solid fa-school mr-1"></i> BAN-PDM Jawa Timur</span>
+                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md text-[10px]">Skor 96 (Unggul)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- STEM AREA & DIGITAL INNOVATION CENTER -->
-    <section id="stem-area" class="section-deferred py-16 bg-gradient-to-br from-slate-900 via-emerald-950 to-primary-dark text-white relative overflow-hidden border-t border-emerald-900/60">
+    <section id="steam-area" class="scroll-mt-24"><div id="stem-area" class="scroll-mt-24"></div> class="section-deferred py-16 bg-gradient-to-br from-slate-900 via-emerald-950 to-primary-dark text-white relative overflow-hidden border-t border-emerald-900/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
             <div class="text-center max-w-3xl mx-auto space-y-3">
                 <span class="bg-cyan-500/20 text-cyan-300 text-xs font-extrabold px-3.5 py-1 rounded-full border border-cyan-400/30 uppercase tracking-widest inline-flex items-center gap-1.5">
-                    <i class="fa-solid fa-flask"></i> Science, Tech, Engineering &amp; Math
+                    <i class="fa-solid fa-flask"></i> Science, Technology, Engineering, Arts &amp; Mathematics
                 </span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">STEM Area &amp; Innovation Center</h2>
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">STEAM (Science, Technology, Engineering, Arts &amp; Math) Center</h2>
                 <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
                     Fasilitas pembelajaran terintegrasi untuk melatih nalar kritis, kemampuan riset sains, rekayasa teknologi, dan pemecahan masalah matematika berbasis nilai Salafiyah.
                 </p>
@@ -2549,8 +3004,8 @@
                         <span class="flex items-center gap-3"><i class="fa-solid fa-trophy text-amber-500 w-5 text-center"></i> Prestasi Santri Terkini</span>
                         <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
                     </a>
-                    <a href="#stem-area" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
-                        <span class="flex items-center gap-3"><i class="fa-solid fa-flask text-teal-600 w-5 text-center"></i> STEM Area &amp; Riset Sains</span>
+                    <a href="#steam-area" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-flask text-teal-600 w-5 text-center"></i> STEAM Area &amp; Riset</span>
                         <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
                     </a>
                     <a href="#galeri" onclick="BottomSheet.close()" class="touch-target-48 w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-white text-gray-700 hover:text-primary transition touch-press font-semibold text-xs">
