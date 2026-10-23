@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { store } from './services/store';
 import { Navbar } from './components/Navbar';
 import { HeroSlider } from './components/HeroSlider';
+import { QuickMenu } from './components/QuickMenu';
 import { EcosystemSection } from './components/EcosystemSection';
 import { AboutSection } from './components/AboutSection';
 import { CurriculumSection } from './components/CurriculumSection';
@@ -179,6 +180,11 @@ export const App: React.FC = () => {
             <HeroSlider
               onOpenPpdb={() => setShowPpdbModal(true)}
               onOpenStatus={() => setShowStatusModal(true)}
+            />
+
+            {/* Quick Menu (Shortcut Capsules: Sambutan, Visi Misi, Pengumuman, E-Learning, Ekskul, Prestasi) */}
+            <QuickMenu
+              onOpenElearning={() => setSelectedEcosystemKey('elearning')}
             />
 
             <EcosystemSection

@@ -31,7 +31,7 @@ export const SteamSection: React.FC = () => {
             <span>Integrasi Sains, Teknologi & Nilai Islam</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0d4a28] tracking-tight">
-            Pusat Riset & Kegiatan STEAM Santri
+            Pusat Riset & Kegiatan STEM Santri
           </h2>
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
             Memadukan kekuatan literasi kitab salaf dengan sains mutakhir. Santri dibekali keterampilan komputasi, robotika IoT, mikroskopi terapan, dan desain multimedia di laboratorium terpadu.
@@ -134,7 +134,7 @@ export const SteamSection: React.FC = () => {
                 href="#gallery"
                 className="px-6 py-3 rounded-2xl bg-[#d4af37] hover:bg-[#b89528] text-gray-900 font-extrabold text-xs shadow-lg transition flex items-center gap-2 btn-spring"
               >
-                <span>Lihat Dokumentasi STEAM</span>
+                <span>Lihat Dokumentasi STEM</span>
                 <ChevronRight className="w-4 h-4" />
               </a>
             </div>
@@ -143,7 +143,7 @@ export const SteamSection: React.FC = () => {
 
       </div>
 
-      {/* STEAM Detail Modal */}
+      {/* STEM Detail Modal */}
       {activeItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200 relative animate-in zoom-in-95 duration-200">

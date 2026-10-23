@@ -48,7 +48,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ media, onOpenMed
             Galeri Sekolah & Dokumentasi Pesantren
           </h2>
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            Kumpulan potret foto dan rekaman video aktivitas halaqah tahfidz 30 juz, praktikum STEAM, asrama santri, dan kejuaraan resmi Pondok Pesantren Jauharul Maknuun.
+            Kumpulan potret foto dan rekaman video aktivitas halaqah tahfidz 30 juz, praktikum STEM, asrama santri, dan kejuaraan resmi Pondok Pesantren Jauharul Maknuun.
           </p>
         </div>
 

@@ -102,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>|</span>
             <span>📖 Program Unggulan: Pondok (Tahfidz 30 Juz Bersanad), Sekolah (SMP Plus), & Masim (Salafiyah)</span>
             <span>|</span>
-            <span>🔬 Laboratorium Komputer Modern & Kurikulum Riset STEAM Santri Terpadu</span>
+            <span>🔬 Laboratorium Komputer Modern & Kurikulum Riset STEM Santri Terpadu</span>
             <span>|</span>
             <span>📲 Narahubung Sekretariat & Konsultasi Asrama: 0812-3456-7890</span>
           </div>
@@ -310,13 +310,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>Prestasi</span>
               </a>
 
-              {/* 5. STEAM */}
+              {/* 5. STEM */}
               <a 
                 href="#steam" 
                 className="px-3 py-2 rounded-xl hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition flex items-center gap-1.5"
               >
                 <Cpu className="w-3.5 h-3.5 text-[#1a6b3c]" />
-                <span>STEAM</span>
+                <span>STEM</span>
               </a>
 
               {/* 6. Galeri */}
@@ -368,11 +368,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Global Search Button */}
               <button
                 onClick={onOpenSearch}
-                className="flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-xl text-xs font-bold text-gray-700 bg-gray-100 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] border border-gray-200/80 transition btn-spring"
+                className="w-9 h-9 sm:w-auto sm:px-3 sm:py-2 rounded-xl text-xs font-bold text-gray-700 bg-gray-100 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] border border-gray-200 flex items-center justify-center sm:gap-2 transition btn-spring"
                 title="Cari Berita, Program, Ekskul, Galeri (Ctrl+K)"
                 aria-label="Cari Informasi Portal"
               >
-                <Search className="w-3.5 h-3.5 text-[#1a6b3c]" />
+                <Search className="w-4 h-4 text-gray-700 sm:text-[#1a6b3c]" />
                 <span className="hidden sm:inline">Search</span>
                 <kbd className="hidden md:inline-block text-[9px] bg-white border border-gray-300 rounded px-1.5 py-0.5 text-gray-400 font-sans shadow-xs font-normal">
                   ⌘K
@@ -382,17 +382,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Portal Admin Button */}
               <button
                 onClick={onOpenAdmin}
-                className="p-2 sm:px-2.5 sm:py-2 rounded-xl text-xs font-semibold text-gray-700 hover:text-[#1a6b3c] hover:bg-gray-100 border border-gray-200 transition flex items-center gap-1"
+                className="w-9 h-9 sm:w-auto sm:px-2.5 sm:py-2 rounded-xl text-xs font-semibold text-gray-700 hover:text-[#1a6b3c] hover:bg-gray-100 border border-gray-200 flex items-center justify-center sm:gap-1 transition"
                 title="Login CMS Admin"
               >
-                <Lock className="w-3.5 h-3.5 text-gray-500" />
+                <Lock className="w-4 h-4 text-gray-600" />
                 <span className="hidden md:inline">Admin</span>
               </button>
 
               {/* Mobile Menu Toggle */}
               <button
                 onClick={toggleMobileMenu}
-                className="lg:hidden p-2 rounded-xl text-gray-700 hover:bg-gray-100 border border-gray-200 transition"
+                className="lg:hidden w-9 h-9 rounded-xl text-gray-700 hover:bg-gray-100 border border-gray-200 flex items-center justify-center transition"
                 aria-label="Buka Menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -512,7 +512,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={closeMobileMenu}
                   className="p-2.5 rounded-xl bg-gray-50 hover:bg-[#1a6b3c]/10 text-gray-800 hover:text-[#1a6b3c] flex items-center gap-2 border border-gray-100"
                 >
-                  <Cpu className="w-4 h-4 text-[#1a6b3c]" /> STEAM
+                  <Cpu className="w-4 h-4 text-[#1a6b3c]" /> STEM
                 </a>
 
                 <a 

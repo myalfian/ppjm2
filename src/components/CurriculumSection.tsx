@@ -171,7 +171,7 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
                   Sekolah: SMP Plus Jauharul Maknuun (Akreditasi "A" BAN-PDM)
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  Menjalankan standar nasional Kurikulum Merdeka Kemendikbudristek secara unggul. Memadukan penguasaan sains, matematika, bahasa Inggris aktif, dan riset teknologi informatika (STEAM).
+                  Menjalankan standar nasional Kurikulum Merdeka Kemendikbudristek secara unggul. Memadukan penguasaan sains, matematika, bahasa Inggris aktif, dan riset teknologi informatika (STEM).
                 </p>
 
                 <div className="space-y-2.5 pt-2">

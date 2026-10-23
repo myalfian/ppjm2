@@ -150,7 +150,7 @@ export const Footer: React.FC = () => {
                 <li>🏆 SMP Plus Akademik Akreditasi "A"</li>
                 <li>📖 Madrasah Diniyah Salafiyah Maknani</li>
                 <li>🗣️ Bilingual Program (Arab &amp; Inggris)</li>
-                <li>🔬 Praktikum Komputer &amp; Riset STEAM</li>
+                <li>🔬 Praktikum Komputer &amp; Riset STEM</li>
                 <li>🥋 Ekstrakurikuler Banjari &amp; Bela Diri</li>
               </ul>
             </div>

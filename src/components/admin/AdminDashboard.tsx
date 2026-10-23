@@ -1483,7 +1483,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   type="text"
                   value={mediaTitle}
                   onChange={(e) => setMediaTitle(e.target.value)}
-                  placeholder="Contoh: Praktikum STEAM Santri"
+                  placeholder="Contoh: Praktikum STEM Santri"
                   className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
                   required
                 />

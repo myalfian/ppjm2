@@ -23,10 +23,10 @@ const slides = [
   },
   {
     badge: 'Islamic Boarding School Modern',
-    title: 'SMP Plus Jauharul Maknuun: Riset STEAM & Pengkajian Kitab Turats',
+    title: 'SMP Plus Jauharul Maknuun: Riset STEM & Pengkajian Kitab Turats',
     desc: 'Fasilitas asrama representatif, laboratorium komputer modern, program dwibahasa (Arab-Inggris), serta kajian kitab turats maknani Jawa dan pembinaan adab santri 24 jam.',
     image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
-    tag: 'Bilingual & STEAM'
+    tag: 'Bilingual & STEM'
   }
 ];
 
@@ -44,7 +44,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
   const next = () => setCurrent(prev => (prev + 1) % slides.length);
 
   return (
-    <section id="home" className="relative min-h-[500px] sm:min-h-[560px] lg:min-h-[580px] flex items-center justify-center overflow-hidden bg-gray-900 text-white">
+    <section id="home" className="relative min-h-[400px] sm:min-h-[460px] lg:min-h-[500px] flex items-start justify-center overflow-hidden bg-gray-900 text-white pb-12 sm:pb-16">
       {/* Background Slides */}
       {slides.map((slide, index) => (
         <div
@@ -63,11 +63,11 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
         </div>
       ))}
 
-      {/* Hero Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 z-10 w-full">
-        <div className="max-w-3xl space-y-5 sm:space-y-6">
+      {/* Hero Content (Card Style) */}
+      <div className="relative max-w-4xl mx-auto my-2 sm:my-4 px-5 py-5 sm:px-8 sm:py-7 z-10 w-[calc(100%-1.25rem)] sm:w-full bg-black/65 sm:bg-black/55 backdrop-blur-md border border-white/20 rounded-2xl sm:rounded-3xl shadow-2xl">
+        <div className="space-y-3.5 sm:space-y-5">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#fef3c7] text-xs font-bold backdrop-blur-md">
+          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/40 text-[#fef3c7] text-xs font-bold backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5 text-[#d4af37] animate-spin" />
             <span>{slides[current].badge}</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></span>
@@ -75,52 +75,33 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
           </div>
 
           {/* Heading */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-snug sm:leading-tight">
             {slides[current].title}
           </h1>
 
-          {/* Description with seamlessly integrated inline links */}
-          <p className="text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl font-light">
-            {slides[current].desc}{' '}
-            <span className="text-white font-normal block sm:inline mt-2 sm:mt-0">
-              Silakan{' '}
-              <button
-                type="button"
-                onClick={onOpenPpdb}
-                className="inline-flex items-center gap-1 font-semibold text-[#facc15] hover:text-[#fde047] underline underline-offset-4 decoration-[#facc15]/70 hover:decoration-[#fde047] transition-colors cursor-pointer group"
-              >
-                <span>Daftar Santri Baru 2026</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#facc15] group-hover:translate-x-0.5 transition-transform" />
-              </button>
-              , pantau berkas via{' '}
-              <button
-                type="button"
-                onClick={onOpenStatus}
-                className="inline-flex items-center gap-1 font-semibold text-emerald-300 hover:text-emerald-200 underline underline-offset-4 decoration-emerald-400/70 hover:decoration-emerald-200 transition-colors cursor-pointer group"
-              >
-                <CheckCircle className="w-3.5 h-3.5 text-emerald-300" />
-                <span>Cek Bukti Pendaftaran</span>
-              </button>
-              , atau hubungi panitia melalui{' '}
-              <a
-                href="https://wa.me/6281234567890?text=Assalamu'alaikum%20Panitia%20PPDB%20PPJM"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-semibold text-emerald-300 hover:text-emerald-200 underline underline-offset-4 decoration-emerald-400/70 hover:decoration-emerald-200 transition-colors cursor-pointer group"
-              >
-                <PhoneCall className="w-3.5 h-3.5 text-emerald-300" />
-                <span>Konsultasi WA</span>
-              </a>
-              .
-            </span>
+          {/* Clean Description */}
+          <p className="text-xs sm:text-base text-gray-200/90 leading-relaxed font-light">
+            {slides[current].desc}
           </p>
+
+          {/* Single Primary Action Button */}
+          <div className="pt-2 sm:pt-2.5">
+            <button
+              type="button"
+              onClick={onOpenPpdb}
+              className="inline-flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-gradient-to-r from-[#d4af37] via-[#eab308] to-[#ca8a04] hover:from-[#eab308] hover:to-[#b45309] text-gray-950 font-extrabold text-xs sm:text-sm tracking-tight shadow-md hover:shadow-xl hover:scale-105 transition-all duration-200 active:scale-95 cursor-pointer group"
+            >
+              <span>Daftar Santri Baru 2026</span>
+              <ArrowRight className="w-4 h-4 text-gray-950 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Slider Controls */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 transition z-20"
+        className="absolute left-2.5 sm:left-4 top-[40%] sm:top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/45 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 transition z-20"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -128,20 +109,20 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
 
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 transition z-20"
+        className="absolute right-2.5 sm:right-4 top-[40%] sm:top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/45 hover:bg-black/60 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 transition z-20"
         aria-label="Next slide"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
 
       {/* Slide Dots */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+      <div className="absolute bottom-9 sm:bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             className={`h-2 rounded-full transition-all duration-300 ${
-              i === current ? 'w-8 bg-[#d4af37]' : 'w-2 bg-white/40 hover:bg-white/70'
+              i === current ? 'w-8 bg-[#d4af37]' : 'w-2 bg-white/50 hover:bg-white/80'
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />

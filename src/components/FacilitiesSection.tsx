@@ -3,7 +3,7 @@ import { Monitor, Home, BookOpen, Stethoscope, Utensils, Shield, Sparkles } from
 
 const facilities = [
   {
-    title: 'Lab Komputer & Riset STEAM',
+    title: 'Lab Komputer & Riset STEM',
     desc: 'Dilengkapi 40 unit PC modern dengan koneksi fiber optic cepat untuk praktikum coding, literasi digital, dan ujian CBT.',
     icon: Monitor,
     image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80',

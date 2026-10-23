@@ -94,7 +94,7 @@ export const AboutSection: React.FC = () => {
                 Pondok Pesantren Jauharul Maknuun didirikan dengan tekad mulia menghidupkan kembali tradisi luhur para ulama Nusantara di tanah bersejarah Lasem. Mengambil nama dari kitab mutiara balaghah yang mendalam (*Al-Jauharul Maknuun*), lembaga ini berkomitmen mencetak santri yang berwawasan luas, halus budi pekertinya, dan kokoh pegangan agamanya.
               </p>
               <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                Untuk menjawab tantangan zaman modern, pesantren mengintegrasikan pendidikan formal SMP Plus dengan kurikulum riset STEAM (Sains, Teknologi, Engineering, Art, dan Matematika) serta pembelajaran bahasa Arab dan Inggris secara aktif di asrama.
+                Untuk menjawab tantangan zaman modern, pesantren mengintegrasikan pendidikan formal SMP Plus dengan kurikulum riset STEM (Sains, Teknologi, Engineering, dan Matematika) serta pembelajaran bahasa Arab dan Inggris secara aktif di asrama.
               </p>
             </div>
 

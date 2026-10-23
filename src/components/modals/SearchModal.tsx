@@ -23,7 +23,7 @@ interface SearchResultItem {
   id: string;
   title: string;
   description: string;
-  category: 'Program' | 'Berita' | 'Galeri' | 'Ekskul' | 'Prestasi' | 'STEAM' | 'Fasilitas' | 'Profil' | 'PPDB';
+  category: 'Program' | 'Berita' | 'Galeri' | 'Ekskul' | 'Prestasi' | 'STEM' | 'Fasilitas' | 'Profil' | 'PPDB';
   badge?: string;
   action: () => void;
   icon: React.ReactNode;
@@ -101,7 +101,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     {
       id: 'prog-sekolah',
       title: 'SMP Plus Jauharul Maknuun (Akreditasi A BAN-PDM)',
-      description: 'Pendidikan formal kurikulum terpadu nasional, integrasi riset STEAM, dwibahasa Arab-Inggris dan pembinaan akhlak.',
+      description: 'Pendidikan formal kurikulum terpadu nasional, integrasi riset STEM, dwibahasa Arab-Inggris dan pembinaan akhlak.',
       category: 'Program',
       badge: 'Sekolah',
       action: () => scrollToSection('program-sekolah'),
@@ -200,12 +200,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       action: () => scrollToSection('prestasi'),
       icon: <Trophy className="w-4 h-4 text-[#d4af37]" />
     },
-    // STEAM
+    // STEM
     {
       id: 'steam-lab',
-      title: 'Laboratorium STEAM & Komputer Modern',
-      description: 'Integrasi Science, Technology, Engineering, Arts, dan Mathematics dalam kurikulum santri abad ke-21.',
-      category: 'STEAM',
+      title: 'Laboratorium STEM & Komputer Modern',
+      description: 'Integrasi Science, Technology, Engineering, dan Mathematics dalam kurikulum santri abad ke-21.',
+      category: 'STEM',
       badge: 'Laboratorium',
       action: () => scrollToSection('steam'),
       icon: <Cpu className="w-4 h-4 text-indigo-600" />
@@ -214,7 +214,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       id: 'steam-astronomi',
       title: 'Ilmu Falak & Praktik Rukyatul Hilal Digital',
       description: 'Pendalaman hisab falakiyah astronomi Islam dengan instrumen theodolite dan teleskop teropong bintang digital.',
-      category: 'STEAM',
+      category: 'STEM',
       badge: 'Riset',
       action: () => scrollToSection('steam'),
       icon: <Cpu className="w-4 h-4 text-purple-600" />
@@ -311,7 +311,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     );
   });
 
-  const categories = ['Semua', 'Program', 'Berita', 'Galeri', 'Ekskul', 'Prestasi', 'STEAM', 'Fasilitas', 'Profil'];
+  const categories = ['Semua', 'Program', 'Berita', 'Galeri', 'Ekskul', 'Prestasi', 'STEM', 'Fasilitas', 'Profil'];
 
   return (
     <div 

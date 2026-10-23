@@ -94,7 +94,7 @@ export const extracurricularList: ExtracurricularItem[] = [
     fullDesc: 'Membekali santri keterampilan abad ke-21 tanpa meninggalkan adab pesantren. Santri diajarkan dasar pemrograman, struktur data algoritma, HTML/CSS modern, JavaScript, serta pembuatan platform dakwah digital dan aplikasi pencatatan hafalan santri.',
     schedule: 'Ahad Pagi (08.30 - 11.00 WIB)',
     coach: 'Ir. M. Alfian & Tim IT SMP Plus Jauharul Maknuun',
-    location: 'Laboratorium Komputer & Riset STEAM Modern',
+    location: 'Laboratorium Komputer & Riset STEM Modern',
     activities: [
       'Praktikum logika algoritma dasar menggunakan Scratch dan Python',
       'Membangun halaman web interaktif HTML, CSS Tailwind, dan JavaScript',
@@ -262,7 +262,7 @@ export const achievementsList: AchievementItem[] = [
     level: 'Nasional',
     category: 'Sains & Teknologi',
     winner: 'Tim Riset STEM SMP Plus JM (4 Santri)',
-    classGrade: 'Klub Robotika & STEAM Santri',
+    classGrade: 'Klub Robotika & STEM Santri',
     organizer: 'Kemenkominfo & Asosiasi Pendidikan Vokasi Santri',
     year: '2025',
     image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80',

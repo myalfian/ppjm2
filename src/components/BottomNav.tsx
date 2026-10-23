@@ -79,7 +79,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}>
             Home
           </span>
-          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+          <span className={`w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
             activeTab === 'home' ? 'opacity-100' : 'opacity-0'
           }`}></span>
         </button>
@@ -104,7 +104,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}>
             JM News
           </span>
-          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+          <span className={`w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
             activeTab === 'news' ? 'opacity-100' : 'opacity-0'
           }`}></span>
         </button>
@@ -156,7 +156,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}>
             E-Learning
           </span>
-          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+          <span className={`w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
             activeTab === 'elearning' ? 'opacity-100' : 'opacity-0'
           }`}></span>
         </button>
@@ -188,7 +188,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}>
             Menu
           </span>
-          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+          <span className={`w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
             activeTab === 'menu' || isMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}></span>
         </button>

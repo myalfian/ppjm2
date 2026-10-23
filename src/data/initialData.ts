@@ -135,7 +135,7 @@ export const initialMedia: MediaGalleryItem[] = [
     size: '210 KB (WebP)',
     description: 'Aktivitas santri di laboratorium komputer modern berjejaring fiber optic. Santri mempelajari algoritma coding, simulasi ujian CBT, dan eksperimen mikrokontroler sensor IoT.',
     date: '2026-02-12',
-    location: 'Laboratorium Komputer & Riset STEAM SMP Plus JM'
+    location: 'Laboratorium Komputer & Riset STEM SMP Plus JM'
   },
   { 
     id: 'med-3', 
@@ -196,7 +196,7 @@ export const initialMedia: MediaGalleryItem[] = [
   },
   { 
     id: 'med-8', 
-    title: 'Dokumentasi Gelar Karya Riset STEAM & Coding Santri', 
+    title: 'Dokumentasi Gelar Karya Riset STEM & Coding Santri', 
     category: 'video', 
     type: 'video', 
     url: 'https://www.youtube.com/embed/ScMzIvxBSi4', 
@@ -269,7 +269,7 @@ export const initialTagihan: Tagihan[] = [
 export const initialNilai: NilaiAkademik[] = [
   { id: 'nil-1', santriName: 'Ziyad Ahmad Al-Bukhari', subject: 'Tahfidz Al-Qur\'an', score: 96, semester: 'Ganjil', academicYear: '2025/2026' },
   { id: 'nil-2', santriName: 'Ziyad Ahmad Al-Bukhari', subject: 'Nahwu & Shorof (Al-Ajurumiyyah)', score: 92, semester: 'Ganjil', academicYear: '2025/2026' },
-  { id: 'nil-3', santriName: 'Ziyad Ahmad Al-Bukhari', subject: 'Matematika & IT STEAM', score: 88, semester: 'Ganjil', academicYear: '2025/2026' },
+  { id: 'nil-3', santriName: 'Ziyad Ahmad Al-Bukhari', subject: 'Matematika & IT STEM', score: 88, semester: 'Ganjil', academicYear: '2025/2026' },
   { id: 'nil-4', santriName: 'Nabila Syakirah', subject: 'Bahasa Arab Fusha', score: 94, semester: 'Ganjil', academicYear: '2025/2026' },
   { id: 'nil-5', santriName: 'Nabila Syakirah', subject: 'Fiqih Fathul Qorib', score: 90, semester: 'Ganjil', academicYear: '2025/2026' }
 ];
@@ -306,7 +306,7 @@ export const utbkQuestions = [
   },
   {
     id: 4,
-    subject: 'Penalaran Matematika & STEAM',
+    subject: 'Penalaran Matematika & STEM',
     question: 'Sebuah asrama santri memiliki luas tanah 450 m². Sebanyak 2/5 luas digunakan untuk kamar, 1/3 untuk aula kajian, dan sisanya taman hijau. Berapakah luas taman hijau?',
     options: ['90 m²', '120 m²', '150 m²', '180 m²'],
     correct: 1,
