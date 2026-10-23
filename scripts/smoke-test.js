@@ -26,19 +26,46 @@ process.on('exit', cleanup);
 
 try {
   await new Promise((resolve, reject) => {
-    const timer = setTimeout(resolve, 4000);
-    child.stdout.on('data', (chunk) => {
-      if (chunk.toString().includes('running at')) {
-        clearTimeout(timer);
+    let resolved = false;
+    const checkReady = (chunk) => {
+      if ((output + (chunk ? chunk.toString() : '')).includes('running at') && !resolved) {
+        resolved = true;
         resolve();
       }
-    });
+    };
+    if (output.includes('running at')) {
+      resolved = true;
+      return resolve();
+    }
+    child.stdout.on('data', checkReady);
     child.once('error', reject);
     child.once('exit', (code) => {
-      clearTimeout(timer);
-      reject(new Error(`server exited early with code ${code}: ${output}`));
+      if (!resolved) reject(new Error(`server exited early with code ${code}: ${output}`));
     });
+    setTimeout(() => {
+      if (!resolved) {
+        resolved = true;
+        resolve(); // proceed to poll
+      }
+    }, 4000);
   });
+
+  // Polling with retry to ensure socket is accepting connections
+  let ready = false;
+  for (let i = 0; i < 30; i++) {
+    try {
+      const probe = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(500) });
+      if (probe.ok) {
+        ready = true;
+        break;
+      }
+    } catch {
+      await new Promise((r) => setTimeout(r, 150));
+    }
+  }
+  if (!ready) {
+    throw new Error(`Server did not respond on ${base} within timeout. Output: ${output}`);
+  }
 
   for (const [path, contentType, marker] of expected) {
     const response = await fetch(`${base}${path}`);

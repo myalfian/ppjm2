@@ -1,3 +1,14 @@
+// Global Robustness: Unhandled Rejection & Error Protection
+if (typeof window !== 'undefined') {
+  window.addEventListener('unhandledrejection', function(event) {
+    console.warn('[PPSPJM SafeGuard] Unhandled Promise Rejection caught:', event.reason);
+    if (event.preventDefault) event.preventDefault();
+  });
+  window.addEventListener('error', function(event) {
+    console.warn('[PPSPJM SafeGuard] Global window error caught:', event.message);
+  });
+}
+
 // ============================================================
 // PPSPJM Portal — script.js
 // Complete Application Logic & Agile School CMS (Supabase Standardized)
@@ -1134,23 +1145,23 @@ function checkPPDBStatus() {
 
       card.innerHTML = `
         <div class="flex items-center justify-between border-b border-emerald-200 pb-2">
-          <span class="font-mono font-bold text-primary">${found.code || 'PPDB-2026-REG'}</span>
-          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${badgeCls}">${found.status}</span>
+          <span class="font-mono font-bold text-primary">${escapeHtml(found.code || 'PPDB-2026-REG')}</span>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${badgeCls}">${escapeHtml(found.status)}</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-700">
-          <div><span class="text-gray-500">Nama Santri:</span> <p class="font-bold text-gray-800">${found.name}</p></div>
-          <div><span class="text-gray-500">Pilihan Program:</span> <p class="font-bold text-gray-800">${found.program}</p></div>
-          <div><span class="text-gray-500">No. WhatsApp:</span> <p class="font-bold text-gray-800">${found.phone}</p></div>
-          <div><span class="text-gray-500">Email Wali:</span> <p class="font-bold text-gray-800">${found.email || '-'}</p></div>
+          <div><span class="text-gray-500">Nama Santri:</span> <p class="font-bold text-gray-800">${escapeHtml(found.name)}</p></div>
+          <div><span class="text-gray-500">Pilihan Program:</span> <p class="font-bold text-gray-800">${escapeHtml(found.program)}</p></div>
+          <div><span class="text-gray-500">No. WhatsApp:</span> <p class="font-bold text-gray-800">${escapeHtml(found.phone)}</p></div>
+          <div><span class="text-gray-500">Email Wali:</span> <p class="font-bold text-gray-800">${escapeHtml(found.email || '-')}</p></div>
           <div class="sm:col-span-2 bg-emerald-100/60 p-2 rounded-lg border border-emerald-200">
             <span class="text-emerald-900 font-bold block text-[11px]"><i class="fa-solid fa-bowl-rice mr-1"></i> Paket Nutrisi Asrama:</span>
-            <p class="font-semibold text-emerald-800 text-xs">${found.diet_package || 'Reguler 4 Sehat (3x Sehari)'}</p>
-            ${found.allergy_notes ? `<p class="text-[10px] text-amber-800 mt-0.5"><strong>Alergen:</strong> ${found.allergy_notes}</p>` : ''}
+            <p class="font-semibold text-emerald-800 text-xs">${escapeHtml(found.diet_package || 'Reguler 4 Sehat (3x Sehari)')}</p>
+            ${found.allergy_notes ? `<p class="text-[10px] text-amber-800 mt-0.5"><strong>Alergen:</strong> ${escapeHtml(found.allergy_notes)}</p>` : ''}
           </div>
           <div class="sm:col-span-2"><span class="text-gray-500">Tanggal Daftar:</span> <p class="font-medium text-gray-800">${new Date(found.submitted_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p></div>
         </div>
         <div class="pt-2 flex gap-2">
-          <button onclick="printRegistrationCard('${found.id || found.code}')" class="bg-primary hover:bg-primary-dark text-white font-bold py-1.5 px-3 rounded-lg text-[11px] btn-spring flex items-center gap-1.5">
+          <button onclick="printRegistrationCard('${escapeHtml(found.id || found.code)}')" class="bg-primary hover:bg-primary-dark text-white font-bold py-1.5 px-3 rounded-lg text-[11px] btn-spring flex items-center gap-1.5">
             <i class="fa-solid fa-print"></i> Cetak Bukti Pendaftaran
           </button>
         </div>
@@ -1621,7 +1632,7 @@ function renderAdminPPDB(data) {
     // Header
     const head = el('div', { class: 'flex items-center justify-between' });
     const nameCode = el('div', { class: 'font-bold text-gray-800' });
-    nameCode.innerHTML = `<span class="font-mono text-primary font-extrabold mr-2">${item.code || 'REG'}</span> ${item.name}`;
+    nameCode.innerHTML = `<span class="font-mono text-primary font-extrabold mr-2">${escapeHtml(item.code || 'REG')}</span> ${escapeHtml(item.name)}`;
     
     const badgeColors = {
       'Diterima': 'bg-emerald-100 text-emerald-800 border-emerald-300',
@@ -1639,10 +1650,10 @@ function renderAdminPPDB(data) {
     // Meta details
     const meta = el('div', { class: 'grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-[11px] text-gray-600 bg-white p-2 rounded-lg border border-gray-100' });
     meta.innerHTML = `
-      <div><span class="text-gray-400">Program:</span> <strong class="text-primary-dark">${item.program}</strong></div>
-      <div><span class="text-gray-400">WhatsApp:</span> <strong class="font-mono">${item.phone}</strong></div>
-      <div><span class="text-gray-400">Jenis Kelamin:</span> ${item.gender || '-'}</div>
-      <div class="col-span-2 sm:col-span-3 text-gray-500 truncate"><span class="text-gray-400">Alamat:</span> ${item.address || '-'}</div>
+      <div><span class="text-gray-400">Program:</span> <strong class="text-primary-dark">${escapeHtml(item.program)}</strong></div>
+      <div><span class="text-gray-400">WhatsApp:</span> <strong class="font-mono">${escapeHtml(item.phone)}</strong></div>
+      <div><span class="text-gray-400">Jenis Kelamin:</span> ${escapeHtml(item.gender || '-')}</div>
+      <div class="col-span-2 sm:col-span-3 text-gray-500 truncate"><span class="text-gray-400">Alamat:</span> ${escapeHtml(item.address || '-')}</div>
     `;
     row.appendChild(meta);
 
@@ -3603,7 +3614,7 @@ function renderUtbkQuestion() {
   if (idxBadge) idxBadge.textContent = `Soal No. ${utbkState.currentIdx + 1} dari ${utbkState.questions.length}`;
   if (catBadge) catBadge.textContent = q.category;
   if (diffEl) diffEl.textContent = q.difficulty;
-  if (textEl) textEl.innerHTML = `<p>${q.text}</p>`;
+  if (textEl) textEl.innerHTML = `<p>${escapeHtml(q.text)}</p>`;
 
   if (optionsContainer) {
     optionsContainer.innerHTML = '';
@@ -3622,7 +3633,7 @@ function renderUtbkQuestion() {
       card.innerHTML = `
         <div class="flex items-center gap-3">
           <span class="w-7 h-7 rounded-lg ${isSelected ? 'bg-violet-600 text-white' : 'bg-gray-100 text-gray-700'} font-bold flex items-center justify-center text-xs shrink-0">${opt.id}</span>
-          <span class="text-xs ${isSelected ? 'font-bold text-violet-950' : 'text-gray-700'}">${opt.text}</span>
+          <span class="text-xs ${isSelected ? 'font-bold text-violet-950' : 'text-gray-700'}">${escapeHtml(opt.text)}</span>
         </div>
         ${isSelected ? '<i class="fa-solid fa-circle-check text-violet-600 text-base"></i>' : ''}
       `;
@@ -3864,14 +3875,14 @@ function renderSantriTable() {
     const jkColor = item.jenis_kelamin === 'Laki-laki' ? 'text-blue-600 bg-blue-50' : 'text-pink-600 bg-pink-50';
 
     tr.innerHTML = `
-      <td class="p-3 font-mono font-semibold">${item.nisn}</td>
-      <td class="p-3 font-bold text-gray-900">${item.nama_lengkap}</td>
-      <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${jkColor}">${item.jenis_kelamin}</span></td>
-      <td class="p-3 text-gray-600">${item.kelas?.nama_kelas || '-'}</td>
-      <td class="p-3 text-gray-600">${item.asrama?.nama_asrama || '-'}</td>
-      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${statusColor}">${item.status}</span></td>
+      <td class="p-3 font-mono font-semibold">${escapeHtml(item.nisn)}</td>
+      <td class="p-3 font-bold text-gray-900">${escapeHtml(item.nama_lengkap)}</td>
+      <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${jkColor}">${escapeHtml(item.jenis_kelamin)}</span></td>
+      <td class="p-3 text-gray-600">${escapeHtml(item.kelas?.nama_kelas || '-')}</td>
+      <td class="p-3 text-gray-600">${escapeHtml(item.asrama?.nama_asrama || '-')}</td>
+      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${statusColor}">${escapeHtml(item.status)}</span></td>
       <td class="p-3 text-right">
-        <button onclick="deleteSantri('${item.id}', '${item.nama_lengkap}')" class="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50" title="Hapus Data">
+        <button onclick="deleteSantri('${item.id}', '${escapeHtml(item.nama_lengkap)}')" class="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50" title="Hapus Data">
           <i class="fa-solid fa-trash-can"></i>
         </button>
       </td>
@@ -3977,13 +3988,13 @@ function renderTahfidzTable() {
       : (item.jenis === 'murajaah' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800');
 
     tr.innerHTML = `
-      <td class="p-3 font-mono">${item.tanggal || '-'}</td>
-      <td class="p-3 font-bold text-gray-900">${item.santri?.nama_lengkap || 'Santri'}</td>
-      <td class="p-3 text-gray-600">${item.pengampu?.full_name || 'Ustadz Pengampu'}</td>
-      <td class="p-3 font-semibold text-primary-dark">QS. ${item.surat_mulai}: ${item.ayat_mulai} - ${item.surat_selesai}: ${item.ayat_selesai}</td>
-      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${jenisBadge}">${item.jenis}</span></td>
-      <td class="p-3"><span class="font-bold text-emerald-700">${item.nilai}</span> <span class="text-[10px] text-gray-400">(${item.predikat || 'Mutqin'})</span></td>
-      <td class="p-3 text-gray-500 italic max-w-xs truncate">${item.catatan || '-'}</td>
+      <td class="p-3 font-mono">${escapeHtml(item.tanggal || '-')}</td>
+      <td class="p-3 font-bold text-gray-900">${escapeHtml(item.santri?.nama_lengkap || 'Santri')}</td>
+      <td class="p-3 text-gray-600">${escapeHtml(item.pengampu?.full_name || 'Ustadz Pengampu')}</td>
+      <td class="p-3 font-semibold text-primary-dark">QS. ${escapeHtml(item.surat_mulai)}: ${escapeHtml(item.ayat_mulai)} - ${escapeHtml(item.surat_selesai)}: ${escapeHtml(item.ayat_selesai)}</td>
+      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${jenisBadge}">${escapeHtml(item.jenis)}</span></td>
+      <td class="p-3"><span class="font-bold text-emerald-700">${escapeHtml(item.nilai)}</span> <span class="text-[10px] text-gray-400">(${escapeHtml(item.predikat || 'Mutqin')})</span></td>
+      <td class="p-3 text-gray-500 italic max-w-xs truncate">${escapeHtml(item.catatan || '-')}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -4122,11 +4133,11 @@ function renderPerizinanTable() {
     }
 
     tr.innerHTML = `
-      <td class="p-3 font-bold text-gray-900">${item.santri?.nama_lengkap || 'Santri'}</td>
-      <td class="p-3 text-[11px] font-mono text-gray-700">${keluarFmt} s/d ${kembaliFmt}</td>
-      <td class="p-3 max-w-xs text-gray-600">${item.alasan}</td>
-      <td class="p-3 text-gray-600">${item.penjemput_nama || '-'} <span class="text-[10px] text-gray-400">(${item.penjemput_kontak || '-'})</span></td>
-      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${sBadge}">${item.status}</span></td>
+      <td class="p-3 font-bold text-gray-900">${escapeHtml(item.santri?.nama_lengkap || 'Santri')}</td>
+      <td class="p-3 text-[11px] font-mono text-gray-700">${escapeHtml(keluarFmt)} s/d ${escapeHtml(kembaliFmt)}</td>
+      <td class="p-3 max-w-xs text-gray-600">${escapeHtml(item.alasan)}</td>
+      <td class="p-3 text-gray-600">${escapeHtml(item.penjemput_nama || '-')} <span class="text-[10px] text-gray-400">(${escapeHtml(item.penjemput_kontak || '-')})</span></td>
+      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${sBadge}">${escapeHtml(item.status)}</span></td>
       <td class="p-3 text-right">${actionButtons}</td>
     `;
     tbody.appendChild(tr);
@@ -4247,12 +4258,12 @@ function renderTagihanTable() {
       : `<button onclick="markTagihanLunas('${item.id}', '${item.kode_tagihan}')" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-1 px-2.5 rounded">Tandai Lunas</button>`;
 
     tr.innerHTML = `
-      <td class="p-3 font-mono font-bold text-primary-dark">${item.kode_tagihan}</td>
-      <td class="p-3 font-bold text-gray-900">${item.santri?.nama_lengkap || 'Santri'}</td>
-      <td class="p-3 text-gray-600">${item.jenis_tagihan} <span class="text-[10px] text-gray-400">(${item.periode || '-'})</span></td>
-      <td class="p-3 font-mono font-bold text-gray-900">${nominalFmt}</td>
-      <td class="p-3 text-gray-500 font-mono text-[11px]">${item.tgl_jatuh_tempo || '-'}</td>
-      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${sBadge}">${item.status_pembayaran}</span></td>
+      <td class="p-3 font-mono font-bold text-primary-dark">${escapeHtml(item.kode_tagihan)}</td>
+      <td class="p-3 font-bold text-gray-900">${escapeHtml(item.santri?.nama_lengkap || 'Santri')}</td>
+      <td class="p-3 text-gray-600">${escapeHtml(item.jenis_tagihan)} <span class="text-[10px] text-gray-400">(${escapeHtml(item.periode || '-')})</span></td>
+      <td class="p-3 font-mono font-bold text-gray-900">${escapeHtml(nominalFmt)}</td>
+      <td class="p-3 text-gray-500 font-mono text-[11px]">${escapeHtml(item.tgl_jatuh_tempo || '-')}</td>
+      <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${sBadge}">${escapeHtml(item.status_pembayaran)}</span></td>
       <td class="p-3 text-right">${actionBtn}</td>
     `;
     tbody.appendChild(tr);
@@ -4374,12 +4385,12 @@ function renderNilaiTable() {
     const badgeColor = num >= 85 ? 'text-emerald-700 bg-emerald-50' : (num >= 75 ? 'text-blue-700 bg-blue-50' : 'text-amber-700 bg-amber-50');
 
     tr.innerHTML = `
-      <td class="p-3 font-bold text-gray-900">${item.santri?.nama_lengkap || 'Siswa'}</td>
-      <td class="p-3 font-semibold text-primary-dark">${item.mata_pelajaran}</td>
-      <td class="p-3 text-gray-600">${item.jenis_ujian} <span class="text-[10px] text-gray-400">(Sem. ${item.semester})</span></td>
-      <td class="p-3"><span class="px-2.5 py-1 rounded font-bold font-mono ${badgeColor}">${item.nilai}</span></td>
-      <td class="p-3 text-gray-500 italic max-w-xs truncate">${item.capaian_kompetensi || '-'}</td>
-      <td class="p-3 text-gray-600">${item.guru?.full_name || 'Guru Pengampu'}</td>
+      <td class="p-3 font-bold text-gray-900">${escapeHtml(item.santri?.nama_lengkap || 'Siswa')}</td>
+      <td class="p-3 font-semibold text-primary-dark">${escapeHtml(item.mata_pelajaran)}</td>
+      <td class="p-3 text-gray-600">${escapeHtml(item.jenis_ujian)} <span class="text-[10px] text-gray-400">(Sem. ${escapeHtml(item.semester)})</span></td>
+      <td class="p-3"><span class="px-2.5 py-1 rounded font-bold font-mono ${badgeColor}">${escapeHtml(item.nilai)}</span></td>
+      <td class="p-3 text-gray-500 italic max-w-xs truncate">${escapeHtml(item.capaian_kompetensi || '-')}</td>
+      <td class="p-3 text-gray-600">${escapeHtml(item.guru?.full_name || 'Guru Pengampu')}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -5576,6 +5587,7 @@ function appendChatMessage(sender, text) {
   
   const msgDiv = document.createElement('div');
   msgDiv.className = `flex items-start gap-2 ${sender === 'user' ? 'justify-end' : ''}`;
+  const safeText = escapeHtml(text);
   
   if (sender === 'bot') {
     msgDiv.innerHTML = `
@@ -5583,13 +5595,13 @@ function appendChatMessage(sender, text) {
         <i class="fa-solid fa-robot"></i>
       </div>
       <div class="bg-white p-2.5 rounded-2xl rounded-tl-none border border-gray-200 shadow-sm text-gray-700 leading-relaxed max-w-[85%]">
-        ${text}
+        ${safeText}
       </div>
     `;
   } else {
     msgDiv.innerHTML = `
       <div class="bg-primary text-white p-2.5 rounded-2xl rounded-tr-none shadow-sm leading-relaxed max-w-[85%]">
-        ${text}
+        ${safeText}
       </div>
     `;
   }
