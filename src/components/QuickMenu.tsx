@@ -25,7 +25,8 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
       id: 'sambutan',
       label: 'Sambutan',
       icon: UserCheck,
-      pillBg: 'bg-[#fef3c7] hover:bg-[#fde68a]/70 border-[#fde68a]',
+      cardTheme: 'bg-gradient-to-b from-[#fffbeb] to-[#fef3c7]/90 border-[#fde68a] hover:border-[#f59e0b]/50 shadow-2xs hover:shadow-xs',
+      pillTheme: 'bg-[#fef3c7]',
       iconColor: 'text-[#92400e]',
       action: () => scrollTo('sambutan-direktur')
     },
@@ -33,7 +34,8 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
       id: 'visi-misi',
       label: 'Visi & Misi',
       icon: Compass,
-      pillBg: 'bg-[#dbeafe] hover:bg-[#bfdbfe]/70 border-[#bfdbfe]',
+      cardTheme: 'bg-gradient-to-b from-[#eff6ff] to-[#dbeafe]/90 border-[#bfdbfe] hover:border-[#3b82f6]/50 shadow-2xs hover:shadow-xs',
+      pillTheme: 'bg-[#dbeafe]',
       iconColor: 'text-[#1e40af]',
       action: () => scrollTo('visi-misi')
     },
@@ -41,7 +43,8 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
       id: 'pengumuman',
       label: 'Pengumuman',
       icon: Megaphone,
-      pillBg: 'bg-[#ffe4e6] hover:bg-[#fecdd3]/70 border-[#fecdd3]',
+      cardTheme: 'bg-gradient-to-b from-[#fff1f2] to-[#ffe4e6]/90 border-[#fecdd3] hover:border-[#f43f5e]/50 shadow-2xs hover:shadow-xs',
+      pillTheme: 'bg-[#ffe4e6]',
       iconColor: 'text-[#be123c]',
       action: () => scrollTo('news')
     },
@@ -49,7 +52,8 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
       id: 'elearning',
       label: 'E-Learning',
       icon: Laptop,
-      pillBg: 'bg-[#d1fae5] hover:bg-[#a7f3d0]/70 border-[#a7f3d0]',
+      cardTheme: 'bg-gradient-to-b from-[#ecfdf5] to-[#d1fae5]/90 border-[#a7f3d0] hover:border-[#10b981]/50 shadow-2xs hover:shadow-xs',
+      pillTheme: 'bg-[#d1fae5]',
       iconColor: 'text-[#065f46]',
       action: onOpenElearning
     },
@@ -57,7 +61,8 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
       id: 'ekskul',
       label: 'Ekstrakurikuler',
       icon: Activity,
-      pillBg: 'bg-[#ffedd5] hover:bg-[#fed7aa]/70 border-[#fed7aa]',
+      cardTheme: 'bg-gradient-to-b from-[#fff7ed] to-[#ffedd5]/90 border-[#fed7aa] hover:border-[#f97316]/50 shadow-2xs hover:shadow-xs',
+      pillTheme: 'bg-[#ffedd5]',
       iconColor: 'text-[#9a3412]',
       action: () => scrollTo('ekstrakurikuler')
     },
@@ -65,7 +70,8 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
       id: 'prestasi',
       label: 'Prestasi',
       icon: Trophy,
-      pillBg: 'bg-[#fef9c3] hover:bg-[#fef08a]/70 border-[#fef08a]',
+      cardTheme: 'bg-gradient-to-b from-[#fefce8] to-[#fef9c3]/90 border-[#fef08a] hover:border-[#eab308]/50 shadow-2xs hover:shadow-xs',
+      pillTheme: 'bg-[#fef9c3]',
       iconColor: 'text-[#854d0e]',
       action: () => scrollTo('prestasi')
     }
@@ -74,10 +80,10 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
   return (
     <section 
       aria-label="Menu Cepat Portal" 
-      className="relative z-30 -mt-7 sm:-mt-10 bg-white rounded-t-3xl sm:rounded-t-4xl border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] py-3 sm:py-4.5"
+      className="relative z-30 mt-2.5 sm:mt-4 bg-white rounded-t-3xl sm:rounded-t-4xl border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] pt-4 pb-6 sm:pt-6 sm:pb-8 flex items-center justify-center"
     >
-      <div className="max-w-md sm:max-w-xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-3 gap-y-3 gap-x-2">
+      <div className="w-full max-w-md sm:max-w-xl mx-auto px-4 sm:px-6 my-auto flex flex-col justify-center">
+        <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -85,18 +91,18 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
                 key={item.id}
                 onClick={item.action}
                 type="button"
-                className="flex flex-col items-center justify-center group focus:outline-hidden touch-press transition-transform duration-150 active:scale-95"
+                className={`flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 active:scale-95 group focus:outline-hidden cursor-pointer ${item.cardTheme}`}
                 title={item.label}
               >
-                {/* Colored Capsule/Pill */}
+                {/* Colored Capsule/Pill inside distinct card */}
                 <div 
-                  className={`w-14 h-8 sm:w-16 sm:h-9 rounded-full flex items-center justify-center border shadow-xs transition-all duration-200 group-hover:scale-105 group-hover:shadow-sm ${item.pillBg}`}
+                  className={`w-12 h-7 sm:w-14 sm:h-8 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-2xs ${item.pillTheme}`}
                 >
-                  <Icon className={`w-4 h-4 sm:w-4.5 sm:h-4.5 ${item.iconColor} stroke-[2.2]`} />
+                  <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${item.iconColor} stroke-[2.3]`} />
                 </div>
 
                 {/* Label text */}
-                <span className="text-[11px] sm:text-xs font-bold text-gray-800 tracking-tight text-center mt-1.5 group-hover:text-[#1a6b3c] transition-colors leading-tight">
+                <span className="text-[11px] sm:text-xs font-bold text-gray-800 tracking-tight text-center mt-1.5 group-hover:text-gray-950 transition-colors leading-tight">
                   {item.label}
                 </span>
               </button>

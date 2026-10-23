@@ -106,9 +106,39 @@ export const App: React.FC = () => {
     showToast(`Bahasa diubah ke: ${langNames[lang] || lang}`);
   };
 
+  // Scroll Progress Percentage for Top Progress Bar
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const currentProgress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
+      } else {
+        setScrollProgress(0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#f1f7f2] font-sans antialiased text-gray-800 overflow-x-hidden w-full max-w-full pb-20 md:pb-0">
       
+      {/* Thin Animated Scroll Progress Bar at very top */}
+      <div 
+        className="fixed top-0 left-0 right-0 h-[3px] bg-black/10 z-[100] pointer-events-none"
+        aria-hidden="true"
+      >
+        <div 
+          className="h-full bg-gradient-to-r from-[#1a6b3c] via-[#d4af37] to-[#10b981] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(212,175,55,0.7)]"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-5 right-5 z-50 flex items-center gap-2 px-4 py-3 bg-[#1a6b3c] text-white rounded-2xl shadow-2xl border border-[#d4af37] text-xs font-semibold animate-in slide-in-from-top-4 duration-300">
