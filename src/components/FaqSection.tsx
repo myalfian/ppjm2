@@ -34,12 +34,14 @@ const faqs = [
   }
 ];
 
-export const FaqSection: React.FC = () => {
+import { FAQItem } from '../types';
+
+export const FaqSection: React.FC<{ faqs?: FAQItem[] }> = ({ faqs: propFaqs = faqs }) => {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [search, setSearch] = useState('');
 
-  const filtered = faqs.filter(f => {
+  const filtered = propFaqs.filter(f => {
     const matchCat = activeCategory === 'Semua' || f.category === activeCategory;
     const q = search.toLowerCase();
     const matchQ = f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q);
@@ -47,8 +49,8 @@ export const FaqSection: React.FC = () => {
   });
 
   return (
-    <section id="faq" className="py-16 bg-[#f1f7f2]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
+    <section id="faq" className="py-8 sm:py-10 bg-[#f1f7f2]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-5 sm:space-y-6">
         
         <div className="text-center space-y-2">
           <span className="text-[11px] font-bold text-[#1a6b3c] uppercase tracking-wider bg-white px-3 py-1 rounded-full border border-emerald-200">

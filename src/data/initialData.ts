@@ -10,8 +10,14 @@ import {
   Tagihan, 
   NilaiAkademik,
   InstitutionSettings,
-  HeroSlide 
+  HeroSlide,
+  AchievementItem,
+  ExtracurricularItem,
+  FacilityItem,
+  FAQItem,
+  AboutData
 } from '../types';
+import { extracurricularList, achievementsList } from './portalData';
 
 export const initialPosts: Post[] = [
   {
@@ -304,38 +310,182 @@ export const initialSettings: InstitutionSettings = {
 export const initialHeroSlides: HeroSlide[] = [
   {
     id: 'slide-1',
-    badge: 'Pendidikan Islam Terpadu & Berkarakter',
-    title: 'Mencetak Generasi Rabbani, Berakhlak & Unggul Teknologi',
-    desc: 'Sistem pendidikan terpadu memadukan kemurnian Kurikulum Kitab Kuning Pesantren Salaf dengan standar nasional Kurikulum Merdeka berakreditasi "A" BAN-PDM di Kota Santri Lasem.',
-    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1600&q=80',
-    tag: 'Akreditasi "A" BAN-PDM',
-    cardTheme: 'bg-gradient-to-br from-[#064e3b]/90 via-[#064e3b]/80 to-black/85 border-emerald-400/40 shadow-[0_12px_40px_rgba(6,78,59,0.5)]',
+    badge: "Takhassus Al-Qur'an Bersanad",
+    title: 'TAHFIDZ 30 JUZ BERSANAD',
+    desc: "Bimbingan intensif hafalan Al-Qur'an 30 juz mutqin dengan sanad keilmuan yang tersambung kepada Rasulullah SAW, dibimbing langsung oleh dewan huffadz bersanad dengan mutaba'ah harian.",
+    tagline: 'Pondok Pesantren Jauharul Maknuun mencetak generasi hafidz-hafidzah beradab dan berwawasan luas.',
+    website: 'www.jauharulmaknuun.sch.id',
+    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1200&q=80',
+    tag: 'Target Mutqin 30 Juz',
+    cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
     badgeTheme: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-200',
-    tagColor: 'text-[#d4af37]',
-    btnTheme: 'from-[#d4af37] via-[#eab308] to-[#ca8a04]'
+    tagColor: 'text-[#ffcc00]',
+    btnTheme: 'from-[#ffcc00] via-[#eab308] to-[#ca8a04]'
   },
   {
     id: 'slide-2',
-    badge: "Takhassus Al-Qur'an Bersanad",
-    title: 'Halaqah Tahfidz 30 Juz Mutqin & Berijazah Sanad Keilmuan',
-    desc: "Bimbingan intensif hafalan ba'da Subuh dan Maghrib bersama dewan huffadz bersanad 30 juz, dilengkapi kajian tajwid qira'ah dan mutaba'ah berkala.",
-    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1600&q=80',
-    tag: 'Target Mutqin 30 Juz',
-    cardTheme: 'bg-gradient-to-br from-[#1e1b4b]/90 via-[#1e1b4b]/80 to-black/85 border-indigo-400/40 shadow-[0_12px_40px_rgba(30,27,75,0.5)]',
+    badge: 'SMP Plus Unggulan Berkarakter',
+    title: 'SMP PLUS TERAKREDITASI "A"',
+    desc: 'Pendidikan formal jenjang SMP Plus berbasis Kurikulum Merdeka terpadu yang resmi meraih Akreditasi "A" BAN-PDM, membekali santri keunggulan sains, adab, dan kepemimpinan islami.',
+    tagline: 'SMP Plus Jauharul Maknuun mengantarkan santri berprestasi gemilang di kancah nasional.',
+    website: 'www.jauharulmaknuun.sch.id',
+    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    tag: 'Akreditasi "A" BAN-PDM',
+    cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
     badgeTheme: 'bg-indigo-500/20 border-indigo-400/40 text-indigo-200',
-    tagColor: 'text-amber-300',
-    btnTheme: 'from-[#d4af37] via-[#facc15] to-[#eab308]'
+    tagColor: 'text-[#ffcc00]',
+    btnTheme: 'from-[#ffcc00] via-[#facc15] to-[#eab308]'
   },
   {
     id: 'slide-3',
-    badge: 'Islamic Boarding School Modern',
-    title: 'SMP Plus Jauharul Maknuun: Riset STEM & Pengkajian Kitab Turats',
-    desc: 'Fasilitas asrama representatif, laboratorium komputer modern, program dwibahasa (Arab-Inggris), serta kajian kitab turats maknani Jawa dan pembinaan adab santri 24 jam.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
-    tag: 'Bilingual & STEM',
-    cardTheme: 'bg-gradient-to-br from-[#1c1917]/90 via-[#292524]/80 to-black/85 border-amber-500/40 shadow-[0_12px_40px_rgba(28,25,23,0.5)]',
+    badge: 'Khasanah Keilmuan Pesantren Nusantara',
+    title: 'KITAB TURATS SALAFIYAH',
+    desc: 'Kajian literatur kitab kuning klasik dengan metode maknani gandul Jawa (sorogan & bandongan) mencakup Nahwu-Shorof, Fiqih, Tasawuf, dan Hadits Shahih bersama asatidz berpengalaman.',
+    tagline: 'Menjaga kemurnian sanad keilmuan ulama salafus sholih dan pembinaan akhlaqul karimah santri 24 jam.',
+    website: 'www.jauharulmaknuun.sch.id',
+    image: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1200&q=80',
+    tag: 'Metode Maknani Jawa',
+    cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
     badgeTheme: 'bg-amber-500/20 border-amber-400/40 text-amber-200',
-    tagColor: 'text-cyan-300',
-    btnTheme: 'from-[#d4af37] via-[#eab308] to-[#ca8a04]'
+    tagColor: 'text-[#ffcc00]',
+    btnTheme: 'from-[#ffcc00] via-[#eab308] to-[#ca8a04]'
+  },
+  {
+    id: 'slide-4',
+    badge: 'Inovasi Sains & Teknologi Terpadu',
+    title: 'RISET STEM & LAB KOMPUTER',
+    desc: 'Fasilitas laboratorium komputer modern, pembelajaran sains interaktif (STEAM), literasi digital islami, serta coding praktis guna menyiapkan santri menghadapi era kecerdasan buatan.',
+    tagline: 'Pondok Pesantren Jauharul Maknuun siap menjawab tantangan teknologi masa depan.',
+    website: 'www.jauharulmaknuun.sch.id',
+    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
+    tag: 'Laboratorium STEM & IT',
+    cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
+    badgeTheme: 'bg-emerald-500/20 border-emerald-400/40 text-emerald-200',
+    tagColor: 'text-[#ffcc00]',
+    btnTheme: 'from-[#ffcc00] via-[#eab308] to-[#ca8a04]'
+  },
+  {
+    id: 'slide-5',
+    badge: 'Wawasan Global Bahasa Dunia',
+    title: 'PROGRAM BILINGUAL AKTIF',
+    desc: 'Pembiasaan percakapan harian 2 bahasa dunia (Arab & Inggris) di lingkungan asrama (Bilingual Zone), dilengkapi muhadharah khitobah pidato 3 bahasa dan persiapan tes kebahasaan.',
+    tagline: 'Santri fasih berbahasa internasional, percaya diri berkiprah di panggung global.',
+    website: 'www.jauharulmaknuun.sch.id',
+    image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80',
+    tag: 'Arabic & English Zone',
+    cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
+    badgeTheme: 'bg-blue-500/20 border-blue-400/40 text-blue-200',
+    tagColor: 'text-[#ffcc00]',
+    btnTheme: 'from-[#ffcc00] via-[#eab308] to-[#ca8a04]'
   }
 ];
+
+export const initialAchievements: AchievementItem[] = achievementsList;
+export const initialExtracurriculars: ExtracurricularItem[] = extracurricularList;
+
+export const initialFacilities: FacilityItem[] = [
+  {
+    id: 'fac-1',
+    title: 'Lab Komputer & Riset STEM',
+    desc: 'Dilengkapi 40 unit PC modern dengan koneksi fiber optic cepat untuk praktikum coding, literasi digital, dan ujian CBT.',
+    iconName: 'Monitor',
+    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80',
+    tag: 'Laboratorium IT'
+  },
+  {
+    id: 'fac-2',
+    title: 'Asrama Santri Putra & Putri',
+    desc: 'Kamar representatif, ranjang bertingkat kokoh, sirkulasi udara sejuk, lemari pribadi, serta pemisahan area putra-putri yang terjaga.',
+    iconName: 'Home',
+    image: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80',
+    tag: 'Boarding Kondusif'
+  },
+  {
+    id: 'fac-3',
+    title: 'Masjid Jami\' Pesantren',
+    desc: 'Pusat ibadah shalat berjamaah 5 waktu, dzikir ratibul haddad, serta halaqah tahfidz ba\'da Subuh dan Maghrib santri.',
+    iconName: 'Sparkles',
+    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=600&q=80',
+    tag: 'Pusat Ibadah'
+  },
+  {
+    id: 'fac-4',
+    title: 'Perpustakaan Kitab & Digital',
+    desc: 'Menyimpan ribuan jilid kitab kuning klasik, buku referensi kurikulum nasional, serta akses jurnal digital santri.',
+    iconName: 'BookOpen',
+    image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80',
+    tag: 'Khazanah Turats'
+  },
+  {
+    id: 'fac-5',
+    title: 'Poskestren & UKS 24 Jam',
+    desc: 'Klinik kesehatan dasar dengan perawat siaga, obat-obatan esensial, serta kerja sama rujukan dengan RSUD terdekat.',
+    iconName: 'Stethoscope',
+    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
+    tag: 'Layanan Medis'
+  },
+  {
+    id: 'fac-6',
+    title: 'Dapur & Katering Gizi Terpadu',
+    desc: 'Penyajian makanan halalan thayyiban 3 kali sehari dengan menu 4 sehat 5 sempurna dan perhatian khusus alergi santri.',
+    iconName: 'Utensils',
+    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80',
+    tag: 'Nutrisi Halal'
+  }
+];
+
+export const initialFaqs: FAQItem[] = [
+  {
+    id: 'faq-1',
+    category: 'PPDB 2026',
+    q: 'Bagaimana prosedur pendaftaran santri baru (PPDB) 2026/2027?',
+    a: 'Pendaftaran dapat dilakukan secara online melalui tombol PPDB pada website ini dengan mengisi biodata calon santri, memilih paket nutrisi asrama, dan mengunggah berkas. Setelah itu calon santri akan mendapatkan Kartu Registrasi untuk jadwal tes baca Al-Qur\'an.'
+  },
+  {
+    id: 'faq-2',
+    category: 'PPDB 2026',
+    q: 'Berapa kuota penerimaan santri baru tahun ajaran 2026/2027?',
+    a: 'Untuk menjaga kualitas bimbingan intensif dan kenyamanan asrama, kuota santri baru dibatasi 60 santri putra dan 60 santri putri untuk SMP Plus & Program Takhassus Tahfidz.'
+  },
+  {
+    id: 'faq-3',
+    category: 'Kurikulum',
+    q: 'Apa saja kurikulum yang diajarkan di SMP Plus Jauharul Maknuun?',
+    a: 'Kurikulum memadukan standar nasional Kurikulum Merdeka Kemendikbudristek (berakreditasi "A" BAN-PDM), Program Takhassus Tahfidz Al-Qur\'an 30 Juz Bersanad, dan Madrasah Diniyah Salafiyah pengkajian kitab kuning maknani gandul.'
+  },
+  {
+    id: 'faq-4',
+    category: 'Kurikulum',
+    q: 'Bagaimana metode pembelajaran kitab kuning di pesantren?',
+    a: 'Kami melestarikan metode khas pesantren Nusantara yaitu Sorogan (bimbingan privat per santri langsung kepada ustadz) dan Bandongan (pembacaan serta pemaknaan kitab secara klasikal berkelompok).'
+  },
+  {
+    id: 'faq-5',
+    category: 'Asrama',
+    q: 'Apakah asrama santri putra dan putri terpisah?',
+    a: 'Ya, asrama santri putra dan santri putri berada di kompleks gedung terpisah dengan pengawasan ustadz/ustadzah pembina asrama serta petugas keamanan gerbang 24 jam.'
+  },
+  {
+    id: 'faq-6',
+    category: 'Asrama',
+    q: 'Bagaimana sistem katering makanan dan paket nutrisi santri?',
+    a: 'Pesantren menyediakan katering halalan thayyiban 3 kali sehari. Tersedia pilihan paket Reguler 4 Sehat, Nutrisi Khusus Huffadz (asupan madu & omega-3), serta Menu Ramah Alergen bagi santri yang memiliki riwayat alergi tertentu.'
+  }
+];
+
+export const initialAboutData: AboutData = {
+  directorName: 'Ir. M. Alfian & Dewan Masyayikh',
+  directorTitle: 'Direktur Pondok & SMP Plus Jauharul Maknuun',
+  directorImage: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+  directorQuote: 'Mendidik dengan Hati, Menuntun dengan Sanad, Menginspirasi dengan Adab dan Prestasi Nyata.',
+  directorSpeech: 'Pondok Pesantren & SMP Plus Jauharul Maknuun hadir sebagai ikhtiar luhur memadukan kemurnian sanad keilmuan Islam Ahlussunnah wal Jama\'ah dengan keunggulan sains dan teknologi modern. Santri dididik seimbang antara spiritualitas Al-Qur\'an dan kesiapan menjawab masa depan.',
+  vision: 'Terwujudnya Generasi Qur\'ani yang Mutafaqqih fiddin, Berakhlak Karimah, Unggul dalam Prestasi Akademik Sains, serta Berwawasan Global.',
+  mission: [
+    'Menyelenggarakan tahfidzul Qur\'an 30 juz berijazah sanad mutqin.',
+    'Menerapkan Kurikulum Merdeka terintegrasi riset STEM terakreditasi "A".',
+    'Melestarikan kajian kitab turats salafiyah metode maknani gandul.',
+    'Membina adab, kemandirian, dan kepemimpinan islami berbasis asrama 24 jam.'
+  ],
+  history: 'Didirikan atas restu para masyayikh sepuh di Kota Santri Lasem, Jauharul Maknuun berakar dari semangat melestarikan mutiara ilmu salafiyah seraya membuka pintu peradaban teknologi modern bagi santri nusantara.'
+};
+

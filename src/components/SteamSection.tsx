@@ -21,8 +21,8 @@ export const SteamSection: React.FC = () => {
   const [activeItem, setActiveItem] = useState<SteamActivityItem | null>(null);
 
   return (
-    <section id="steam" className="py-16 sm:py-20 bg-white relative scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="steam" className="py-8 sm:py-12 bg-white relative scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">

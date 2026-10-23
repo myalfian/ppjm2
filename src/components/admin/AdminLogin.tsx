@@ -52,7 +52,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
   return (
     <div className="min-h-screen bg-[#f1f7f2] flex flex-col items-center justify-center p-4">
       <div className="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-gray-200 space-y-6">
-        
+
         {/* Header */}
         <div className="text-center space-y-2">
           <div className="w-14 h-14 rounded-2xl bg-[#1a6b3c]/10 text-[#1a6b3c] flex items-center justify-center mx-auto border border-[#1a6b3c]/20">
@@ -62,10 +62,10 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
             Portal Administrasi & CMS
           </span>
           <h2 className="text-xl font-extrabold text-[#0d4a28]">
-            PP & SMP Plus Jauharul Maknuun
+            Pondok Pesantren Jauharul Maknuun
           </h2>
           <p className="text-xs text-gray-500">
-            Masuk untuk mengelola PPDB, santri, tahfidz, dan publikasi berita.
+            Masuk untuk mengelola mengelolah dan publikasi berita website Pondok Pesantren
           </p>
         </div>
 

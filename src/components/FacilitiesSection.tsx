@@ -1,56 +1,74 @@
 import React from 'react';
 import { Monitor, Home, BookOpen, Stethoscope, Utensils, Shield, Sparkles } from 'lucide-react';
 
-const facilities = [
+import { FacilityItem } from '../types';
+
+const defaultFacilities: FacilityItem[] = [
   {
+    id: 'fac-1',
     title: 'Lab Komputer & Riset STEM',
     desc: 'Dilengkapi 40 unit PC modern dengan koneksi fiber optic cepat untuk praktikum coding, literasi digital, dan ujian CBT.',
-    icon: Monitor,
+    iconName: 'Monitor',
     image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80',
     tag: 'Laboratorium IT'
   },
   {
+    id: 'fac-2',
     title: 'Asrama Santri Putra & Putri',
     desc: 'Kamar representatif, ranjang bertingkat kokoh, sirkulasi udara sejuk, lemari pribadi, serta pemisahan area putra-putri yang terjaga.',
-    icon: Home,
+    iconName: 'Home',
     image: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80',
     tag: 'Boarding Kondusif'
   },
   {
+    id: 'fac-3',
     title: 'Masjid Jami\' Pesantren',
     desc: 'Pusat ibadah shalat berjamaah 5 waktu, dzikir ratibul haddad, serta halaqah tahfidz ba\'da Subuh dan Maghrib santri.',
-    icon: Sparkles,
+    iconName: 'Sparkles',
     image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=600&q=80',
     tag: 'Pusat Ibadah'
   },
   {
+    id: 'fac-4',
     title: 'Perpustakaan Kitab & Digital',
     desc: 'Menyimpan ribuan jilid kitab kuning klasik, buku referensi kurikulum nasional, serta akses jurnal digital santri.',
-    icon: BookOpen,
+    iconName: 'BookOpen',
     image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80',
     tag: 'Khazanah Turats'
   },
   {
+    id: 'fac-5',
     title: 'Poskestren & UKS 24 Jam',
     desc: 'Klinik kesehatan dasar dengan perawat siaga, obat-obatan esensial, serta kerja sama rujukan dengan RSUD terdekat.',
-    icon: Stethoscope,
+    iconName: 'Stethoscope',
     image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
     tag: 'Layanan Medis'
   },
   {
+    id: 'fac-6',
     title: 'Dapur & Katering Gizi Terpadu',
     desc: 'Penyajian makanan halalan thayyiban 3 kali sehari dengan menu 4 sehat 5 sempurna dan perhatian khusus alergi santri.',
-    icon: Utensils,
+    iconName: 'Utensils',
     image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80',
     tag: 'Nutrisi Halal'
   }
 ];
 
-export const FacilitiesSection: React.FC = () => {
+const iconMap: Record<string, React.FC<{ className?: string }>> = {
+  Monitor,
+  Home,
+  BookOpen,
+  Stethoscope,
+  Utensils,
+  Sparkles,
+  Shield
+};
+
+export const FacilitiesSection: React.FC<{ facilities?: FacilityItem[] }> = ({ facilities = defaultFacilities }) => {
   return (
-    <section id="facilities" className="py-16 bg-white relative scroll-mt-20">
+    <section id="facilities" className="py-8 sm:py-10 bg-white relative scroll-mt-20">
       <div id="fasilitas" className="absolute -top-16 left-0 scroll-mt-24 pointer-events-none"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-[11px] font-bold text-[#1a6b3c] uppercase tracking-wider bg-[#1a6b3c]/10 px-3 py-1 rounded-full">
@@ -66,10 +84,10 @@ export const FacilitiesSection: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {facilities.map((fac, idx) => {
-            const Icon = fac.icon;
+            const Icon = iconMap[fac.iconName] || Sparkles;
             return (
               <div
-                key={idx}
+                key={fac.id || idx}
                 className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200/80 shadow-sm hover:shadow-md transition group flex flex-col justify-between"
               >
                 <div>

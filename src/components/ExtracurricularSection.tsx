@@ -13,21 +13,22 @@ import {
   Sparkles,
   ChevronRight
 } from 'lucide-react';
+import { SmoothCurvedTabs } from './common/SmoothCurvedTabs';
 
-export const ExtracurricularSection: React.FC = () => {
+export const ExtracurricularSection: React.FC<{ items?: ExtracurricularItem[] }> = ({ items = extracurricularList }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
   const [activeItem, setActiveItem] = useState<ExtracurricularItem | null>(null);
 
   const categories = ['Semua', 'Seni Islami', 'Bela Diri', 'Bahasa', 'Teknologi', 'Kepanduan'];
 
-  const filteredItems = extracurricularList.filter(item => {
+  const filteredItems = items.filter(item => {
     if (selectedCategory === 'Semua') return true;
     return item.category === selectedCategory;
   });
 
   return (
-    <section id="ekstrakurikuler" className="py-16 sm:py-20 bg-white relative scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="ekstrakurikuler" className="py-8 sm:py-12 bg-white relative scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -43,21 +44,14 @@ export const ExtracurricularSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-gray-100/80 rounded-2xl max-w-2xl mx-auto">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                selectedCategory === cat
-                  ? 'bg-[#1a6b3c] text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        {/* Category Tabs with Smooth Curve Edges */}
+        <div className="flex justify-center">
+          <SmoothCurvedTabs
+            tabs={categories.map((cat) => ({ id: cat, label: cat }))}
+            activeTab={selectedCategory}
+            onChange={setSelectedCategory}
+            size="sm"
+          />
         </div>
 
         {/* Extracurricular Grid */}

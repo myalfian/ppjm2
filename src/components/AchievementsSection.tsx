@@ -14,21 +14,22 @@ import {
   ShieldCheck,
   Star
 } from 'lucide-react';
+import { SmoothCurvedTabs } from './common/SmoothCurvedTabs';
 
-export const AchievementsSection: React.FC = () => {
+export const AchievementsSection: React.FC<{ items?: AchievementItem[] }> = ({ items = achievementsList }) => {
   const [selectedLevel, setSelectedLevel] = useState<string>('Semua');
   const [activeItem, setActiveItem] = useState<AchievementItem | null>(null);
 
   const levels = ['Semua', 'Nasional', 'Provinsi', 'Kabupaten'];
 
-  const filteredItems = achievementsList.filter(item => {
+  const filteredItems = items.filter(item => {
     if (selectedLevel === 'Semua') return true;
     return item.level === selectedLevel;
   });
 
   return (
-    <section id="prestasi" className="py-16 sm:py-20 bg-[#f1f7f2] relative scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="prestasi" className="py-8 sm:py-12 bg-[#f1f7f2] relative scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -64,21 +65,17 @@ export const AchievementsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Filter Levels */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-white/80 rounded-2xl border border-gray-200 max-w-md mx-auto">
-          {levels.map((lvl) => (
-            <button
-              key={lvl}
-              onClick={() => setSelectedLevel(lvl)}
-              className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                selectedLevel === lvl
-                  ? 'bg-[#1a6b3c] text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}
-            >
-              {lvl === 'Semua' ? 'Semua Tingkat' : `Tingkat ${lvl}`}
-            </button>
-          ))}
+        {/* Filter Levels with Smooth Curve Edges */}
+        <div className="flex justify-center">
+          <SmoothCurvedTabs
+            tabs={levels.map((lvl) => ({
+              id: lvl,
+              label: lvl === 'Semua' ? 'Semua Tingkat' : `Tingkat ${lvl}`,
+            }))}
+            activeTab={selectedLevel}
+            onChange={setSelectedLevel}
+            size="sm"
+          />
         </div>
 
         {/* Achievements Grid */}

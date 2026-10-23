@@ -17,13 +17,21 @@ import {
   Sparkles,
   Layers
 } from 'lucide-react';
-import { Post, MediaGalleryItem, PPDBSubmission } from '../../types';
+import { 
+  Post, 
+  MediaGalleryItem, 
+  PPDBSubmission, 
+  AchievementItem, 
+  ExtracurricularItem, 
+  FacilityItem, 
+  FAQItem 
+} from '../../types';
 
 interface SearchResultItem {
   id: string;
   title: string;
   description: string;
-  category: 'Program' | 'Berita' | 'Galeri' | 'Ekskul' | 'Prestasi' | 'STEM' | 'Fasilitas' | 'Profil' | 'PPDB';
+  category: 'Program' | 'Berita' | 'Galeri' | 'Ekskul' | 'Prestasi' | 'STEM' | 'Fasilitas' | 'Profil' | 'PPDB' | 'FAQ' | string;
   badge?: string;
   action: () => void;
   icon: React.ReactNode;
@@ -35,6 +43,10 @@ interface SearchModalProps {
   posts: Post[];
   mediaList: MediaGalleryItem[];
   ppdbList: PPDBSubmission[];
+  achievements?: AchievementItem[];
+  extracurriculars?: ExtracurricularItem[];
+  facilities?: FacilityItem[];
+  faqs?: FAQItem[];
   onOpenNewsDetail: (post: Post) => void;
   onOpenMediaModal: (item: MediaGalleryItem) => void;
 }
@@ -45,6 +57,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   posts,
   mediaList,
   ppdbList,
+  achievements = [],
+  extracurriculars = [],
+  facilities = [],
+  faqs = [],
   onOpenNewsDetail,
   onOpenMediaModal
 }) => {
@@ -294,7 +310,72 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     }
   ];
 
-  const allItems = [...staticItems, ...postItems, ...mediaItems, ...ppdbStaticItems];
+  // Dynamic Achievements
+  const achievementItems: SearchResultItem[] = achievements.map(a => ({
+    id: `ach-${a.id}`,
+    title: `${a.title} (${a.winner})`,
+    description: a.description || `Prestasi tingkat ${a.level} kategori ${a.category}. Diselenggarakan oleh ${a.organizer} tahun ${a.year}.`,
+    category: 'Prestasi',
+    badge: `Tingkat ${a.level}`,
+    action: () => {
+      onClose();
+      scrollToSection('prestasi');
+    },
+    icon: <Trophy className="w-4 h-4 text-[#d4af37]" />
+  }));
+
+  // Dynamic Extracurriculars
+  const extracurricularItems: SearchResultItem[] = extracurriculars.map(e => ({
+    id: `ekskul-${e.id}`,
+    title: e.name,
+    description: e.shortDesc || e.fullDesc,
+    category: 'Ekskul',
+    badge: e.category,
+    action: () => {
+      onClose();
+      scrollToSection('ekstrakurikuler');
+    },
+    icon: <Activity className="w-4 h-4 text-[#1a6b3c]" />
+  }));
+
+  // Dynamic Facilities
+  const facilityItems: SearchResultItem[] = facilities.map(f => ({
+    id: `fac-${f.id}`,
+    title: f.title,
+    description: f.desc,
+    category: 'Fasilitas',
+    badge: f.tag,
+    action: () => {
+      onClose();
+      scrollToSection('facilities');
+    },
+    icon: <Building2 className="w-4 h-4 text-emerald-700" />
+  }));
+
+  // Dynamic FAQs
+  const faqItems: SearchResultItem[] = faqs.map(f => ({
+    id: `faq-${f.id}`,
+    title: f.q,
+    description: f.a,
+    category: 'FAQ',
+    badge: f.category,
+    action: () => {
+      onClose();
+      scrollToSection('faq');
+    },
+    icon: <Sparkles className="w-4 h-4 text-amber-500" />
+  }));
+
+  const allItems = [
+    ...staticItems, 
+    ...postItems, 
+    ...mediaItems, 
+    ...achievementItems,
+    ...extracurricularItems,
+    ...facilityItems,
+    ...faqItems,
+    ...ppdbStaticItems
+  ];
 
   // Filtering
   const cleanQuery = query.trim().toLowerCase();
@@ -313,7 +394,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     );
   });
 
-  const categories = ['Semua', 'Program', 'Berita', 'Galeri', 'Ekskul', 'Prestasi', 'STEM', 'Fasilitas', 'Profil'];
+  const categories = ['Semua', 'Program', 'Berita', 'Galeri', 'Ekskul', 'Prestasi', 'STEM', 'Fasilitas', 'Profil', 'FAQ'];
 
   return (
     <div 
