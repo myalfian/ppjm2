@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Post } from '../types';
 import { Search, Calendar, User, ArrowRight, Share2, Tag, BookOpen } from 'lucide-react';
 
@@ -14,6 +14,17 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ posts, onOpenNewsDetai
   const [selectedCat, setSelectedCat] = useState('Semua');
   const [searchQuery, setSearchQuery] = useState('');
   const [visibleCount, setVisibleCount] = useState(4);
+
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === '#prestasi') {
+        setSelectedCat('Prestasi');
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, []);
 
   const filtered = posts.filter(post => {
     if (post.status !== 'published') return false;
@@ -42,7 +53,8 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ posts, onOpenNewsDetai
   };
 
   return (
-    <section id="news" className="py-16 bg-[#f1f7f2]">
+    <section id="news" className="py-16 bg-[#f1f7f2] relative">
+      <div id="prestasi" className="absolute -top-16 left-0 scroll-mt-24 pointer-events-none"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Header & Filter Controls */}

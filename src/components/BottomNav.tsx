@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { Home, GraduationCap, UserCheck, Newspaper, PhoneCall } from 'lucide-react';
+import { Home, Newspaper, Share2, Laptop, Menu, X } from 'lucide-react';
 
 interface BottomNavProps {
-  onOpenPpdb: () => void;
-  onOpenStatus: () => void;
+  onOpenPpdb?: () => void;
+  onOpenMedsos?: () => void;
+  onOpenElearning?: () => void;
+  onOpenMenu?: () => void;
+  isMenuOpen?: boolean;
 }
 
-export const BottomNav: React.FC<BottomNavProps> = ({ onOpenPpdb, onOpenStatus }) => {
-  const [activeTab, setActiveTab] = useState<'home' | 'programs' | 'ppdb' | 'news' | 'contact'>('home');
+export const BottomNav: React.FC<BottomNavProps> = ({ 
+  onOpenPpdb,
+  onOpenMedsos,
+  onOpenElearning, 
+  onOpenMenu,
+  isMenuOpen = false
+}) => {
+  const [activeTab, setActiveTab] = useState<'home' | 'news' | 'medsos' | 'elearning' | 'menu'>('home');
 
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 200;
+      const scrollPos = window.scrollY + 280;
 
-      const contactEl = document.getElementById('lokasi');
+      const medsosEl = document.getElementById('medsos');
       const newsEl = document.getElementById('news');
-      const programsEl = document.getElementById('programs');
 
-      if (contactEl && scrollPos >= contactEl.offsetTop) {
-        setActiveTab('contact');
+      if (medsosEl && scrollPos >= medsosEl.offsetTop) {
+        setActiveTab('medsos');
       } else if (newsEl && scrollPos >= newsEl.offsetTop) {
         setActiveTab('news');
-      } else if (programsEl && scrollPos >= programsEl.offsetTop) {
-        setActiveTab('programs');
-      } else {
+      } else if (window.scrollY < 300) {
         setActiveTab('home');
       }
     };
@@ -33,8 +39,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onOpenPpdb, onOpenStatus }
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (sectionId: string, tab: 'home' | 'programs' | 'news' | 'contact') => {
+  const handleNavClick = (sectionId: string, tab: 'home' | 'news' | 'medsos' | 'elearning' | 'menu') => {
     setActiveTab(tab);
+    if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -44,102 +54,143 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onOpenPpdb, onOpenStatus }
   return (
     <nav 
       aria-label="Navigasi Bawah Mobile"
-      className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200/90 shadow-[0_-4px_24px_rgba(0,0,0,0.09)] md:hidden transition-all duration-300"
+      className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200/80 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] md:hidden transition-all duration-300"
       style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 0.35rem)' }}
     >
-      <div className="grid grid-cols-5 items-center justify-around px-1 pt-1.5 max-w-lg mx-auto">
+      <div className="grid grid-cols-5 items-center justify-around px-2 pt-1 max-w-lg mx-auto relative">
         
-        {/* Menu 1: Beranda */}
+        {/* 1. Home */}
         <button
           onClick={() => handleNavClick('home', 'home')}
-          className={`flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press ${
-            activeTab === 'home' ? 'text-[#1a6b3c]' : 'text-gray-500 hover:text-gray-800'
-          }`}
-          aria-label="Beranda"
+          className="flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press group"
+          aria-label="Home"
         >
-          <div className={`p-1 rounded-xl transition-colors ${activeTab === 'home' ? 'bg-[#1a6b3c]/10' : ''}`}>
-            <Home className="w-5 h-5" />
+          <div className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+            activeTab === 'home' 
+              ? 'bg-[#e8f5e9] text-[#1a6b3c]' 
+              : 'text-slate-500 group-hover:text-slate-700'
+          }`}>
+            <Home className="w-5 h-5 stroke-[2.1]" />
           </div>
-          <span className={`text-[10px] tracking-tight font-bold mt-0.5 ${activeTab === 'home' ? 'text-[#1a6b3c]' : 'text-gray-600'}`}>
-            Beranda
+          <span className={`text-[11px] tracking-tight mt-0.5 leading-none transition-colors ${
+            activeTab === 'home' 
+              ? 'text-[#1a6b3c] font-semibold' 
+              : 'text-slate-600 font-medium'
+          }`}>
+            Home
           </span>
-          {activeTab === 'home' && (
-            <span className="w-1 h-1 rounded-full bg-[#1a6b3c] mt-0.5"></span>
-          )}
+          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+            activeTab === 'home' ? 'opacity-100' : 'opacity-0'
+          }`}></span>
         </button>
 
-        {/* Menu 2: Program */}
-        <button
-          onClick={() => handleNavClick('programs', 'programs')}
-          className={`flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press ${
-            activeTab === 'programs' ? 'text-[#1a6b3c]' : 'text-gray-500 hover:text-gray-800'
-          }`}
-          aria-label="Program & Kurikulum"
-        >
-          <div className={`p-1 rounded-xl transition-colors ${activeTab === 'programs' ? 'bg-[#1a6b3c]/10' : ''}`}>
-            <GraduationCap className="w-5 h-5" />
-          </div>
-          <span className={`text-[10px] tracking-tight font-bold mt-0.5 ${activeTab === 'programs' ? 'text-[#1a6b3c]' : 'text-gray-600'}`}>
-            Program
-          </span>
-          {activeTab === 'programs' && (
-            <span className="w-1 h-1 rounded-full bg-[#1a6b3c] mt-0.5"></span>
-          )}
-        </button>
-
-        {/* Menu 3: PPDB 2026 (Prominent Raised Center Action) */}
-        <button
-          onClick={() => {
-            setActiveTab('ppdb');
-            onOpenPpdb();
-          }}
-          className="flex flex-col items-center justify-center -mt-5 touch-press group relative"
-          aria-label="Pendaftaran PPDB Online"
-        >
-          <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#0d4a28] to-[#1a6b3c] text-white flex items-center justify-center shadow-lg shadow-[#1a6b3c]/40 border-4 border-white group-active:scale-95 transition-transform duration-200 ring-2 ring-[#d4af37]/60">
-            <UserCheck className="w-6 h-6 text-[#d4af37] animate-pulse" />
-          </div>
-          <span className="text-[10px] font-black tracking-tight text-[#1a6b3c] mt-1 bg-[#d4af37]/20 px-1.5 py-0.2 rounded-md">
-            PPDB '26
-          </span>
-        </button>
-
-        {/* Menu 4: Berita */}
+        {/* 2. JM News */}
         <button
           onClick={() => handleNavClick('news', 'news')}
-          className={`flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press ${
-            activeTab === 'news' ? 'text-[#1a6b3c]' : 'text-gray-500 hover:text-gray-800'
-          }`}
-          aria-label="Berita & Pengumuman"
+          className="flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press group"
+          aria-label="JM News"
         >
-          <div className={`p-1 rounded-xl transition-colors ${activeTab === 'news' ? 'bg-[#1a6b3c]/10' : ''}`}>
-            <Newspaper className="w-5 h-5" />
+          <div className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+            activeTab === 'news' 
+              ? 'bg-[#e8f5e9] text-[#1a6b3c]' 
+              : 'text-slate-500 group-hover:text-slate-700'
+          }`}>
+            <Newspaper className="w-5 h-5 stroke-[2.1]" />
           </div>
-          <span className={`text-[10px] tracking-tight font-bold mt-0.5 ${activeTab === 'news' ? 'text-[#1a6b3c]' : 'text-gray-600'}`}>
-            Berita
+          <span className={`text-[11px] tracking-tight mt-0.5 leading-none transition-colors ${
+            activeTab === 'news' 
+              ? 'text-[#1a6b3c] font-semibold' 
+              : 'text-slate-600 font-medium'
+          }`}>
+            JM News
           </span>
-          {activeTab === 'news' && (
-            <span className="w-1 h-1 rounded-full bg-[#1a6b3c] mt-0.5"></span>
-          )}
+          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+            activeTab === 'news' ? 'opacity-100' : 'opacity-0'
+          }`}></span>
         </button>
 
-        {/* Menu 5: Kontak / Lokasi */}
-        <button
-          onClick={() => handleNavClick('lokasi', 'contact')}
-          className={`flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press ${
-            activeTab === 'contact' ? 'text-[#1a6b3c]' : 'text-gray-500 hover:text-gray-800'
-          }`}
-          aria-label="Kontak & Lokasi"
-        >
-          <div className={`p-1 rounded-xl transition-colors ${activeTab === 'contact' ? 'bg-[#1a6b3c]/10' : ''}`}>
-            <PhoneCall className="w-5 h-5" />
-          </div>
-          <span className={`text-[10px] tracking-tight font-bold mt-0.5 ${activeTab === 'contact' ? 'text-[#1a6b3c]' : 'text-gray-600'}`}>
-            Kontak
+        {/* 3. Center Elevated FAB: Medsos */}
+        <div className="flex flex-col items-center justify-center -mt-6">
+          <button
+            onClick={() => {
+              setActiveTab('medsos');
+              if (onOpenMedsos) {
+                onOpenMedsos();
+              } else {
+                const element = document.getElementById('medsos');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }
+            }}
+            className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#0d4a28] border-[3px] border-white ring-2 ring-[#d4af37] shadow-[0_6px_16px_rgba(13,74,40,0.35)] flex items-center justify-center text-emerald-400 hover:scale-105 active:scale-95 transition-transform duration-200"
+            aria-label="Media Sosial Resmi"
+          >
+            <Share2 className="w-6 h-6 stroke-[2.3] text-emerald-300" />
+          </button>
+          <span className="mt-1 px-2.5 py-0.5 rounded-full bg-[#fef3c7] border border-[#fde68a] text-[10px] font-bold text-[#0d4a28] tracking-tight whitespace-nowrap shadow-xs">
+            Medsos
           </span>
-          {activeTab === 'contact' && (
-            <span className="w-1 h-1 rounded-full bg-[#1a6b3c] mt-0.5"></span>
-          )}
+        </div>
+
+        {/* 4. E-Learning */}
+        <button
+          onClick={() => {
+            setActiveTab('elearning');
+            onOpenElearning?.();
+          }}
+          className="flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press group"
+          aria-label="E-Learning"
+        >
+          <div className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+            activeTab === 'elearning' 
+              ? 'bg-[#e8f5e9] text-[#1a6b3c]' 
+              : 'text-slate-500 group-hover:text-slate-700'
+          }`}>
+            <Laptop className="w-5 h-5 stroke-[2.1]" />
+          </div>
+          <span className={`text-[11px] tracking-tight mt-0.5 leading-none transition-colors ${
+            activeTab === 'elearning' 
+              ? 'text-[#1a6b3c] font-semibold' 
+              : 'text-slate-600 font-medium'
+          }`}>
+            E-Learning
+          </span>
+          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+            activeTab === 'elearning' ? 'opacity-100' : 'opacity-0'
+          }`}></span>
+        </button>
+
+        {/* 5. Menu */}
+        <button
+          onClick={() => {
+            setActiveTab('menu');
+            onOpenMenu?.();
+          }}
+          className="flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press group"
+          aria-label="Menu"
+        >
+          <div className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
+            activeTab === 'menu' || isMenuOpen
+              ? 'bg-[#e8f5e9] text-[#1a6b3c]' 
+              : 'text-slate-500 group-hover:text-slate-700'
+          }`}>
+            {isMenuOpen ? (
+              <X className="w-5 h-5 stroke-[2.1]" />
+            ) : (
+              <Menu className="w-5 h-5 stroke-[2.1]" />
+            )}
+          </div>
+          <span className={`text-[11px] tracking-tight mt-0.5 leading-none transition-colors ${
+            activeTab === 'menu' || isMenuOpen
+              ? 'text-[#1a6b3c] font-semibold' 
+              : 'text-slate-600 font-medium'
+          }`}>
+            Menu
+          </span>
+          <span className={`w-1 h-1 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
+            activeTab === 'menu' || isMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}></span>
         </button>
 
       </div>

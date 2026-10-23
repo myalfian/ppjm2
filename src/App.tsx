@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { store } from './services/store';
 import { Navbar } from './components/Navbar';
 import { HeroSlider } from './components/HeroSlider';
-import { CountdownBanner } from './components/CountdownBanner';
 import { EcosystemSection } from './components/EcosystemSection';
 import { AboutSection } from './components/AboutSection';
 import { CurriculumSection } from './components/CurriculumSection';
+import { ExtracurricularSection } from './components/ExtracurricularSection';
+import { AchievementsSection } from './components/AchievementsSection';
+import { SteamSection } from './components/SteamSection';
 import { FacilitiesSection } from './components/FacilitiesSection';
 import { NewsSection } from './components/NewsSection';
 import { GallerySection } from './components/GallerySection';
@@ -23,6 +25,7 @@ import { NewsDetailModal } from './components/modals/NewsDetailModal';
 import { MediaModal } from './components/modals/MediaModal';
 import { EcosystemModal } from './components/modals/EcosystemModal';
 import { SyllabusModal } from './components/modals/SyllabusModal';
+import { SearchModal } from './components/modals/SearchModal';
 
 // Admin Views
 import { AdminLogin } from './components/admin/AdminLogin';
@@ -60,7 +63,11 @@ export const App: React.FC = () => {
   const [isAdminView, setIsAdminView] = useState(false);
   const [currentLang, setCurrentLang] = useState('id');
 
+  // Mobile Menu Drawer State
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   // Modal States
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const [showPpdbModal, setShowPpdbModal] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [printCardSubmission, setPrintCardSubmission] = useState<PPDBSubmission | null>(null);
@@ -68,6 +75,18 @@ export const App: React.FC = () => {
   const [selectedMediaItem, setSelectedMediaItem] = useState<MediaGalleryItem | null>(null);
   const [selectedEcosystemKey, setSelectedEcosystemKey] = useState<string | null>(null);
   const [selectedSyllabusProgram, setSelectedSyllabusProgram] = useState<string | null>(null);
+
+  // Global Ctrl+K / Cmd+K Search Shortcut
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setShowSearchModal(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Toast Notifications
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -145,11 +164,14 @@ export const App: React.FC = () => {
         <>
           {/* Public Portal Navigation */}
           <Navbar
+            onOpenSearch={() => setShowSearchModal(true)}
             onOpenPpdb={() => setShowPpdbModal(true)}
             onOpenStatus={() => setShowStatusModal(true)}
             onOpenAdmin={() => setIsAdminView(true)}
             currentLang={currentLang}
             onLanguageChange={handleLanguageChange}
+            isMobileMenuOpen={mobileMenuOpen}
+            onToggleMobileMenu={() => setMobileMenuOpen(prev => !prev)}
           />
 
           {/* Main Landing Sections */}
@@ -157,10 +179,6 @@ export const App: React.FC = () => {
             <HeroSlider
               onOpenPpdb={() => setShowPpdbModal(true)}
               onOpenStatus={() => setShowStatusModal(true)}
-            />
-
-            <CountdownBanner
-              onOpenPpdb={() => setShowPpdbModal(true)}
             />
 
             <EcosystemSection
@@ -172,6 +190,12 @@ export const App: React.FC = () => {
             <CurriculumSection
               onOpenSyllabusModal={(prog) => setSelectedSyllabusProgram(prog)}
             />
+
+            <ExtracurricularSection />
+
+            <AchievementsSection />
+
+            <SteamSection />
 
             <FacilitiesSection />
 
@@ -202,10 +226,12 @@ export const App: React.FC = () => {
           {/* Footer */}
           <Footer />
 
-          {/* Android-style Mobile Bottom Navigation Bar (5 Menus) */}
+          {/* Android-style Mobile Bottom Navigation Bar (Home, JM News, Medsos, E-Learning, Menu) */}
           <BottomNav
             onOpenPpdb={() => setShowPpdbModal(true)}
-            onOpenStatus={() => setShowStatusModal(true)}
+            onOpenElearning={() => setSelectedEcosystemKey('elearning')}
+            onOpenMenu={() => setMobileMenuOpen(prev => !prev)}
+            isMenuOpen={mobileMenuOpen}
           />
         </>
       )}
@@ -256,6 +282,16 @@ export const App: React.FC = () => {
         programName={selectedSyllabusProgram}
         onClose={() => setSelectedSyllabusProgram(null)}
         onToast={showToast}
+      />
+
+      <SearchModal
+        isOpen={showSearchModal}
+        onClose={() => setShowSearchModal(false)}
+        posts={posts}
+        mediaList={mediaList}
+        ppdbList={ppdbList}
+        onOpenNewsDetail={(p) => setSelectedNewsPost(p)}
+        onOpenMediaModal={(m) => setSelectedMediaItem(m)}
       />
 
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Award, BookOpen, CheckCircle, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
 
 interface HeroSliderProps {
   onOpenPpdb: () => void;
@@ -10,21 +10,21 @@ const slides = [
   {
     badge: 'Pendidikan Islam Terpadu & Berkarakter',
     title: 'Mencetak Generasi Rabbani, Berakhlak & Unggul Teknologi',
-    desc: 'Sistem pendidikan terpadu memadukan kemurnian Kurikulum Kitab Kuning Pesantren Salaf dengan standar nasional Kurikulum Merdeka di Kota Santri Lasem.',
+    desc: 'Sistem pendidikan terpadu memadukan kemurnian Kurikulum Kitab Kuning Pesantren Salaf dengan standar nasional Kurikulum Merdeka berakreditasi "A" BAN-PDM di Kota Santri Lasem.',
     image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1600&q=80',
     tag: 'Akreditasi "A" BAN-PDM'
   },
   {
     badge: 'Takhassus Al-Qur\'an Bersanad',
     title: 'Halaqah Tahfidz 30 Juz Mutqin & Berijazah Sanad Keilmuan',
-    desc: 'Bimbingan intensif hafalan ba\'da Subuh dan Maghrib bersama dewan huffadz bersanad, dilengkapi kajian tajwid qira\'ah dan mutaba\'ah berkala.',
+    desc: 'Bimbingan intensif hafalan ba\'da Subuh dan Maghrib bersama dewan huffadz bersanad 30 juz, dilengkapi kajian tajwid qira\'ah dan mutaba\'ah berkala.',
     image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1600&q=80',
     tag: 'Target Mutqin 30 Juz'
   },
   {
     badge: 'Islamic Boarding School Modern',
     title: 'SMP Plus Jauharul Maknuun: Riset STEAM & Pengkajian Kitab Turats',
-    desc: 'Fasilitas asrama representatif, laboratorium komputer modern, program dwibahasa (Arab-Inggris), serta pembinaan adab santri 24 jam terarah.',
+    desc: 'Fasilitas asrama representatif, laboratorium komputer modern, program dwibahasa (Arab-Inggris), serta kajian kitab turats maknani Jawa dan pembinaan adab santri 24 jam.',
     image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
     tag: 'Bilingual & STEAM'
   }
@@ -44,7 +44,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
   const next = () => setCurrent(prev => (prev + 1) % slides.length);
 
   return (
-    <section id="home" className="relative min-h-[580px] sm:min-h-[640px] flex items-center justify-center overflow-hidden bg-gray-900 text-white">
+    <section id="home" className="relative min-h-[500px] sm:min-h-[560px] lg:min-h-[580px] flex items-center justify-center overflow-hidden bg-gray-900 text-white">
       {/* Background Slides */}
       {slides.map((slide, index) => (
         <div
@@ -79,59 +79,41 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
             {slides[current].title}
           </h1>
 
-          {/* Description */}
-          <p className="text-sm sm:text-base text-gray-200 leading-relaxed max-w-2xl font-light">
-            {slides[current].desc}
+          {/* Description with seamlessly integrated inline links */}
+          <p className="text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl font-light">
+            {slides[current].desc}{' '}
+            <span className="text-white font-normal block sm:inline mt-2 sm:mt-0">
+              Silakan{' '}
+              <button
+                type="button"
+                onClick={onOpenPpdb}
+                className="inline-flex items-center gap-1 font-semibold text-[#facc15] hover:text-[#fde047] underline underline-offset-4 decoration-[#facc15]/70 hover:decoration-[#fde047] transition-colors cursor-pointer group"
+              >
+                <span>Daftar Santri Baru 2026</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#facc15] group-hover:translate-x-0.5 transition-transform" />
+              </button>
+              , pantau berkas via{' '}
+              <button
+                type="button"
+                onClick={onOpenStatus}
+                className="inline-flex items-center gap-1 font-semibold text-emerald-300 hover:text-emerald-200 underline underline-offset-4 decoration-emerald-400/70 hover:decoration-emerald-200 transition-colors cursor-pointer group"
+              >
+                <CheckCircle className="w-3.5 h-3.5 text-emerald-300" />
+                <span>Cek Bukti Pendaftaran</span>
+              </button>
+              , atau hubungi panitia melalui{' '}
+              <a
+                href="https://wa.me/6281234567890?text=Assalamu'alaikum%20Panitia%20PPDB%20PPJM"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-semibold text-emerald-300 hover:text-emerald-200 underline underline-offset-4 decoration-emerald-400/70 hover:decoration-emerald-200 transition-colors cursor-pointer group"
+              >
+                <PhoneCall className="w-3.5 h-3.5 text-emerald-300" />
+                <span>Konsultasi WA</span>
+              </a>
+              .
+            </span>
           </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <button
-              onClick={onOpenPpdb}
-              className="px-6 py-3 rounded-2xl bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold text-xs sm:text-sm shadow-xl shadow-[#1a6b3c]/40 flex items-center gap-2 btn-spring border border-[#d4af37]/40"
-            >
-              <span>Daftar Santri Baru 2026</span>
-              <ArrowRight className="w-4 h-4 text-[#d4af37]" />
-            </button>
-
-            <button
-              onClick={onOpenStatus}
-              className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm backdrop-blur-md border border-white/20 flex items-center gap-2 btn-spring"
-            >
-              <CheckCircle className="w-4 h-4 text-[#d4af37]" />
-              <span>Cek Bukti Pendaftaran</span>
-            </button>
-
-            <a
-              href="https://wa.me/6281234567890?text=Assalamu'alaikum%20Panitia%20PPDB%20PPJM"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-3 rounded-2xl bg-emerald-700/40 hover:bg-emerald-700/60 text-emerald-200 font-semibold text-xs sm:text-sm border border-emerald-500/30 flex items-center gap-2 transition"
-            >
-              <PhoneCall className="w-4 h-4 text-emerald-400" />
-              <span>Konsultasi WA</span>
-            </a>
-          </div>
-
-          {/* Feature Highlights Counter */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-white/15 text-xs text-white">
-            <div className="bg-white/5 backdrop-blur p-2.5 rounded-xl border border-white/10">
-              <div className="font-extrabold text-lg text-[#d4af37]">Akreditasi "A"</div>
-              <div className="text-[11px] text-gray-300">BAN-PDM Resmi</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur p-2.5 rounded-xl border border-white/10">
-              <div className="font-extrabold text-lg text-[#d4af37]">30 Juz</div>
-              <div className="text-[11px] text-gray-300">Tahfidz Bersanad</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur p-2.5 rounded-xl border border-white/10">
-              <div className="font-extrabold text-lg text-[#d4af37]">Kitab Turats</div>
-              <div className="text-[11px] text-gray-300">Metode Maknani Jawa</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur p-2.5 rounded-xl border border-white/10">
-              <div className="font-extrabold text-lg text-[#d4af37]">Bilingual</div>
-              <div className="text-[11px] text-gray-300">Arab & Inggris Aktif</div>
-            </div>
-          </div>
         </div>
       </div>
 

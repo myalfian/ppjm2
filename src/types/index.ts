@@ -36,6 +36,50 @@ export interface MediaGalleryItem {
   type: 'photo' | 'video';
   url: string;
   size?: string;
+  description?: string;
+  date?: string;
+  location?: string;
+  duration?: string;
+}
+
+export interface ExtracurricularItem {
+  id: string;
+  name: string;
+  category: 'Seni Islami' | 'Bela Diri' | 'Bahasa' | 'Teknologi' | 'Kepanduan' | string;
+  image: string;
+  shortDesc: string;
+  fullDesc: string;
+  schedule: string;
+  coach: string;
+  location: string;
+  activities: string[];
+  achievements: string[];
+}
+
+export interface AchievementItem {
+  id: string;
+  title: string;
+  level: 'Nasional' | 'Provinsi' | 'Kabupaten';
+  category: 'Tahfidz' | 'Sains & Teknologi' | 'Bahasa & Pidato' | 'Seni Islami' | 'Olahraga' | string;
+  winner: string;
+  classGrade: string;
+  organizer: string;
+  year: string;
+  image: string;
+  description: string;
+}
+
+export interface SteamActivityItem {
+  id: string;
+  title: string;
+  category: 'Coding & AI' | 'Robotika & IoT' | 'Sains Terpadu' | 'Digital Art' | 'CBT & Literasi' | string;
+  image: string;
+  shortDesc: string;
+  fullDesc: string;
+  tools: string[];
+  skills: string[];
+  projectOutput: string;
+  schedule: string;
 }
 
 export interface GuestbookEntry {

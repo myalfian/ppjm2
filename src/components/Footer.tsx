@@ -188,7 +188,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* DEDICATED SOCIAL MEDIA SECTION */}
-          <div className="bg-emerald-950/60 rounded-3xl p-6 sm:p-8 border border-emerald-800/60 space-y-6">
+          <div id="medsos" className="bg-emerald-950/60 rounded-3xl p-6 sm:p-8 border border-emerald-800/60 space-y-6 scroll-mt-20">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-emerald-800/40 pb-5">
               <div>
                 <div className="flex items-center gap-2">

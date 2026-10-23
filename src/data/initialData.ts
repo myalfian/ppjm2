@@ -115,12 +115,97 @@ export const initialPPDB: PPDBSubmission[] = [
 ];
 
 export const initialMedia: MediaGalleryItem[] = [
-  { id: 'med-1', title: 'Halaqah Tahfidz & Setoran Hafalan Qur\'an Ba\'da Subuh', category: 'kegiatan', type: 'photo', url: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1200&q=80', size: '185 KB (WebP)' },
-  { id: 'med-2', title: 'Laboratorium Komputer & Praktikum IT SMP Plus', category: 'fasilitas', type: 'photo', url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80', size: '210 KB (WebP)' },
-  { id: 'med-3', title: 'Upacara Hari Santri & Peringatan Kebangsaan', category: 'kegiatan', type: 'photo', url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80', size: '190 KB (WebP)' },
-  { id: 'med-4', title: 'Penerimaan Trofi Juara 1 MHQ Tingkat Jawa Tengah', category: 'prestasi', type: 'photo', url: 'https://images.unsplash.com/photo-1578269174936-2709b6aeb913?auto=format&fit=crop&w=1200&q=80', size: '230 KB (WebP)' },
-  { id: 'med-5', title: 'Perpustakaan Khazanah Turats & Buku Digital', category: 'fasilitas', type: 'photo', url: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80', size: '175 KB (WebP)' },
-  { id: 'med-6', title: 'Profil Dokumenter PP & SMP Plus Jauharul Maknuun', category: 'video', type: 'video', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', size: 'Embed Stream' }
+  { 
+    id: 'med-1', 
+    title: 'Halaqah Tahfidz & Tasmi\' 30 Juz Santri Bersanad', 
+    category: 'kegiatan', 
+    type: 'photo', 
+    url: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1200&q=80', 
+    size: '185 KB (WebP)',
+    description: 'Suasana khidmat halaqah Al-Qur\'an santri takhassus ba\'da Subuh di Masjid Jami\' Pesantren. Santri menyetorkan hafalan dengan tartil diawasi langsung oleh dewan asatidz huffadz bersanad.',
+    date: '2026-02-18',
+    location: 'Masjid Jami\' Pesantren Jauharul Maknuun'
+  },
+  { 
+    id: 'med-2', 
+    title: 'Praktikum Komputer, Robotika & Riset STEM Santri', 
+    category: 'fasilitas', 
+    type: 'photo', 
+    url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80', 
+    size: '210 KB (WebP)',
+    description: 'Aktivitas santri di laboratorium komputer modern berjejaring fiber optic. Santri mempelajari algoritma coding, simulasi ujian CBT, dan eksperimen mikrokontroler sensor IoT.',
+    date: '2026-02-12',
+    location: 'Laboratorium Komputer & Riset STEAM SMP Plus JM'
+  },
+  { 
+    id: 'med-3', 
+    title: 'Dokumenter Profil Resmi Pondok & SMP Plus Jauharul Maknuun', 
+    category: 'video', 
+    type: 'video', 
+    url: 'https://www.youtube.com/embed/5O_7rQyQ2sY', 
+    size: 'Full HD 1080p',
+    description: 'Video dokumenter resmi memperkenalkan visi, kurikulum terpadu (Kurikulum Merdeka & Kitab Turats), sarana asrama, dan testimoni wali santri Pondok Pesantren Jauharul Maknuun Lasem.',
+    date: '2026-02-01',
+    location: 'Kompleks Pesantren Lasem Sidayu Gresik',
+    duration: '06:45'
+  },
+  { 
+    id: 'med-4', 
+    title: 'Penerimaan Piala & Medali Juara 1 MHQ 30 Juz Nasional', 
+    category: 'prestasi', 
+    type: 'photo', 
+    url: 'https://images.unsplash.com/photo-1578269174936-2709b6aeb913?auto=format&fit=crop&w=1200&q=80', 
+    size: '230 KB (WebP)',
+    description: 'Santri Muhammad Fatih Al-Habsyi menerima trofi Juara 1 Nasional Musabaqah Hifdzil Qur\'an (MHQ) 30 Juz yang diserahkan langsung oleh dewan juri kehormatan.',
+    date: '2026-01-28',
+    location: 'Panggung Utama Istana Peradaban Santri Nasional'
+  },
+  { 
+    id: 'med-5', 
+    title: 'Sorogan & Bandongan Kitab Kuning Maknani Gandul', 
+    category: 'kegiatan', 
+    type: 'photo', 
+    url: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80', 
+    size: '175 KB (WebP)',
+    description: 'Santri mendalami kitab Fathul Qorib dan Ta\'limul Muta\'allim dengan tradisi maknani gandul ala Jawa, menjaga kelestarian metodologi sanad keilmuan pesantren salafiyah.',
+    date: '2026-02-14',
+    location: 'Bale Belajar Madrasah Diniyah Salafiyah'
+  },
+  { 
+    id: 'med-6', 
+    title: 'Festival Jam\'iyyah Sholawat Al-Banjari Syauqul Maknuun', 
+    category: 'video', 
+    type: 'video', 
+    url: 'https://www.youtube.com/embed/9No-FiEInLA', 
+    size: 'High Definition',
+    description: 'Penampilan memukau grup rebana dan sholawat banjari santri Jauharul Maknuun yang berhasil menyabet Juara Umum Festival Hadrah Se-Jawa Timur.',
+    date: '2026-01-15',
+    location: 'Auditorium Seni Islami',
+    duration: '08:12'
+  },
+  { 
+    id: 'med-7', 
+    title: 'Asrama Representatif Santri Putra & Putri', 
+    category: 'fasilitas', 
+    type: 'photo', 
+    url: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1200&q=80', 
+    size: '198 KB (WebP)',
+    description: 'Area asrama yang nyaman dengan ventilasi silang sejuk, ranjang bertingkat kokoh, lemari pribadi santri, serta pengawasan wali asrama dan pembinaan 24 jam.',
+    date: '2026-02-05',
+    location: 'Asrama Ibnu Abbas & Siti Khadijah'
+  },
+  { 
+    id: 'med-8', 
+    title: 'Dokumentasi Gelar Karya Riset STEAM & Coding Santri', 
+    category: 'video', 
+    type: 'video', 
+    url: 'https://www.youtube.com/embed/ScMzIvxBSi4', 
+    size: 'Full HD 1080p',
+    description: 'Pameran sains dan inovasi santri SMP Plus Jauharul Maknuun memamerkan robot pengukur kelembaban tanah otomatis, website dakwah santri, dan proyek mikroskopi biologi.',
+    date: '2026-02-10',
+    location: 'Ruang Riset Sains & Teknologi Santri',
+    duration: '05:30'
+  }
 ];
 
 export const initialGuestbook: GuestbookEntry[] = [
