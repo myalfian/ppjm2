@@ -13,6 +13,7 @@ import { LocationSection } from './components/LocationSection';
 import { GuestbookSection } from './components/GuestbookSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
+import { BottomNav } from './components/BottomNav';
 
 // Modals
 import { PpdbModal } from './components/modals/PpdbModal';
@@ -86,7 +87,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f1f7f2] font-sans antialiased text-gray-800">
+    <div className="min-h-screen flex flex-col bg-[#f1f7f2] font-sans antialiased text-gray-800 overflow-x-hidden w-full max-w-full pb-20 md:pb-0">
       
       {/* Toast Notification */}
       {toastMessage && (
@@ -200,6 +201,12 @@ export const App: React.FC = () => {
 
           {/* Footer */}
           <Footer />
+
+          {/* Android-style Mobile Bottom Navigation Bar (5 Menus) */}
+          <BottomNav
+            onOpenPpdb={() => setShowPpdbModal(true)}
+            onOpenStatus={() => setShowStatusModal(true)}
+          />
         </>
       )}
 
