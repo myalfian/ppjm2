@@ -27,7 +27,7 @@ export const AchievementsSection: React.FC = () => {
   });
 
   return (
-    <section id="prestasi" className="py-16 sm:py-20 bg-[#f1f7f2] border-b border-gray-200 relative scroll-mt-20">
+    <section id="prestasi" className="py-16 sm:py-20 bg-[#f1f7f2] relative scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Section Header */}

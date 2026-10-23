@@ -15,6 +15,7 @@ import { GallerySection } from './components/GallerySection';
 import { LocationSection } from './components/LocationSection';
 import { GuestbookSection } from './components/GuestbookSection';
 import { FaqSection } from './components/FaqSection';
+import { WaveDivider } from './components/WaveDivider';
 import { Footer } from './components/Footer';
 import { BottomNav } from './components/BottomNav';
 
@@ -217,23 +218,71 @@ export const App: React.FC = () => {
               onOpenElearning={() => setSelectedEcosystemKey('elearning')}
             />
 
+            <WaveDivider 
+              bgColor="bg-white" 
+              fillColor="text-white/80" 
+              variant="gentle" 
+            />
+
             <EcosystemSection
               onOpenEcosystemModal={(key) => setSelectedEcosystemKey(key)}
             />
 
+            <WaveDivider 
+              bgColor="bg-white/70" 
+              fillColor="text-white" 
+              variant="crest" 
+            />
+
             <AboutSection />
+
+            <WaveDivider 
+              bgColor="bg-white" 
+              fillColor="text-[#f1f7f2]" 
+              variant="layered" 
+            />
 
             <CurriculumSection
               onOpenSyllabusModal={(prog) => setSelectedSyllabusProgram(prog)}
             />
 
+            <WaveDivider 
+              bgColor="bg-[#f1f7f2]" 
+              fillColor="text-white" 
+              variant="layered" 
+            />
+
             <ExtracurricularSection />
+
+            <WaveDivider 
+              bgColor="bg-white" 
+              fillColor="text-[#f1f7f2]" 
+              variant="crest" 
+            />
 
             <AchievementsSection />
 
+            <WaveDivider 
+              bgColor="bg-[#f1f7f2]" 
+              fillColor="text-white" 
+              variant="layered" 
+            />
+
             <SteamSection />
 
+            <WaveDivider 
+              bgColor="bg-white" 
+              fillColor="text-emerald-50/50" 
+              variant="gentle" 
+            />
+
             <FacilitiesSection />
+
+            <WaveDivider 
+              bgColor="bg-white" 
+              fillColor="text-[#f1f7f2]" 
+              variant="layered" 
+            />
 
             <NewsSection
               posts={posts}
@@ -241,13 +290,31 @@ export const App: React.FC = () => {
               onToast={showToast}
             />
 
+            <WaveDivider 
+              bgColor="bg-[#f1f7f2]" 
+              fillColor="text-gray-50/70" 
+              variant="crest" 
+            />
+
             <GallerySection
               media={mediaList}
               onOpenMediaModal={(m) => setSelectedMediaItem(m)}
             />
 
+            <WaveDivider 
+              bgColor="bg-gray-50/70" 
+              fillColor="text-[#f1f7f2]" 
+              variant="layered" 
+            />
+
             <LocationSection
               onToast={showToast}
+            />
+
+            <WaveDivider 
+              bgColor="bg-[#f1f7f2]" 
+              fillColor="text-white" 
+              variant="gentle" 
             />
 
             <GuestbookSection
@@ -256,7 +323,19 @@ export const App: React.FC = () => {
               onToast={showToast}
             />
 
+            <WaveDivider 
+              bgColor="bg-white" 
+              fillColor="text-[#f1f7f2]" 
+              variant="layered" 
+            />
+
             <FaqSection />
+
+            <WaveDivider 
+              bgColor="bg-[#f1f7f2]" 
+              fillColor="text-[#0b3d21]" 
+              variant="layered" 
+            />
           </main>
 
           {/* Footer */}

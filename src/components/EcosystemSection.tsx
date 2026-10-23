@@ -59,7 +59,7 @@ const modules = [
 
 export const EcosystemSection: React.FC<EcosystemSectionProps> = ({ onOpenEcosystemModal }) => {
   return (
-    <section className="py-12 bg-white/70 border-b border-gray-200">
+    <section className="py-12 bg-white/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-8">
           <span className="text-[11px] font-bold text-[#1a6b3c] uppercase tracking-wider bg-[#1a6b3c]/10 px-3 py-1 rounded-full">

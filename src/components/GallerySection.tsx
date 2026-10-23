@@ -35,7 +35,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ media, onOpenMed
   });
 
   return (
-    <section id="gallery" className="py-16 sm:py-20 bg-gray-50/70 border-b border-gray-200 relative scroll-mt-20">
+    <section id="gallery" className="py-16 sm:py-20 bg-gray-50/70 relative scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}

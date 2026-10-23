@@ -26,7 +26,7 @@ export const ExtracurricularSection: React.FC = () => {
   });
 
   return (
-    <section id="ekstrakurikuler" className="py-16 sm:py-20 bg-white border-b border-gray-200 relative scroll-mt-20">
+    <section id="ekstrakurikuler" className="py-16 sm:py-20 bg-white relative scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Section Header */}

@@ -36,7 +36,7 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
   }, []);
 
   return (
-    <section id="programs" className="py-16 sm:py-20 bg-[#f1f7f2] border-b border-gray-200 relative scroll-mt-20">
+    <section id="programs" className="py-16 sm:py-20 bg-[#f1f7f2] relative scroll-mt-20">
       {/* Specific Submenu Anchors */}
       <div id="program-pondok" className="absolute -top-20 left-0 scroll-mt-24 pointer-events-none"></div>
       <div id="program-sekolah" className="absolute -top-20 left-0 scroll-mt-24 pointer-events-none"></div>
