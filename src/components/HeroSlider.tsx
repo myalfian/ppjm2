@@ -70,10 +70,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
               type="button"
               onClick={onOpenPpdb}
               className="inline-flex items-center justify-center min-h-[44px] px-5 py-2 sm:px-6 sm:py-2.5 bg-transparent border-2 border-white rounded-[4px] text-white hover:bg-white hover:text-gray-950 font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-hidden cursor-pointer shadow-sm group"
-              aria-label="Daftar Santri Baru 2026"
+              aria-label="Read More..."
             >
               <span>Read More...</span>
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
