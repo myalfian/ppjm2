@@ -53,8 +53,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ posts, onOpenNewsDetai
   };
 
   return (
-    <section id="news" className="py-16 bg-[#f1f7f2] relative">
-      <div id="prestasi" className="absolute -top-16 left-0 scroll-mt-24 pointer-events-none"></div>
+    <section id="news" className="py-16 bg-[#f1f7f2] relative scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Header & Filter Controls */}

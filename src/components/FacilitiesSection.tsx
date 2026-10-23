@@ -48,8 +48,8 @@ const facilities = [
 
 export const FacilitiesSection: React.FC = () => {
   return (
-    <section id="facilities" className="py-16 bg-white relative">
-      <div id="steam" className="absolute -top-16 left-0 scroll-mt-24 pointer-events-none"></div>
+    <section id="facilities" className="py-16 bg-white relative scroll-mt-20">
+      <div id="fasilitas" className="absolute -top-16 left-0 scroll-mt-24 pointer-events-none"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         <div className="text-center max-w-2xl mx-auto">

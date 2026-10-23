@@ -56,7 +56,7 @@ export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
                 Lembaga pendidikan Islam terpadu yang memadukan keilmuan Kitab Kuning Salafiyah dengan Kurikulum Merdeka SMP Plus berakreditasi "A" BAN-PDM.
               </p>
 
-              <div className="flex items-center gap-2.5 pt-1 text-[#d4af37]">
+              <div id="medsos" className="flex items-center gap-2.5 pt-1 text-[#d4af37] scroll-mt-24">
                 <a
                   href="https://facebook.com/ppjauharulmaknuun"
                   target="_blank"

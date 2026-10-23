@@ -18,12 +18,21 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<'home' | 'news' | 'medsos' | 'elearning' | 'menu'>('home');
 
+  // Sync activeTab if isMenuOpen changes from parent
+  useEffect(() => {
+    if (isMenuOpen) {
+      setActiveTab('menu');
+    }
+  }, [isMenuOpen]);
+
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
+      if (isMenuOpen) return;
+
       const scrollPos = window.scrollY + 280;
 
-      const medsosEl = document.getElementById('medsos');
+      const medsosEl = document.getElementById('medsos') || document.getElementById('lokasi');
       const newsEl = document.getElementById('news');
 
       if (medsosEl && scrollPos >= medsosEl.offsetTop) {
@@ -37,7 +46,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMenuOpen]);
 
   const handleNavClick = (sectionId: string, tab: 'home' | 'news' | 'medsos' | 'elearning' | 'menu') => {
     setActiveTab(tab);
@@ -47,7 +56,13 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     }
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 70;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -117,9 +132,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               if (onOpenMedsos) {
                 onOpenMedsos();
               } else {
-                const element = document.getElementById('medsos');
+                const element = document.getElementById('medsos') || document.getElementById('lokasi');
                 if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
+                  const headerOffset = 70;
+                  const elementPosition = element.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
                 }
               }
             }}

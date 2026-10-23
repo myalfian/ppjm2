@@ -55,10 +55,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [jmCenterOpen, setJmCenterOpen] = useState(false);
   const [programOpen, setProgramOpen] = useState(false);
 
-  // Mobile Accordion States
-  const [mobileJmAccordion, setMobileJmAccordion] = useState(true);
-  const [mobileProgAccordion, setMobileProgAccordion] = useState(true);
-
   const jmCenterRef = useRef<HTMLDivElement>(null);
   const programRef = useRef<HTMLDivElement>(null);
 
@@ -133,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="font-black text-sm sm:text-base tracking-tight text-[#d4af37] leading-none">
                   JAUHARUL MAKNUUN
                 </span>
-                <span className="text-[9px] text-gray-500 font-medium">Lasem Sidayu Gresik</span>
+                <span className="text-[9px] text-gray-500 font-medium">Lasem Sidayu Gresik - Jawa Timur</span>
               </div>
             </a>
 
@@ -401,142 +397,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           </div>
         </div>
-
-        {/* Mobile Navigation Drawer (With Submenus and Quick Actions) */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-4 space-y-3 animate-in slide-in-from-top duration-200 shadow-xl max-h-[85vh] overflow-y-auto">
-            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-1">
-              Navigasi & Sub Menu Portal
-            </div>
-
-            <div className="space-y-2">
-              
-              {/* Accordion 1: JM Center */}
-              <div className="rounded-2xl border border-gray-200 bg-gray-50/60 overflow-hidden">
-                <button
-                  onClick={() => setMobileJmAccordion(prev => !prev)}
-                  className="w-full p-3 text-xs font-bold text-gray-900 flex items-center justify-between hover:bg-gray-100 transition"
-                >
-                  <div className="flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-[#1a6b3c]" />
-                    <span>JM Center</span>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileJmAccordion ? 'rotate-180 text-[#1a6b3c]' : 'text-gray-400'}`} />
-                </button>
-                {mobileJmAccordion && (
-                  <div className="p-2 pt-0 space-y-1 bg-white border-t border-gray-100">
-                    <a
-                      href="#profil-jm"
-                      onClick={closeMobileMenu}
-                      className="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition"
-                    >
-                      • Profil JM (Identitas & Legalitas)
-                    </a>
-                    <a
-                      href="#sambutan-direktur"
-                      onClick={closeMobileMenu}
-                      className="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition"
-                    >
-                      • Sambutan Direktur (KH. Ahmad Zaini)
-                    </a>
-                    <a
-                      href="#visi-misi"
-                      onClick={closeMobileMenu}
-                      className="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition"
-                    >
-                      • Visi dan Misi (Panca Jiwa Santri)
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              {/* Accordion 2: Program Unggulan */}
-              <div className="rounded-2xl border border-gray-200 bg-gray-50/60 overflow-hidden">
-                <button
-                  onClick={() => setMobileProgAccordion(prev => !prev)}
-                  className="w-full p-3 text-xs font-bold text-gray-900 flex items-center justify-between hover:bg-gray-100 transition"
-                >
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4 text-[#1a6b3c]" />
-                    <span>Program Unggulan</span>
-                  </div>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileProgAccordion ? 'rotate-180 text-[#1a6b3c]' : 'text-gray-400'}`} />
-                </button>
-                {mobileProgAccordion && (
-                  <div className="p-2 pt-0 space-y-1 bg-white border-t border-gray-100">
-                    <a
-                      href="#program-pondok"
-                      onClick={closeMobileMenu}
-                      className="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition"
-                    >
-                      • Pondok (Tahfidz 30 Juz Bersanad)
-                    </a>
-                    <a
-                      href="#program-sekolah"
-                      onClick={closeMobileMenu}
-                      className="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition"
-                    >
-                      • Sekolah (SMP Plus Akreditasi "A")
-                    </a>
-                    <a
-                      href="#program-masim"
-                      onClick={closeMobileMenu}
-                      className="block px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition"
-                    >
-                      • Masim (Madrasah Salafiyah Diniyah)
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              {/* Direct Links */}
-              <div className="grid grid-cols-2 gap-2 text-xs font-bold pt-1">
-                <a 
-                  href="#ekstrakurikuler" 
-                  onClick={closeMobileMenu}
-                  className="p-2.5 rounded-xl bg-gray-50 hover:bg-[#1a6b3c]/10 text-gray-800 hover:text-[#1a6b3c] flex items-center gap-2 border border-gray-100"
-                >
-                  <Activity className="w-4 h-4 text-[#1a6b3c]" /> Ekstrakurikuler
-                </a>
-
-                <a 
-                  href="#prestasi" 
-                  onClick={closeMobileMenu}
-                  className="p-2.5 rounded-xl bg-gray-50 hover:bg-[#1a6b3c]/10 text-gray-800 hover:text-[#1a6b3c] flex items-center gap-2 border border-gray-100"
-                >
-                  <Trophy className="w-4 h-4 text-[#d4af37]" /> Prestasi
-                </a>
-
-                <a 
-                  href="#steam" 
-                  onClick={closeMobileMenu}
-                  className="p-2.5 rounded-xl bg-gray-50 hover:bg-[#1a6b3c]/10 text-gray-800 hover:text-[#1a6b3c] flex items-center gap-2 border border-gray-100"
-                >
-                  <Cpu className="w-4 h-4 text-[#1a6b3c]" /> STEM
-                </a>
-
-                <a 
-                  href="#gallery" 
-                  onClick={closeMobileMenu}
-                  className="p-2.5 rounded-xl bg-gray-50 hover:bg-[#1a6b3c]/10 text-gray-800 hover:text-[#1a6b3c] flex items-center gap-2 border border-gray-100"
-                >
-                  <Image className="w-4 h-4 text-[#1a6b3c]" /> Galeri
-                </a>
-              </div>
-
-            </div>
-
-            {/* Quick Actions in Mobile Menu */}
-            <div className="flex flex-col gap-2 pt-2 border-t border-gray-100">
-              <button
-                onClick={() => { closeMobileMenu(); onOpenSearch(); }}
-                className="w-full py-2.5 rounded-xl bg-[#1a6b3c]/10 hover:bg-[#1a6b3c]/20 text-[#1a6b3c] text-xs font-bold flex items-center justify-center gap-2 border border-[#1a6b3c]/20"
-              >
-                <Search className="w-4 h-4" /> Cari Informasi Portal (Search)
-              </button>
-            </div>
-          </div>
-        )}
       </header>
     </>
   );

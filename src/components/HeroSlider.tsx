@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 import { HeroSlide } from '../types';
 import { initialHeroSlides } from '../data/initialData';
 
@@ -18,7 +18,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
       setCurrent(prev => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   const prev = () => setCurrent(prev => (prev - 1 + slides.length) % slides.length);
   const next = () => setCurrent(prev => (prev + 1) % slides.length);
@@ -54,25 +54,26 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onOpenPpdb, onOpenStatus
             <span className={slides[current].tagColor}>{slides[current].tag}</span>
           </div>
 
-          {/* Heading */}
-          <h1 className="text-lg sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white leading-snug sm:leading-tight">
+          {/* Heading (Classic Bold Serif, Uppercase, White) */}
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-serif font-bold uppercase tracking-wide text-white leading-snug sm:leading-tight text-left drop-shadow-sm">
             {slides[current].title}
           </h1>
 
-          {/* Clean Description */}
-          <p className="text-xs sm:text-sm text-gray-200/90 leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+          {/* Description (Sans-serif, White, Medium/Semi-bold, 1.5 line height) */}
+          <p className="text-xs sm:text-sm text-white font-medium sm:font-semibold leading-relaxed text-left line-clamp-3 sm:line-clamp-none drop-shadow-xs">
             {slides[current].desc}
           </p>
 
-          {/* Single Primary Action Button (Centered Horizontally) */}
-          <div className="pt-1.5 sm:pt-2 flex justify-center w-full">
+          {/* Outline Action Button (Style as in reference image: transparent bg, 2px white border, 4px rounded, left-aligned) */}
+          <div className="pt-2 sm:pt-3 flex justify-start w-full">
             <button
               type="button"
               onClick={onOpenPpdb}
-              className={`inline-flex items-center gap-2 px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-gradient-to-r ${slides[current].btnTheme} hover:brightness-110 text-gray-950 font-extrabold text-xs sm:text-sm tracking-tight shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group`}
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-2 sm:px-6 sm:py-2.5 bg-transparent border-2 border-white rounded-[4px] text-white hover:bg-white hover:text-gray-950 font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-hidden cursor-pointer shadow-sm group"
+              aria-label="Daftar Santri Baru 2026"
             >
               <span>Daftar Santri Baru 2026</span>
-              <ArrowRight className="w-4 h-4 text-gray-950 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>

@@ -191,4 +191,6 @@ export interface HeroSlide {
   badgeTheme: string;
   tagColor: string;
   btnTheme: string;
+  btnText?: string;
+  link?: string;
 }

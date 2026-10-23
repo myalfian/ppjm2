@@ -29,6 +29,7 @@ import { EcosystemModal } from './components/modals/EcosystemModal';
 import { SyllabusModal } from './components/modals/SyllabusModal';
 import { SearchModal } from './components/modals/SearchModal';
 import { CbtExamModal } from './components/modals/CbtExamModal';
+import { MobileMenuModal } from './components/modals/MobileMenuModal';
 
 // Admin Views
 import { AdminLogin } from './components/admin/AdminLogin';
@@ -109,6 +110,54 @@ export const App: React.FC = () => {
     setCurrentLang(lang);
     const langNames: Record<string, string> = { id: 'Indonesia', en: 'English', ar: 'العربية' };
     showToast(`Bahasa diubah ke: ${langNames[lang] || lang}`);
+  };
+
+  // Section Navigation from Mobile Menu / Navbar / BottomNav
+  const handleNavigateToSection = (targetId: string, hash?: string) => {
+    setMobileMenuOpen(false);
+
+    // Return to public website portal view if currently in admin mode
+    if (isAdminView) {
+      setIsAdminView(false);
+    }
+
+    // Dismiss any open modals
+    setShowPpdbModal(false);
+    setShowStatusModal(false);
+    setShowSearchModal(false);
+    setSelectedNewsPost(null);
+    setSelectedMediaItem(null);
+    setSelectedEcosystemKey(null);
+    setSelectedSyllabusProgram(null);
+    setCbtExamSubmission(null);
+    setPrintCardSubmission(null);
+
+    // Ensure route is at root
+    if (window.location.pathname && window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+      window.history.pushState({}, '', '/');
+    }
+
+    if (hash) {
+      window.location.hash = hash;
+    }
+
+    // Delay slightly to allow public DOM elements to mount if coming from another view
+    setTimeout(() => {
+      if (targetId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 70;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 120);
   };
 
   // Scroll Progress Percentage with requestAnimationFrame (LOW-04)
@@ -394,6 +443,7 @@ export const App: React.FC = () => {
           {/* Android-style Mobile Bottom Navigation Bar (Home, JM News, Medsos, E-Learning, Menu) */}
           <BottomNav
             onOpenPpdb={() => setShowPpdbModal(true)}
+            onOpenMedsos={() => handleNavigateToSection('medsos')}
             onOpenElearning={() => setSelectedEcosystemKey('elearning')}
             onOpenMenu={() => setMobileMenuOpen(prev => !prev)}
             isMenuOpen={mobileMenuOpen}
@@ -473,6 +523,20 @@ export const App: React.FC = () => {
         ppdbList={ppdbList}
         onOpenNewsDetail={(p) => setSelectedNewsPost(p)}
         onOpenMediaModal={(m) => setSelectedMediaItem(m)}
+      />
+
+      {/* Full-featured Mobile Menu Bottom Sheet (Visible anywhere in viewport) */}
+      <MobileMenuModal
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        onOpenSearch={() => setShowSearchModal(true)}
+        onOpenPpdb={() => setShowPpdbModal(true)}
+        onOpenStatus={() => setShowStatusModal(true)}
+        onOpenAdmin={() => setIsAdminView(true)}
+        onOpenElearning={() => setSelectedEcosystemKey('elearning')}
+        onOpenEcosystem={(key) => setSelectedEcosystemKey(key)}
+        onOpenSyllabus={(prog) => setSelectedSyllabusProgram(prog)}
+        onNavigateToSection={handleNavigateToSection}
       />
 
     </div>
