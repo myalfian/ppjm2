@@ -11,6 +11,7 @@ import {
   Clock,
   ChevronRight
 } from 'lucide-react';
+import { SmoothCurvedTabs } from './common/SmoothCurvedTabs';
 
 interface GallerySectionProps {
   media: MediaGalleryItem[];
@@ -35,8 +36,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ media, onOpenMed
   });
 
   return (
-    <section id="gallery" className="py-16 sm:py-20 bg-gray-50/70 relative scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="gallery" className="py-8 sm:py-12 bg-gray-50/70 relative scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -52,21 +53,14 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ media, onOpenMed
           </p>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-white rounded-2xl border border-gray-200 shadow-xs max-w-2xl mx-auto">
-          {categories.map((c) => (
-            <button
-              key={c.key}
-              onClick={() => setActiveCat(c.key)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                activeCat === c.key
-                  ? 'bg-[#1a6b3c] text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}
-            >
-              {c.label}
-            </button>
-          ))}
+        {/* Filter Buttons with Smooth Curve Edges */}
+        <div className="flex justify-center">
+          <SmoothCurvedTabs
+            tabs={categories.map((c) => ({ id: c.key, label: c.label }))}
+            activeTab={activeCat}
+            onChange={setActiveCat}
+            size="sm"
+          />
         </div>
 
         {/* Media Grid */}

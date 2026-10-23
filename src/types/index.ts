@@ -193,4 +193,33 @@ export interface HeroSlide {
   btnTheme: string;
   btnText?: string;
   link?: string;
+  tagline?: string;
+  website?: string;
+}
+
+export interface FacilityItem {
+  id: string;
+  title: string;
+  desc: string;
+  iconName: string;
+  image: string;
+  tag: string;
+}
+
+export interface FAQItem {
+  id: string;
+  category: string;
+  q: string;
+  a: string;
+}
+
+export interface AboutData {
+  directorName: string;
+  directorTitle: string;
+  directorImage: string;
+  directorQuote: string;
+  directorSpeech: string;
+  vision: string;
+  mission: string[];
+  history: string;
 }

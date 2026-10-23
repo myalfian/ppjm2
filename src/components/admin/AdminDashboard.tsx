@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
-import { 
-  LayoutDashboard, 
-  UserCheck, 
-  Users, 
-  BookOpen, 
-  Calendar, 
-  CreditCard, 
-  GraduationCap, 
-  Newspaper, 
-  Trash2, 
-  Image as ImageIcon, 
-  Activity, 
-  FileQuestion, 
-  LogOut, 
-  Home, 
-  Plus, 
-  Search, 
-  Printer, 
-  Download, 
-  MessageSquare, 
-  Check, 
-  X, 
+import {
+  LayoutDashboard,
+  UserCheck,
+  Users,
+  BookOpen,
+  Calendar,
+  CreditCard,
+  GraduationCap,
+  Newspaper,
+  Trash2,
+  Image as ImageIcon,
+  Activity,
+  FileQuestion,
+  LogOut,
+  Home,
+  Plus,
+  Search,
+  Printer,
+  Download,
+  MessageSquare,
+  Check,
+  X,
   AlertCircle,
   Eye,
   RefreshCw,
@@ -31,23 +31,32 @@ import {
   Sparkles,
   ShieldAlert,
   Save,
-  CheckCircle2
+  CheckCircle2,
+  HardDrive,
+  Cloud
 } from 'lucide-react';
-import { 
-  AdminRole, 
-  PPDBSubmission, 
-  Post, 
-  MediaGalleryItem, 
-  ActivityLog, 
-  Santri, 
-  TahfidzRecord, 
-  Perizinan, 
-  Tagihan, 
+import {
+  AdminRole,
+  PPDBSubmission,
+  Post,
+  MediaGalleryItem,
+  ActivityLog,
+  Santri,
+  TahfidzRecord,
+  Perizinan,
+  Tagihan,
   NilaiAkademik,
   InstitutionSettings,
-  HeroSlide 
+  HeroSlide,
+  AchievementItem,
+  ExtracurricularItem,
+  FacilityItem,
+  FAQItem,
+  AboutData
 } from '../../types';
-import { utbkQuestions, initialSettings, initialHeroSlides } from '../../data/initialData';
+import { utbkQuestions, initialSettings, initialHeroSlides, initialAboutData } from '../../data/initialData';
+import { DriveMediaPicker } from '../common/DriveMediaPicker';
+import { PortalContentManager } from './PortalContentManager';
 
 interface AdminDashboardProps {
   currentRole: AdminRole;
@@ -66,11 +75,31 @@ interface AdminDashboardProps {
   nilaiList: NilaiAkademik[];
   settings?: InstitutionSettings;
   slides?: HeroSlide[];
+  achievements?: AchievementItem[];
+  extracurriculars?: ExtracurricularItem[];
+  facilities?: FacilityItem[];
+  faqs?: FAQItem[];
+  aboutData?: AboutData;
   onUpdateSettings?: (settings: Partial<InstitutionSettings>) => void;
   onUpdateSlide?: (id: string, slide: Partial<HeroSlide>) => void;
   onAddSlide?: (slide: Omit<HeroSlide, 'id'>) => void;
   onDeleteSlide?: (id: string) => void;
   onCleanupTestAudit?: () => number;
+  onAddAchievement?: (item: Omit<AchievementItem, 'id'>) => void;
+  onUpdateAchievement?: (item: AchievementItem) => void;
+  onDeleteAchievement?: (id: string) => void;
+  onAddExtracurricular?: (item: Omit<ExtracurricularItem, 'id'>) => void;
+  onUpdateExtracurricular?: (item: ExtracurricularItem) => void;
+  onDeleteExtracurricular?: (id: string) => void;
+  onAddFacility?: (item: Omit<FacilityItem, 'id'>) => void;
+  onUpdateFacility?: (item: FacilityItem) => void;
+  onDeleteFacility?: (id: string) => void;
+  onAddFaq?: (item: Omit<FAQItem, 'id'>) => void;
+  onUpdateFaq?: (item: FAQItem) => void;
+  onDeleteFaq?: (id: string) => void;
+  onUpdateAboutData?: (data: AboutData) => void;
+  onExportAllData?: () => string;
+  onImportAllData?: (json: string) => boolean;
   onUpdatePPDBStatus: (id: string, status: PPDBSubmission['status']) => void;
   onOpenPrintCard: (submission: PPDBSubmission) => void;
   onAddPost: (post: Omit<Post, 'id'>) => void;
@@ -106,11 +135,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   nilaiList,
   settings: propSettings,
   slides: propSlides,
+  achievements = [],
+  extracurriculars = [],
+  facilities = [],
+  faqs = [],
+  aboutData: propAboutData,
   onUpdateSettings,
   onUpdateSlide,
   onAddSlide,
   onDeleteSlide,
   onCleanupTestAudit,
+  onAddAchievement,
+  onUpdateAchievement,
+  onDeleteAchievement,
+  onAddExtracurricular,
+  onUpdateExtracurricular,
+  onDeleteExtracurricular,
+  onAddFacility,
+  onUpdateFacility,
+  onDeleteFacility,
+  onAddFaq,
+  onUpdateFaq,
+  onDeleteFaq,
+  onUpdateAboutData,
+  onExportAllData,
+  onImportAllData,
   onUpdatePPDBStatus,
   onOpenPrintCard,
   onAddPost,
@@ -130,8 +179,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 }) => {
   const settings = propSettings || initialSettings;
   const slides = propSlides || initialHeroSlides;
+  const aboutData = propAboutData || initialAboutData;
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'ppdb' | 'santri' | 'tahfidz' | 'perizinan' | 'tagihan' | 'nilai' | 'posts' | 'trash' | 'media' | 'activity' | 'cbt' | 'settings' | 'slides'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'ppdb' | 'santri' | 'tahfidz' | 'perizinan' | 'tagihan' | 'nilai' | 'posts' | 'trash' | 'media' | 'activity' | 'cbt' | 'settings' | 'slides' | 'content'>('overview');
 
   // Search & Filter state
   const [ppdbQuery, setPpdbQuery] = useState('');
@@ -163,7 +213,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       return ['overview', 'ppdb', 'cbt', 'activity'].includes(tab);
     }
     if (currentRole === 'guru') {
-      return ['overview', 'santri', 'tahfidz', 'nilai', 'posts', 'cbt'].includes(tab);
+      return ['overview', 'santri', 'tahfidz', 'nilai', 'posts', 'cbt', 'content'].includes(tab);
     }
     if (currentRole === 'santri_wali') {
       return ['overview', 'santri', 'tahfidz', 'tagihan', 'nilai'].includes(tab);
@@ -390,14 +440,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* Top Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-30 px-4 sm:px-6 py-3">
         <div className="flex items-center justify-between">
-          
+
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-[#1a6b3c] text-white flex items-center justify-center font-bold">
-              JM
+              PPJM
             </div>
             <div>
               <h1 className="font-extrabold text-sm sm:text-base text-[#0d4a28]">
-                Portal Pengelola PP & SMP Plus JM
+                Portal Pengelola Pondok Pesantren Jauharul Maknuun
               </h1>
               <p className="text-[10px] text-gray-500">
                 Sistem Terpadu Akademik, Asrama & Agile CMS
@@ -448,7 +498,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
       {/* Main Body */}
       <div className="flex-1 flex flex-col md:flex-row">
-        
+
         {/* Sidebar Nav */}
         <aside className="w-full md:w-64 bg-white border-r border-gray-200 p-4 space-y-1">
           <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 mb-2">
@@ -458,9 +508,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('overview') && (
             <button
               onClick={() => setActiveTab('overview')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'overview' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'overview' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <LayoutDashboard className="w-4 h-4" />
               <span>Ringkasan (Overview)</span>
@@ -470,17 +519,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('ppdb') && (
             <button
               onClick={() => setActiveTab('ppdb')}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'ppdb' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'ppdb' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <div className="flex items-center gap-2.5">
                 <UserCheck className="w-4 h-4" />
                 <span>Verifikasi PPDB</span>
               </div>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
-                activeTab === 'ppdb' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-[#1a6b3c]'
-              }`}>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${activeTab === 'ppdb' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-[#1a6b3c]'
+                }`}>
                 {ppdbList.length}
               </span>
             </button>
@@ -489,9 +536,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('santri') && (
             <button
               onClick={() => setActiveTab('santri')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'santri' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'santri' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <Users className="w-4 h-4" />
               <span>Direktori Santri</span>
@@ -501,9 +547,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('tahfidz') && (
             <button
               onClick={() => setActiveTab('tahfidz')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'tahfidz' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'tahfidz' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <BookOpen className="w-4 h-4" />
               <span>Setoran Tahfidz</span>
@@ -513,9 +558,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('perizinan') && (
             <button
               onClick={() => setActiveTab('perizinan')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'perizinan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'perizinan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <Calendar className="w-4 h-4" />
               <span>Perizinan Asrama</span>
@@ -525,9 +569,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('tagihan') && (
             <button
               onClick={() => setActiveTab('tagihan')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'tagihan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'tagihan' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <CreditCard className="w-4 h-4" />
               <span>Keuangan / SPP</span>
@@ -537,9 +580,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('nilai') && (
             <button
               onClick={() => setActiveTab('nilai')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'nilai' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'nilai' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <GraduationCap className="w-4 h-4" />
               <span>Rapor & Nilai</span>
@@ -553,21 +595,36 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('posts') && (
             <button
               onClick={() => setActiveTab('posts')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'posts' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'posts' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <Newspaper className="w-4 h-4" />
               <span>Berita & Artikel</span>
             </button>
           )}
 
+          {isTabAllowed('content') && (
+            <button
+              onClick={() => setActiveTab('content')}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'content' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Sparkles className="w-4 h-4" />
+                <span>Konten & Card Web</span>
+              </div>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${activeTab === 'content' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-[#1a6b3c]'
+                }`}>
+                {achievements.length + extracurriculars.length + facilities.length + faqs.length}
+              </span>
+            </button>
+          )}
+
           {isTabAllowed('trash') && (
             <button
               onClick={() => setActiveTab('trash')}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'trash' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'trash' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <div className="flex items-center gap-2.5">
                 <Trash2 className="w-4 h-4" />
@@ -584,9 +641,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('slides') && (
             <button
               onClick={() => setActiveTab('slides')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'slides' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'slides' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <Sliders className="w-4 h-4" />
               <span>Hero Banner Slider</span>
@@ -596,9 +652,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('media') && (
             <button
               onClick={() => setActiveTab('media')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'media' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'media' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <ImageIcon className="w-4 h-4" />
               <span>Manajer Galeri</span>
@@ -608,9 +663,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('cbt') && (
             <button
               onClick={() => setActiveTab('cbt')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'cbt' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'cbt' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <FileQuestion className="w-4 h-4" />
               <span>CBT / Ujian Asesmen</span>
@@ -620,9 +674,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {isTabAllowed('activity') && (
             <button
               onClick={() => setActiveTab('activity')}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                activeTab === 'activity' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'activity' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               <Activity className="w-4 h-4" />
               <span>Audit Trail Log</span>
@@ -637,9 +690,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
               <button
                 onClick={() => setActiveTab('settings')}
-                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${
-                  activeTab === 'settings' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-                }`}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold transition ${activeTab === 'settings' ? 'bg-[#1a6b3c] text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+                  }`}
               >
                 <Settings className="w-4 h-4" />
                 <span>Profil & Kontak Lembaga</span>
@@ -650,7 +702,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
         {/* Tab Content Panel */}
         <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
-          
+
           {/* OVERVIEW TAB */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
@@ -722,6 +774,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     >
                       <Download className="w-4 h-4 mb-1" />
                       Ekspor CSV PPDB
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('content')}
+                      className="col-span-2 p-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#0d4a28] font-bold text-left border border-emerald-200 transition flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-[#d4af37]" />
+                        <span>Kelola Card & Konten Web (Prestasi, Ekskul, Fasilitas, FAQ, Profil)</span>
+                      </div>
+                      <span className="text-[10px] bg-white px-2 py-0.5 rounded-full border border-emerald-300 text-emerald-800 font-extrabold">
+                        {achievements.length + extracurriculars.length + facilities.length + faqs.length} Card
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -980,9 +1044,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         <td className="p-3 font-semibold text-[#0d4a28]">{t.surahJuz}</td>
                         <td className="p-3 text-gray-600">{t.halamanAyat}</td>
                         <td className="p-3">
-                          <span className={`px-2 py-0.5 rounded font-bold text-[10px] ${
-                            t.status === 'Mutqin' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
-                          }`}>
+                          <span className={`px-2 py-0.5 rounded font-bold text-[10px] ${t.status === 'Mutqin' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
+                            }`}>
                             {t.status}
                           </span>
                         </td>
@@ -1011,9 +1074,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <strong className="text-sm text-gray-900">{p.santriName}</strong>
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                          p.status === 'Disetujui' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                        }`}>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${p.status === 'Disetujui' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                          }`}>
                           {p.status}
                         </span>
                       </div>
@@ -1079,9 +1141,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         </td>
                         <td className="p-3 font-mono text-gray-500">{t.dueDate}</td>
                         <td className="p-3">
-                          <span className={`px-2 py-0.5 rounded font-bold text-[10px] ${
-                            t.status === 'Lunas' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'
-                          }`}>
+                          <span className={`px-2 py-0.5 rounded font-bold text-[10px] ${t.status === 'Lunas' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'
+                            }`}>
                             {t.status}
                           </span>
                         </td>
@@ -1246,6 +1307,27 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </button>
               </div>
 
+              {/* Drive Integration Notice Banner */}
+              <div className="bg-gradient-to-r from-emerald-50 via-teal-50 to-white p-3.5 rounded-2xl border border-emerald-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#1a6b3c] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <Cloud className="w-4 h-4 text-[#d4af37]" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-gray-900 block">Pustaka Konten Drive Desktop & Cloud</span>
+                    <span className="text-[11px] text-gray-600">Unggah foto, video profil, atau berkas dokumen langsung dari drive lokal komputer Anda maupun link Google Drive / YouTube.</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowMediaModal(true)}
+                  className="px-3 py-1.5 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold text-xs rounded-xl shadow-xs flex items-center gap-1.5 shrink-0 self-start sm:self-auto cursor-pointer"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Upload Berkas Drive</span>
+                </button>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {mediaList.map((m) => (
                   <div key={m.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between">
@@ -1311,9 +1393,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-[#1a6b3c]">Soal #{idx + 1} - {q.subject}</span>
                       {cbtSubmitted && (
-                        <span className={`px-2 py-0.5 rounded font-bold text-[10px] ${
-                          cbtAnswers[q.id] === q.correct ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'
-                        }`}>
+                        <span className={`px-2 py-0.5 rounded font-bold text-[10px] ${cbtAnswers[q.id] === q.correct ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'
+                          }`}>
                           {cbtAnswers[q.id] === q.correct ? 'Benar ✓' : 'Salah ✗'}
                         </span>
                       )}
@@ -1325,11 +1406,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       {q.options.map((opt, oIdx) => (
                         <label
                           key={oIdx}
-                          className={`flex items-center gap-2 p-2.5 rounded-xl border cursor-pointer transition ${
-                            cbtAnswers[q.id] === oIdx
-                              ? 'bg-emerald-50 border-[#1a6b3c] font-bold text-[#0d4a28]'
-                              : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-                          }`}
+                          className={`flex items-center gap-2 p-2.5 rounded-xl border cursor-pointer transition ${cbtAnswers[q.id] === oIdx
+                            ? 'bg-emerald-50 border-[#1a6b3c] font-bold text-[#0d4a28]'
+                            : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                            }`}
                         >
                           <input
                             type="radio"
@@ -1394,6 +1474,27 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 >
                   <Plus className="w-4 h-4" />
                   <span>Tambah Banner Baru</span>
+                </button>
+              </div>
+
+              {/* Drive Integration Notice Banner */}
+              <div className="bg-gradient-to-r from-emerald-50 via-teal-50 to-white p-3.5 rounded-2xl border border-emerald-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#1a6b3c] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <HardDrive className="w-4 h-4 text-[#d4af37]" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-gray-900 block">Integrasi Input Berkas Drive Aktif</span>
+                    <span className="text-[11px] text-gray-600">Flyer poster 16:9 (800x450) dapat diunggah langsung dari Drive Komputer (C:, D:, Desktop) atau tautan Google Drive.</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowSlideModal(true)}
+                  className="px-3 py-1.5 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold text-xs rounded-xl shadow-xs flex items-center gap-1.5 shrink-0 self-start sm:self-auto cursor-pointer"
+                >
+                  <HardDrive className="w-3.5 h-3.5" />
+                  <span>Ambil dari Drive</span>
                 </button>
               </div>
 
@@ -1580,6 +1681,35 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
           )}
 
+          {/* KONTEN & CARD WEB CMS TAB */}
+          {activeTab === 'content' && (
+            <PortalContentManager
+              achievements={achievements}
+              extracurriculars={extracurriculars}
+              facilities={facilities}
+              faqs={faqs}
+              aboutData={aboutData}
+              settings={settings}
+              mediaList={mediaList}
+              onAddAchievement={onAddAchievement}
+              onUpdateAchievement={onUpdateAchievement}
+              onDeleteAchievement={onDeleteAchievement}
+              onAddExtracurricular={onAddExtracurricular}
+              onUpdateExtracurricular={onUpdateExtracurricular}
+              onDeleteExtracurricular={onDeleteExtracurricular}
+              onAddFacility={onAddFacility}
+              onUpdateFacility={onUpdateFacility}
+              onDeleteFacility={onDeleteFacility}
+              onAddFaq={onAddFaq}
+              onUpdateFaq={onUpdateFaq}
+              onDeleteFaq={onDeleteFaq}
+              onUpdateAboutData={onUpdateAboutData}
+              onExportData={onExportAllData}
+              onImportData={onImportAllData}
+              onToast={onToast}
+            />
+          )}
+
         </main>
       </div>
 
@@ -1644,16 +1774,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 />
               </div>
 
-              <div>
-                <label className="block text-gray-700 font-bold mb-1">URL Foto Sampul</label>
-                <input
-                  type="url"
-                  value={postImage}
-                  onChange={(e) => setPostImage(e.target.value)}
-                  placeholder="https://images.unsplash.com/..."
-                  className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
-                />
-              </div>
+              <DriveMediaPicker
+                label="Foto Sampul Artikel / Berita"
+                value={postImage}
+                onChange={(url) => setPostImage(url)}
+                mediaType="image"
+                placeholder="Pilih foto dari drive desktop atau tautan Google Drive..."
+                helperText="Materi foto dapat diambil langsung dari drive laptop/PC atau tautan Google Drive / Cloud."
+                galleryItems={mediaList}
+              />
 
               <div className="pt-2 flex gap-2">
                 <button
@@ -1734,17 +1863,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 />
               </div>
 
-              <div>
-                <label className="block text-gray-700 font-bold mb-1">URL Gambar Latar (Unsplash / Direct Link) *</label>
-                <input
-                  type="url"
-                  value={slideImage}
-                  onChange={(e) => setSlideImage(e.target.value)}
-                  placeholder="https://images.unsplash.com/..."
-                  className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
-                  required
-                />
-              </div>
+              <DriveMediaPicker
+                label="Materi Flyer / Gambar Banner Slider"
+                value={slideImage}
+                onChange={(url) => setSlideImage(url)}
+                mediaType="image"
+                placeholder="Pilih flyer dari drive desktop atau tautan Google Drive..."
+                helperText="Mendukung upload flyer poster 16:9 (800x450 px) langsung dari drive PC/laptop atau Google Drive."
+                galleryItems={mediaList}
+                required
+              />
 
               <div className="pt-2 flex gap-2">
                 <button
@@ -1970,17 +2098,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
               </div>
 
-              <div>
-                <label className="block text-gray-700 font-bold mb-1">URL Media *</label>
-                <input
-                  type="url"
-                  value={mediaUrl}
-                  onChange={(e) => setMediaUrl(e.target.value)}
-                  placeholder={mediaType === 'video' ? 'https://www.youtube.com/embed/...' : 'https://images.unsplash.com/...'}
-                  className="w-full px-3 py-2 bg-gray-50 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1a6b3c]"
-                  required
-                />
-              </div>
+              <DriveMediaPicker
+                label={`Berkas / URL ${mediaType === 'video' ? 'Video' : 'Foto / Dokumen'}`}
+                value={mediaUrl}
+                onChange={(url) => setMediaUrl(url)}
+                mediaType={mediaType === 'video' ? 'video' : 'image'}
+                placeholder={mediaType === 'video' ? 'Pilih video MP4 dari drive atau link YouTube / Google Drive...' : 'Pilih foto/berkas dari drive atau link cloud...'}
+                helperText="Bisa ambil langsung dari drive desktop (C:/, D:/, Desktop) atau tautan Google Drive / Cloud Drive."
+                galleryItems={mediaList}
+                required
+              />
 
               <div className="pt-2 flex gap-2">
                 <button type="submit" className="flex-1 py-2.5 bg-[#1a6b3c] hover:bg-[#0d4a28] text-white font-bold rounded-xl btn-spring">

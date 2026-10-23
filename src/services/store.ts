@@ -11,7 +11,12 @@ import {
   NilaiAkademik,
   AdminRole,
   InstitutionSettings,
-  HeroSlide 
+  HeroSlide,
+  AchievementItem,
+  ExtracurricularItem,
+  FacilityItem,
+  FAQItem,
+  AboutData
 } from '../types';
 import { 
   initialPosts, 
@@ -25,7 +30,12 @@ import {
   initialTagihan, 
   initialNilai,
   initialSettings,
-  initialHeroSlides 
+  initialHeroSlides,
+  initialAchievements,
+  initialExtracurriculars,
+  initialFacilities,
+  initialFaqs,
+  initialAboutData
 } from '../data/initialData';
 
 // Local storage helper with fallbacks
@@ -60,6 +70,11 @@ class AppStore {
   private nilaiList: NilaiAkademik[] = getStored('nilai', initialNilai);
   private settings: InstitutionSettings = getStored('settings', initialSettings);
   private slides: HeroSlide[] = getStored('slides', initialHeroSlides);
+  private achievements: AchievementItem[] = getStored('achievements', initialAchievements);
+  private extracurriculars: ExtracurricularItem[] = getStored('extracurriculars', initialExtracurriculars);
+  private facilities: FacilityItem[] = getStored('facilities', initialFacilities);
+  private faqs: FAQItem[] = getStored('faqs', initialFaqs);
+  private aboutData: AboutData = getStored('about_data', initialAboutData);
   
   private currentRole: AdminRole = 'super_admin';
   private isAuthenticated: boolean = false;
@@ -88,7 +103,18 @@ class AppStore {
   getTagihanList() { return this.tagihanList; }
   getNilaiList() { return this.nilaiList; }
   getSettings() { return this.settings; }
-  getSlides() { return this.slides; }
+  getAchievements() { return this.achievements; }
+  getExtracurriculars() { return this.extracurriculars; }
+  getFacilities() { return this.facilities; }
+  getFaqs() { return this.faqs; }
+  getAboutData() { return this.aboutData; }
+  getSlides() { 
+    if (!this.slides || this.slides.length < 5) {
+      this.slides = initialHeroSlides;
+      setStored('slides', this.slides);
+    }
+    return this.slides; 
+  }
   getCurrentRole() { return this.currentRole; }
   getIsAuthenticated() { return this.isAuthenticated; }
   getCurrentUserEmail() { return this.currentUserEmail; }
@@ -404,6 +430,153 @@ class AppStore {
     this.logActivity(`Pembersihan data audit: ${removedCount} entri TEST-AUDIT dibersihkan`, 'delete');
     this.notify();
     return removedCount;
+  }
+
+  // ==========================================
+  // PORTAL CARDS & CONTENT CRUD METHODS
+  // ==========================================
+
+  // Achievements CRUD
+  addAchievement(item: Omit<AchievementItem, 'id'>) {
+    const newAch: AchievementItem = { ...item, id: `ach-${Date.now()}` };
+    this.achievements = [newAch, ...this.achievements];
+    setStored('achievements', this.achievements);
+    this.logActivity(`Tambah prestasi santri: ${newAch.title}`, 'create');
+    this.notify();
+  }
+
+  updateAchievement(item: AchievementItem) {
+    this.achievements = this.achievements.map(a => a.id === item.id ? item : a);
+    setStored('achievements', this.achievements);
+    this.logActivity(`Update prestasi santri: ${item.title}`, 'update');
+    this.notify();
+  }
+
+  deleteAchievement(id: string) {
+    const ach = this.achievements.find(a => a.id === id);
+    this.achievements = this.achievements.filter(a => a.id !== id);
+    setStored('achievements', this.achievements);
+    this.logActivity(`Hapus prestasi santri: ${ach?.title || id}`, 'delete');
+    this.notify();
+  }
+
+  // Extracurriculars CRUD
+  addExtracurricular(item: Omit<ExtracurricularItem, 'id'>) {
+    const newEx: ExtracurricularItem = { ...item, id: `ekskul-${Date.now()}` };
+    this.extracurriculars = [newEx, ...this.extracurriculars];
+    setStored('extracurriculars', this.extracurriculars);
+    this.logActivity(`Tambah ekstrakurikuler: ${newEx.name}`, 'create');
+    this.notify();
+  }
+
+  updateExtracurricular(item: ExtracurricularItem) {
+    this.extracurriculars = this.extracurriculars.map(e => e.id === item.id ? item : e);
+    setStored('extracurriculars', this.extracurriculars);
+    this.logActivity(`Update ekstrakurikuler: ${item.name}`, 'update');
+    this.notify();
+  }
+
+  deleteExtracurricular(id: string) {
+    const ex = this.extracurriculars.find(e => e.id === id);
+    this.extracurriculars = this.extracurriculars.filter(e => e.id !== id);
+    setStored('extracurriculars', this.extracurriculars);
+    this.logActivity(`Hapus ekstrakurikuler: ${ex?.name || id}`, 'delete');
+    this.notify();
+  }
+
+  // Facilities CRUD
+  addFacility(item: Omit<FacilityItem, 'id'>) {
+    const newFac: FacilityItem = { ...item, id: `fac-${Date.now()}` };
+    this.facilities = [...this.facilities, newFac];
+    setStored('facilities', this.facilities);
+    this.logActivity(`Tambah fasilitas: ${newFac.title}`, 'create');
+    this.notify();
+  }
+
+  updateFacility(item: FacilityItem) {
+    this.facilities = this.facilities.map(f => f.id === item.id ? item : f);
+    setStored('facilities', this.facilities);
+    this.logActivity(`Update fasilitas: ${item.title}`, 'update');
+    this.notify();
+  }
+
+  deleteFacility(id: string) {
+    const fac = this.facilities.find(f => f.id === id);
+    this.facilities = this.facilities.filter(f => f.id !== id);
+    setStored('facilities', this.facilities);
+    this.logActivity(`Hapus fasilitas: ${fac?.title || id}`, 'delete');
+    this.notify();
+  }
+
+  // FAQs CRUD
+  addFaq(item: Omit<FAQItem, 'id'>) {
+    const newFaq: FAQItem = { ...item, id: `faq-${Date.now()}` };
+    this.faqs = [...this.faqs, newFaq];
+    setStored('faqs', this.faqs);
+    this.logActivity(`Tambah FAQ: ${newFaq.q}`, 'create');
+    this.notify();
+  }
+
+  updateFaq(item: FAQItem) {
+    this.faqs = this.faqs.map(f => f.id === item.id ? item : f);
+    setStored('faqs', this.faqs);
+    this.logActivity(`Update FAQ: ${item.q}`, 'update');
+    this.notify();
+  }
+
+  deleteFaq(id: string) {
+    const faq = this.faqs.find(f => f.id === id);
+    this.faqs = this.faqs.filter(f => f.id !== id);
+    setStored('faqs', this.faqs);
+    this.logActivity(`Hapus FAQ: ${faq?.q || id}`, 'delete');
+    this.notify();
+  }
+
+  // About Data Update
+  updateAboutData(data: AboutData) {
+    this.aboutData = data;
+    setStored('about_data', this.aboutData);
+    this.logActivity(`Update profil pimpinan & visi-misi`, 'update');
+    this.notify();
+  }
+
+  // Backup & Restore
+  exportAllData(): string {
+    return JSON.stringify({
+      version: '2.0',
+      exportedAt: new Date().toISOString(),
+      posts: this.posts,
+      slides: this.slides,
+      media: this.mediaList,
+      achievements: this.achievements,
+      extracurriculars: this.extracurriculars,
+      facilities: this.facilities,
+      faqs: this.faqs,
+      aboutData: this.aboutData,
+      settings: this.settings
+    }, null, 2);
+  }
+
+  importAllData(jsonStr: string): boolean {
+    try {
+      const data = JSON.parse(jsonStr);
+      if (Array.isArray(data.posts)) { this.posts = data.posts; setStored('posts', this.posts); }
+      if (Array.isArray(data.slides)) { this.slides = data.slides; setStored('slides', this.slides); }
+      if (Array.isArray(data.media)) { this.mediaList = data.media; setStored('media', this.mediaList); }
+      if (Array.isArray(data.achievements)) { this.achievements = data.achievements; setStored('achievements', this.achievements); }
+      if (Array.isArray(data.extracurriculars)) { this.extracurriculars = data.extracurriculars; setStored('extracurriculars', this.extracurriculars); }
+      if (Array.isArray(data.facilities)) { this.facilities = data.facilities; setStored('facilities', this.facilities); }
+      if (Array.isArray(data.faqs)) { this.faqs = data.faqs; setStored('faqs', this.faqs); }
+      if (data.aboutData && typeof data.aboutData === 'object') { this.aboutData = data.aboutData; setStored('about_data', this.aboutData); }
+      if (data.settings && typeof data.settings === 'object') { this.settings = data.settings; setStored('settings', this.settings); }
+      
+      this.logActivity(`Restore data portal dari file backup JSON`, 'upload');
+      this.notify();
+      return true;
+    } catch (e) {
+      console.error('Import failed', e);
+      return false;
+    }
   }
 }
 

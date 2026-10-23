@@ -4,7 +4,7 @@
   html, body {
     width: 100%;
     max-width: 100vw;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   body {
     font-family: 'Poppins', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -77,6 +77,17 @@
 .bg-accent-light { background-color: #fef3c7; }
 .border-accent { border-color: #d4af37; }
 
+/* Hide scrollbar across all browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Print Card for PPDB Bukti Pendaftaran */
 @media print {
   body * {
@@ -92,3 +103,4 @@
     width: 100%;
   }
 }
+

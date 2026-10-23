@@ -62,6 +62,11 @@ export const App: React.FC = () => {
   const nilaiList = store.getNilaiList();
   const settings = store.getSettings();
   const slides = store.getSlides();
+  const achievements = store.getAchievements();
+  const extracurriculars = store.getExtracurriculars();
+  const facilities = store.getFacilities();
+  const faqs = store.getFaqs();
+  const aboutData = store.getAboutData();
   const currentRole = store.getCurrentRole();
   const isAuthenticated = store.getIsAuthenticated();
 
@@ -198,7 +203,7 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f1f7f2] font-sans antialiased text-gray-800 overflow-x-hidden w-full max-w-full pb-20 md:pb-0">
+    <div className="min-h-screen flex flex-col bg-[#f1f7f2] font-sans antialiased text-gray-800 overflow-x-clip w-full max-w-full pb-20 md:pb-0">
       
       {/* Thin Animated Scroll Progress Bar at very top */}
       <div 
@@ -266,11 +271,31 @@ export const App: React.FC = () => {
             nilaiList={nilaiList}
             settings={settings}
             slides={slides}
+            achievements={achievements}
+            extracurriculars={extracurriculars}
+            facilities={facilities}
+            faqs={faqs}
+            aboutData={aboutData}
             onUpdateSettings={(s) => store.updateSettings(s)}
             onUpdateSlide={(id, s) => store.updateSlide(id, s)}
             onAddSlide={(s) => store.addSlide(s)}
             onDeleteSlide={(id) => store.deleteSlide(id)}
             onCleanupTestAudit={() => store.cleanupTestAuditData()}
+            onAddAchievement={(a) => store.addAchievement(a)}
+            onUpdateAchievement={(a) => store.updateAchievement(a)}
+            onDeleteAchievement={(id) => store.deleteAchievement(id)}
+            onAddExtracurricular={(e) => store.addExtracurricular(e)}
+            onUpdateExtracurricular={(e) => store.updateExtracurricular(e)}
+            onDeleteExtracurricular={(id) => store.deleteExtracurricular(id)}
+            onAddFacility={(f) => store.addFacility(f)}
+            onUpdateFacility={(f) => store.updateFacility(f)}
+            onDeleteFacility={(id) => store.deleteFacility(id)}
+            onAddFaq={(faq) => store.addFaq(faq)}
+            onUpdateFaq={(faq) => store.updateFaq(faq)}
+            onDeleteFaq={(id) => store.deleteFaq(id)}
+            onUpdateAboutData={(data) => store.updateAboutData(data)}
+            onExportAllData={() => store.exportAllData()}
+            onImportAllData={(json) => store.importAllData(json)}
             onUpdatePPDBStatus={(id, s) => store.updatePPDBStatus(id, s)}
             onOpenPrintCard={(s) => setPrintCardSubmission(s)}
             onAddPost={(p) => store.addPost(p)}
@@ -332,7 +357,10 @@ export const App: React.FC = () => {
               variant="crest" 
             />
 
-            <AboutSection />
+            <AboutSection 
+              aboutData={aboutData}
+              settings={settings}
+            />
 
             <WaveDivider 
               bgColor="bg-white" 
@@ -350,7 +378,9 @@ export const App: React.FC = () => {
               variant="layered" 
             />
 
-            <ExtracurricularSection />
+            <ExtracurricularSection 
+              items={extracurriculars}
+            />
 
             <WaveDivider 
               bgColor="bg-white" 
@@ -358,7 +388,9 @@ export const App: React.FC = () => {
               variant="crest" 
             />
 
-            <AchievementsSection />
+            <AchievementsSection 
+              items={achievements}
+            />
 
             <WaveDivider 
               bgColor="bg-[#f1f7f2]" 
@@ -374,7 +406,9 @@ export const App: React.FC = () => {
               variant="gentle" 
             />
 
-            <FacilitiesSection />
+            <FacilitiesSection 
+              facilities={facilities}
+            />
 
             <WaveDivider 
               bgColor="bg-white" 
@@ -428,7 +462,9 @@ export const App: React.FC = () => {
               variant="layered" 
             />
 
-            <FaqSection />
+            <FaqSection 
+              faqs={faqs}
+            />
 
             <WaveDivider 
               bgColor="bg-[#f1f7f2]" 
@@ -521,6 +557,10 @@ export const App: React.FC = () => {
         posts={posts}
         mediaList={mediaList}
         ppdbList={ppdbList}
+        achievements={achievements}
+        extracurriculars={extracurriculars}
+        facilities={facilities}
+        faqs={faqs}
         onOpenNewsDetail={(p) => setSelectedNewsPost(p)}
         onOpenMediaModal={(m) => setSelectedMediaItem(m)}
       />

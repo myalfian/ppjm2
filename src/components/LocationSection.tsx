@@ -16,8 +16,8 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast, setti
   };
 
   return (
-    <section id="lokasi" className="py-16 bg-[#f1f7f2]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="lokasi" className="py-8 sm:py-10 bg-[#f1f7f2]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-[11px] font-bold text-[#1a6b3c] uppercase tracking-wider bg-white px-3 py-1 rounded-full border border-emerald-200">

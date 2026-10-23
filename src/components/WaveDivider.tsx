@@ -21,7 +21,7 @@ export const WaveDivider: React.FC<WaveDividerProps> = ({
       aria-hidden="true"
     >
       <svg
-        className={`w-full block h-5 sm:h-8 md:h-11 ${fillColor}`}
+        className={`w-full block h-3 sm:h-5 md:h-7 ${fillColor}`}
         viewBox="0 0 1440 60"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

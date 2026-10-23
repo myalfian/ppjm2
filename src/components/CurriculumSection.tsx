@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  BookOpen, 
-  Award, 
-  CheckCircle2, 
-  Download, 
-  GraduationCap, 
-  Scroll, 
+import {
+  BookOpen,
+  Award,
+  CheckCircle2,
+  Download,
+  GraduationCap,
+  Scroll,
   Sparkles,
   Building,
   Home,
   Check
 } from 'lucide-react';
+import { SmoothCurvedTabs } from './common/SmoothCurvedTabs';
 
 interface CurriculumSectionProps {
   onOpenSyllabusModal: (programName: string) => void;
@@ -36,14 +37,14 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
   }, []);
 
   return (
-    <section id="programs" className="py-16 sm:py-20 bg-[#f1f7f2] relative scroll-mt-20">
+    <section id="programs" className="py-8 sm:py-12 bg-[#f1f7f2] relative scroll-mt-20">
       {/* Specific Submenu Anchors */}
       <div id="program-pondok" className="absolute -top-20 left-0 scroll-mt-24 pointer-events-none"></div>
       <div id="program-sekolah" className="absolute -top-20 left-0 scroll-mt-24 pointer-events-none"></div>
       <div id="program-masim" className="absolute -top-20 left-0 scroll-mt-24 pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1a6b3c]/10 border border-[#1a6b3c]/20 text-[#1a6b3c] text-xs font-bold">
@@ -51,58 +52,31 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
             <span>Pilar Pendidikan Terpadu</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0d4a28] tracking-tight">
-            Program Unggulan: Pondok, Sekolah & Masim
+            Program Unggulan Pondok Pesantren Jauharul Maknuun
           </h2>
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
             Keterpaduan tiga pilar pendidikan utama dalam satu ekosistem: Penguatan tahfidz asrama (Pondok), keunggulan kurikulum nasional SMP Plus (Sekolah), dan pendalaman literatur kitab turats salaf (Masim).
           </p>
         </div>
 
-        {/* 3 Main Submenu Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-white/90 rounded-2xl border border-gray-200 shadow-xs max-w-2xl mx-auto">
-          {/* Submenu 1: Pondok */}
-          <button
-            onClick={() => setActiveTab('pondok')}
-            className={`flex-1 min-w-[130px] px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 ${
-              activeTab === 'pondok'
-                ? 'bg-[#1a6b3c] text-white shadow-md'
-                : 'text-gray-600 hover:text-[#1a6b3c] hover:bg-gray-100'
-            }`}
-          >
-            <Home className="w-4 h-4 text-[#d4af37]" />
-            <span>1. Pondok</span>
-          </button>
-
-          {/* Submenu 2: Sekolah */}
-          <button
-            onClick={() => setActiveTab('sekolah')}
-            className={`flex-1 min-w-[130px] px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 ${
-              activeTab === 'sekolah'
-                ? 'bg-[#1a6b3c] text-white shadow-md'
-                : 'text-gray-600 hover:text-[#1a6b3c] hover:bg-gray-100'
-            }`}
-          >
-            <GraduationCap className="w-4 h-4 text-[#d4af37]" />
-            <span>2. Sekolah (SMP Plus)</span>
-          </button>
-
-          {/* Submenu 3: Masim */}
-          <button
-            onClick={() => setActiveTab('masim')}
-            className={`flex-1 min-w-[130px] px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 ${
-              activeTab === 'masim'
-                ? 'bg-[#1a6b3c] text-white shadow-md'
-                : 'text-gray-600 hover:text-[#1a6b3c] hover:bg-gray-100'
-            }`}
-          >
-            <Scroll className="w-4 h-4 text-[#d4af37]" />
-            <span>3. Masim (Diniyah Salaf)</span>
-          </button>
+        {/* 3 Main Submenu Tabs with Smooth Curve Edges */}
+        <div className="flex justify-center">
+          <SmoothCurvedTabs<'pondok' | 'sekolah' | 'masim'>
+            tabs={[
+              { id: 'pondok', label: 'Pondok Pesantren', icon: <Home className="w-4 h-4" /> },
+              { id: 'sekolah', label: 'Sekolah (SMP Plus)', icon: <GraduationCap className="w-4 h-4" /> },
+              { id: 'masim', label: 'Masim (Diniyah Salaf)', icon: <Scroll className="w-4 h-4" /> },
+            ]}
+            activeTab={activeTab}
+            onChange={setActiveTab}
+            size="md"
+            className="max-w-3xl flex justify-center"
+          />
         </div>
 
         {/* Tab Contents */}
         <div className="bg-white rounded-3xl p-6 sm:p-10 border border-gray-200/90 shadow-sm">
-          
+
           {/* 1. PONDOK CONTENT */}
           {activeTab === 'pondok' && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">

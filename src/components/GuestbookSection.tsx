@@ -42,8 +42,8 @@ export const GuestbookSection: React.FC<GuestbookSectionProps> = ({ entries, onS
   };
 
   return (
-    <section id="testimoni" className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <section id="testimoni" className="py-8 sm:py-10 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-[11px] font-bold text-[#1a6b3c] uppercase tracking-wider bg-[#1a6b3c]/10 px-3 py-1 rounded-full">

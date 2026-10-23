@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Post } from '../types';
 import { Search, Calendar, User, ArrowRight, Share2, Tag, BookOpen } from 'lucide-react';
+import { SmoothCurvedTabs } from './common/SmoothCurvedTabs';
 
 interface NewsSectionProps {
   posts: Post[];
@@ -53,8 +54,8 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ posts, onOpenNewsDetai
   };
 
   return (
-    <section id="news" className="py-16 bg-[#f1f7f2] relative scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <section id="news" className="py-8 sm:py-10 bg-[#f1f7f2] relative scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5 sm:space-y-6">
         
         {/* Header & Filter Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -83,21 +84,14 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ posts, onOpenNewsDetai
           </div>
         </div>
 
-        {/* Category Pills */}
-        <div className="flex flex-wrap items-center gap-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => { setSelectedCat(cat); setVisibleCount(4); }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
-                selectedCat === cat
-                  ? 'bg-[#1a6b3c] text-white shadow-sm'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        {/* Category Tabs with Smooth Curve Edges */}
+        <div className="flex justify-start sm:justify-center overflow-x-auto no-scrollbar">
+          <SmoothCurvedTabs
+            tabs={categories.map((cat) => ({ id: cat, label: cat }))}
+            activeTab={selectedCat}
+            onChange={(cat) => { setSelectedCat(cat); setVisibleCount(4); }}
+            size="sm"
+          />
         </div>
 
         {/* News Grid */}

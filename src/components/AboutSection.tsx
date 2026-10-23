@@ -14,11 +14,21 @@ import {
   FileCheck2,
   GraduationCap
 } from 'lucide-react';
+import { AboutData, InstitutionSettings } from '../types';
+import { initialAboutData, initialSettings } from '../data/initialData';
 
-export const AboutSection: React.FC = () => {
+interface AboutSectionProps {
+  aboutData?: AboutData;
+  settings?: InstitutionSettings;
+}
+
+export const AboutSection: React.FC<AboutSectionProps> = ({ 
+  aboutData = initialAboutData, 
+  settings = initialSettings 
+}) => {
   return (
-    <section id="about" className="py-16 sm:py-20 bg-white relative scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+    <section id="about" className="py-8 sm:py-12 bg-white relative scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14">
         
         {/* ========================================================
             SUB-MENU 1: PROFIL JM (id="profil-jm")
@@ -131,24 +141,24 @@ export const AboutSection: React.FC = () => {
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
-                  alt="Pengasuh PP Jauharul Maknuun KH. Ahmad Zaini"
+                  src={aboutData.directorImage}
+                  alt={aboutData.directorName}
                   className="w-full h-[400px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                  <span className="text-[10px] text-[#d4af37] font-bold uppercase tracking-wider">Pengasuh Pesantren</span>
-                  <h3 className="text-lg font-bold">KH. Ahmad Zaini, M.Pd.I</h3>
-                  <p className="text-xs text-gray-300">Direktur Pondok & SMP Plus Jauharul Maknuun</p>
+                  <span className="text-[10px] text-[#d4af37] font-bold uppercase tracking-wider">Pimpinan Pesantren</span>
+                  <h3 className="text-lg font-bold">{aboutData.directorName}</h3>
+                  <p className="text-xs text-gray-300">{aboutData.directorTitle}</p>
                 </div>
               </div>
               
               {/* Floating Badge */}
               <div className="absolute -bottom-4 -right-4 bg-[#1a6b3c] text-white p-3.5 rounded-2xl shadow-xl border-2 border-white flex items-center gap-2.5">
                 <div className="w-10 h-10 rounded-xl bg-[#d4af37] text-gray-900 flex items-center justify-center font-black text-lg">
-                  A
+                  {settings.accreditation ? settings.accreditation.charAt(0) : 'A'}
                 </div>
                 <div className="text-left">
-                  <div className="text-xs font-bold leading-tight">Terakreditasi "A"</div>
+                  <div className="text-xs font-bold leading-tight">Terakreditasi "{settings.accreditation || 'A'}"</div>
                   <div className="text-[10px] text-emerald-200">BAN-PDM Resmi</div>
                 </div>
               </div>
@@ -165,11 +175,11 @@ export const AboutSection: React.FC = () => {
               </h2>
 
               <blockquote className="p-4 bg-emerald-50/70 border-l-4 border-[#1a6b3c] rounded-r-2xl italic text-xs sm:text-sm text-gray-700 leading-relaxed font-serif">
-                "Pondok Pesantren Jauharul Maknuun hadir bukan sekadar sebagai tempat menuntut ilmu formal, melainkan kawah candradimuka pembinaan adab santri, benteng akidah ahlussunnah wal jama’ah, dan sarana mencetak generasi penghafal Qur'an yang cerdas sains serta berakhlak mulia."
+                "{aboutData.directorQuote}"
               </blockquote>
 
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Kami meyakini bahwa kemajuan teknologi tidak boleh menjauhkan generasi muda dari Al-Qur'an dan nilai-nilai akhlaqul karimah. Di Jauharul Maknuun, santri diajarkan memegang teguh sanad keilmuan ulama salaf sembari mahir mengoperasikan sains terapan abad ke-21.
+                {aboutData.directorSpeech}
               </p>
 
               <div className="grid grid-cols-2 gap-3 pt-2 text-xs text-gray-700">
@@ -216,7 +226,7 @@ export const AboutSection: React.FC = () => {
                 </div>
                 <h4 className="font-bold text-base text-[#0d4a28]">Visi Pesantren</h4>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  "Terwujudnya lembaga pendidikan Islam terpadu yang unggul dalam mencetak generasi muttaqin, hafidz Qur'an yang mutqin, menguasai khazanah kitab kuning salafiyah, serta cakap dalam sains dan teknologi informasi berlandaskan Ahlussunnah wal Jama'ah An-Nahdliyyah."
+                  "{aboutData.vision}"
                 </p>
               </div>
 
@@ -227,22 +237,12 @@ export const AboutSection: React.FC = () => {
                 </div>
                 <h4 className="font-bold text-base text-[#0d4a28]">Misi Utama</h4>
                 <ul className="text-xs text-gray-600 space-y-2">
-                  <li className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1.5 shrink-0"></span>
-                    <span>Menyelenggarakan halaqah tahfidz Al-Qur'an 30 juz dengan bimbingan bersanad.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1.5 shrink-0"></span>
-                    <span>Mengkaji kitab kuning turats salafiyah metode maknani gandul secara istiqomah.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1.5 shrink-0"></span>
-                    <span>Menerapkan kurikulum nasional Kurikulum Merdeka berstandar BAN-PDM Akreditasi A.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1.5 shrink-0"></span>
-                    <span>Menanamkan pembiasaan akhlaqul karimah dan kemandirian hidup santri.</span>
-                  </li>
+                  {aboutData.mission.map((m, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1.5 shrink-0"></span>
+                      <span>{m}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

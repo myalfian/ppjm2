@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Newspaper, Share2, Laptop, Menu, X } from 'lucide-react';
+import { Home, Newspaper, Share2, Laptop, GraduationCap } from 'lucide-react';
 
 interface BottomNavProps {
   onOpenPpdb?: () => void;
@@ -16,20 +16,11 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   onOpenMenu,
   isMenuOpen = false
 }) => {
-  const [activeTab, setActiveTab] = useState<'home' | 'news' | 'medsos' | 'elearning' | 'menu'>('home');
-
-  // Sync activeTab if isMenuOpen changes from parent
-  useEffect(() => {
-    if (isMenuOpen) {
-      setActiveTab('menu');
-    }
-  }, [isMenuOpen]);
+  const [activeTab, setActiveTab] = useState<'home' | 'news' | 'medsos' | 'elearning' | 'ppdb'>('home');
 
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (isMenuOpen) return;
-
       const scrollPos = window.scrollY + 280;
 
       const medsosEl = document.getElementById('medsos') || document.getElementById('lokasi');
@@ -46,9 +37,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMenuOpen]);
+  }, []);
 
-  const handleNavClick = (sectionId: string, tab: 'home' | 'news' | 'medsos' | 'elearning' | 'menu') => {
+  const handleNavClick = (sectionId: string, tab: 'home' | 'news' | 'medsos' | 'elearning' | 'ppdb') => {
     setActiveTab(tab);
     if (sectionId === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -182,35 +173,38 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}></span>
         </button>
 
-        {/* 5. Menu */}
+        {/* 5. PPDB */}
         <button
           onClick={() => {
-            setActiveTab('menu');
-            onOpenMenu?.();
+            setActiveTab('ppdb');
+            if (onOpenPpdb) {
+              onOpenPpdb();
+            } else {
+              const element = document.getElementById('ppdb');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
           }}
           className="flex flex-col items-center justify-center py-1 transition-all duration-200 touch-press group"
-          aria-label="Menu"
+          aria-label="PPDB"
         >
           <div className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
-            activeTab === 'menu' || isMenuOpen
+            activeTab === 'ppdb'
               ? 'bg-[#e8f5e9] text-[#1a6b3c]' 
               : 'text-slate-500 group-hover:text-slate-700'
           }`}>
-            {isMenuOpen ? (
-              <X className="w-5 h-5 stroke-[2.1]" />
-            ) : (
-              <Menu className="w-5 h-5 stroke-[2.1]" />
-            )}
+            <GraduationCap className="w-5 h-5 stroke-[2.1]" />
           </div>
           <span className={`text-[11px] tracking-tight mt-0.5 leading-none transition-colors ${
-            activeTab === 'menu' || isMenuOpen
+            activeTab === 'ppdb'
               ? 'text-[#1a6b3c] font-semibold' 
               : 'text-slate-600 font-medium'
           }`}>
-            Menu
+            PPDB
           </span>
           <span className={`w-1.5 h-1.5 rounded-full bg-[#1a6b3c] mt-1 transition-opacity ${
-            activeTab === 'menu' || isMenuOpen ? 'opacity-100' : 'opacity-0'
+            activeTab === 'ppdb' ? 'opacity-100' : 'opacity-0'
           }`}></span>
         </button>
 
