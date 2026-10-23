@@ -550,7 +550,6 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             </div>
           </div>
         )}
-
       </div>
 
       {/* ================= FULL-SIZE FLYER MODAL / BOTTOM SHEET ================= */}
