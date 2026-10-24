@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 import { 
   UserCheck, 
   Compass, 
   Megaphone, 
   Laptop, 
   Activity, 
-  Trophy 
+  Trophy,
+  ArrowUpRight
 } from 'lucide-react';
 
 interface QuickMenuProps {
@@ -15,6 +16,7 @@ interface QuickMenuProps {
 interface MenuItem {
   id: string;
   label: string;
+  subtitle: string;
   icon: React.ComponentType<{ className?: string }>;
   cardTheme: string;
   pillTheme: string;
@@ -24,11 +26,6 @@ interface MenuItem {
 }
 
 export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
-  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isInteractingRef = useRef(false);
-
   const scrollToSection = (targetId: string) => {
     const el = document.getElementById(targetId);
     if (el) {
@@ -40,129 +37,79 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
     {
       id: 'sambutan',
       label: 'Sambutan',
+      subtitle: 'Pesan & Arahan Pimpinan',
       icon: UserCheck,
-      cardTheme: 'bg-gradient-to-b from-[#fffdf5] via-[#fffbeb] to-[#fef3c7]/95 border-[#fde68a]',
-      pillTheme: 'bg-[#fef3c7] border border-[#fde68a]/80',
+      cardTheme: 'bg-gradient-to-br from-[#fffdf5] via-[#fffbeb] to-[#fef3c7]/85 border-[#fde68a]/80',
+      pillTheme: 'bg-[#fef3c7] border border-[#fde68a]',
       iconColor: 'text-[#92400e]',
-      hoverShadow: 'hover:shadow-amber-500/20 hover:border-[#f59e0b]/60',
+      hoverShadow: 'hover:shadow-amber-500/15 hover:border-[#f59e0b]/60',
       action: () => scrollToSection('sambutan-direktur')
     },
     {
       id: 'visi-misi',
       label: 'Visi & Misi',
+      subtitle: 'Arah & Nilai Luhur Lembaga',
       icon: Compass,
-      cardTheme: 'bg-gradient-to-b from-[#f8faff] via-[#eff6ff] to-[#dbeafe]/95 border-[#bfdbfe]',
-      pillTheme: 'bg-[#dbeafe] border border-[#bfdbfe]/80',
+      cardTheme: 'bg-gradient-to-br from-[#f8faff] via-[#eff6ff] to-[#dbeafe]/85 border-[#bfdbfe]/80',
+      pillTheme: 'bg-[#dbeafe] border border-[#bfdbfe]',
       iconColor: 'text-[#1e40af]',
-      hoverShadow: 'hover:shadow-blue-500/20 hover:border-[#3b82f6]/60',
+      hoverShadow: 'hover:shadow-blue-500/15 hover:border-[#3b82f6]/60',
       action: () => scrollToSection('visi-misi')
     },
     {
       id: 'pengumuman',
       label: 'Pengumuman',
+      subtitle: 'Informasi & Warta Terkini',
       icon: Megaphone,
-      cardTheme: 'bg-gradient-to-b from-[#fff5f6] via-[#fff1f2] to-[#ffe4e6]/95 border-[#fecdd3]',
-      pillTheme: 'bg-[#ffe4e6] border border-[#fecdd3]/80',
+      cardTheme: 'bg-gradient-to-br from-[#fff5f6] via-[#fff1f2] to-[#ffe4e6]/85 border-[#fecdd3]/80',
+      pillTheme: 'bg-[#ffe4e6] border border-[#fecdd3]',
       iconColor: 'text-[#be123c]',
-      hoverShadow: 'hover:shadow-rose-500/20 hover:border-[#f43f5e]/60',
+      hoverShadow: 'hover:shadow-rose-500/15 hover:border-[#f43f5e]/60',
       action: () => scrollToSection('news')
     },
     {
       id: 'elearning',
       label: 'E-Learning',
+      subtitle: 'Portal Digital Pembelajaran',
       icon: Laptop,
-      cardTheme: 'bg-gradient-to-b from-[#f2fcf7] via-[#ecfdf5] to-[#d1fae5]/95 border-[#a7f3d0]',
-      pillTheme: 'bg-[#d1fae5] border border-[#a7f3d0]/80',
+      cardTheme: 'bg-gradient-to-br from-[#f2fcf7] via-[#ecfdf5] to-[#d1fae5]/85 border-[#a7f3d0]/80',
+      pillTheme: 'bg-[#d1fae5] border border-[#a7f3d0]',
       iconColor: 'text-[#065f46]',
-      hoverShadow: 'hover:shadow-emerald-500/20 hover:border-[#10b981]/60',
+      hoverShadow: 'hover:shadow-emerald-500/15 hover:border-[#10b981]/60',
       action: onOpenElearning
     },
     {
       id: 'ekskul',
       label: 'Ekstrakurikuler',
+      subtitle: 'Wadah Minat & Bakat Santri',
       icon: Activity,
-      cardTheme: 'bg-gradient-to-b from-[#fffaf5] via-[#fff7ed] to-[#ffedd5]/95 border-[#fed7aa]',
-      pillTheme: 'bg-[#ffedd5] border border-[#fed7aa]/80',
+      cardTheme: 'bg-gradient-to-br from-[#fffaf5] via-[#fff7ed] to-[#ffedd5]/85 border-[#fed7aa]/80',
+      pillTheme: 'bg-[#ffedd5] border border-[#fed7aa]',
       iconColor: 'text-[#9a3412]',
-      hoverShadow: 'hover:shadow-orange-500/20 hover:border-[#f97316]/60',
+      hoverShadow: 'hover:shadow-orange-500/15 hover:border-[#f97316]/60',
       action: () => scrollToSection('ekstrakurikuler')
     },
     {
       id: 'prestasi',
       label: 'Prestasi',
+      subtitle: 'Capaian & Kejuaraan Siswa',
       icon: Trophy,
-      cardTheme: 'bg-gradient-to-b from-[#fefef0] via-[#fefce8] to-[#fef9c3]/95 border-[#fef08a]',
-      pillTheme: 'bg-[#fef9c3] border border-[#fef08a]/80',
+      cardTheme: 'bg-gradient-to-br from-[#fefef0] via-[#fefce8] to-[#fef9c3]/85 border-[#fef08a]/80',
+      pillTheme: 'bg-[#fef9c3] border border-[#fef08a]',
       iconColor: 'text-[#854d0e]',
-      hoverShadow: 'hover:shadow-yellow-500/20 hover:border-[#eab308]/60',
+      hoverShadow: 'hover:shadow-yellow-500/15 hover:border-[#eab308]/60',
       action: () => scrollToSection('prestasi')
     }
   ];
 
-  // Mobile pairs (2 items per screen fit)
-  const mobilePairs = [
-    [menuItems[0], menuItems[1]],
-    [menuItems[2], menuItems[3]],
-    [menuItems[4], menuItems[5]],
-  ];
-
-  // Scroll to specific page in mobile carousel
-  const scrollToPage = useCallback((pageIndex: number) => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const pageWidth = container.clientWidth;
-    container.scrollTo({
-      left: pageIndex * pageWidth,
-      behavior: 'smooth'
-    });
-    setActiveMobileIndex(pageIndex);
-  }, []);
-
-  // Update active page index based on scroll position
-  const handleScroll = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const scrollLeft = container.scrollLeft;
-    const pageWidth = container.clientWidth;
-    if (!pageWidth) return;
-
-    const pageIndex = Math.round(scrollLeft / pageWidth);
-    const clampedIndex = Math.max(0, Math.min(pageIndex, mobilePairs.length - 1));
-    if (clampedIndex !== activeMobileIndex) {
-      setActiveMobileIndex(clampedIndex);
-    }
-  };
-
-  // Auto-sliding Carousel for Mobile (3.8s interval, pauses on touch/hover)
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      if (isInteractingRef.current) return;
-
-      setActiveMobileIndex((prev) => {
-        const nextIndex = (prev + 1) % mobilePairs.length;
-        scrollToPage(nextIndex);
-        return nextIndex;
-      });
-    }, 3800);
-
-    return () => clearInterval(interval);
-  }, [isPaused, mobilePairs.length, scrollToPage]);
-
   return (
     <section 
       aria-label="Menu Navigasi Cepat Portal" 
-      className="relative z-30 -mt-2 sm:-mt-3 bg-white rounded-t-3xl sm:rounded-t-4xl border-t border-gray-100 shadow-[0_-6px_24px_rgba(0,0,0,0.05)] pt-3 pb-3 sm:pt-4 sm:pb-5"
+      className="relative z-30 -mt-3 sm:-mt-4 bg-white rounded-t-3xl sm:rounded-t-4xl border-t border-gray-100 shadow-[0_-6px_24px_rgba(0,0,0,0.05)] pt-4 pb-5 sm:pt-6 sm:pb-7"
     >
       <div className="w-full max-w-7xl mx-auto px-3 sm:px-6">
-        
-        {/* ======================================================== */}
-        {/* 1. DESKTOP & TABLET VIEW (md ke atas: 1 Baris Penuh 6 Kolom Besar) */}
-        {/* ======================================================== */}
-        <div className="hidden md:grid md:grid-cols-6 gap-3 lg:gap-4">
+        {/* Layout Menu: 2 Baris x 3 Kolom */}
+        <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 lg:gap-4.5">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -170,118 +117,37 @@ export const QuickMenu: React.FC<QuickMenuProps> = ({ onOpenElearning }) => {
                 key={item.id}
                 onClick={item.action}
                 type="button"
-                className={`group relative flex flex-col items-center justify-center p-4 sm:p-5 lg:p-6 rounded-2xl lg:rounded-3xl border transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-xl active:scale-95 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#d4af37] cursor-pointer overflow-hidden backdrop-blur-xs min-h-[125px] lg:min-h-[145px] ${item.cardTheme} ${item.hoverShadow}`}
-                title={item.label}
+                className={`group relative flex flex-col md:flex-row items-center md:items-center text-center md:text-left p-2.5 sm:p-4 lg:p-4.5 rounded-2xl lg:rounded-3xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg active:scale-[0.98] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#d4af37] cursor-pointer overflow-hidden backdrop-blur-xs min-h-[92px] sm:min-h-[105px] md:min-h-[90px] ${item.cardTheme} ${item.hoverShadow}`}
+                title={`${item.label} - ${item.subtitle}`}
               >
                 {/* Subtle Glass Highlight */}
                 <div className="absolute inset-x-0 top-0 h-1/2 bg-white/45 pointer-events-none rounded-t-2xl lg:rounded-t-3xl" />
 
-                {/* Animated Large Icon Badge */}
+                {/* Animated Icon Badge */}
                 <div 
-                  className={`w-14 h-11 lg:w-16 lg:h-12 rounded-2xl flex items-center justify-center transition-all duration-300 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:-translate-y-0.5 shadow-xs ${item.pillTheme}`}
+                  className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 lg:w-13 lg:h-13 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 ease-out group-hover:scale-110 group-hover:rotate-2 shadow-xs ${item.pillTheme}`}
                 >
-                  <Icon className={`w-6 h-6 lg:w-7 lg:h-7 ${item.iconColor} stroke-[2.3] transition-transform duration-300 group-hover:scale-105`} />
+                  <Icon className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-6.5 lg:h-6.5 ${item.iconColor} stroke-[2.2] transition-transform duration-300 group-hover:scale-105`} />
                 </div>
 
-                {/* Card Text Label - Prominent, Bold & Fit to Card */}
-                <span className="relative z-10 text-sm md:text-[15px] lg:text-base xl:text-lg font-black text-gray-900 tracking-tight text-center mt-2.5 lg:mt-3 group-hover:text-black transition-colors leading-tight w-full px-1">
-                  {item.label}
-                </span>
+                {/* Card Text Details */}
+                <div className="flex-1 min-w-0 mt-1.5 md:mt-0 md:ml-3 lg:ml-4 w-full">
+                  <div className="flex items-center justify-center md:justify-between gap-1">
+                    <span className="text-xs sm:text-sm md:text-base lg:text-[17px] font-black text-gray-900 tracking-tight leading-snug group-hover:text-black transition-colors truncate">
+                      {item.label}
+                    </span>
+                    <div className="hidden md:flex items-center justify-center w-6 h-6 lg:w-7 lg:h-7 rounded-full bg-white/70 text-gray-400 group-hover:text-gray-800 group-hover:bg-white group-hover:translate-x-0.5 transition-all shadow-2xs">
+                      <ArrowUpRight className="w-3.5 h-3.5 lg:w-4 lg:h-4 stroke-[2.3]" />
+                    </div>
+                  </div>
+                  <p className="hidden md:block text-[11px] lg:text-xs text-gray-600 font-medium mt-0.5 line-clamp-1">
+                    {item.subtitle}
+                  </p>
+                </div>
               </button>
             );
           })}
         </div>
-
-        {/* ======================================================== */}
-        {/* 2. MOBILE VIEW (< md: Tampil Per 2 Menu Fit to Screen Besar) */}
-        {/* ======================================================== */}
-        <div 
-          className="md:hidden relative"
-          onMouseEnter={() => {
-            isInteractingRef.current = true;
-            setIsPaused(true);
-          }}
-          onMouseLeave={() => {
-            isInteractingRef.current = false;
-            setIsPaused(false);
-          }}
-          onTouchStart={() => {
-            isInteractingRef.current = true;
-            setIsPaused(true);
-          }}
-          onTouchEnd={() => {
-            isInteractingRef.current = false;
-            setTimeout(() => {
-              if (!isInteractingRef.current) setIsPaused(false);
-            }, 1500);
-          }}
-        >
-          {/* Scrollable Track - 2 Large Cards Fit to Screen per Slide Page */}
-          <div 
-            ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="flex overflow-x-auto scrollbar-none snap-x snap-mandatory touch-pan-x"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch'
-            }}
-          >
-            {mobilePairs.map((pair, pageIdx) => (
-              <div 
-                key={pageIdx}
-                className="w-full shrink-0 grid grid-cols-2 gap-3 px-2 snap-center"
-              >
-                {pair.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={item.action}
-                      type="button"
-                      className={`group relative flex flex-col items-center justify-center p-4 rounded-2xl border transition-all duration-300 ease-out active:scale-95 focus:outline-hidden cursor-pointer shadow-sm min-h-[118px] backdrop-blur-xs ${item.cardTheme}`}
-                      title={item.label}
-                    >
-                      {/* Glass Highlight */}
-                      <div className="absolute inset-x-0 top-0 h-1/2 bg-white/40 pointer-events-none rounded-t-2xl" />
-
-                      {/* Large Icon Badge */}
-                      <div 
-                        className={`w-14 h-10 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs group-hover:scale-105 ${item.pillTheme}`}
-                      >
-                        <Icon className={`w-6 h-6 ${item.iconColor} stroke-[2.3]`} />
-                      </div>
-
-                      {/* Text Label - Large, Bold & Fit to Card */}
-                      <span className="relative z-10 text-sm xs:text-base font-black text-gray-900 tracking-tight text-center mt-2.5 leading-tight w-full px-1">
-                        {item.label}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile Dot Indicators for the 3 Pages */}
-          <div className="flex items-center justify-center gap-2 mt-3">
-            {mobilePairs.map((_, pageIdx) => (
-              <button
-                key={pageIdx}
-                type="button"
-                onClick={() => scrollToPage(pageIdx)}
-                aria-label={`Halaman menu ${pageIdx + 1} dari ${mobilePairs.length}`}
-                className={`transition-all duration-300 rounded-full cursor-pointer focus:outline-hidden ${
-                  pageIdx === activeMobileIndex 
-                    ? 'w-6 h-2 bg-[#d4af37]' 
-                    : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
-                }`}
-              />
-            ))}
-          </div>
-
-        </div>
-
       </div>
     </section>
   );

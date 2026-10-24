@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { store } from './services/store';
 import { Navbar } from './components/Navbar';
 import { HeroSlider } from './components/HeroSlider';
@@ -19,21 +19,21 @@ import { WaveDivider } from './components/WaveDivider';
 import { Footer } from './components/Footer';
 import { BottomNav } from './components/BottomNav';
 
-// Modals
-import { PpdbModal } from './components/modals/PpdbModal';
-import { PpdbStatusModal } from './components/modals/PpdbStatusModal';
-import { PrintCardModal } from './components/modals/PrintCardModal';
-import { NewsDetailModal } from './components/modals/NewsDetailModal';
-import { MediaModal } from './components/modals/MediaModal';
-import { EcosystemModal } from './components/modals/EcosystemModal';
-import { SyllabusModal } from './components/modals/SyllabusModal';
-import { SearchModal } from './components/modals/SearchModal';
-import { CbtExamModal } from './components/modals/CbtExamModal';
-import { MobileMenuModal } from './components/modals/MobileMenuModal';
+// Code-split Modals with dynamic import (loaded on demand)
+const PpdbModal = lazy(() => import('./components/modals/PpdbModal').then(m => ({ default: m.PpdbModal })));
+const PpdbStatusModal = lazy(() => import('./components/modals/PpdbStatusModal').then(m => ({ default: m.PpdbStatusModal })));
+const PrintCardModal = lazy(() => import('./components/modals/PrintCardModal').then(m => ({ default: m.PrintCardModal })));
+const NewsDetailModal = lazy(() => import('./components/modals/NewsDetailModal').then(m => ({ default: m.NewsDetailModal })));
+const MediaModal = lazy(() => import('./components/modals/MediaModal').then(m => ({ default: m.MediaModal })));
+const EcosystemModal = lazy(() => import('./components/modals/EcosystemModal').then(m => ({ default: m.EcosystemModal })));
+const SyllabusModal = lazy(() => import('./components/modals/SyllabusModal').then(m => ({ default: m.SyllabusModal })));
+const SearchModal = lazy(() => import('./components/modals/SearchModal').then(m => ({ default: m.SearchModal })));
+const CbtExamModal = lazy(() => import('./components/modals/CbtExamModal').then(m => ({ default: m.CbtExamModal })));
+const MobileMenuModal = lazy(() => import('./components/modals/MobileMenuModal').then(m => ({ default: m.MobileMenuModal })));
 
-// Admin Views
-import { AdminLogin } from './components/admin/AdminLogin';
-import { AdminDashboard } from './components/admin/AdminDashboard';
+// Code-split Admin Views (loaded only when accessing Admin panel)
+const AdminLogin = lazy(() => import('./components/admin/AdminLogin').then(m => ({ default: m.AdminLogin })));
+const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 
 import { Post, MediaGalleryItem, PPDBSubmission } from './types';
 import { CheckCircle2, AlertCircle, X } from 'lucide-react';
@@ -248,72 +248,81 @@ export const App: React.FC = () => {
 
       {/* Admin Mode vs Public Portal View */}
       {isAdminView ? (
-        !isAuthenticated ? (
-          <AdminLogin
-            onLogin={(email) => store.login(email)}
-            onBack={() => setIsAdminView(false)}
-          />
-        ) : (
-          <AdminDashboard
-            currentRole={currentRole}
-            onRoleChange={(r) => store.setRole(r)}
-            onLogout={() => store.logout()}
-            onBackToWebsite={() => setIsAdminView(false)}
-            ppdbList={ppdbList}
-            posts={posts}
-            trash={trash}
-            mediaList={mediaList}
-            activityLogs={activityLogs}
-            santriList={santriList}
-            tahfidzList={tahfidzList}
-            perizinanList={perizinanList}
-            tagihanList={tagihanList}
-            nilaiList={nilaiList}
-            settings={settings}
-            slides={slides}
-            achievements={achievements}
-            extracurriculars={extracurriculars}
-            facilities={facilities}
-            faqs={faqs}
-            aboutData={aboutData}
-            onUpdateSettings={(s) => store.updateSettings(s)}
-            onUpdateSlide={(id, s) => store.updateSlide(id, s)}
-            onAddSlide={(s) => store.addSlide(s)}
-            onDeleteSlide={(id) => store.deleteSlide(id)}
-            onCleanupTestAudit={() => store.cleanupTestAuditData()}
-            onAddAchievement={(a) => store.addAchievement(a)}
-            onUpdateAchievement={(a) => store.updateAchievement(a)}
-            onDeleteAchievement={(id) => store.deleteAchievement(id)}
-            onAddExtracurricular={(e) => store.addExtracurricular(e)}
-            onUpdateExtracurricular={(e) => store.updateExtracurricular(e)}
-            onDeleteExtracurricular={(id) => store.deleteExtracurricular(id)}
-            onAddFacility={(f) => store.addFacility(f)}
-            onUpdateFacility={(f) => store.updateFacility(f)}
-            onDeleteFacility={(id) => store.deleteFacility(id)}
-            onAddFaq={(faq) => store.addFaq(faq)}
-            onUpdateFaq={(faq) => store.updateFaq(faq)}
-            onDeleteFaq={(id) => store.deleteFaq(id)}
-            onUpdateAboutData={(data) => store.updateAboutData(data)}
-            onExportAllData={() => store.exportAllData()}
-            onImportAllData={(json) => store.importAllData(json)}
-            onUpdatePPDBStatus={(id, s) => store.updatePPDBStatus(id, s)}
-            onOpenPrintCard={(s) => setPrintCardSubmission(s)}
-            onAddPost={(p) => store.addPost(p)}
-            onDeletePost={(id) => store.deletePost(id)}
-            onRestorePost={(id) => store.restorePost(id)}
-            onPermanentDeletePost={(id) => store.permanentDeletePost(id)}
-            onAddMedia={(m) => store.addMedia(m)}
-            onDeleteMedia={(id) => store.deleteMedia(id)}
-            onAddSantri={(s) => store.addSantri(s)}
-            onDeleteSantri={(id) => store.deleteSantri(id)}
-            onAddTahfidz={(t) => store.addTahfidz(t)}
-            onAddPerizinan={(p) => store.addPerizinan(p)}
-            onUpdatePerizinanStatus={(id, s) => store.updatePerizinanStatus(id, s)}
-            onMarkTagihanLunas={(id) => store.markTagihanLunas(id)}
-            onAddNilai={(n) => store.addNilai(n)}
-            onToast={showToast}
-          />
-        )
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-10 h-10 border-4 border-[#1a6b3c] border-t-transparent rounded-full animate-spin" />
+              <p className="text-sm font-semibold text-gray-600">Memuat Portal Administrasi...</p>
+            </div>
+          </div>
+        }>
+          {!isAuthenticated ? (
+            <AdminLogin
+              onLogin={(email) => store.login(email)}
+              onBack={() => setIsAdminView(false)}
+            />
+          ) : (
+            <AdminDashboard
+              currentRole={currentRole}
+              onRoleChange={(r) => store.setRole(r)}
+              onLogout={() => store.logout()}
+              onBackToWebsite={() => setIsAdminView(false)}
+              ppdbList={ppdbList}
+              posts={posts}
+              trash={trash}
+              mediaList={mediaList}
+              activityLogs={activityLogs}
+              santriList={santriList}
+              tahfidzList={tahfidzList}
+              perizinanList={perizinanList}
+              tagihanList={tagihanList}
+              nilaiList={nilaiList}
+              settings={settings}
+              slides={slides}
+              achievements={achievements}
+              extracurriculars={extracurriculars}
+              facilities={facilities}
+              faqs={faqs}
+              aboutData={aboutData}
+              onUpdateSettings={(s) => store.updateSettings(s)}
+              onUpdateSlide={(id, s) => store.updateSlide(id, s)}
+              onAddSlide={(s) => store.addSlide(s)}
+              onDeleteSlide={(id) => store.deleteSlide(id)}
+              onCleanupTestAudit={() => store.cleanupTestAuditData()}
+              onAddAchievement={(a) => store.addAchievement(a)}
+              onUpdateAchievement={(a) => store.updateAchievement(a)}
+              onDeleteAchievement={(id) => store.deleteAchievement(id)}
+              onAddExtracurricular={(e) => store.addExtracurricular(e)}
+              onUpdateExtracurricular={(e) => store.updateExtracurricular(e)}
+              onDeleteExtracurricular={(id) => store.deleteExtracurricular(id)}
+              onAddFacility={(f) => store.addFacility(f)}
+              onUpdateFacility={(f) => store.updateFacility(f)}
+              onDeleteFacility={(id) => store.deleteFacility(id)}
+              onAddFaq={(faq) => store.addFaq(faq)}
+              onUpdateFaq={(faq) => store.updateFaq(faq)}
+              onDeleteFaq={(id) => store.deleteFaq(id)}
+              onUpdateAboutData={(data) => store.updateAboutData(data)}
+              onExportAllData={() => store.exportAllData()}
+              onImportAllData={(json) => store.importAllData(json)}
+              onUpdatePPDBStatus={(id, s) => store.updatePPDBStatus(id, s)}
+              onOpenPrintCard={(s) => setPrintCardSubmission(s)}
+              onAddPost={(p) => store.addPost(p)}
+              onDeletePost={(id) => store.deletePost(id)}
+              onRestorePost={(id) => store.restorePost(id)}
+              onPermanentDeletePost={(id) => store.permanentDeletePost(id)}
+              onAddMedia={(m) => store.addMedia(m)}
+              onDeleteMedia={(id) => store.deleteMedia(id)}
+              onAddSantri={(s) => store.addSantri(s)}
+              onDeleteSantri={(id) => store.deleteSantri(id)}
+              onAddTahfidz={(t) => store.addTahfidz(t)}
+              onAddPerizinan={(p) => store.addPerizinan(p)}
+              onUpdatePerizinanStatus={(id, s) => store.updatePerizinanStatus(id, s)}
+              onMarkTagihanLunas={(id) => store.markTagihanLunas(id)}
+              onAddNilai={(n) => store.addNilai(n)}
+              onToast={showToast}
+            />
+          )}
+        </Suspense>
       ) : (
         <>
           {/* Public Portal Navigation */}
@@ -487,97 +496,116 @@ export const App: React.FC = () => {
         </>
       )}
 
-      {/* Interactive Modals */}
-      <PpdbModal
-        isOpen={showPpdbModal}
-        onClose={() => setShowPpdbModal(false)}
-        onSubmit={(sub) => store.addPPDB(sub)}
-        onOpenPrintCard={(sub) => {
-          setShowPpdbModal(false);
-          setPrintCardSubmission(sub);
-        }}
-      />
+      {/* Interactive Modals (Loaded On-Demand) */}
+      <Suspense fallback={null}>
+        {showPpdbModal && (
+          <PpdbModal
+            isOpen={showPpdbModal}
+            onClose={() => setShowPpdbModal(false)}
+            onSubmit={(sub) => store.addPPDB(sub)}
+            onOpenPrintCard={(sub) => {
+              setShowPpdbModal(false);
+              setPrintCardSubmission(sub);
+            }}
+          />
+        )}
 
-      <PpdbStatusModal
-        isOpen={showStatusModal}
-        onClose={() => setShowStatusModal(false)}
-        submissions={ppdbList}
-        onOpenPrintCard={(sub) => {
-          setShowStatusModal(false);
-          setPrintCardSubmission(sub);
-        }}
-        onStartCbt={(sub) => {
-          setShowStatusModal(false);
-          setCbtExamSubmission(sub);
-        }}
-      />
+        {showStatusModal && (
+          <PpdbStatusModal
+            isOpen={showStatusModal}
+            onClose={() => setShowStatusModal(false)}
+            submissions={ppdbList}
+            onOpenPrintCard={(sub) => {
+              setShowStatusModal(false);
+              setPrintCardSubmission(sub);
+            }}
+            onStartCbt={(sub) => {
+              setShowStatusModal(false);
+              setCbtExamSubmission(sub);
+            }}
+          />
+        )}
 
-      {cbtExamSubmission && (
-        <CbtExamModal
-          isOpen={!!cbtExamSubmission}
-          submission={cbtExamSubmission}
-          onClose={() => setCbtExamSubmission(null)}
-          onComplete={(score, total) => {
-            store.recordCBTScore(cbtExamSubmission.code, score, total);
-            showToast(`CBT Asesmen selesai! Skor: ${score}/${total} telah disimpan pada berkas pendaftaran.`);
-          }}
-        />
-      )}
+        {cbtExamSubmission && (
+          <CbtExamModal
+            isOpen={!!cbtExamSubmission}
+            submission={cbtExamSubmission}
+            onClose={() => setCbtExamSubmission(null)}
+            onComplete={(score, total) => {
+              store.recordCBTScore(cbtExamSubmission.code, score, total);
+              showToast(`CBT Asesmen selesai! Skor: ${score}/${total} telah disimpan pada berkas pendaftaran.`);
+            }}
+          />
+        )}
 
-      <PrintCardModal
-        submission={printCardSubmission}
-        onClose={() => setPrintCardSubmission(null)}
-      />
+        {printCardSubmission && (
+          <PrintCardModal
+            submission={printCardSubmission}
+            onClose={() => setPrintCardSubmission(null)}
+          />
+        )}
 
-      <NewsDetailModal
-        post={selectedNewsPost}
-        onClose={() => setSelectedNewsPost(null)}
-        onToast={showToast}
-      />
+        {selectedNewsPost && (
+          <NewsDetailModal
+            post={selectedNewsPost}
+            onClose={() => setSelectedNewsPost(null)}
+            onToast={showToast}
+          />
+        )}
 
-      <MediaModal
-        item={selectedMediaItem}
-        onClose={() => setSelectedMediaItem(null)}
-      />
+        {selectedMediaItem && (
+          <MediaModal
+            item={selectedMediaItem}
+            onClose={() => setSelectedMediaItem(null)}
+          />
+        )}
 
-      <EcosystemModal
-        moduleKey={selectedEcosystemKey}
-        onClose={() => setSelectedEcosystemKey(null)}
-      />
+        {selectedEcosystemKey && (
+          <EcosystemModal
+            moduleKey={selectedEcosystemKey}
+            onClose={() => setSelectedEcosystemKey(null)}
+          />
+        )}
 
-      <SyllabusModal
-        programName={selectedSyllabusProgram}
-        onClose={() => setSelectedSyllabusProgram(null)}
-        onToast={showToast}
-      />
+        {selectedSyllabusProgram && (
+          <SyllabusModal
+            programName={selectedSyllabusProgram}
+            onClose={() => setSelectedSyllabusProgram(null)}
+            onToast={showToast}
+          />
+        )}
 
-      <SearchModal
-        isOpen={showSearchModal}
-        onClose={() => setShowSearchModal(false)}
-        posts={posts}
-        mediaList={mediaList}
-        ppdbList={ppdbList}
-        achievements={achievements}
-        extracurriculars={extracurriculars}
-        facilities={facilities}
-        faqs={faqs}
-        onOpenNewsDetail={(p) => setSelectedNewsPost(p)}
-        onOpenMediaModal={(m) => setSelectedMediaItem(m)}
-      />
+        {showSearchModal && (
+          <SearchModal
+            isOpen={showSearchModal}
+            onClose={() => setShowSearchModal(false)}
+            posts={posts}
+            mediaList={mediaList}
+            ppdbList={ppdbList}
+            achievements={achievements}
+            extracurriculars={extracurriculars}
+            facilities={facilities}
+            faqs={faqs}
+            onOpenNewsDetail={(p) => setSelectedNewsPost(p)}
+            onOpenMediaModal={(m) => setSelectedMediaItem(m)}
+          />
+        )}
 
-      {/* Full-featured Mobile Menu Bottom Sheet (Visible anywhere in viewport) */}
-      <MobileMenuModal
-        isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-        onOpenSearch={() => setShowSearchModal(true)}
-        onOpenPpdb={() => setShowPpdbModal(true)}
-        onOpenStatus={() => setShowStatusModal(true)}
-        onOpenAdmin={() => setIsAdminView(true)}
-        onOpenElearning={() => setSelectedEcosystemKey('elearning')}
-        onOpenEcosystem={(key) => setSelectedEcosystemKey(key)}
-        onOpenSyllabus={(prog) => setSelectedSyllabusProgram(prog)}
-        onNavigateToSection={handleNavigateToSection}
-      />
+        {mobileMenuOpen && (
+          <MobileMenuModal
+            isOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+            onOpenSearch={() => setShowSearchModal(true)}
+            onOpenPpdb={() => setShowPpdbModal(true)}
+            onOpenStatus={() => setShowStatusModal(true)}
+            onOpenAdmin={() => setIsAdminView(true)}
+            onOpenElearning={() => setSelectedEcosystemKey('elearning')}
+            onOpenEcosystem={(key) => setSelectedEcosystemKey(key)}
+            onOpenSyllabus={(prog) => setSelectedSyllabusProgram(prog)}
+            onNavigateToSection={handleNavigateToSection}
+          />
+        )}
+      </Suspense>
 
     </div>
   );
