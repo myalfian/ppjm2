@@ -215,7 +215,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({ onToast, setti
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4">
             <div>
               <h3 className="text-lg sm:text-xl font-bold text-[#0d4a28]">
-                Peta Lokasi Kompleks Pesantren & SMP Plus
+                Peta Lokasi Kompleks Pondok Pesantren Jauharul Maknuun
               </h3>
               <p className="text-xs text-gray-500 mt-0.5">
                 Jl. Raya Dukun-Lasem RT 1 RW 1, Lasem Sidayu Gresik, Gresik 61153

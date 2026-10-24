@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /private/
 
-Sitemap: https://ppjauharulmaknuun.yufan.id/sitemap.xml
+Sitemap: https://ppjauharulmaknuun.sch.id/sitemap.xml

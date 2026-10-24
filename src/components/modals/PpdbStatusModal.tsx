@@ -85,7 +85,7 @@ export const PpdbStatusModal: React.FC<PpdbStatusModalProps> = ({
                 Cek Status Pendaftaran PPDB 2026
               </h3>
               <p className="text-[11px] text-gray-500">
-                Pondok Pesantren & SMP Plus Jauharul Maknuun
+                Pondok Pesantren Jauharul Maknuun
               </p>
             </div>
           </div>

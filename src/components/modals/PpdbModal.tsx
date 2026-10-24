@@ -19,7 +19,7 @@ export const PpdbModal: React.FC<PpdbModalProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('Laki-laki');
-  const [program, setProgram] = useState('SMP Plus & Pesantren');
+  const [program, setProgram] = useState('Pendidikan Terpadu & Pesantren');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [dietPackage, setDietPackage] = useState('Reguler 4 Sehat (3x Sehari)');
@@ -121,7 +121,7 @@ export const PpdbModal: React.FC<PpdbModalProps> = ({
                 Formulir PPDB Online 2026/2027
               </h3>
               <p className="text-[11px] text-gray-500">
-                Pondok Pesantren & SMP Plus Jauharul Maknuun
+                Pondok Pesantren Jauharul Maknuun
               </p>
             </div>
           </div>
@@ -243,7 +243,7 @@ export const PpdbModal: React.FC<PpdbModalProps> = ({
                     onChange={(e) => setProgram(e.target.value)}
                     className="w-full px-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:ring-2 focus:ring-[#1a6b3c] focus:outline-none"
                   >
-                    <option value="SMP Plus & Pesantren">SMP Plus & Pesantren Terpadu</option>
+                    <option value="Pendidikan Terpadu & Pesantren">Pendidikan Terpadu & Pesantren</option>
                     <option value="Takhassus Tahfidz">Takhassus Tahfidz 30 Juz Bersanad</option>
                     <option value="Kajian Kitab Kuning">Kajian Kitab Kuning Salafiyah</option>
                   </select>

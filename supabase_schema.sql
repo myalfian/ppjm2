@@ -1,6 +1,6 @@
 -- ============================================================
 -- PPSPJM Portal — Supabase Schema & Security Setup
--- Pondok Pesantren & SMP Plus Jauharul Maknuun Lasem
+-- Pondok Pesantren Jauharul Maknuun Lasem
 -- ============================================================
 
 -- 1. Tabel PPDB (Pendaftaran Peserta Didik Baru)
@@ -109,15 +109,15 @@ CREATE POLICY "auth_all_logs" ON activity_logs FOR ALL TO authenticated USING (t
 INSERT INTO posts (title, slug, category, author, date, image, status, summary, content)
 VALUES
   (
-    'Pendaftaran PPDB Santri Baru & Siswa SMP Plus TP 2026/2027 Resmi Dibuka',
+    'Pendaftaran PPDB Santri Baru TP 2026/2027 Resmi Dibuka',
     'ppdb-santri-baru-2026-2027',
     'Pengumuman',
     'Panitia PPDB',
     '2026-02-20',
     'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80',
     'published',
-    'Pondok Pesantren dan SMP Plus Jauharul Maknuun Lasem resmi membuka Pendaftaran Peserta Didik Baru Gelombang I.',
-    'Alhamdulillah, PP & SMP Plus Jauharul Maknuun Lasem membuka Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027. Tersedia Program SMP Plus Akademik Terakreditasi, Takhassus Tahfidzul Qur''an 30 Juz, dan Diniyah Kitab Kuning Salaf. Kuota terbatas 120 santri/siswa dengan sistem seleksi berkas, baca Al-Qur''an, dan tes potensi akademik.'
+    'Pondok Pesantren Jauharul Maknuun Lasem resmi membuka Pendaftaran Peserta Didik Baru Gelombang I.',
+    'Alhamdulillah, Pondok Pesantren Jauharul Maknuun Lasem membuka Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027. Tersedia Program Pendidikan Terpadu Terakreditasi, Takhassus Tahfidzul Qur''an 30 Juz, dan Diniyah Kitab Kuning Salaf. Kuota terbatas 120 santri dengan sistem seleksi berkas, baca Al-Qur''an, dan tes potensi akademik.'
   ),
   (
     'Santri Jauharul Maknuun Raih Juara 1 Musabaqah Hifdzil Qur''an (MHQ) se-Jawa Tengah',

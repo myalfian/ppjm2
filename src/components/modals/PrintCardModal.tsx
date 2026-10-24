@@ -50,13 +50,10 @@ export const PrintCardModal: React.FC<PrintCardModalProps> = ({ submission, onCl
                 <img src="/logo.jpg" alt="Logo PPJM" className="w-full h-full object-cover" />
               </div>
               <h2 className="text-lg sm:text-xl font-black text-[#1a6b3c] tracking-tight">
-                PONDOK PESANTREN JAUHARUL MAKNUUN LASEM
+                PONDOK PESANTREN JAUHARUL MAKNUUN
               </h2>
-              <h3 className="text-xs sm:text-sm font-bold text-gray-700">
-                SMP PLUS JAUHARUL MAKNUUN ISLAMIC BOARDING SCHOOL
-              </h3>
               <p className="text-[11px] text-gray-500 mt-1">
-                Jl. Raya Dukun-Lasem RT 1 RW 1, Lasem Sidayu Gresik, Gresik 61153 &bull; Telp: 0812-3456-7890
+                Jl. Raya Dukun-Lasem RT 1 RW 1, Lasem Sidayu Gresik 61153 &bull; Telp: 0812-3456-7890 &bull; Website: https://ppjauharulmaknuun.sch.id/
               </p>
               <div className="inline-block mt-3 px-4 py-1 rounded-full bg-[#1a6b3c] text-white text-xs font-extrabold tracking-wider">
                 KARTU BUKTI PENDAFTARAN PPDB TP 2026/2027

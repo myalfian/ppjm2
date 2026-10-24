@@ -43,7 +43,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               Profil Pondok Pesantren Jauharul Maknuun
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              Lembaga pendidikan Islam terpadu yang memadukan keilmuan Kitab Kuning Salafiyah dengan Kurikulum Merdeka SMP Plus Terakreditasi "A" di Kota Santri Lasem.
+              Lembaga pendidikan Islam terpadu yang memadukan keilmuan Kitab Kuning Salafiyah dengan kurikulum terpadu Terakreditasi "A" di Kota Santri Lasem.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               </div>
               <div>
                 <span className="text-[10px] text-gray-500 font-bold uppercase block">Nama Resmi</span>
-                <h4 className="font-bold text-sm text-gray-900 leading-tight">PP & SMP Plus Jauharul Maknuun</h4>
+                <h4 className="font-bold text-sm text-gray-900 leading-tight">Pondok Pesantren Jauharul Maknuun</h4>
                 <span className="text-[11px] text-[#1a6b3c] font-semibold mt-0.5 block">Islamic Boarding School</span>
               </div>
             </div>
@@ -104,7 +104,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 Pondok Pesantren Jauharul Maknuun didirikan dengan tekad mulia menghidupkan kembali tradisi luhur para ulama Nusantara di tanah bersejarah Lasem. Mengambil nama dari kitab mutiara balaghah yang mendalam (*Al-Jauharul Maknuun*), lembaga ini berkomitmen mencetak santri yang berwawasan luas, halus budi pekertinya, dan kokoh pegangan agamanya.
               </p>
               <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                Untuk menjawab tantangan zaman modern, pesantren mengintegrasikan pendidikan formal SMP Plus dengan kurikulum riset STEM (Sains, Teknologi, Engineering, dan Matematika) serta pembelajaran bahasa Arab dan Inggris secara aktif di asrama.
+                Untuk menjawab tantangan zaman modern, pesantren mengintegrasikan pendidikan formal berbasis kurikulum terpadu dengan kurikulum riset STEM (Sains, Teknologi, Engineering, dan Matematika) serta pembelajaran bahasa Arab dan Inggris secara aktif di asrama.
               </p>
             </div>
 

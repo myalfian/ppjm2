@@ -410,7 +410,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       onAddSlide({
         title: slideTitle.trim(),
         badge: slideBadge.trim() || 'Pendidikan Terpadu',
-        desc: slideDesc.trim() || 'Pondok Pesantren & SMP Plus Jauharul Maknuun',
+        desc: slideDesc.trim() || 'Pondok Pesantren Jauharul Maknuun',
         image: slideImage.trim(),
         tag: slideTag.trim() || 'Akreditasi A',
         cardTheme: 'bg-gradient-to-br from-[#064e3b]/90 via-[#064e3b]/80 to-black/85 border-emerald-400/40 shadow-[0_12px_40px_rgba(6,78,59,0.5)]',
@@ -852,7 +852,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     className="px-2.5 py-1.5 bg-gray-50 rounded-xl border border-gray-200 focus:outline-none"
                   >
                     <option value="Semua">Semua Program</option>
-                    <option value="SMP Plus & Pesantren">SMP Plus & Pesantren</option>
+                    <option value="Pendidikan Terpadu & Pesantren">Pendidikan Terpadu & Pesantren</option>
                     <option value="Takhassus Tahfidz">Takhassus Tahfidz</option>
                     <option value="Kajian Kitab Kuning">Kajian Kitab Kuning</option>
                   </select>
@@ -1384,7 +1384,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <div className="space-y-6">
               <div>
                 <h2 className="text-xl font-bold text-[#0d4a28]">Simulasi CBT Asesmen Santri</h2>
-                <p className="text-xs text-gray-500">Platform ujian berbasis komputer mandiri untuk santri SMP Plus & Diniyah.</p>
+                <p className="text-xs text-gray-500">Platform ujian berbasis komputer mandiri untuk santri Pondok Pesantren Jauharul Maknuun.</p>
               </div>
 
               <div className="space-y-4">

@@ -22,16 +22,16 @@ import { extracurricularList, achievementsList } from './portalData';
 export const initialPosts: Post[] = [
   {
     id: 'post-1',
-    title: 'Alhamdulillah, SMP Plus Jauharul Maknuun Resmi Meraih Akreditasi "A" BAN-PDM',
+    title: 'Alhamdulillah, Pondok Pesantren Jauharul Maknuun Resmi Meraih Akreditasi "A" BAN-PDM',
     slug: 'akreditasi-a-ban-pdm-smp-plus-jm',
     category: 'Prestasi',
     author: 'Humas PPJM',
     date: '2026-02-20',
     image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
     status: 'published',
-    tags: ['Akreditasi A', 'BAN-PDM', 'SMP Plus', 'Pesantren'],
-    summary: 'SMP Plus Jauharul Maknuun Islamic Boarding School resmi meraih predikat Akreditasi "A" (Unggul) dari BAN-PDM.',
-    content: 'Alhamdulillah, puji syukur ke hadirat Allah SWT. SMP Plus Jauharul Maknuun Islamic Boarding School Lasem Sidayu Gresik resmi meraih predikat Akreditasi "A" dari Badan Akreditasi Nasional Pendidikan Dasar dan Menengah (BAN-PDM). Capaian ini menjadi tonggak penting dalam mewujudkan lembaga pendidikan berkualitas yang mengintegrasikan kurikulum nasional terpadu dengan pembinaan adab santri, kajian kitab kuning maknani, dan tahfidz Al-Qur\'an.'
+    tags: ['Akreditasi A', 'BAN-PDM', 'Pesantren', 'Unggulan'],
+    summary: 'Pondok Pesantren Jauharul Maknuun Islamic Boarding School resmi meraih predikat Akreditasi "A" (Unggul) dari BAN-PDM.',
+    content: 'Alhamdulillah, puji syukur ke hadirat Allah SWT. Pondok Pesantren Jauharul Maknuun Islamic Boarding School Lasem Sidayu Gresik resmi meraih predikat Akreditasi "A" dari Badan Akreditasi Nasional Pendidikan Dasar dan Menengah (BAN-PDM). Capaian ini menjadi tonggak penting dalam mewujudkan lembaga pendidikan berkualitas yang mengintegrasikan kurikulum nasional terpadu dengan pembinaan adab santri, kajian kitab kuning maknani, dan tahfidz Al-Qur\'an.'
   },
   {
     id: 'post-2',
@@ -56,8 +56,8 @@ export const initialPosts: Post[] = [
     image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80',
     status: 'published',
     tags: ['PPDB 2026', 'Santri Baru', 'Tahfidz', 'Pendaftaran'],
-    summary: 'Pendaftaran santri baru dan siswa SMP Plus Islamic Boarding School Gelombang I resmi dibuka secara online.',
-    content: 'Pondok Pesantren Jauharul Maknuun Lasem Sidayu Gresik membuka Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027. Tersedia Program Takhassus Tahfidzul Qur\'an 30 Juz Bersanad, SMP Plus Akademik Terakreditasi "A", Kajian Kitab Kuning Salafiyah, dan Bilingual Program (Bahasa Arab & Inggris). Kuota terbatas untuk memastikan pembinaan intensif dan asrama yang kondusif.'
+    summary: 'Pendaftaran santri baru Pondok Pesantren Jauharul Maknuun Islamic Boarding School Gelombang I resmi dibuka secara online.',
+    content: 'Pondok Pesantren Jauharul Maknuun Lasem Sidayu Gresik membuka Penerimaan Peserta Didik Baru (PPDB) Tahun Ajaran 2026/2027. Tersedia Program Takhassus Tahfidzul Qur\'an 30 Juz Bersanad, Pendidikan Akademik Terakreditasi "A", Kajian Kitab Kuning Salafiyah, dan Bilingual Program (Bahasa Arab & Inggris). Kuota terbatas untuk memastikan pembinaan intensif dan asrama yang kondusif.'
   },
   {
     id: 'post-4',
@@ -97,11 +97,11 @@ export const initialMedia: MediaGalleryItem[] = [
     size: '210 KB (WebP)',
     description: 'Aktivitas santri di laboratorium komputer modern berjejaring fiber optic. Santri mempelajari algoritma coding, simulasi ujian CBT, dan eksperimen mikrokontroler sensor IoT.',
     date: '2026-02-12',
-    location: 'Laboratorium Komputer & Riset STEM SMP Plus JM'
+    location: 'Laboratorium Komputer & Riset STEM Pondok Pesantren Jauharul Maknuun'
   },
   { 
     id: 'med-3', 
-    title: 'Dokumenter Profil Resmi Pondok & SMP Plus Jauharul Maknuun', 
+    title: 'Dokumenter Profil Resmi Pondok Pesantren Jauharul Maknuun', 
     category: 'video', 
     type: 'video', 
     url: 'https://www.youtube.com/embed/5O_7rQyQ2sY', 
@@ -163,7 +163,7 @@ export const initialMedia: MediaGalleryItem[] = [
     type: 'video', 
     url: 'https://www.youtube.com/embed/ScMzIvxBSi4', 
     size: 'Full HD 1080p',
-    description: 'Pameran sains dan inovasi santri SMP Plus Jauharul Maknuun memamerkan robot pengukur kelembaban tanah otomatis, website dakwah santri, dan proyek mikroskopi biologi.',
+    description: 'Pameran sains dan inovasi santri Pondok Pesantren Jauharul Maknuun memamerkan robot pengukur kelembaban tanah otomatis, website dakwah santri, dan proyek mikroskopi biologi.',
     date: '2026-02-10',
     location: 'Ruang Riset Sains & Teknologi Santri',
     duration: '05:30'
@@ -256,15 +256,15 @@ export const utbkQuestions = [
   {
     id: 3,
     subject: 'Literasi Bahasa Indonesia & Logika',
-    question: 'Inti dari sistem Kurikulum Merdeka Terpadu di SMP Plus Jauharul Maknuun adalah...',
+    question: 'Inti dari sistem Kurikulum Terpadu di Pondok Pesantren Jauharul Maknuun adalah...',
     options: [
       'Menghapus kurikulum agama untuk memperbanyak sains',
-      'Mengintegrasikan capaian kurikulum nasional, tahfidz bersanad, dan kajian kitab salaf',
+      'Mengintegrasikan capaian kurikulum terpadu, tahfidz bersanad, dan kajian kitab salaf',
       'Hanya berfokus pada ujian berbasis hafalan tanpa praktikum',
       'Memisahkan santri asrama dari pendidikan formal'
     ],
     correct: 1,
-    explanation: 'Visi Jauharul Maknuun adalah keterpaduan kurikulum nasional Kemendikbudristek dengan khazanah turats salafiyah.'
+    explanation: 'Visi Jauharul Maknuun adalah keterpaduan kurikulum nasional terpadu dengan khazanah turats salafiyah.'
   },
   {
     id: 4,
@@ -290,13 +290,13 @@ export const utbkQuestions = [
 ];
 
 export const initialSettings: InstitutionSettings = {
-  name: 'Pondok Pesantren & SMP Plus Jauharul Maknuun',
+  name: 'Pondok Pesantren Jauharul Maknuun',
   tagline: "Membina Generasi Qur'ani, Berakhlak Salaf & Berwawasan Global STEAM",
   address: 'Jl. Raya Lasem - Sidayu Km. 3, Desa Lasem, Sidayu',
   city: 'Kabupaten Gresik, Jawa Timur 61153',
   phone: '0812-3456-7890',
   whatsapp: '6281234567890',
-  email: 'sekretariat@ppjauharulmaknuun.yufan.id',
+  email: 'sekretariat@ppjauharulmaknuun.sch.id',
   accreditation: 'Akreditasi "A" BAN-PDM',
   npsn: '69981234',
   nsm: '212352500099',
@@ -314,7 +314,7 @@ export const initialHeroSlides: HeroSlide[] = [
     title: 'TAHFIDZ 30 JUZ BERSANAD',
     desc: "Bimbingan intensif hafalan Al-Qur'an 30 juz mutqin dengan sanad keilmuan yang tersambung kepada Rasulullah SAW, dibimbing langsung oleh dewan huffadz bersanad dengan mutaba'ah harian.",
     tagline: 'Pondok Pesantren Jauharul Maknuun mencetak generasi hafidz-hafidzah beradab dan berwawasan luas.',
-    website: 'www.jauharulmaknuun.sch.id',
+    website: 'https://ppjauharulmaknuun.sch.id/',
     image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=1200&q=80',
     tag: 'Target Mutqin 30 Juz',
     cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
@@ -324,11 +324,11 @@ export const initialHeroSlides: HeroSlide[] = [
   },
   {
     id: 'slide-2',
-    badge: 'SMP Plus Unggulan Berkarakter',
-    title: 'SMP PLUS TERAKREDITASI "A"',
-    desc: 'Pendidikan formal jenjang SMP Plus berbasis Kurikulum Merdeka terpadu yang resmi meraih Akreditasi "A" BAN-PDM, membekali santri keunggulan sains, adab, dan kepemimpinan islami.',
-    tagline: 'SMP Plus Jauharul Maknuun mengantarkan santri berprestasi gemilang di kancah nasional.',
-    website: 'www.jauharulmaknuun.sch.id',
+    badge: 'Pendidikan Islam Unggulan Berkarakter',
+    title: 'PENDIDIKAN TERAKREDITASI "A"',
+    desc: 'Pendidikan berbasis kurikulum terpadu yang resmi meraih Akreditasi "A" BAN-PDM, membekali santri keunggulan sains, adab, dan kepemimpinan islami.',
+    tagline: 'Pondok Pesantren Jauharul Maknuun mengantarkan santri berprestasi gemilang di kancah nasional.',
+    website: 'https://ppjauharulmaknuun.sch.id/',
     image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
     tag: 'Akreditasi "A" BAN-PDM',
     cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
@@ -342,7 +342,7 @@ export const initialHeroSlides: HeroSlide[] = [
     title: 'KITAB TURATS SALAFIYAH',
     desc: 'Kajian literatur kitab kuning klasik dengan metode maknani gandul Jawa (sorogan & bandongan) mencakup Nahwu-Shorof, Fiqih, Tasawuf, dan Hadits Shahih bersama asatidz berpengalaman.',
     tagline: 'Menjaga kemurnian sanad keilmuan ulama salafus sholih dan pembinaan akhlaqul karimah santri 24 jam.',
-    website: 'www.jauharulmaknuun.sch.id',
+    website: 'https://ppjauharulmaknuun.sch.id/',
     image: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1200&q=80',
     tag: 'Metode Maknani Jawa',
     cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
@@ -356,7 +356,7 @@ export const initialHeroSlides: HeroSlide[] = [
     title: 'RISET STEM & LAB KOMPUTER',
     desc: 'Fasilitas laboratorium komputer modern, pembelajaran sains interaktif (STEAM), literasi digital islami, serta coding praktis guna menyiapkan santri menghadapi era kecerdasan buatan.',
     tagline: 'Pondok Pesantren Jauharul Maknuun siap menjawab tantangan teknologi masa depan.',
-    website: 'www.jauharulmaknuun.sch.id',
+    website: 'https://ppjauharulmaknuun.sch.id/',
     image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
     tag: 'Laboratorium STEM & IT',
     cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
@@ -370,7 +370,7 @@ export const initialHeroSlides: HeroSlide[] = [
     title: 'PROGRAM BILINGUAL AKTIF',
     desc: 'Pembiasaan percakapan harian 2 bahasa dunia (Arab & Inggris) di lingkungan asrama (Bilingual Zone), dilengkapi muhadharah khitobah pidato 3 bahasa dan persiapan tes kebahasaan.',
     tagline: 'Santri fasih berbahasa internasional, percaya diri berkiprah di panggung global.',
-    website: 'www.jauharulmaknuun.sch.id',
+    website: 'https://ppjauharulmaknuun.sch.id/',
     image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80',
     tag: 'Arabic & English Zone',
     cardTheme: 'from-[#08357a] via-[#093c8a] to-[#062c66]',
@@ -445,13 +445,13 @@ export const initialFaqs: FAQItem[] = [
     id: 'faq-2',
     category: 'PPDB 2026',
     q: 'Berapa kuota penerimaan santri baru tahun ajaran 2026/2027?',
-    a: 'Untuk menjaga kualitas bimbingan intensif dan kenyamanan asrama, kuota santri baru dibatasi 60 santri putra dan 60 santri putri untuk SMP Plus & Program Takhassus Tahfidz.'
+    a: 'Untuk menjaga kualitas bimbingan intensif dan kenyamanan asrama, kuota santri baru dibatasi 60 santri putra dan 60 santri putri untuk Program Pendidikan Terpadu & Takhassus Tahfidz.'
   },
   {
     id: 'faq-3',
     category: 'Kurikulum',
-    q: 'Apa saja kurikulum yang diajarkan di SMP Plus Jauharul Maknuun?',
-    a: 'Kurikulum memadukan standar nasional Kurikulum Merdeka Kemendikbudristek (berakreditasi "A" BAN-PDM), Program Takhassus Tahfidz Al-Qur\'an 30 Juz Bersanad, dan Madrasah Diniyah Salafiyah pengkajian kitab kuning maknani gandul.'
+    q: 'Apa saja kurikulum yang diajarkan di Pondok Pesantren Jauharul Maknuun?',
+    a: 'Kurikulum memadukan standar nasional Kurikulum Merdeka terpadu (berakreditasi "A" BAN-PDM), Program Takhassus Tahfidz Al-Qur\'an 30 Juz Bersanad, dan Madrasah Diniyah Salafiyah pengkajian kitab kuning maknani gandul.'
   },
   {
     id: 'faq-4',
@@ -475,10 +475,10 @@ export const initialFaqs: FAQItem[] = [
 
 export const initialAboutData: AboutData = {
   directorName: 'Ir. M. Alfian & Dewan Masyayikh',
-  directorTitle: 'Direktur Pondok & SMP Plus Jauharul Maknuun',
+  directorTitle: 'Pimpinan Pondok Pesantren Jauharul Maknuun',
   directorImage: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
   directorQuote: 'Mendidik dengan Hati, Menuntun dengan Sanad, Menginspirasi dengan Adab dan Prestasi Nyata.',
-  directorSpeech: 'Pondok Pesantren & SMP Plus Jauharul Maknuun hadir sebagai ikhtiar luhur memadukan kemurnian sanad keilmuan Islam Ahlussunnah wal Jama\'ah dengan keunggulan sains dan teknologi modern. Santri dididik seimbang antara spiritualitas Al-Qur\'an dan kesiapan menjawab masa depan.',
+  directorSpeech: 'Pondok Pesantren Jauharul Maknuun hadir sebagai ikhtiar luhur memadukan kemurnian sanad keilmuan Islam Ahlussunnah wal Jama\'ah dengan keunggulan sains dan teknologi modern. Santri dididik seimbang antara spiritualitas Al-Qur\'an dan kesiapan menjawab masa depan.',
   vision: 'Terwujudnya Generasi Qur\'ani yang Mutafaqqih fiddin, Berakhlak Karimah, Unggul dalam Prestasi Akademik Sains, serta Berwawasan Global.',
   mission: [
     'Menyelenggarakan tahfidzul Qur\'an 30 juz berijazah sanad mutqin.',

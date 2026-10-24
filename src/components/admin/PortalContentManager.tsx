@@ -246,7 +246,7 @@ export const PortalContentManager: React.FC<PortalContentManagerProps> = ({
       category: exCategory,
       image: exImage.trim() || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
       shortDesc: exShortDesc.trim() || 'Pengembangan bakat dan potensi santri terpadu.',
-      fullDesc: exFullDesc.trim() || exShortDesc.trim() || 'Program ekstrakurikuler resmi PP & SMP Plus Jauharul Maknuun.',
+      fullDesc: exFullDesc.trim() || exShortDesc.trim() || 'Program ekstrakurikuler resmi Pondok Pesantren Jauharul Maknuun.',
       schedule: exSchedule.trim() || 'Jadwal Reguler Mingguan',
       coach: exCoach.trim() || 'Pelatih Berlisensi',
       location: exLocation.trim() || 'Kompleks Pesantren',
@@ -792,7 +792,7 @@ export const PortalContentManager: React.FC<PortalContentManagerProps> = ({
                 value={dirTitle}
                 onChange={(e) => setDirTitle(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:ring-2 focus:ring-[#1a6b3c] focus:outline-none"
-                placeholder="Contoh: Direktur Pondok & SMP Plus Jauharul Maknuun"
+                placeholder="Contoh: Pimpinan Pondok Pesantren Jauharul Maknuun"
               />
             </div>
 
@@ -1063,7 +1063,7 @@ export const PortalContentManager: React.FC<PortalContentManagerProps> = ({
                     value={achClassGrade}
                     onChange={(e) => setAchClassGrade(e.target.value)}
                     className="w-full px-3 py-2 rounded-xl border border-gray-200 text-xs focus:ring-2 focus:ring-[#1a6b3c] focus:outline-none"
-                    placeholder="Contoh: Kelas IX SMP Plus"
+                    placeholder="Contoh: Santri Pondok Pesantren Jauharul Maknuun"
                   />
                 </div>
               </div>

@@ -66,7 +66,7 @@ export const CbtExamModal: React.FC<CbtExamModalProps> = ({
                 </span>
               </div>
               <p className="text-[11px] text-emerald-100/80">
-                Pondok Pesantren & SMP Plus Jauharul Maknuun
+                Pondok Pesantren Jauharul Maknuun
               </p>
             </div>
           </div>

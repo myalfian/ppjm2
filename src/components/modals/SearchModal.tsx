@@ -116,7 +116,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     },
     {
       id: 'prog-sekolah',
-      title: 'SMP Plus Jauharul Maknuun (Akreditasi A BAN-PDM)',
+      title: 'Pondok Pesantren Jauharul Maknuun (Akreditasi A BAN-PDM)',
       description: 'Pendidikan formal kurikulum terpadu nasional, integrasi riset STEM, dwibahasa Arab-Inggris dan pembinaan akhlak.',
       category: 'Program',
       badge: 'Sekolah',
@@ -210,7 +210,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     {
       id: 'prestasi-robotik',
       title: 'Medali Emas Kompetisi Robotika Sains Madrasah',
-      description: 'Inovasi robot pemilah sampah otomatis dan smart garden hidroponik karya tim sains santri SMP Plus Jauharul Maknuun.',
+      description: 'Inovasi robot pemilah sampah otomatis dan smart garden hidroponik karya tim sains santri Pondok Pesantren Jauharul Maknuun.',
       category: 'Prestasi',
       badge: 'Juara 1',
       action: () => scrollToSection('prestasi'),
@@ -299,7 +299,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     {
       id: 'ppdb-info',
       title: 'Penerimaan Peserta Didik Baru (PPDB Online 2026/2027)',
-      description: 'Pendaftaran santri baru SMP Plus & Pondok Pesantren Jauharul Maknuun dibuka untuk Gelombang 1.',
+      description: 'Pendaftaran santri baru Pondok Pesantren Jauharul Maknuun dibuka untuk Gelombang 1.',
       category: 'Program',
       badge: 'PPDB 2026',
       action: () => {
@@ -504,7 +504,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 Tidak ada hasil untuk "{query}"
               </h4>
               <p className="text-xs text-gray-500 max-w-sm mx-auto">
-                Coba gunakan kata kunci umum seperti: <button onClick={() => setQuery('Tahfidz')} className="text-[#1a6b3c] font-bold hover:underline">Tahfidz</button>, <button onClick={() => setQuery('SMP Plus')} className="text-[#1a6b3c] font-bold hover:underline">SMP Plus</button>, <button onClick={() => setQuery('Robotika')} className="text-[#1a6b3c] font-bold hover:underline">Robotika</button>, atau <button onClick={() => setQuery('Masim')} className="text-[#1a6b3c] font-bold hover:underline">Masim</button>.
+                Coba gunakan kata kunci umum seperti: <button onClick={() => setQuery('Tahfidz')} className="text-[#1a6b3c] font-bold hover:underline">Tahfidz</button>, <button onClick={() => setQuery('Pesantren')} className="text-[#1a6b3c] font-bold hover:underline">Pesantren</button>, <button onClick={() => setQuery('Robotika')} className="text-[#1a6b3c] font-bold hover:underline">Robotika</button>, atau <button onClick={() => setQuery('Masim')} className="text-[#1a6b3c] font-bold hover:underline">Masim</button>.
               </p>
             </div>
           )}

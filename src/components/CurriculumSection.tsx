@@ -55,7 +55,7 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
             Program Unggulan Pondok Pesantren Jauharul Maknuun
           </h2>
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            Keterpaduan tiga pilar pendidikan utama dalam satu ekosistem: Penguatan tahfidz asrama (Pondok), keunggulan kurikulum nasional SMP Plus (Sekolah), dan pendalaman literatur kitab turats salaf (Masim).
+            Keterpaduan tiga pilar pendidikan utama dalam satu ekosistem: Penguatan tahfidz asrama (Pondok), keunggulan kurikulum terpadu (Pendidikan Formal), dan pendalaman literatur kitab turats salaf (Masim).
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
           <SmoothCurvedTabs<'pondok' | 'sekolah' | 'masim'>
             tabs={[
               { id: 'pondok', label: 'Pondok Pesantren', icon: <Home className="w-4 h-4" /> },
-              { id: 'sekolah', label: 'Sekolah (SMP Plus)', icon: <GraduationCap className="w-4 h-4" /> },
+              { id: 'sekolah', label: 'Pendidikan Formal', icon: <GraduationCap className="w-4 h-4" /> },
               { id: 'masim', label: 'Masim (Diniyah Salaf)', icon: <Scroll className="w-4 h-4" /> },
             ]}
             activeTab={activeTab}
@@ -142,7 +142,7 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
                   <Award className="w-3.5 h-3.5" /> Pendidikan Formal Berkelanjutan
                 </span>
                 <h3 className="text-xl sm:text-3xl font-extrabold text-[#0d4a28] leading-tight">
-                  Sekolah: SMP Plus Jauharul Maknuun (Akreditasi "A" BAN-PDM)
+                  Pendidikan Formal: Pondok Pesantren Jauharul Maknuun (Akreditasi "A" BAN-PDM)
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   Menjalankan standar nasional Kurikulum Merdeka Kemendikbudristek secara unggul. Memadukan penguasaan sains, matematika, bahasa Inggris aktif, dan riset teknologi informatika (STEM).
@@ -169,11 +169,11 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
 
                 <div className="pt-3">
                   <button
-                    onClick={() => onOpenSyllabusModal('Kurikulum SMP Plus Kurikulum Merdeka')}
+                    onClick={() => onOpenSyllabusModal('Kurikulum Terpadu Pondok Pesantren Jauharul Maknuun')}
                     className="px-4 py-2.5 rounded-xl bg-[#1a6b3c] hover:bg-[#0d4a28] text-white text-xs font-bold flex items-center gap-2 btn-spring shadow-sm"
                   >
                     <Download className="w-4 h-4 text-[#d4af37]" />
-                    <span>Unduh Kurikulum Sekolah SMP Plus</span>
+                    <span>Unduh Dokumen Kurikulum Terpadu</span>
                   </button>
                 </div>
               </div>
@@ -181,7 +181,7 @@ export const CurriculumSection: React.FC<CurriculumSectionProps> = ({ onOpenSyll
               <div className="relative rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 bg-gray-100">
                 <img
                   src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
-                  alt="Kelas & Lab Komputer SMP Plus JM"
+                  alt="Kelas & Lab Komputer Pondok Pesantren Jauharul Maknuun"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur px-4 py-2 rounded-xl border border-gray-200 text-xs font-bold text-[#1a6b3c] shadow-sm">

@@ -132,7 +132,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                 Navigasi & Sub Menu Portal
               </h3>
               <p className="text-[11px] text-gray-500 font-medium">
-                Pondok & SMP Plus Jauharul Maknuun
+                Pondok Pesantren Jauharul Maknuun
               </p>
             </div>
           </div>
@@ -325,7 +325,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                   <ChevronRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-[#1a6b3c] transition-transform group-hover:translate-x-0.5" />
                 </button>
 
-                {/* Sub-item 2: Sekolah SMP Plus */}
+                {/* Sub-item 2: Pendidikan Formal Terpadu */}
                 <button
                   onClick={() => { onClose(); onNavigateToSection('programs', '#program-sekolah'); }}
                   className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-emerald-50/60 text-gray-800 hover:text-[#1a6b3c] transition group"
@@ -335,7 +335,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                       <GraduationCap className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <span className="font-bold block text-xs">2. Sekolah (SMP Plus Akreditasi "A")</span>
+                      <span className="font-bold block text-xs">2. Pendidikan Formal (Akreditasi "A")</span>
                       <span className="text-[10px] text-gray-500 font-normal">Kurikulum Merdeka BAN-PDM & Lab STEM</span>
                     </div>
                   </div>
@@ -361,7 +361,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
 
                 {/* Sub-item 4: Silabus Kurikulum Modal */}
                 <button
-                  onClick={() => { onClose(); onOpenSyllabus?.('SMP Plus Jauharul Maknuun'); }}
+                  onClick={() => { onClose(); onOpenSyllabus?.('Pondok Pesantren Jauharul Maknuun'); }}
                   className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-emerald-50/60 text-gray-800 hover:text-[#1a6b3c] transition group"
                 >
                   <div className="flex items-center gap-2.5">

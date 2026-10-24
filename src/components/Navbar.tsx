@@ -58,9 +58,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="animate-ticker text-[#0d4a28] font-medium inline-block space-x-6">
             <span>✨ Pendaftaran PPDB Santri Baru Pondok Pesantren Jauharul Maknuun TP 2026/2027 telah dibuka!</span>
             <span>|</span>
-            <span>🏆 SMP Plus Jauharul Maknuun Islamic Boarding School Resmi Meraih Akreditasi "A" BAN-PDM</span>
+            <span>🏆 Pondok Pesantren Jauharul Maknuun Resmi Meraih Akreditasi "A" BAN-PDM</span>
             <span>|</span>
-            <span>📖 Program Unggulan: Pondok (Tahfidz 30 Juz Bersanad), Sekolah (SMP Plus), & Masim (Salafiyah)</span>
+            <span>📖 Program Unggulan: Tahfidz 30 Juz Bersanad, Madrasah Diniyah Salafiyah, & Pendidikan Terpadu</span>
             <span>|</span>
             <span>🔬 Laboratorium Komputer Modern & Kurikulum Riset STEM Santri Terpadu</span>
             <span>|</span>

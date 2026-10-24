@@ -7,7 +7,7 @@ interface AdminLoginProps {
 }
 
 export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
-  const [email, setEmail] = useState('admin@jauharulmaknuun.sch.id');
+  const [email, setEmail] = useState('admin@ppjauharulmaknuun.sch.id');
   const [password, setPassword] = useState('Maknuun2026!');
   const [error, setError] = useState<string | null>(null);
 
@@ -23,8 +23,8 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
       return;
     }
 
-    // Strict credential validation (admin@jauharulmaknuun.sch.id / Maknuun2026!)
-    if (email.trim().toLowerCase() === 'admin@jauharulmaknuun.sch.id' && password === 'Maknuun2026!') {
+    // Strict credential validation (admin@ppjauharulmaknuun.sch.id / Maknuun2026!)
+    if (email.trim().toLowerCase() === 'admin@ppjauharulmaknuun.sch.id' && password === 'Maknuun2026!') {
       setFailedAttempts(0);
       onLogin(email.trim());
     } else {
@@ -44,7 +44,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
   };
 
   const fillDemo = () => {
-    setEmail('admin@jauharulmaknuun.sch.id');
+    setEmail('admin@ppjauharulmaknuun.sch.id');
     setPassword('Maknuun2026!');
     setError(null);
   };
@@ -88,7 +88,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onBack }) => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@jauharulmaknuun.sch.id"
+                placeholder="admin@ppjauharulmaknuun.sch.id"
                 className="w-full pl-9 pr-3.5 py-2.5 bg-gray-50 rounded-xl border border-gray-200 focus:bg-white focus:ring-2 focus:ring-[#1a6b3c] focus:outline-none"
                 required
               />

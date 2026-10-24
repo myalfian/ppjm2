@@ -67,7 +67,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ posts, onOpenNewsDetai
               Berita, Prestasi & Agenda Santri
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 mt-1">
-              Dokumentasi aktivitas keilmuan dan kabar terbaru seputar PP & SMP Plus Jauharul Maknuun.
+              Dokumentasi aktivitas keilmuan dan kabar terbaru seputar Pondok Pesantren Jauharul Maknuun.
             </p>
           </div>
 

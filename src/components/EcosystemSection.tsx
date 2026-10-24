@@ -66,7 +66,7 @@ export const EcosystemSection: React.FC<EcosystemSectionProps> = ({ onOpenEcosys
             Inovasi Pesantren Modern
           </span>
           <h2 className="text-xl sm:text-2xl font-extrabold text-[#0d4a28] mt-2">
-            Ekosistem Digital Pondok & SMP Plus JM
+            Ekosistem Digital Pondok Pesantren Jauharul Maknuun
           </h2>
           <p className="text-xs text-gray-500 mt-1">
             Teknologi terintegrasi untuk kenyamanan santri, kemudahan asatidz, dan transparansi wali santri.

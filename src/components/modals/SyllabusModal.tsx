@@ -11,8 +11,7 @@ export const SyllabusModal: React.FC<SyllabusModalProps> = ({ programName, onClo
   if (!programName) return null;
 
   const handleDownload = () => {
-    // Generate text/file download simulation
-    const content = `PONDOK PESANTREN JAUHARUL MAKNUUN LASEM\nSILABUS & STRUKTUR KURIKULUM: ${programName}\n\nTahun Ajaran: 2026/2027\nAkreditasi: "A" BAN-PDM\n\n1. Target Capaian Pembelajaran Terpadu\n2. Standar Kelulusan Santri & Sertifikasi Sanad\n3. Jadwal Pembinaan Asrama & Halaqah Harian\n\nDokumen resmi diterbitkan oleh Sekretariat Akademik PPJM Lasem.`;
+    const content = `PONDOK PESANTREN JAUHARUL MAKNUUN\nSILABUS & STRUKTUR KURIKULUM: ${programName}\n\nTahun Ajaran: 2026/2027\nAkreditasi: "A" BAN-PDM\nWebsite: https://ppjauharulmaknuun.sch.id/\n\n1. Target Capaian Pembelajaran Terpadu\n2. Standar Kelulusan Santri & Sertifikasi Sanad\n3. Jadwal Pembinaan Asrama & Halaqah Harian\n\nDokumen resmi diterbitkan oleh Sekretariat Pondok Pesantren Jauharul Maknuun.`;
     const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

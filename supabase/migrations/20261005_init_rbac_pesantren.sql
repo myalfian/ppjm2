@@ -1,5 +1,5 @@
 -- ==============================================================================
--- SISTEM INFORMASI PESANTREN & SMP PLUS JAUHARUL MAKNUUN LASEM
+-- SISTEM INFORMASI PONDOK PESANTREN JAUHARUL MAKNUUN LASEM
 -- ROLE-BASED ACCESS CONTROL (RBAC) & SUPABASE PRODUCTION DATABASE SCHEMA
 -- ==============================================================================
 -- Roles:

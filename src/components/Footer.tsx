@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
               </div>
 
               <p className="text-xs text-gray-300 leading-relaxed">
-                Lembaga pendidikan Islam terpadu yang memadukan keilmuan Kitab Kuning Salafiyah dengan Kurikulum Merdeka SMP Plus berakreditasi "A" BAN-PDM.
+                Lembaga pendidikan Islam terpadu yang memadukan keilmuan Kitab Kuning Salafiyah dengan kurikulum terpadu berakreditasi "A" BAN-PDM.
               </p>
 
               <div id="medsos" className="flex items-center gap-2.5 pt-1 text-[#d4af37] scroll-mt-24">
@@ -154,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
               </h4>
               <ul className="space-y-2 text-xs text-gray-300">
                 <li>✨ Takhassus Tahfidz 30 Juz Bersanad</li>
-                <li>🏆 SMP Plus Akademik Akreditasi "A"</li>
+                <li>🏆 Pendidikan Terpadu Akreditasi "A"</li>
                 <li>📖 Madrasah Diniyah Salafiyah Maknani</li>
                 <li>🗣️ Bilingual Program (Arab &amp; Inggris)</li>
                 <li>🔬 Praktikum Komputer &amp; Riset STEM</li>
@@ -234,7 +234,7 @@ export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
                   Kalender Akademik TP 2026/2027
                 </h3>
                 <p className="text-[11px] text-gray-500">
-                  Pondok Pesantren &amp; SMP Plus Jauharul Maknuun Lasem
+                  Pondok Pesantren Jauharul Maknuun Lasem
                 </p>
               </div>
             </div>
@@ -270,7 +270,7 @@ export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
                 <div className="p-3 rounded-xl bg-gray-50 border border-gray-100 flex items-start justify-between gap-3">
                   <div>
                     <span className="font-bold text-gray-900 block">Awal KBM Sekolah &amp; Madrasah Diniyah Salafiyah</span>
-                    <span className="text-[11px] text-gray-500">Permulaan jam sekolah formal SMP Plus dan pengajian kitab maknani Jawa.</span>
+                    <span className="text-[11px] text-gray-500">Permulaan jam pendidikan formal dan pengajian kitab maknani Jawa.</span>
                   </div>
                   <span className="px-2 py-1 bg-white rounded-lg border border-gray-200 text-[#1a6b3c] font-mono font-bold shrink-0 text-[10px]">
                     20 Juli 2026
@@ -378,7 +378,7 @@ export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
                   Kebijakan Privasi (Privacy Policy)
                 </h3>
                 <p className="text-[11px] text-gray-500">
-                  Pondok Pesantren &amp; SMP Plus Jauharul Maknuun Lasem
+                  Pondok Pesantren Jauharul Maknuun Lasem
                 </p>
               </div>
             </div>

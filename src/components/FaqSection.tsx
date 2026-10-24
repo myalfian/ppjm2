@@ -10,12 +10,12 @@ const faqs = [
   {
     category: 'PPDB 2026',
     q: 'Berapa kuota penerimaan santri baru tahun ajaran 2026/2027?',
-    a: 'Untuk menjaga kualitas bimbingan intensif dan kenyamanan asrama, kuota santri baru dibatasi 60 santri putra dan 60 santri putri untuk SMP Plus & Program Takhassus Tahfidz.'
+    a: 'Untuk menjaga kualitas bimbingan intensif dan kenyamanan asrama, kuota santri baru dibatasi 60 santri putra dan 60 santri putri untuk Program Pendidikan Terpadu & Takhassus Tahfidz.'
   },
   {
     category: 'Kurikulum',
-    q: 'Apa saja kurikulum yang diajarkan di SMP Plus Jauharul Maknuun?',
-    a: 'Kurikulum memadukan standar nasional Kurikulum Merdeka Kemendikbudristek (berakreditasi "A" BAN-PDM), Program Takhassus Tahfidz Al-Qur\'an 30 Juz Bersanad, dan Madrasah Diniyah Salafiyah pengkajian kitab kuning maknani gandul.'
+    q: 'Apa saja kurikulum yang diajarkan di Pondok Pesantren Jauharul Maknuun?',
+    a: 'Kurikulum memadukan standar nasional Kurikulum Merdeka terpadu (berakreditasi "A" BAN-PDM), Program Takhassus Tahfidz Al-Qur\'an 30 Juz Bersanad, dan Madrasah Diniyah Salafiyah pengkajian kitab kuning maknani gandul.'
   },
   {
     category: 'Kurikulum',
