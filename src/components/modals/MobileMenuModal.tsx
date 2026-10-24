@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { 
-  Building2, 
-  GraduationCap, 
-  Newspaper, 
-  Image, 
+  Landmark, 
+  BookOpenCheck, 
+  BellRing, 
+  Images, 
   MapPin, 
   HelpCircle, 
-  UserCheck, 
+  ScrollText, 
   X, 
   Search, 
   BookOpen, 
   Award, 
-  Cpu, 
+  Atom, 
   Trophy, 
-  Activity, 
   ChevronRight, 
   ChevronDown,
   Sparkles, 
-  Laptop, 
+  MonitorCheck, 
   FileText, 
   PhoneCall, 
   Compass, 
@@ -191,7 +190,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
               className="flex flex-col items-center justify-center p-2 rounded-2xl bg-blue-50/70 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 transition text-center group active:scale-95"
             >
               <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs group-hover:scale-110 transition-transform">
-                <Laptop className="w-4 h-4" />
+                <MonitorCheck className="w-4 h-4" />
               </div>
               <span className="text-[10px] font-bold text-blue-900 mt-1.5 leading-tight">
                 E-Learning
@@ -208,7 +207,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
               className="w-full px-3.5 py-2.5 bg-gray-50/90 hover:bg-gray-100/90 flex items-center justify-between text-left font-bold text-gray-900 transition"
             >
               <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-[#1a6b3c]" />
+                <Landmark className="w-4 h-4 text-[#1a6b3c]" />
                 <span className="text-xs font-extrabold text-[#0d4a28]">1. JM Center & Profil Lembaga</span>
               </div>
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openAccordions.jmCenter ? 'rotate-180 text-[#1a6b3c]' : 'text-gray-400'}`} />
@@ -224,7 +223,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-6 h-6 rounded-lg bg-emerald-50 text-[#1a6b3c] flex items-center justify-center group-hover:bg-[#1a6b3c] group-hover:text-white transition">
-                      <Building2 className="w-3.5 h-3.5" />
+                      <Landmark className="w-3.5 h-3.5" />
                     </div>
                     <div>
                       <span className="font-bold block text-xs">Profil JM (Identitas & Legalitas)</span>
@@ -241,11 +240,11 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-6 h-6 rounded-lg bg-emerald-50 text-[#1a6b3c] flex items-center justify-center group-hover:bg-[#1a6b3c] group-hover:text-white transition">
-                      <UserCheck className="w-3.5 h-3.5" />
+                      <ScrollText className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <span className="font-bold block text-xs">Sambutan Direktur Pesantren</span>
-                      <span className="text-[10px] text-gray-500 font-normal">Pesan KH. Ahmad Zaini, M.Pd.I</span>
+                      <span className="font-bold block text-xs">Sambutan Pengasuh Pesantren</span>
+                      <span className="text-[10px] text-gray-500 font-normal">Pesan & Arahan Pimpinan Pondok</span>
                     </div>
                   </div>
                   <ChevronRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-[#1a6b3c] transition-transform group-hover:translate-x-0.5" />
@@ -298,7 +297,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
               className="w-full px-3.5 py-2.5 bg-gray-50/90 hover:bg-gray-100/90 flex items-center justify-between text-left font-bold text-gray-900 transition"
             >
               <div className="flex items-center gap-2">
-                <GraduationCap className="w-4 h-4 text-[#1a6b3c]" />
+                <BookOpenCheck className="w-4 h-4 text-[#1a6b3c]" />
                 <span className="text-xs font-extrabold text-[#0d4a28]">2. Program Unggulan: Pondok, Sekolah & Masim</span>
               </div>
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openAccordions.program ? 'rotate-180 text-[#1a6b3c]' : 'text-gray-400'}`} />
@@ -331,7 +330,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-6 h-6 rounded-lg bg-emerald-50 text-[#1a6b3c] flex items-center justify-center group-hover:bg-[#1a6b3c] group-hover:text-white transition">
-                      <GraduationCap className="w-3.5 h-3.5" />
+                      <BookOpenCheck className="w-3.5 h-3.5" />
                     </div>
                     <div>
                       <span className="font-bold block text-xs">2. Pendidikan Formal (Akreditasi "A")</span>
@@ -388,7 +387,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
               className="w-full px-3.5 py-2.5 bg-gray-50/90 hover:bg-gray-100/90 flex items-center justify-between text-left font-bold text-gray-900 transition"
             >
               <div className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-[#1a6b3c]" />
+                <Sparkles className="w-4 h-4 text-[#1a6b3c]" />
                 <span className="text-xs font-extrabold text-[#0d4a28]">3. Aktivitas Santri, Riset & Fasilitas</span>
               </div>
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openAccordions.aktivitas ? 'rotate-180 text-[#1a6b3c]' : 'text-gray-400'}`} />
@@ -402,10 +401,10 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                   className="p-2.5 rounded-xl bg-gray-50/80 hover:bg-emerald-50/70 border border-gray-100 hover:border-emerald-200 text-left transition group"
                 >
                   <div className="flex items-center gap-1.5 text-[#1a6b3c] font-bold text-xs mb-0.5">
-                    <Activity className="w-3.5 h-3.5" />
+                    <Sparkles className="w-3.5 h-3.5" />
                     <span>Ekstrakurikuler</span>
                   </div>
-                  <span className="text-[10px] text-gray-500 block leading-tight">Robotika, Pramuka, Hadrah</span>
+                  <span className="text-[10px] text-gray-500 block leading-tight">Hadrah, Silat, Pramuka</span>
                 </button>
 
                 <button
@@ -413,7 +412,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                   className="p-2.5 rounded-xl bg-gray-50/80 hover:bg-emerald-50/70 border border-gray-100 hover:border-emerald-200 text-left transition group"
                 >
                   <div className="flex items-center gap-1.5 text-[#d4af37] font-bold text-xs mb-0.5">
-                    <Trophy className="w-3.5 h-3.5" />
+                    <Trophy className="w-3.5 h-3.5 stroke-[2.2]" />
                     <span>Prestasi Santri</span>
                   </div>
                   <span className="text-[10px] text-gray-500 block leading-tight">Kejuaraan Sains & Tahfidz</span>
@@ -424,10 +423,10 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                   className="p-2.5 rounded-xl bg-gray-50/80 hover:bg-emerald-50/70 border border-gray-100 hover:border-emerald-200 text-left transition group"
                 >
                   <div className="flex items-center gap-1.5 text-[#1a6b3c] font-bold text-xs mb-0.5">
-                    <Cpu className="w-3.5 h-3.5" />
+                    <Atom className="w-3.5 h-3.5" />
                     <span>Pusat Riset STEM</span>
                   </div>
-                  <span className="text-[10px] text-gray-500 block leading-tight">Coding, IoT, & Eksperimen</span>
+                  <span className="text-[10px] text-gray-500 block leading-tight">Coding, IoT, & Sains</span>
                 </button>
 
                 <button
@@ -435,10 +434,10 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                   className="p-2.5 rounded-xl bg-gray-50/80 hover:bg-emerald-50/70 border border-gray-100 hover:border-emerald-200 text-left transition group"
                 >
                   <div className="flex items-center gap-1.5 text-[#0d4a28] font-bold text-xs mb-0.5">
-                    <Building2 className="w-3.5 h-3.5" />
+                    <Landmark className="w-3.5 h-3.5" />
                     <span>Sarana & Fasilitas</span>
                   </div>
-                  <span className="text-[10px] text-gray-500 block leading-tight">Asrama, Lab IT, Poskestren</span>
+                  <span className="text-[10px] text-gray-500 block leading-tight">Asrama, Lab IT, Masjid</span>
                 </button>
 
               </div>
@@ -454,7 +453,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
               className="w-full px-3.5 py-2.5 bg-gray-50/90 hover:bg-gray-100/90 flex items-center justify-between text-left font-bold text-gray-900 transition"
             >
               <div className="flex items-center gap-2">
-                <Newspaper className="w-4 h-4 text-[#1a6b3c]" />
+                <BellRing className="w-4 h-4 text-[#1a6b3c]" />
                 <span className="text-xs font-extrabold text-[#0d4a28]">4. Berita, Galeri & Narahubung</span>
               </div>
               <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openAccordions.publikasi ? 'rotate-180 text-[#1a6b3c]' : 'text-gray-400'}`} />
@@ -467,7 +466,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                   onClick={() => { onClose(); onNavigateToSection('news'); }}
                   className="p-2 rounded-xl hover:bg-gray-50 text-left transition flex items-center gap-2"
                 >
-                  <Newspaper className="w-3.5 h-3.5 text-[#1a6b3c] shrink-0" />
+                  <BellRing className="w-3.5 h-3.5 text-[#1a6b3c] shrink-0" />
                   <span className="font-semibold text-gray-800 text-xs">JM News & Kabar</span>
                 </button>
 
@@ -475,7 +474,7 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
                   onClick={() => { onClose(); onNavigateToSection('gallery'); }}
                   className="p-2 rounded-xl hover:bg-gray-50 text-left transition flex items-center gap-2"
                 >
-                  <Image className="w-3.5 h-3.5 text-[#1a6b3c] shrink-0" />
+                  <Images className="w-3.5 h-3.5 text-[#1a6b3c] shrink-0" />
                   <span className="font-semibold text-gray-800 text-xs">Galeri Dokumentasi</span>
                 </button>
 

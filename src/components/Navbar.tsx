@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { 
-  Building2, 
-  GraduationCap, 
-  Image, 
+  Landmark, 
+  BookOpenCheck, 
+  Images, 
   Globe, 
   Sparkles,
   Search,
-  Cpu,
-  Trophy,
-  Activity
+  Atom,
+  Trophy
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -111,60 +110,66 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             </div>
 
-            {/* IMPROVED TOP NAVBAR (Desktop Navigation with Interactive Submenus) */}
+            {/* Desktop Navigation with Iconic & Professional Styling */}
             <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-xs font-bold text-gray-700">
               
               {/* 1. JM Center (Direct link to #about) */}
               <a 
                 href="#about" 
-                className="px-3 py-2 rounded-xl hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition flex items-center gap-1.5"
+                className="group px-3 py-2 rounded-xl text-gray-700 hover:text-[#1a6b3c] hover:bg-emerald-50/80 transition-all duration-200 flex items-center gap-1.5 cursor-pointer font-bold"
+                title="Pusat Informasi & Profil Lembaga"
               >
-                <Building2 className="w-3.5 h-3.5 text-[#1a6b3c]" />
+                <Landmark className="w-4 h-4 text-[#1a6b3c] group-hover:scale-110 transition-transform duration-200" />
                 <span>JM Center</span>
               </a>
 
               {/* 2. Program Unggulan (Direct link to #programs) */}
               <a 
                 href="#programs" 
-                className="px-3 py-2 rounded-xl hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition flex items-center gap-1.5"
+                className="group px-3 py-2 rounded-xl text-gray-700 hover:text-[#1a6b3c] hover:bg-emerald-50/80 transition-all duration-200 flex items-center gap-1.5 cursor-pointer font-bold"
+                title="Program Pendidikan & Kurikulum Terpadu"
               >
-                <GraduationCap className="w-3.5 h-3.5 text-[#1a6b3c]" />
+                <BookOpenCheck className="w-4 h-4 text-[#1a6b3c] group-hover:scale-110 transition-transform duration-200" />
                 <span>Program Unggulan</span>
               </a>
 
               {/* 3. Ekstrakurikuler */}
               <a 
                 href="#ekstrakurikuler" 
-                className="px-3 py-2 rounded-xl hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition flex items-center gap-1.5"
+                className="group px-3 py-2 rounded-xl text-gray-700 hover:text-[#1a6b3c] hover:bg-emerald-50/80 transition-all duration-200 flex items-center gap-1.5 cursor-pointer font-bold"
+                title="Minat, Bakat, & Seni Santri"
               >
-                <Activity className="w-3.5 h-3.5 text-[#1a6b3c]" />
+                <Sparkles className="w-4 h-4 text-[#1a6b3c] group-hover:scale-110 transition-transform duration-200" />
                 <span>Ekstrakurikuler</span>
               </a>
 
               {/* 4. Prestasi */}
               <a 
                 href="#prestasi" 
-                className="px-3 py-2 rounded-xl hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition flex items-center gap-1.5"
+                className="group px-3 py-2 rounded-xl text-gray-700 hover:text-amber-700 hover:bg-amber-50/80 transition-all duration-200 flex items-center gap-1.5 cursor-pointer font-bold"
+                title="Kejuaraan & Capaian Santri"
               >
-                <Trophy className="w-3.5 h-3.5 text-[#d4af37]" />
+                <Trophy className="w-4 h-4 text-[#d4af37] group-hover:scale-110 transition-transform duration-200 stroke-[2.2]" />
                 <span>Prestasi</span>
               </a>
 
               {/* 5. STEM */}
               <a 
                 href="#steam" 
-                className="px-3 py-2 rounded-xl hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition flex items-center gap-1.5"
+                className="group px-3 py-2 rounded-xl text-gray-700 hover:text-[#1a6b3c] hover:bg-emerald-50/80 transition-all duration-200 flex items-center gap-1.5 cursor-pointer font-bold"
+                title="Sains, Riset, Teknologi & Coding"
               >
-                <Cpu className="w-3.5 h-3.5 text-[#1a6b3c]" />
+                <Atom className="w-4 h-4 text-[#1a6b3c] group-hover:scale-110 transition-transform duration-200" />
                 <span>STEM</span>
               </a>
 
               {/* 6. Galeri */}
               <a 
                 href="#gallery" 
-                className="px-3 py-2 rounded-xl hover:bg-[#1a6b3c]/10 hover:text-[#1a6b3c] transition flex items-center gap-1.5"
+                className="group px-3 py-2 rounded-xl text-gray-700 hover:text-[#1a6b3c] hover:bg-emerald-50/80 transition-all duration-200 flex items-center gap-1.5 cursor-pointer font-bold"
+                title="Galeri Dokumentasi Foto & Video"
               >
-                <Image className="w-3.5 h-3.5 text-[#1a6b3c]" />
+                <Images className="w-4 h-4 text-[#1a6b3c] group-hover:scale-110 transition-transform duration-200" />
                 <span>Galeri</span>
               </a>
             </nav>
