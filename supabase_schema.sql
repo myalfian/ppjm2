@@ -11,9 +11,15 @@ CREATE TABLE IF NOT EXISTS ppdb_submissions (
   gender text,
   program text,
   phone text,
+  email text,
+  diet_package text,
+  allergy_notes text,
   address text,
   status text DEFAULT 'Menunggu Verifikasi',
-  submitted_at timestamptz DEFAULT now()
+  submitted_at timestamptz DEFAULT now(),
+  cbt_score integer DEFAULT 0,
+  cbt_total integer DEFAULT 20,
+  cbt_status text DEFAULT 'Belum Mengikuti'
 );
 
 -- Index untuk pencarian cepat
@@ -102,6 +108,63 @@ DROP POLICY IF EXISTS "auth_all_logs" ON activity_logs;
 
 CREATE POLICY "anon_insert_logs" ON activity_logs FOR INSERT TO anon WITH CHECK (true);
 CREATE POLICY "auth_all_logs" ON activity_logs FOR ALL TO authenticated USING (true);
+
+-- 5. Tabel Galeri Media Dokumentasi
+CREATE TABLE IF NOT EXISTS media_gallery (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  title text NOT NULL,
+  category text DEFAULT 'kegiatan',
+  type text DEFAULT 'photo',
+  url text NOT NULL,
+  size text,
+  description text,
+  date text,
+  location text,
+  duration text,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_media_cat ON media_gallery(category);
+ALTER TABLE media_gallery ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "anon_select_media" ON media_gallery FOR SELECT TO anon USING (true);
+CREATE POLICY "auth_all_media" ON media_gallery FOR ALL TO authenticated USING (true);
+
+-- 6. Tabel Profil & Pengaturan Identitas Resmi Lembaga
+CREATE TABLE IF NOT EXISTS institution_settings (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  key text UNIQUE NOT NULL DEFAULT 'main',
+  name text NOT NULL DEFAULT 'Pondok Pesantren Jauharul Maknuun',
+  tagline text,
+  address text,
+  city text,
+  phone text,
+  whatsapp text,
+  email text,
+  accreditation text,
+  npsn text,
+  nsm text,
+  foundation text,
+  maps_embed_url text,
+  facebook_url text,
+  instagram_url text,
+  youtube_url text,
+  updated_at timestamptz DEFAULT now()
+);
+
+ALTER TABLE institution_settings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "anon_select_settings" ON institution_settings FOR SELECT TO anon USING (true);
+CREATE POLICY "auth_all_settings" ON institution_settings FOR ALL TO authenticated USING (true);
+
+-- 7. Tabel Konten Portal Dinamis
+CREATE TABLE IF NOT EXISTS portal_content (
+  key text PRIMARY KEY,
+  content jsonb NOT NULL,
+  updated_at timestamptz DEFAULT now()
+);
+
+ALTER TABLE portal_content ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "anon_select_portal_content" ON portal_content FOR SELECT TO anon USING (true);
+CREATE POLICY "auth_all_portal_content" ON portal_content FOR ALL TO authenticated USING (true);
 
 -- ============================================================
 -- Seed Data Awal (Opsional)

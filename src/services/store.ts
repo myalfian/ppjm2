@@ -37,6 +37,7 @@ import {
   initialFaqs,
   initialAboutData
 } from '../data/initialData';
+import { supabase } from './supabaseClient';
 
 // Local storage helper with fallbacks
 function getStored<T>(key: string, fallback: T): T {
@@ -80,6 +81,100 @@ class AppStore {
   private isAuthenticated: boolean = false;
   private currentUserEmail: string | null = null;
   private listeners: Set<() => void> = new Set();
+
+  constructor() {
+    this.initSupabaseSync();
+  }
+
+  async initSupabaseSync() {
+    try {
+      // 1. Sinkronisasi Posts / Berita dari Supabase
+      const { data: postsData } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('status', 'published')
+        .order('created_at', { ascending: false });
+
+      if (postsData && postsData.length > 0) {
+        const remotePosts: Post[] = postsData.map((row: any) => ({
+          id: row.id,
+          title: row.title,
+          slug: row.slug || `post-${row.id}`,
+          category: row.category || 'Berita',
+          author: row.author || 'Panitia PPJM',
+          date: row.date || (row.created_at ? row.created_at.slice(0, 10) : ''),
+          image: row.image || '',
+          status: (row.status === 'published' ? 'published' : 'draft') as 'published' | 'draft',
+          tags: Array.isArray(row.tags) ? row.tags : [],
+          summary: row.summary || '',
+          content: row.content || ''
+        }));
+        
+        const existingSlugs = new Set(remotePosts.map(p => p.slug));
+        const preservedLocals = this.posts.filter(p => !existingSlugs.has(p.slug));
+        this.posts = [...remotePosts, ...preservedLocals];
+        setStored('posts', this.posts);
+      }
+
+      // 2. Sinkronisasi Media Galeri dari Supabase
+      const { data: mediaData } = await supabase
+        .from('media_gallery')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (mediaData && mediaData.length > 0) {
+        const remoteMedia: MediaGalleryItem[] = mediaData.map((row: any) => ({
+          id: row.id,
+          title: row.title,
+          category: row.category || 'kegiatan',
+          type: (row.type === 'video' ? 'video' : 'photo') as 'photo' | 'video',
+          url: row.url,
+          size: row.size || '',
+          description: row.description || '',
+          date: row.date || '',
+          location: row.location || '',
+          duration: row.duration || ''
+        }));
+        const existingUrls = new Set(remoteMedia.map(m => m.url));
+        const preservedLocalMedia = this.mediaList.filter(m => !existingUrls.has(m.url));
+        this.mediaList = [...remoteMedia, ...preservedLocalMedia];
+        setStored('media', this.mediaList);
+      }
+
+      // 3. Sinkronisasi Pengaturan Lembaga dari Supabase
+      const { data: settingsData } = await supabase
+        .from('institution_settings')
+        .select('*')
+        .eq('key', 'main')
+        .maybeSingle();
+
+      if (settingsData) {
+        this.settings = {
+          ...this.settings,
+          name: settingsData.name || this.settings.name,
+          tagline: settingsData.tagline || this.settings.tagline,
+          address: settingsData.address || this.settings.address,
+          city: settingsData.city || this.settings.city,
+          phone: settingsData.phone || this.settings.phone,
+          whatsapp: settingsData.whatsapp || this.settings.whatsapp,
+          email: settingsData.email || this.settings.email,
+          accreditation: settingsData.accreditation || this.settings.accreditation,
+          npsn: settingsData.npsn || this.settings.npsn,
+          nsm: settingsData.nsm || this.settings.nsm,
+          foundation: settingsData.foundation || this.settings.foundation,
+          mapsEmbedUrl: settingsData.maps_embed_url || this.settings.mapsEmbedUrl,
+          facebookUrl: settingsData.facebook_url || this.settings.facebookUrl,
+          instagramUrl: settingsData.instagram_url || this.settings.instagramUrl,
+          youtubeUrl: settingsData.youtube_url || this.settings.youtubeUrl,
+        };
+        setStored('settings', this.settings);
+      }
+
+      this.notify();
+    } catch (e) {
+      console.warn('Supabase offline fallback active:', e);
+    }
+  }
 
   subscribe(listener: () => void) {
     this.listeners.add(listener);
@@ -166,6 +261,26 @@ class AppStore {
     setStored('ppdb', this.ppdbList);
     this.logActivity(`Pendaftaran baru: ${newEntry.name} (${code})`, 'create');
     this.notify();
+
+    // Sync to Supabase in background
+    supabase.from('ppdb_submissions').insert([{
+      code: newEntry.code,
+      name: newEntry.name,
+      gender: newEntry.gender,
+      program: newEntry.program,
+      phone: newEntry.phone,
+      email: newEntry.email || null,
+      diet_package: newEntry.diet_package || null,
+      allergy_notes: newEntry.allergy_notes || null,
+      address: newEntry.address,
+      status: newEntry.status,
+      cbt_score: newEntry.cbt_score || 0,
+      cbt_total: newEntry.cbt_total || 20,
+      cbt_status: newEntry.cbt_status || 'Belum Mengikuti'
+    }]).then(({ error }) => {
+      if (error) console.warn('Supabase PPDB insert:', error.message);
+    });
+
     return newEntry;
   }
 
@@ -179,6 +294,14 @@ class AppStore {
     });
     setStored('ppdb', this.ppdbList);
     this.notify();
+
+    // Sync status to Supabase
+    supabase.from('ppdb_submissions')
+      .update({ status })
+      .or(`id.eq.${id},code.eq.${id}`)
+      .then(({ error }) => {
+        if (error) console.warn('Supabase status update:', error.message);
+      });
   }
 
   // Guestbook
@@ -192,6 +315,17 @@ class AppStore {
     setStored('guestbook', this.guestbook);
     this.logActivity(`Testimoni baru dari ${entry.name}`, 'create');
     this.notify();
+
+    // Sync to Supabase
+    supabase.from('guestbook_entries').insert([{
+      name: newEntry.name,
+      role: newEntry.role,
+      rating: newEntry.rating,
+      message: newEntry.message
+    }]).then(({ error }) => {
+      if (error) console.warn('Supabase guestbook insert:', error.message);
+    });
+
     return newEntry;
   }
 
@@ -205,6 +339,23 @@ class AppStore {
     setStored('posts', this.posts);
     this.logActivity(`Menerbitkan artikel "${post.title}"`, 'create');
     this.notify();
+
+    // Sync to Supabase
+    supabase.from('posts').insert([{
+      title: newPost.title,
+      slug: newPost.slug,
+      category: newPost.category,
+      author: newPost.author,
+      date: newPost.date,
+      image: newPost.image,
+      status: newPost.status,
+      tags: newPost.tags,
+      summary: newPost.summary,
+      content: newPost.content
+    }]).then(({ error }) => {
+      if (error) console.warn('Supabase post insert:', error.message);
+    });
+
     return newPost;
   }
 
@@ -383,6 +534,18 @@ class AppStore {
     setStored('ppdb', this.ppdbList);
     this.logActivity(`Hasil CBT dicatat untuk [${codeOrId}]: Skor ${score}/${total}`, 'create');
     this.notify();
+
+    // Sync CBT score to Supabase
+    supabase.from('ppdb_submissions')
+      .update({
+        cbt_score: score,
+        cbt_total: total,
+        cbt_status: 'Sudah Mengikuti'
+      })
+      .or(`code.ilike.${codeOrId},id.eq.${codeOrId}`)
+      .then(({ error }) => {
+        if (error) console.warn('Supabase CBT score update:', error.message);
+      });
   }
 
   // Cleanup TEST-AUDIT data
