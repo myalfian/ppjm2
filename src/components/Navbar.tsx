@@ -3,7 +3,6 @@ import {
   Building2, 
   GraduationCap, 
   Image, 
-  Lock, 
   Globe, 
   Sparkles,
   Search,
@@ -14,7 +13,7 @@ import {
 
 interface NavbarProps {
   onOpenSearch: () => void;
-  onOpenAdmin: () => void;
+  onOpenAdmin?: () => void;
   currentLang: string;
   onLanguageChange: (lang: string) => void;
   onOpenPpdb?: () => void;
@@ -218,16 +217,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <kbd className="text-[9px] bg-white border border-gray-300 rounded px-1.5 py-0.5 text-gray-400 font-sans shadow-xs font-normal">
                   ⌘K
                 </kbd>
-              </button>
-
-              {/* Portal Admin Button */}
-              <button
-                onClick={onOpenAdmin}
-                className="w-9 h-9 sm:w-auto sm:px-2.5 sm:py-2 rounded-xl text-xs font-semibold text-gray-700 hover:text-[#1a6b3c] hover:bg-gray-100 border border-gray-200 flex items-center justify-center sm:gap-1 transition shrink-0"
-                title="Login CMS Admin"
-              >
-                <Lock className="w-4 h-4 text-gray-600" />
-                <span className="hidden md:inline">Admin</span>
               </button>
             </div>
 

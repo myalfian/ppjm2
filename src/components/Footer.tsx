@@ -198,7 +198,17 @@ export const Footer: React.FC<FooterProps> = ({ settings: propSettings }) => {
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-gray-400 gap-4">
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-            <span>&copy; 2026 Pondok Pesantren Jauharul Maknuun Lasem. All rights reserved.</span>
+            <span>
+              &copy; 2026{' '}
+              <a
+                href="#yaieditor"
+                className="hover:text-[#d4af37] transition-colors focus:outline-none"
+                title="Pondok Pesantren Jauharul Maknuun Lasem Sidayu Gresik"
+              >
+                Pondok Pesantren Jauharul Maknuun Lasem Sidayu Gresik
+              </a>
+              . All rights reserved.
+            </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-xs font-medium">

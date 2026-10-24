@@ -100,6 +100,26 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Secure Hash-based Admin Access (#yaieditor)
+  useEffect(() => {
+    const handleHashCheck = () => {
+      if (window.location.hash === '#yaieditor') {
+        setIsAdminView(true);
+      }
+    };
+
+    handleHashCheck();
+    window.addEventListener('hashchange', handleHashCheck);
+    return () => window.removeEventListener('hashchange', handleHashCheck);
+  }, []);
+
+  const handleExitAdmin = () => {
+    setIsAdminView(false);
+    if (window.location.hash === '#yaieditor') {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  };
+
   // Toast Notifications
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -123,7 +143,7 @@ export const App: React.FC = () => {
 
     // Return to public website portal view if currently in admin mode
     if (isAdminView) {
-      setIsAdminView(false);
+      handleExitAdmin();
     }
 
     // Dismiss any open modals
@@ -259,14 +279,14 @@ export const App: React.FC = () => {
           {!isAuthenticated ? (
             <AdminLogin
               onLogin={(email) => store.login(email)}
-              onBack={() => setIsAdminView(false)}
+              onBack={handleExitAdmin}
             />
           ) : (
             <AdminDashboard
               currentRole={currentRole}
               onRoleChange={(r) => store.setRole(r)}
               onLogout={() => store.logout()}
-              onBackToWebsite={() => setIsAdminView(false)}
+              onBackToWebsite={handleExitAdmin}
               ppdbList={ppdbList}
               posts={posts}
               trash={trash}
@@ -330,7 +350,6 @@ export const App: React.FC = () => {
             onOpenSearch={() => setShowSearchModal(true)}
             onOpenPpdb={() => setShowPpdbModal(true)}
             onOpenStatus={() => setShowStatusModal(true)}
-            onOpenAdmin={() => setIsAdminView(true)}
             currentLang={currentLang}
             onLanguageChange={handleLanguageChange}
             isMobileMenuOpen={mobileMenuOpen}
@@ -598,7 +617,6 @@ export const App: React.FC = () => {
             onOpenSearch={() => setShowSearchModal(true)}
             onOpenPpdb={() => setShowPpdbModal(true)}
             onOpenStatus={() => setShowStatusModal(true)}
-            onOpenAdmin={() => setIsAdminView(true)}
             onOpenElearning={() => setSelectedEcosystemKey('elearning')}
             onOpenEcosystem={(key) => setSelectedEcosystemKey(key)}
             onOpenSyllabus={(prog) => setSelectedSyllabusProgram(prog)}

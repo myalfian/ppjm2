@@ -7,7 +7,6 @@ import {
   MapPin, 
   HelpCircle, 
   UserCheck, 
-  Lock, 
   X, 
   Search, 
   BookOpen, 
@@ -36,7 +35,7 @@ interface MobileMenuModalProps {
   onOpenSearch: () => void;
   onOpenPpdb: () => void;
   onOpenStatus: () => void;
-  onOpenAdmin: () => void;
+  onOpenAdmin?: () => void;
   onOpenElearning: () => void;
   onOpenEcosystem?: (key: string) => void;
   onOpenSyllabus?: (program: string) => void;
@@ -537,21 +536,11 @@ export const MobileMenuModal: React.FC<MobileMenuModalProps> = ({
               href="https://wa.me/6281234567890?text=Assalamu'alaikum%20Admin%20Pondok%20Pesantren%20Jauharul%20Maknuun"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition shadow-xs"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition shadow-xs"
             >
               <PhoneCall className="w-3.5 h-3.5" />
-              <span>WhatsApp</span>
+              <span>Hubungi WhatsApp</span>
             </a>
-
-            {/* Admin CMS Portal Login */}
-            <button
-              onClick={() => { onClose(); onOpenAdmin(); }}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gray-800 hover:bg-gray-900 text-white text-xs font-bold transition shadow-xs"
-              title="Portal Login CMS Admin"
-            >
-              <Lock className="w-3.5 h-3.5 text-amber-400" />
-              <span>Admin</span>
-            </button>
           </div>
 
         </div>
